@@ -1,5 +1,5 @@
 package Stats_Func;
-
+//practice
 public class run {
     public static void main() {
         double m;
