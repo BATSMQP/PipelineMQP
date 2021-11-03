@@ -2,6 +2,8 @@ package Stats_Func;
 
 public class dev {
     
+    //TODO: make array able to have nondoubles but ignore them
+    
     public static void main(String[] args) {
         
     }

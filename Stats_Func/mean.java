@@ -1,5 +1,7 @@
 package Stats_Func;
 public class mean{
+    
+    //TODO: make array able to have nondoubles but ignore them
 
     public static void main(String[] args) {
         //This is basicaly a test, but I couldn't find the easy test method.
