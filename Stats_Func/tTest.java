@@ -15,14 +15,14 @@ public class tTest {
 
         ar[0][1]=2;
         ar[1][1]=3;
-        ar[2][1]=4;
+        ar[2][1]=5;
         ar[3][1]=4;
 
         m= paired(ar,0,2,0,0,2,1);
         System.out.println(m);
 
-        m= pairedAll(ar,0,1);
-        System.out.println(m);
+        //m= pairedAll(ar,0,1);
+        //System.out.println(m);
     }
 
     public static double paired(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
@@ -34,13 +34,15 @@ public class tTest {
         double[][] difAr= new double[n][1];
 
         for(int i=0; i<n;i++){
-            difAr[i][0]=Math.abs(ar[rowMin1][col1]-ar[rowMin2][col2]); //placeholder should be matched value 1-2
+            difAr[i][0]=Math.abs(ar[rowMin1+i][col1]-ar[rowMin2+i][col2]); //placeholder should be matched value 1-2
         }
 
         double SD=dev.SDAll(difAr, 0);
 
         result=(m1-m2)/(SD/Math.sqrt(n));
-
+        if (!(result>0||result<0)){
+            result=0;
+        }
         return result;
     }
 
