@@ -6,7 +6,7 @@ public class tTest {
 
     public static void main(String[] args) {
         //This is basicaly a test, but I couldn't find the easy test method.
-        double m;
+        double m[];
         double[][] ar=new double [4][5];
         ar[0][0]=2;
         ar[1][0]=3;
@@ -19,13 +19,18 @@ public class tTest {
         ar[3][1]=4;
 
         m= paired(ar,0,2,0,0,2,1);
-        System.out.println(m);
+        System.out.println(m[0]);
+        System.out.println(m[1]);
 
         m= pairedAll(ar,0,1);
-        System.out.println(m);
+        System.out.println(m[0]);
+        System.out.println(m[1]);
     }
 
-    public static double paired(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
+    public static double[] paired(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
+        //Paired t test for comparing datapoints that are accociated. First element in array is t-value, second is degrees of freedom
+        
+        double[] resultar=new double[2];
         double result=0;
         double m1=mean.Array(ar,rowMin1,rowMax1,col1);
         double m2=mean.Array(ar,rowMin2,rowMax2,col2);
@@ -34,19 +39,25 @@ public class tTest {
         double[][] difAr= new double[n][1];
 
         for(int i=0; i<n;i++){
-            difAr[i][0]=Math.abs(ar[rowMin1][col1]-ar[rowMin2][col2]); //placeholder should be matched value 1-2
+            difAr[i][0]=Math.abs(ar[rowMin1+i][col1]-ar[rowMin2+i][col2]); 
         }
 
         double SD=dev.SDAll(difAr, 0);
 
         result=(m1-m2)/(SD/Math.sqrt(n));
+        if (!(result>0||result<0)){
+            result=0;
+        }
 
-        return result;
+        resultar[0]=result;
+        resultar[1]=n-1;
+
+        return resultar;
     }
 
-    public static double pairedAll(double[][] ar, int col1, int col2){
-        double result=0;
-        result=paired(ar, 0, ar.length, col1, 0, ar.length, col2);
+    public static double[] pairedAll(double[][] ar, int col1, int col2){
+        double[] result;
+        result=paired(ar, 0, ar.length-1, col1, 0, ar.length-1, col2);
         return result;
     }
 
@@ -58,7 +69,7 @@ public class tTest {
 
     public static double vairanceAll(double[][] ar, int col1, int col2){
         double result=0;
-        result=variance(ar, 0, ar.length, col1, 0, ar.length, col2);
+        result=variance(ar, 0, ar.length-1, col1, 0, ar.length-1, col2);
         return result;
     }
 
@@ -70,7 +81,7 @@ public class tTest {
 
     public static double unequalAll(double[][] ar, int col1, int col2){
         double result=0;
-        result=unequal(ar, 0, ar.length, col1, 0, ar.length, col2);
+        result=unequal(ar, 0, ar.length-1, col1, 0, ar.length-1, col2);
         return result;
     }
 }
