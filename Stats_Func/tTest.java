@@ -28,8 +28,7 @@ public class tTest {
     }
 
     public static double[] paired(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
-        //Paired t test for comparing datapoints that are accociated
-        //First element in array is t-value, second is degrees of freedom
+        //Paired t test for comparing datapoints that are accociated. First element in array is t-value, second is degrees of freedom
         
         double[] resultar=new double[2];
         double result=0;
