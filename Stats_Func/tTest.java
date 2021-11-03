@@ -6,7 +6,7 @@ public class tTest {
 
     public static void main(String[] args) {
         //This is basicaly a test, but I couldn't find the easy test method.
-        double m;
+        double m[];
         double[][] ar=new double [4][5];
         ar[0][0]=2;
         ar[1][0]=3;
@@ -15,19 +15,23 @@ public class tTest {
 
         ar[0][1]=2;
         ar[1][1]=3;
-        ar[2][1]=5;
+        ar[2][1]=4;
         ar[3][1]=4;
 
         m= paired(ar,0,2,0,0,2,1);
-        System.out.println(m);
+        System.out.println(m[0]);
+        System.out.println(m[1]);
 
         m= pairedAll(ar,0,1);
-        System.out.println(m);
+        System.out.println(m[0]);
+        System.out.println(m[1]);
     }
 
-    public static double paired(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
+    public static double[] paired(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
         //Paired t test for comparing datapoints that are accociated
+        //First element in array is t-value, second is degrees of freedom
         
+        double[] resultar=new double[2];
         double result=0;
         double m1=mean.Array(ar,rowMin1,rowMax1,col1);
         double m2=mean.Array(ar,rowMin2,rowMax2,col2);
@@ -45,11 +49,15 @@ public class tTest {
         if (!(result>0||result<0)){
             result=0;
         }
-        return result;
+
+        resultar[0]=result;
+        resultar[1]=n-1;
+
+        return resultar;
     }
 
-    public static double pairedAll(double[][] ar, int col1, int col2){
-        double result=0;
+    public static double[] pairedAll(double[][] ar, int col1, int col2){
+        double[] result;
         result=paired(ar, 0, ar.length-1, col1, 0, ar.length-1, col2);
         return result;
     }
