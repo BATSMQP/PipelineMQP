@@ -21,11 +21,13 @@ public class tTest {
         m= paired(ar,0,2,0,0,2,1);
         System.out.println(m);
 
-        //m= pairedAll(ar,0,1);
-        //System.out.println(m);
+        m= pairedAll(ar,0,1);
+        System.out.println(m);
     }
 
     public static double paired(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
+        //Paired t test for comparing datapoints that are accociated
+        
         double result=0;
         double m1=mean.Array(ar,rowMin1,rowMax1,col1);
         double m2=mean.Array(ar,rowMin2,rowMax2,col2);
@@ -34,7 +36,7 @@ public class tTest {
         double[][] difAr= new double[n][1];
 
         for(int i=0; i<n;i++){
-            difAr[i][0]=Math.abs(ar[rowMin1+i][col1]-ar[rowMin2+i][col2]); //placeholder should be matched value 1-2
+            difAr[i][0]=Math.abs(ar[rowMin1+i][col1]-ar[rowMin2+i][col2]); 
         }
 
         double SD=dev.SDAll(difAr, 0);
@@ -48,7 +50,7 @@ public class tTest {
 
     public static double pairedAll(double[][] ar, int col1, int col2){
         double result=0;
-        result=paired(ar, 0, ar.length, col1, 0, ar.length, col2);
+        result=paired(ar, 0, ar.length-1, col1, 0, ar.length-1, col2);
         return result;
     }
 
@@ -60,7 +62,7 @@ public class tTest {
 
     public static double vairanceAll(double[][] ar, int col1, int col2){
         double result=0;
-        result=variance(ar, 0, ar.length, col1, 0, ar.length, col2);
+        result=variance(ar, 0, ar.length-1, col1, 0, ar.length-1, col2);
         return result;
     }
 
@@ -72,7 +74,7 @@ public class tTest {
 
     public static double unequalAll(double[][] ar, int col1, int col2){
         double result=0;
-        result=unequal(ar, 0, ar.length, col1, 0, ar.length, col2);
+        result=unequal(ar, 0, ar.length-1, col1, 0, ar.length-1, col2);
         return result;
     }
 }
