@@ -112,4 +112,14 @@ public class LowPassFilter extends Filter {
             input.popFloat();
         output.pushFloat(sum);
     }
+
+    public static double[][] lowPass(double [][] ar, int minRow, int maxRow,int col, Float SR, Float cutoff,int taps, int dec){
+
+        LowPassFilter l=new LowPassFilter(SR, cutoff, taps, dec);
+
+        
+
+    }
+
+
 }
