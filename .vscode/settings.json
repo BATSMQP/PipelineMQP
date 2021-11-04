@@ -1,6 +1,5 @@
 {
     "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "d:\\Downloads2\\commons-math3-3.6.1.jar"
+        "lib/**/*.jar"
     ]
 }
