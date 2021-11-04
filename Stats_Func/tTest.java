@@ -16,10 +16,15 @@ public class tTest {
         ar[2][0]=4;
         ar[3][0]=5;
 
-        ar[0][1]=2;
-        ar[1][1]=3;
-        ar[2][1]=4;
-        ar[3][1]=4;
+        ar[0][1]=5;
+        ar[1][1]=6;
+        ar[2][1]=7;
+        ar[3][1]=3; 
+        /*
+        ar[0][1]=3;
+        ar[1][1]=2;
+        ar[2][1]=6;
+        ar[3][1]=1;*/
 
         m= paired(ar,0,2,0,0,2,1);
         System.out.println(m[0]);
@@ -29,8 +34,8 @@ public class tTest {
         System.out.println(m[0]);
         System.out.println(m[1]); 
 
-        double b = tDist(m[0],m[1]);
-        System.out.println(b);
+        double b = tDist(-(Math.abs(m[0])),m[1])*2;
+        System.out.println(b);    //It works! MWAHAHAHAHA!
     }
 
     public static double[] paired(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
