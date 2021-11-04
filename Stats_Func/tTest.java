@@ -1,5 +1,7 @@
 package Stats_Func;
 
+//import org.apache.commons.math
+
 public class tTest {
 
     //TODO: make array able to have nondoubles but ignore them
@@ -84,4 +86,13 @@ public class tTest {
         result=unequal(ar, 0, ar.length-1, col1, 0, ar.length-1, col2);
         return result;
     }
+
+    public static double tDist(double t, int n){
+        double result=1.01;
+
+
+
+        return result;
+    }
+
 }
