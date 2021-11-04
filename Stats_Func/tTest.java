@@ -1,6 +1,7 @@
 package Stats_Func;
 
-//import org.apache.commons.math
+import org.apache.commons.math3.distribution.AbstractRealDistribution;
+import org.apache.commons.math3.distribution.TDistribution;
 
 public class tTest {
 
@@ -8,7 +9,7 @@ public class tTest {
 
     public static void main(String[] args) {
         //This is basicaly a test, but I couldn't find the easy test method.
-        double m[];
+        /* double m[];
         double[][] ar=new double [4][5];
         ar[0][0]=2;
         ar[1][0]=3;
@@ -26,7 +27,10 @@ public class tTest {
 
         m= pairedAll(ar,0,1);
         System.out.println(m[0]);
-        System.out.println(m[1]);
+        System.out.println(m[1]); */
+
+        double m = tDist(3, 100);
+        System.out.println(m);
     }
 
     public static double[] paired(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
@@ -90,7 +94,8 @@ public class tTest {
     public static double tDist(double t, int n){
         double result=1.01;
 
-
+        TDistribution r = new TDistribution(n);
+        result=r.cumulativeProbability(t);
 
         return result;
     }

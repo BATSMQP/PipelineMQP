@@ -1,6 +1,6 @@
 package Stats_Func;
 
-npm install low-pass-filter
+//npm install low-pass-filter //this isn't working on Nathan's computor likely becaue he doesn't have the package. It is comented out untill the meeting tomorow where he will ask about it.
 
 public class lowpass {
     
