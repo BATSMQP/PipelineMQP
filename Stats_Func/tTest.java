@@ -6,10 +6,10 @@ import org.apache.commons.math3.distribution.TDistribution;
 public class tTest {
 
     //TODO: make array able to have nondoubles but ignore them
-
+    //I'm trying to make it so that we use the minimum amount of imported code so the user can look at the code direcly if they want to. Thinks like table downloads are fine, but most math should be editable and clear. This is as of now a design consideration I am trying to keep to.
     public static void main(String[] args) {
         //This is basicaly a test, but I couldn't find the easy test method.
-        /* double m[];
+         double m[];
         double[][] ar=new double [4][5];
         ar[0][0]=2;
         ar[1][0]=3;
@@ -27,10 +27,10 @@ public class tTest {
 
         m= pairedAll(ar,0,1);
         System.out.println(m[0]);
-        System.out.println(m[1]); */
+        System.out.println(m[1]); 
 
-        double m = tDist(3, 100);
-        System.out.println(m);
+        double b = tDist(m[0],m[1]);
+        System.out.println(b);
     }
 
     public static double[] paired(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
@@ -91,7 +91,7 @@ public class tTest {
         return result;
     }
 
-    public static double tDist(double t, int n){
+    public static double tDist(double t, double n){
         double result=1.01;
 
         TDistribution r = new TDistribution(n);
