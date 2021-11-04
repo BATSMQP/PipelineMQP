@@ -121,5 +121,14 @@ public class LowPassFilter extends Filter {
 
     }
 
+    public static double[][] lowPassAll(double [][] ar,int col, Float SR, Float cutoff,int taps, int dec){
+
+        return lowPass(ar, 0, ar.length, col, SR, cutoff, taps, dec);
+
+    }
+
+    public static void main(String[] args) {
+        
+    }
 
 }
