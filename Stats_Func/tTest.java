@@ -5,7 +5,7 @@ import org.apache.commons.math3.distribution.TDistribution;
 public class tTest {
 
     //TODO: make array able to have nondoubles but ignore them
-    
+
     //I'm trying to make it so that we use the minimum amount of imported code so the user can look at the code direcly if they want to. Thinks like table downloads are fine, but most math should be editable and clear. This is as of now a design consideration I am trying to keep to.
     public static void main(String[] args) {
         //This is basicaly a test, but I couldn't find the easy test method.
@@ -37,7 +37,7 @@ public class tTest {
         System.out.println(m[1]); 
 
         b = m[2];
-        System.out.printf("The p value is %f\n",b);  */   //It works! MWAHAHAHAHA!
+        System.out.printf("The p value is %f\n",b);  */   
 
 
         /* m= sameSize(ar,0,2,0,0,2,1);
@@ -67,7 +67,7 @@ public class tTest {
         System.out.println(m[1]); 
 
         b = m[2];
-        System.out.printf("The p value is %f\n",b);
+        System.out.printf("The p value is %f\n",b);      //It works! MWAHAHAHAHA!
     }
 
     public static double[] paired(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
@@ -107,7 +107,7 @@ public class tTest {
     }
 
     public static double[] sameSize(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
-        //t-test for two groups with similar variances or equal populations.
+        //t-test for two groups with similar variances or equal populations. First element in array is t-value, second is degrees of freedom, and third is p val
 
         double[] resultar=new double[3];
         double result=0;
@@ -139,7 +139,7 @@ public class tTest {
     }
 
     public static double[] unequal(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
-        //t-test for two groups with different populations and very differnet variances.
+        //t-test for two groups with different populations and very differnet variances. First element in array is t-value, second is degrees of freedom, and third is p val
 
         double[] resultar=new double[3];
         double result=0;
@@ -149,6 +149,7 @@ public class tTest {
         double v2=dev.var(ar, rowMin2, rowMax2, col2);
         double n1=rowMax1-rowMin1+1;
         double n2=rowMax2-rowMin2+1;
+        
         double vv1=Math.pow(v1, 2)/n1;
         double vv2=Math.pow(v2, 2)/n2;
 
