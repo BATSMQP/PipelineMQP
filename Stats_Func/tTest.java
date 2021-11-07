@@ -34,7 +34,19 @@ public class tTest {
         System.out.println(m[1]); 
 
         double b = m[2];
-        System.out.printf("The p value is %f",b);    //It works! MWAHAHAHAHA!
+        System.out.printf("The p value is %f\n",b);    //It works! MWAHAHAHAHA!
+
+
+        m= variance(ar,0,2,0,0,2,1);
+        System.out.println(m[0]);
+        System.out.println(m[1]);
+
+        m= varianceAll(ar,0,1);
+        System.out.println(m[0]);
+        System.out.println(m[1]); 
+
+        b = m[2];
+        System.out.printf("The p value is %f\n",b);    //It works! MWAHAHAHAHA!
     }
 
     public static double[] paired(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
@@ -78,29 +90,25 @@ public class tTest {
         double result=0;
         double m1=mean.Array(ar,rowMin1,rowMax1,col1);
         double m2=mean.Array(ar,rowMin2,rowMax2,col2);
-        int n=rowMax1-rowMin1+1;
-
-        double[][] difAr= new double[n][1];
-
-        for(int i=0; i<n;i++){
-            difAr[i][0]=Math.abs(ar[rowMin1+i][col1]-ar[rowMin2+i][col2]); 
-        }
-
-        double SD=dev.SDAll(difAr, 0);
-
-        result=(m1-m2)/(SD/Math.sqrt(n));
+        double v1=dev.var(ar, rowMin1, rowMax1, col1);
+        double v2=dev.var(ar, rowMin2, rowMax2, col2);
+        int n1=rowMax1-rowMin1+1;
+        int n2=rowMax2-rowMin2+1;
+        double free=n1+n2-2;
+        
+        result=(m1-m2)/((((n1-1)*Math.pow(v1,2)+((n2-1)*Math.pow(v2,2))/free))*Math.sqrt(1/n1+1/n2));
         if (!(result>0||result<0)){
             result=0;
-        }
+        } 
 
         resultar[0]=result;
-        resultar[1]=n-1;
-        resultar[2]=tDist(-(Math.abs(resultar[0])),resultar[1])*2;;
+        resultar[1]=free;
+        resultar[2]=1-tDist((Math.abs(resultar[0])),resultar[1]);;
 
         return resultar;
     }
 
-    public static double[] vairanceAll(double[][] ar, int col1, int col2){
+    public static double[] varianceAll(double[][] ar, int col1, int col2){
         double[] result;
         result=variance(ar, 0, ar.length-1, col1, 0, ar.length-1, col2);
         return result;
