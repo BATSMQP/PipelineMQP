@@ -21,7 +21,7 @@ package com.github.psambit9791.jdsp.filter;
  * @version 1.1
  */
 public class Butterworth implements _IIRFilter {
-    private double[] signal;
+    private double[][] signal; /** Here, the 1st column is  */
     private double samplingFreq;
     private double[] output;
 
@@ -31,7 +31,7 @@ public class Butterworth implements _IIRFilter {
      * @param s Signal to be filtered
      * @param Fs Sampling frequency of input signal
      */
-    public Butterworth(double[] s, double Fs) {
+    public Butterworth(double[][] s, double Fs) {
         this.signal = s;
         this.samplingFreq = Fs;
     }
@@ -42,9 +42,10 @@ public class Butterworth implements _IIRFilter {
      * @param cutoffFreq The cutoff frequency for the filter in Hz
      * @return double[] Filtered signal
      */
-    public double[] lowPassFilter(int order, double cutoffFreq) {
+     /**Modified by Claire Nicolas */
+    public double[] lowPassFilter(int order, double cutoffFreq, double[][] TSSignal, double startTime, double endTime) {
         this.output = new double[this.signal.length];
-        uk.me.berndporr.iirj.Butterworth lp = new uk.me.berndporr.iirj.Butterworth();
+         lp = new Butterworth();
         lp.lowPass(order, this.samplingFreq, cutoffFreq);
         for (int i =0; i<this.output.length; i++) {
             this.output[i] = lp.filter(this.signal[i]);
@@ -53,11 +54,12 @@ public class Butterworth implements _IIRFilter {
     }
 
     /**
-     * This method implements a high pass filter with given parameters, filters the signal and returns it.
+     * This method implements a high pass filter with given parameters, filters the signal, displays a graph and returns it.
      * @param order Order of the filter
      * @param cutoffFreq The cutoff frequency for the filter in Hz
      * @return double[] Filtered signal
      */
+     /**Modified by Claire Nicolas */
     public double[] highPassFilter(int order, double cutoffFreq) {
         this.output = new double[this.signal.length];
         uk.me.berndporr.iirj.Butterworth hp = new uk.me.berndporr.iirj.Butterworth();
@@ -65,6 +67,7 @@ public class Butterworth implements _IIRFilter {
         for (int i =0; i<this.output.length; i++) {
             this.output[i] = hp.filter(this.signal[i]);
         }
+        print
         return this.output;
     }
 
