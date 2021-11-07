@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="newStudy.css">
 
-    <title>BATS: Share Study</title>
+    <title>BATS: Upload Analysis Tool</title>
   </head>
   <body>
 
@@ -45,34 +45,42 @@
 
     <div id="main">
 
-        <h3 id="title">Share Study:</h3>
+        <h3 id="title">Upload Personal Analysis Tool:</h3>
+        <h6 id="otherText">Must be coded in Java, Python, or Matlab.</h6>
 
         <form>
-            <!-- <div class="mb-3">
-                <label for="inputStudyName" class="form-label">Name:</label>
-                <input type="name" class="form-control" id="inputStudyName">
-            </div> -->
-            <div class="row mb-3 align-items-center">
-                <div class="col-auto">
-                    <label for="inputStudyName" class="form-label">Study:</label>
-                </div>
-                <select class="form-select" aria-label="Select Study">
-                  <option selected>Select Study</option>
-                  <option value="1">Study 1</option>
-                  <option value="2">Study 2</option>
-                  <option value="3">Study 3</option>
-                </select>
+          <div class="row mb-3 align-items-center">
+            <div class="col-auto">
+                <label for="inputGroupFile02" class="form-label">File:</label>
             </div>
+            <div class="col-auto">
+              <div class="input-group mb-3">
+                <input type="file" class="form-control" id="inputGroupFile02">
+              </div>
+          </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-              <div class="col-auto">
-                  <label for="inputShareWith" class="form-label">Share With:</label>
-              </div>
-              <div class="col-auto input">
-                  <input type="name" class="form-control" id="inputShareWith">
-              </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-auto">
+                <label for="inputName" class="form-label">Name:</label>
             </div>
-            <button type="submit" id="shareStudyButton" class="btn btn-primary">Share</button>
+            <div class="col-auto input">
+                <input type="name" class="form-control" id="inputName">
+            </div>
+          </div>
+
+          <p>Analysis For:</p>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="timeSeriesData" value="option1">
+            <label class="form-check-label" for="timeSeriesData">Time Series Data</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="logData" value="option2">
+            <label class="form-check-label" for="logData">Log Data</label>
+          </div>
+          </br>
+          <button type="submit" id="confirmButton" class="btn btn-primary">Confirm</button>
         </form>
 
     </div>
