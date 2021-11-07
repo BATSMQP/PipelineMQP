@@ -106,7 +106,8 @@ public class tTest {
     }
 
     public static double[] sameSize(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
-        
+        //t-test for two groups with similar variances or equal populations.
+
         double[] resultar=new double[3];
         double result=0;
         double m1=mean.Array(ar,rowMin1,rowMax1,col1);
@@ -137,7 +138,8 @@ public class tTest {
     }
 
     public static double[] unequal(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
-        
+        //t-test for two groups with different populations and very differnet variances.
+
         double[] resultar=new double[3];
         double result=0;
         double m1=mean.Array(ar,rowMin1,rowMax1,col1);
