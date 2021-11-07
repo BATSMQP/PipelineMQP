@@ -33,14 +33,14 @@ public class tTest {
         System.out.println(m[0]);
         System.out.println(m[1]); 
 
-        double b = tDist(-(Math.abs(m[0])),m[1])*2;
+        double b = m[2];
         System.out.printf("The p value is %f",b);    //It works! MWAHAHAHAHA!
     }
 
     public static double[] paired(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
-        //Paired t test for comparing datapoints that are accociated. First element in array is t-value, second is degrees of freedom
+        //Paired t test for comparing datapoints that are accociated. First element in array is t-value, second is degrees of freedom, and third is p val
         
-        double[] resultar=new double[2];
+        double[] resultar=new double[3];
         double result=0;
         double m1=mean.Array(ar,rowMin1,rowMax1,col1);
         double m2=mean.Array(ar,rowMin2,rowMax2,col2);
@@ -61,6 +61,7 @@ public class tTest {
 
         resultar[0]=result;
         resultar[1]=n-1;
+        resultar[2]=tDist(-(Math.abs(resultar[0])),resultar[1])*2;;
 
         return resultar;
     }
@@ -71,14 +72,36 @@ public class tTest {
         return result;
     }
 
-    public static double variance(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
-        double result=0;
+    public static double[] variance(double[][] ar,int rowMin1, int rowMax1, int col1, int rowMin2, int rowMax2, int col2){
         
-        return result;
+        double[] resultar=new double[3];
+        double result=0;
+        double m1=mean.Array(ar,rowMin1,rowMax1,col1);
+        double m2=mean.Array(ar,rowMin2,rowMax2,col2);
+        int n=rowMax1-rowMin1+1;
+
+        double[][] difAr= new double[n][1];
+
+        for(int i=0; i<n;i++){
+            difAr[i][0]=Math.abs(ar[rowMin1+i][col1]-ar[rowMin2+i][col2]); 
+        }
+
+        double SD=dev.SDAll(difAr, 0);
+
+        result=(m1-m2)/(SD/Math.sqrt(n));
+        if (!(result>0||result<0)){
+            result=0;
+        }
+
+        resultar[0]=result;
+        resultar[1]=n-1;
+        resultar[2]=tDist(-(Math.abs(resultar[0])),resultar[1])*2;;
+
+        return resultar;
     }
 
-    public static double vairanceAll(double[][] ar, int col1, int col2){
-        double result=0;
+    public static double[] vairanceAll(double[][] ar, int col1, int col2){
+        double[] result;
         result=variance(ar, 0, ar.length-1, col1, 0, ar.length-1, col2);
         return result;
     }
