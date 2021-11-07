@@ -5,6 +5,7 @@ import org.apache.commons.math3.distribution.TDistribution;
 public class tTest {
 
     //TODO: make array able to have nondoubles but ignore them
+    
     //I'm trying to make it so that we use the minimum amount of imported code so the user can look at the code direcly if they want to. Thinks like table downloads are fine, but most math should be editable and clear. This is as of now a design consideration I am trying to keep to.
     public static void main(String[] args) {
         //This is basicaly a test, but I couldn't find the easy test method.
