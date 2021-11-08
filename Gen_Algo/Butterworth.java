@@ -20,6 +20,10 @@ package com.github.psambit9791.jdsp.filter;
  * @author  Sambit Paul
  * @version 1.1
  */
+
+ import java.util.Scanner; // Claire Nicolas Edit
+ import java.util.*;  //Claire Nicolas Edit
+
 public class Butterworth implements _IIRFilter {
     private double[][] signal; /** Here, the 1st column is  */
     private double samplingFreq;
@@ -36,6 +40,17 @@ public class Butterworth implements _IIRFilter {
         this.samplingFreq = Fs;
     }
 
+/**This method selects the specific range */
+    public double[][] SpecificSection(double startT, double endT){
+        this.output = this.signal
+       for ( int i = 0; i < this.signal.length; i++) {
+               if ( this.output[i][0]< startT | this.output[i][0]>endT ) {
+                    this.output[i][0] = "";
+                    this.output[i][1] = "";
+        return this.output;
+    }
+
+
     /**
      * This method implements a low pass filter with given parameters, filters the signal and returns it.
      * @param order Order of the filter
@@ -44,6 +59,7 @@ public class Butterworth implements _IIRFilter {
      */
      /**Modified by Claire Nicolas */
     public double[] lowPassFilter(int order, double cutoffFreq, double[][] TSSignal, double startTime, double endTime) {
+        SpecificSection(startTime, endTime)
         this.output = new double[this.signal.length];
          lp = new Butterworth();
         lp.lowPass(order, this.samplingFreq, cutoffFreq);
@@ -62,8 +78,8 @@ public class Butterworth implements _IIRFilter {
      /**Modified by Claire Nicolas */
     public double[] highPassFilter(int order, double cutoffFreq) {
         this.output = new double[this.signal.length];
-        uk.me.berndporr.iirj.Butterworth hp = new uk.me.berndporr.iirj.Butterworth();
-        hp.highPass(order, this.samplingFreq, cutoffFreq);
+        hp = new Butterworth();
+        highPass(order, this.samplingFreq, cutoffFreq);
         for (int i =0; i<this.output.length; i++) {
             this.output[i] = hp.filter(this.signal[i]);
         }
@@ -86,7 +102,7 @@ public class Butterworth implements _IIRFilter {
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];
-        uk.me.berndporr.iirj.Butterworth bp = new uk.me.berndporr.iirj.Butterworth();
+         bp = new Butterworth();
         bp.bandPass(order, this.samplingFreq, centreFreq, width);
         for (int i=0; i<this.output.length; i++) {
             this.output[i] = bp.filter(this.signal[i]);
@@ -109,11 +125,21 @@ public class Butterworth implements _IIRFilter {
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];
-        uk.me.berndporr.iirj.Butterworth bs = new uk.me.berndporr.iirj.Butterworth();
+        Butterworth bs = new Butterworth();
         bs.bandStop(order, this.samplingFreq, centreFreq, width);
         for (int i=0; i<this.output.length; i++) {
             this.output[i] = bs.filter(this.signal[i]);
         }
         return this.output;
+    }
+
+    public static void main(String[] args){
+        
+        Scanner keyboard = new Scanner(System.in);  
+        System.out.print("Enter path to csv: ");  
+        String str= keyboard.nextLine();    
+        Scanner sc = new Scanner(new File(str))
+        double[][] trial1= csv
+
     }
 }
