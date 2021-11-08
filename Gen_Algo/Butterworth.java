@@ -10,6 +10,9 @@
 
 package com.github.psambit9791.jdsp.filter;
 
+import static easyjcckit.QuickPlot.*; //downloaded to make plots
+
+
 /**
  * <h1>Butterworth Filter</h1>
  * The Butterworth class implements low-pass, high-pass, band-pass and band-stop filter using the Butterworth polynomials.
@@ -40,16 +43,31 @@ public class Butterworth implements _IIRFilter {
         this.samplingFreq = Fs;
     }
 
-/**This method selects the specific range */
+    /** This method selects the specific range and removed all unneeded 
+    @param startT start time of range we want to analyse
+    @param endT end time of the range we wanna analyse  
+    Created by Claire Nicolas
+    */
     public double[][] SpecificSection(double startT, double endT){
-        this.output = this.signal
+        this.output= new double[endT-startT*this.samplingFreq][1]
+        int j= 0; 
        for ( int i = 0; i < this.signal.length; i++) {
-               if ( this.output[i][0]< startT | this.output[i][0]>endT ) {
-                    this.output[i][0] = "";
-                    this.output[i][1] = "";
+               if ( this.signal[i][0]< startT | this.signal[i][0]>endT ) { //this is assuming that col 1 = time 2= data
+                    this.output[j][0] =this.signal[i][0];
+                    this.output[j][1] = this.signal[i][1];
+                    j++;
         return this.output;
     }
 
+    /**This method prints the this.output of a butterworth() 
+    
+    Created by Claire Nicolas
+    */
+    public void PrintGraph( ){
+       scatter(this.output[][0], this.output[][1] ); // create a plot using xaxis and yvalues
+       System.out.println("Press enter to exit");
+       System.in.read();  
+    }
 
     /**
      * This method implements a low pass filter with given parameters, filters the signal and returns it.
@@ -57,11 +75,11 @@ public class Butterworth implements _IIRFilter {
      * @param cutoffFreq The cutoff frequency for the filter in Hz
      * @return double[] Filtered signal
      */
-     /**Modified by Claire Nicolas */
-    public double[] lowPassFilter(int order, double cutoffFreq, double[][] TSSignal, double startTime, double endTime) {
+     /**Modified by Claire Nicolas
+     completes a lowpass filter over a desired range and prints the figure */
+    public double[][] lowPassFilter(int order, double cutoffFreq, double[][] TSSignal, double startTime, double endTime) {
         SpecificSection(startTime, endTime)
-        this.output = new double[this.signal.length];
-         lp = new Butterworth();
+        lp = new Butterworth();
         lp.lowPass(order, this.samplingFreq, cutoffFreq);
         for (int i =0; i<this.output.length; i++) {
             this.output[i] = lp.filter(this.signal[i]);
