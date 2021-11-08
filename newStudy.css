@@ -25,6 +25,15 @@
     margin-top: 20px;
 }
 
+#toolkitTable {
+    height: 200px;
+    /* overflow-y: scroll; */
+}
+
+#nextButton {
+    float: right;
+}
+
 .form-control {
     width: 400px;
 }
