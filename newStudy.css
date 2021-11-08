@@ -50,6 +50,23 @@
     margin-bottom: 20px;
 }
 
+#dataTableName {
+    text-align: center;
+}
+
+.inline {
+    display: inline-block;
+}
+
+#analyzeDataButton {
+    float: right;
+}
+
+#addNewData {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
 .form-control {
     width: 400px;
 }
