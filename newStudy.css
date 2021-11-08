@@ -1,5 +1,9 @@
 #main {
-    padding: 50px;
+    padding: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 15px;
+    /* overflow: scroll; */
 }
 
 #title {
@@ -32,6 +36,18 @@
 
 #nextButton {
     float: right;
+}
+
+#nameDataset {
+    float: left;
+}
+
+#dataType {
+    float: right;
+}
+
+#dataTypeButtons {
+    margin-bottom: 20px;
 }
 
 .form-control {
