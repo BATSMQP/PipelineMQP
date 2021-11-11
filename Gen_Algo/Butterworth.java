@@ -29,7 +29,7 @@ import static easyjcckit.QuickPlot.*; //downloaded to make plots
 public class Butterworth implements _IIRFilter {
     private double[][] signal; /** Here, the 1st column is  */
     private double samplingFreq;
-    private double[] output;
+    private double[][] output;
 
     /**
      * This constructor initialises the prerequisites
@@ -100,7 +100,7 @@ public class Butterworth implements _IIRFilter {
         for (int i =0; i<this.output.length; i++) {
             this.output[i] = hp.filter(this.signal[i]);
         }
-        print
+        //print
         return this.output;
     }
 
@@ -156,7 +156,7 @@ public class Butterworth implements _IIRFilter {
         System.out.print("Enter path to csv: ");  
         String str= keyboard.nextLine();    
         Scanner sc = new Scanner(new File(str))
-        double[][] trial1= csv
+       // double[][] trial1= csv
 
     }
 }
