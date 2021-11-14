@@ -6,6 +6,9 @@ import java.awt.geom.*;
 
 //https://www.codespeedy.com/plot-graph-in-java/
 
+//TODO:Make the scalling extend to X
+//TODO: Less urgent make Y able to be negitive scaling wise
+
 public class Graphing_Simp extends JPanel{
     public static double [][] coordinates=new double[100][2];
     int mar=50;
