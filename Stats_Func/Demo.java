@@ -12,17 +12,17 @@ public class Demo {
         ar[1][0]=3;
         ar[2][0]=4;
         ar[3][0]=5;
-        /*
+        
         ar[0][1]=5;
         ar[1][1]=6;
         ar[2][1]=7;
         ar[3][1]=3; 
-        */
+       /*
         ar[0][1]=2;
         ar[1][1]=3;
         ar[2][1]=4;
         ar[3][1]=4;
-
+ */
         /* m= tTest.paired(ar,0,2,0,0,2,1);
         System.out.println(m[0]);
         System.out.println(m[1]);
