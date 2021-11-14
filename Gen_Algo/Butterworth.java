@@ -8,7 +8,7 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.github.psambit9791.jdsp.filter; //
+//package com.github.psambit9791.jdsp.filter; //
 
 import static easyjcckit.QuickPlot.*; //downloaded to make plots
 
@@ -27,7 +27,7 @@ import static easyjcckit.QuickPlot.*; //downloaded to make plots
  import java.util.*;  //Claire Nicolas Edit
 
 public class Butterworth implements _IIRFilter {
-    private double[][] signal; /** Here, the 1st column is  */
+    private double[][] signal; /** Here, the 1st column is time */
     private double samplingFreq;
     private double[][] output;
 
@@ -48,14 +48,16 @@ public class Butterworth implements _IIRFilter {
     Created by Claire Nicolas
     */
     public double[][] SpecificSection(double startT, double endT){
-        this.output= new double[endT-startT*this.samplingFreq][1]
+        this.output= new double[endT-startT*this.samplingFreq][1];
         int j= 0; 
        for ( int i = 0; i < this.signal.length; i++) {
                if ( this.signal[i][0]< startT | this.signal[i][0]>endT ) { //this is assuming that col 1 = time 2= data
                     this.output[j][0] =this.signal[i][0];
                     this.output[j][1] = this.signal[i][1];
                     j++;
+               }
         return this.output;
+        }
     }
 
     /**This method prints the this.output of a butterworth() 
@@ -63,7 +65,7 @@ public class Butterworth implements _IIRFilter {
     Created by Claire Nicolas
     */
     public void PrintGraph( ){
-       scatter(this.output[][0], this.output[][1] ); // create a plot using xaxis and yvalues
+       scatter(this.output[0], this.output[1] ); // create a plot using xaxis and yvalues
        System.out.println("Press enter to exit");
        System.in.read();  
     }
@@ -154,8 +156,8 @@ public class Butterworth implements _IIRFilter {
         
         Scanner keyboard = new Scanner(System.in);  
         System.out.print("Enter path to csv: ");  
-        String str= keyboard.nextLine();    
-        Scanner sc = new Scanner(new File(str))
+        //String str= keyboard.nextLine();    
+        //Scanner sc = new Scanner(new File(str));
        // double[][] trial1= csv
 
     }
