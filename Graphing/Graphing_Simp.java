@@ -3,6 +3,7 @@ package Graphing;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.geom.*;
+
 public class Graphing_Simp extends JPanel{
     int[] coordinates={100,20};
     int mar=50;
