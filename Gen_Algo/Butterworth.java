@@ -22,7 +22,7 @@
  * @author  Sambit Paul
  * @version 1.1
  */
-
+import uk.me.berndporr.iirj.*;
  import java.util.Scanner; // Claire Nicolas Edit
  import java.util.*;  //Claire Nicolas Edit
 
@@ -48,7 +48,9 @@ public class Butterworth implements _IIRFilter {
     Created by Claire Nicolas
     */
     public double[][] SpecificSection(double startT, double endT){
-        this.output= new double[endT-startT*this.samplingFreq][1];
+        int Length= (int) (endT-startT*this.samplingFreq);
+        double Length2 = Length;
+        this.output= new double[Double.valueOf(Length)][2];
         int j= 0; 
        for ( int i = 0; i < this.signal.length; i++) {
                if ( this.signal[i][0]< startT | this.signal[i][0]>endT ) { //this is assuming that col 1 = time 2= data
@@ -62,14 +64,6 @@ public class Butterworth implements _IIRFilter {
 
     /**This method prints the this.output of a butterworth() 
     
-    Created by Claire Nicolas
-    */
-    public void PrintGraph( ){
-       scatter(this.output[0], this.output[1] ); // create a plot using xaxis and yvalues
-       System.out.println("Press enter to exit");
-       System.in.read();  
-    }
-
     /**
      * This method implements a low pass filter with given parameters, filters the signal and returns it.
      * @param order Order of the filter
@@ -95,9 +89,9 @@ public class Butterworth implements _IIRFilter {
      * @return double[] Filtered signal
      */
      /**Modified by Claire Nicolas */
-    public double[] highPassFilter(int order, double cutoffFreq) {
-        this.output = new double[this.signal.length];
-        hp = new Butterworth();
+    public double[][] highPassFilter(int order, double cutoffFreq) {
+        this.output = new double[this.signal.length][2];
+        uk.me.berndporr.iirj.Butterworth hp = new uk.me.berndporr.iirj.Butterworth ();
         highPass(order, this.samplingFreq, cutoffFreq);
         for (int i =0; i<this.output.length; i++) {
             this.output[i] = hp.filter(this.signal[i]);
@@ -114,14 +108,14 @@ public class Butterworth implements _IIRFilter {
      * @throws java.lang.IllegalArgumentException The lower cutoff frequency is greater than the higher cutoff frequency
      * @return double[] Filtered signal
      */
-    public double[] bandPassFilter(int order, double lowCutoff, double highCutoff) throws IllegalArgumentException{
+    public double[][] bandPassFilter(int order, double lowCutoff, double highCutoff) throws IllegalArgumentException{
         if (lowCutoff >= highCutoff) {
             throw new IllegalArgumentException("Lower Cutoff Frequency cannot be more than the Higher Cutoff Frequency");
         }
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
-        this.output = new double[this.signal.length];
-         bp = new Butterworth();
+        this.output = new double[this.signal.length][2];
+        uk.me.berndporr.iirj.Butterworth  bp = new uk.me.berndporr.iirj.Butterworth ();
         bp.bandPass(order, this.samplingFreq, centreFreq, width);
         for (int i=0; i<this.output.length; i++) {
             this.output[i] = bp.filter(this.signal[i]);
@@ -137,14 +131,14 @@ public class Butterworth implements _IIRFilter {
      * @throws java.lang.IllegalArgumentException The lower cutoff frequency is greater than the higher cutoff frequency
      * @return double[] Filtered signal
      */
-    public double[] bandStopFilter(int order, double lowCutoff, double highCutoff) throws IllegalArgumentException{
+    public double[][] bandStopFilter(int order, double lowCutoff, double highCutoff) throws IllegalArgumentException{
         if (lowCutoff >= highCutoff) {
             throw new IllegalArgumentException("Lower Cutoff Frequency cannot be more than the Higher Cutoff Frequency");
         }
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
-        this.output = new double[this.signal.length];
-        Butterworth bs = new Butterworth();
+        this.output = new double[this.signal.length][2];
+        uk.me.berndporr.iirj.Butterworth  bs = new uk.me.berndporr.iirj.Butterworth ();
         bs.bandStop(order, this.samplingFreq, centreFreq, width);
         for (int i=0; i<this.output.length; i++) {
             this.output[i] = bs.filter(this.signal[i]);
@@ -160,5 +154,11 @@ public class Butterworth implements _IIRFilter {
         //Scanner sc = new Scanner(new File(str));
        // double[][] trial1= csv
 
+    }
+
+    @Override
+    public double[][] lowPassFilter(int order, double cutoffFreq) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
