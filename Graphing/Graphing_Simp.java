@@ -6,7 +6,7 @@ import java.awt.geom.*;
 
 //https://www.codespeedy.com/plot-graph-in-java/
 
-//TODO:Make the scalling extend to X
+//Make the scalling extend to X. Done!
 //TODO: Less urgent make Y able to be negitive scaling wise
 
 public class Graphing_Simp extends JPanel{
@@ -20,24 +20,25 @@ public class Graphing_Simp extends JPanel{
         int height=getHeight();
         g1.draw(new Line2D.Double(mar,mar,mar,height-mar));
         g1.draw(new Line2D.Double(mar,height-mar,width-mar,height-mar));
-        double x=(double)(width-2*mar)/(coordinates.length-1);
-        double scale=(double)(height-2*mar)/getMax();
+        //double x=(double)(width-2*mar)/(coordinates.length-1);
+        double scaleY = (double)(height-2*mar)/getMax(1);
+        double scaleX = (double)(width-2*mar)/getMax(0);
         g1.setPaint(Color.BLUE);
 
         for(int i=0;i<coordinates.length;i++){
-            double x1=mar+coordinates[i][0]*x;
-            double y1=height-mar-scale*coordinates[i][1];
+            double x1=mar+coordinates[i][0]*scaleX;
+            double y1=height-mar-scaleY*coordinates[i][1];
             g1.fill(new Ellipse2D.Double(x1-2,y1-2,4,4));
         }
         
         
         
     }
-    private double getMax(){
+    private double getMax(int dim){
         double max=-Integer.MAX_VALUE;
         for(int i=0;i<coordinates.length;i++){
-            if(coordinates[i][1]>max)
-                max=coordinates[i][1];
+            if(coordinates[i][dim]>max)
+                max=coordinates[i][dim];
            
         }return max;
     }       
