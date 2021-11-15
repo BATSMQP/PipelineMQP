@@ -3,6 +3,8 @@ public class mean{
     
     //TODO: make array able to have nondoubles but ignore them
 
+    //TODO: make noncontiguous work by making another colomn that is wheather or not the row should be used
+
     public static void main(String[] args) {
         //This is basicaly a test, but I couldn't find the easy test method.
         double m;
