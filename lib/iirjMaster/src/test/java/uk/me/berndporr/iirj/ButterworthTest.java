@@ -44,7 +44,7 @@ public class ButterworthTest {
 	@Test
 	public void lowPassTest() throws Exception {
 
-		Butterworth butterworth = new Butterworth();
+		ButterworthJDSP butterworth = new ButterworthJDSP();
 		butterworth.lowPass(order, fs, fc);
 
 		createDir();
@@ -70,7 +70,7 @@ public class ButterworthTest {
 
 	@Test
 	public void bandPassTest() throws Exception {
-		Butterworth butterworth = new Butterworth();
+		ButterworthJDSP butterworth = new ButterworthJDSP();
 		butterworth.bandPass(order, fs, fc, fc/4);
 
 		createDir();
@@ -96,7 +96,7 @@ public class ButterworthTest {
 
 	@Test
 	public void bandStopTest() throws Exception {
-		Butterworth butterworth = new Butterworth();
+		ButterworthJDSP butterworth = new ButterworthJDSP();
 		butterworth.bandStop(order, fs, fc, fc/4);
 
 		createDir();
@@ -122,7 +122,7 @@ public class ButterworthTest {
 
 	@Test
 	public void highPassTest() throws Exception {
-		Butterworth butterworth = new Butterworth();
+		ButterworthJDSP butterworth = new ButterworthJDSP();
 		butterworth.highPass(order, fs, fc);
 
 		createDir();

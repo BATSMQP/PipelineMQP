@@ -47,7 +47,7 @@ public class DetectorTest {
 	public void detTest() throws Exception {
 		createDir();
 		
-		Butterworth butterworth = new Butterworth();
+		ButterworthJDSP butterworth = new ButterworthJDSP();
 		// this fakes an R peak so we have a matched filter!
 		butterworth.bandPass(2,250,20,15);
 		

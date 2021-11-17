@@ -39,22 +39,22 @@ public class ParameterChecksTest {
 	@Test
 	public void correctFsTest() throws Exception {
 
-		Butterworth butterworth1 = new Butterworth();
+		ButterworthJDSP butterworth1 = new ButterworthJDSP();
 		butterworth1.lowPass(4, 250, 50);
 		
-		Butterworth butterworth2 = new Butterworth();
+		ButterworthJDSP butterworth2 = new ButterworthJDSP();
 		butterworth2.bandPass(2, 250, 50, 5);
 
-		Butterworth butterworth3 = new Butterworth();
+		ButterworthJDSP butterworth3 = new ButterworthJDSP();
 		butterworth3.bandStop(2, 250, 50, 5);
 
-		Butterworth butterworth4 = new Butterworth();
+		ButterworthJDSP butterworth4 = new ButterworthJDSP();
 		butterworth4.highPass(4, 250, 50);
 	}
 
 	@Test
 	public void wrongFcTestLowpass() throws Exception {
-		Butterworth butterworth = new Butterworth();
+		ButterworthJDSP butterworth = new ButterworthJDSP();
 		try {
 			butterworth.lowPass(4, 250, 125);
 			Assert.fail("Exception not generated for wrong fc.");
@@ -65,7 +65,7 @@ public class ParameterChecksTest {
 
 	@Test
 	public void wrongFcTestHighpass() throws Exception {
-		Butterworth butterworth = new Butterworth();
+		ButterworthJDSP butterworth = new ButterworthJDSP();
 		try {
 			butterworth.highPass(4, 250, 125);
 			Assert.fail("Exception not generated for wrong fc.");
@@ -76,7 +76,7 @@ public class ParameterChecksTest {
 
 	@Test
 	public void wrongFcTestBandpass() throws Exception {
-		Butterworth butterworth = new Butterworth();
+		ButterworthJDSP butterworth = new ButterworthJDSP();
 		try {
 			butterworth.bandPass(2, 250, 125, 5);
 			Assert.fail("Exception not generated for wrong fc.");
@@ -87,7 +87,7 @@ public class ParameterChecksTest {
 
 	@Test
 	public void wrongFcTestBandstop() throws Exception {
-		Butterworth butterworth = new Butterworth();
+		ButterworthJDSP butterworth = new ButterworthJDSP();
 		try {
 			butterworth.bandStop(2, 250, 125, 5);
 			Assert.fail("Exception not generated for wrong fc.");
@@ -98,7 +98,7 @@ public class ParameterChecksTest {
 
 	@Test
 	public void negFcTestLowpass() throws Exception {
-		Butterworth butterworth = new Butterworth();
+		ButterworthJDSP butterworth = new ButterworthJDSP();
 		try {
 			butterworth.lowPass(4, 250, -1);
 			Assert.fail("Exception not generated for wrong fc.");
@@ -109,7 +109,7 @@ public class ParameterChecksTest {
 
 	@Test
 	public void negFcTestHighpass() throws Exception {
-		Butterworth butterworth = new Butterworth();
+		ButterworthJDSP butterworth = new ButterworthJDSP();
 		try {
 			butterworth.highPass(4, 250, -1);
 			Assert.fail("Exception not generated for wrong fc.");
@@ -120,7 +120,7 @@ public class ParameterChecksTest {
 
 	@Test
 	public void negFcTestBandpass() throws Exception {
-		Butterworth butterworth = new Butterworth();
+		ButterworthJDSP butterworth = new ButterworthJDSP();
 		try {
 			butterworth.bandPass(2, 250, -1, 5);
 			Assert.fail("Exception not generated for wrong fc.");
@@ -131,7 +131,7 @@ public class ParameterChecksTest {
 
 	@Test
 	public void negFcTestBandstop() throws Exception {
-		Butterworth butterworth = new Butterworth();
+		ButterworthJDSP butterworth = new ButterworthJDSP();
 		try {
 			butterworth.bandStop(2, 250, -1, 5);
 			Assert.fail("Exception not generated for wrong fc.");
