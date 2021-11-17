@@ -1,4 +1,4 @@
-package uk.me.berndporr.iirj;
+package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -29,7 +29,7 @@ import org.apache.commons.math3.complex.Complex;
  * call one of the methods below to create low-,high-,band-, or stopband
  * filters. For example: bessel.bandPass(2,250,50,5);
  */
-public class Bessel extends Cascade {
+public class BesselIIRJ extends CascadeIIRJ {
 
 	// returns fact(n) = n!
 	private double fact(int n) {
@@ -43,7 +43,7 @@ public class Bessel extends Cascade {
 		return y;
 	}
 
-	class AnalogLowPass extends LayoutBase {
+	class AnalogLowPassIIRJ extends LayoutBaseIIRJ {
 
 		int degree;
 		
@@ -60,7 +60,7 @@ public class Bessel extends Cascade {
 
 		// ------------------------------------------------------------------------------
 
-		public AnalogLowPass(int _degree) {
+		public AnalogLowPassIIRJ(int _degree) {
 			super(_degree);
 			degree = _degree;
 			m_a   = new double[degree + 1]; // input coefficients (degree+1 elements)
@@ -95,13 +95,13 @@ public class Bessel extends Cascade {
 	private void setupLowPass(int order, double sampleRate,
 			double cutoffFrequency, int directFormType) {
 
-		AnalogLowPass m_analogProto = new AnalogLowPass(order);
+		AnalogLowPassIIRJ m_analogProto = new AnalogLowPassIIRJ(order);
 
 		m_analogProto.design();
 
-		LayoutBase m_digitalProto = new LayoutBase(order);
+		LayoutBaseIIRJ m_digitalProto = new LayoutBaseIIRJ(order);
 
-		new LowPassTransform(cutoffFrequency / sampleRate, m_digitalProto,
+		new LowPassTransformIIRJ(cutoffFrequency / sampleRate, m_digitalProto,
 				m_analogProto);
 
 		setLayout(m_digitalProto, directFormType);
@@ -119,7 +119,7 @@ public class Bessel extends Cascade {
 	 */
 	public void lowPass(int order, double sampleRate, double cutoffFrequency) {
 		setupLowPass(order, sampleRate, cutoffFrequency,
-				DirectFormAbstract.DIRECT_FORM_II);
+				DirectFormAbstractIIRJ.DIRECT_FORM_II);
 	}
 
 	/**
@@ -143,12 +143,12 @@ public class Bessel extends Cascade {
 	private void setupHighPass(int order, double sampleRate,
 			double cutoffFrequency, int directFormType) {
 
-		AnalogLowPass m_analogProto = new AnalogLowPass(order);
+		AnalogLowPassIIRJ m_analogProto = new AnalogLowPassIIRJ(order);
 		m_analogProto.design();
 
-		LayoutBase m_digitalProto = new LayoutBase(order);
+		LayoutBaseIIRJ m_digitalProto = new LayoutBaseIIRJ(order);
 
-		new HighPassTransform(cutoffFrequency / sampleRate, m_digitalProto,
+		new HighPassTransformIIRJ(cutoffFrequency / sampleRate, m_digitalProto,
 				m_analogProto);
 
 		setLayout(m_digitalProto, directFormType);
@@ -183,18 +183,18 @@ public class Bessel extends Cascade {
 	 */
 	public void highPass(int order, double sampleRate, double cutoffFrequency) {
 		setupHighPass(order, sampleRate, cutoffFrequency,
-				DirectFormAbstract.DIRECT_FORM_II);
+				DirectFormAbstractIIRJ.DIRECT_FORM_II);
 	}
 
 	private void setupBandStop(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, int directFormType) {
 
-		AnalogLowPass m_analogProto = new AnalogLowPass(order);
+		AnalogLowPassIIRJ m_analogProto = new AnalogLowPassIIRJ(order);
 		m_analogProto.design();
 
-		LayoutBase m_digitalProto = new LayoutBase(order * 2);
+		LayoutBaseIIRJ m_digitalProto = new LayoutBaseIIRJ(order * 2);
 
-		new BandStopTransform(centerFrequency / sampleRate, widthFrequency
+		new BandStopTransformIIRJ(centerFrequency / sampleRate, widthFrequency
 				/ sampleRate, m_digitalProto, m_analogProto);
 
 		setLayout(m_digitalProto, directFormType);
@@ -215,7 +215,7 @@ public class Bessel extends Cascade {
 	public void bandStop(int order, double sampleRate, double centerFrequency,
 			double widthFrequency) {
 		setupBandStop(order, sampleRate, centerFrequency, widthFrequency,
-				DirectFormAbstract.DIRECT_FORM_II);
+				DirectFormAbstractIIRJ.DIRECT_FORM_II);
 	}
 
 	/**
@@ -241,12 +241,12 @@ public class Bessel extends Cascade {
 	private void setupBandPass(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, int directFormType) {
 
-		AnalogLowPass m_analogProto = new AnalogLowPass(order);
+		AnalogLowPassIIRJ m_analogProto = new AnalogLowPassIIRJ(order);
 		m_analogProto.design();
 
-		LayoutBase m_digitalProto = new LayoutBase(order * 2);
+		LayoutBaseIIRJ m_digitalProto = new LayoutBaseIIRJ(order * 2);
 
-		new BandPassTransform(centerFrequency / sampleRate, widthFrequency
+		new BandPassTransformIIRJ(centerFrequency / sampleRate, widthFrequency
 				/ sampleRate, m_digitalProto, m_analogProto);
 
 		setLayout(m_digitalProto, directFormType);
@@ -268,7 +268,7 @@ public class Bessel extends Cascade {
 	public void bandPass(int order, double sampleRate, double centerFrequency,
 			double widthFrequency) {
 		setupBandPass(order, sampleRate, centerFrequency, widthFrequency,
-				DirectFormAbstract.DIRECT_FORM_II);
+				DirectFormAbstractIIRJ.DIRECT_FORM_II);
 	}
 
 	/**

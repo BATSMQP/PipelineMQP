@@ -1,3 +1,5 @@
+package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -18,24 +20,36 @@
  *  Copyright (c) 2016 by Bernd Porr
  */
 
-package uk.me.berndporr.iirj;
+import org.apache.commons.math3.complex.Complex;
 
 /**
- * Abstract form of the a filter which can have different state variables
+ * 
+ * It's written on the tin.
  *
- * Direct form I or II is derived from it
  */
-public abstract class DirectFormAbstract {
+public class PoleZeroPairIIRJ {
 
-    public DirectFormAbstract () {
-        reset();
-    }
+	public ComplexPairIIRJ poles;
+	public ComplexPairIIRJ zeros;
 
-    public abstract void reset();
+	// single pole/zero
+	public PoleZeroPairIIRJ(Complex p, Complex z) {
+		poles = new ComplexPairIIRJ(p);
+		zeros = new ComplexPairIIRJ(z);
+	}
 
-    public abstract double process1 (double in, Biquad s);
+	// pole/zero pair
+	public PoleZeroPairIIRJ(Complex p1, Complex z1, Complex p2, Complex z2) {
+		poles = new ComplexPairIIRJ(p1, p2);
+		zeros = new ComplexPairIIRJ(z1, z2);
+	}
 
-    public static final int DIRECT_FORM_I = 0;
-    public static final int DIRECT_FORM_II = 1;
+	public boolean isSinglePole() {
+		return poles.second.equals(new Complex(0, 0))
+				&& zeros.second.equals(new Complex(0, 0));
+	}
 
+	public boolean is_nan() {
+		return poles.is_nan() || zeros.is_nan();
+	}
 };

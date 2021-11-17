@@ -18,18 +18,18 @@
  *  Copyright (c) 2016 by Bernd Porr
  */
 
-package uk.me.berndporr.iirj;
+package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 
 /**
  * Transforms from an analogue lowpass filter to a digital highpass filter
  */
-public class HighPassTransform {
+public class HighPassTransformIIRJ {
 
 	double f;
 
-	public HighPassTransform(double fc, LayoutBase digital, LayoutBase analog) {
+	public HighPassTransformIIRJ(double fc, LayoutBaseIIRJ digital, LayoutBaseIIRJ analog) {
 		digital.reset();
 
 		if (fc < 0) {
@@ -46,13 +46,13 @@ public class HighPassTransform {
 		int numPoles = analog.getNumPoles();
 		int pairs = numPoles / 2;
 		for (int i = 0; i < pairs; ++i) {
-			PoleZeroPair pair = analog.getPair(i);
+			PoleZeroPairIIRJ pair = analog.getPair(i);
 			digital.addPoleZeroConjugatePairs(transform(pair.poles.first),
 					transform(pair.zeros.first));
 		}
 
 		if ((numPoles & 1) == 1) {
-			PoleZeroPair pair = analog.getPair(pairs);
+			PoleZeroPairIIRJ pair = analog.getPair(pairs);
 			digital.add(transform(pair.poles.first),
 					transform(pair.zeros.first));
 		}

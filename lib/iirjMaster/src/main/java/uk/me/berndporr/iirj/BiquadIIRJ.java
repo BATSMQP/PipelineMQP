@@ -18,7 +18,7 @@
  *  Copyright (c) 2016 by Bernd Porr
  */
 
-package uk.me.berndporr.iirj;
+package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.complex.ComplexUtils;
@@ -26,7 +26,7 @@ import org.apache.commons.math3.complex.ComplexUtils;
 /**
  * Contains the coefficients of a 2nd order digital filter with two poles and two zeros
  */
-public class Biquad {
+public class BiquadIIRJ {
 
     double m_a0;
     double m_a1;
@@ -75,10 +75,10 @@ public class Biquad {
 
         Complex ct = new Complex(b0 / a0);
         Complex cb = new Complex(1);
-        ct = MathSupplement.addmul(ct, b1 / a0, czn1);
-        ct = MathSupplement.addmul(ct, b2 / a0, czn2);
-        cb = MathSupplement.addmul(cb, a1 / a0, czn1);
-        cb = MathSupplement.addmul(cb, a2 / a0, czn2);
+        ct = MathSupplementIIRJ.addmul(ct, b1 / a0, czn1);
+        ct = MathSupplementIIRJ.addmul(ct, b2 / a0, czn2);
+        cb = MathSupplementIIRJ.addmul(cb, a1 / a0, czn1);
+        cb = MathSupplementIIRJ.addmul(cb, a2 / a0, czn2);
         ch = ch.multiply(ct);
         cbot = cbot.multiply(cb);
 
@@ -138,10 +138,11 @@ public class Biquad {
         setCoefficients(a0, a1, a2, b0, b1, b2);
     }
 
-    public void setPoleZeroForm(BiquadPoleState bps) {
+    public void setPoleZeroForm(BiquadPoleStateIIRJ bps) {
         setPoleZeroPair(bps);
         applyScale(bps.gain);
     }
+    
 
     public void setIdentity() {
         setCoefficients(1, 0, 0, 1, 0, 0);
@@ -154,7 +155,7 @@ public class Biquad {
     }
 
 
-    public void setPoleZeroPair(PoleZeroPair pair) {
+    public void setPoleZeroPair(PoleZeroPairIIRJ pair) {
         if (pair.isSinglePole()) {
             setOnePole(pair.poles.first, pair.zeros.first);
         } else {

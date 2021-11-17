@@ -19,14 +19,14 @@
  */
 
 
-package uk.me.berndporr.iirj;
+package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 
 /**
  * Transforms from an analogue bandpass filter to a digital bandstop filter
  */
-public class BandPassTransform {
+public class BandPassTransformIIRJ {
 
 	private double wc2;
 	private double wc;
@@ -34,8 +34,8 @@ public class BandPassTransform {
 	private double a2, b2;
 	private double ab, ab_2;
 
-	public BandPassTransform(double fc, double fw, LayoutBase digital,
-			LayoutBase analog) {
+	public BandPassTransformIIRJ(double fc, double fw, LayoutBaseIIRJ digital,
+			LayoutBaseIIRJ analog) {
 
 		digital.reset();
 
@@ -69,17 +69,17 @@ public class BandPassTransform {
 		int numPoles = analog.getNumPoles();
 		int pairs = numPoles / 2;
 		for (int i = 0; i < pairs; ++i) {
-			PoleZeroPair pair = analog.getPair(i);
-			ComplexPair p1 = transform(pair.poles.first);
-			ComplexPair z1 = transform(pair.zeros.first);
+			PoleZeroPairIIRJ pair = analog.getPair(i);
+			ComplexPairIIRJ p1 = transform(pair.poles.first);
+			ComplexPairIIRJ  z1 = transform(pair.zeros.first);
 
 			digital.addPoleZeroConjugatePairs(p1.first, z1.first);
 			digital.addPoleZeroConjugatePairs(p1.second, z1.second);
 		}
 
 		if ((numPoles & 1) == 1) {
-			ComplexPair poles = transform(analog.getPair(pairs).poles.first);
-			ComplexPair zeros = transform(analog.getPair(pairs).zeros.first);
+			ComplexPairIIRJ poles = transform(analog.getPair(pairs).poles.first);
+			ComplexPairIIRJ zeros = transform(analog.getPair(pairs).zeros.first);
 
 			digital.add(poles, zeros);
 		}
@@ -90,31 +90,31 @@ public class BandPassTransform {
 						* Math.tan((wc2 + wn) * 0.5))), analog.getNormalGain());
 	}
 
-	private ComplexPair transform(Complex c) {
+	private ComplexPairIIRJ transform(Complex c) {
 		if (c.isInfinite()) {
-			return new ComplexPair(new Complex(-1), new Complex(1));
+			return new ComplexPairIIRJ(new Complex(-1), new Complex(1));
 		}
 
 		c = ((new Complex(1)).add(c)).divide((new Complex(1)).subtract(c)); // bilinear
 
 		Complex v = new Complex(0);
-		v = MathSupplement.addmul(v, 4 * (b2 * (a2 - 1) + 1), c);
+		v = MathSupplementIIRJ.addmul(v, 4 * (b2 * (a2 - 1) + 1), c);
 		v = v.add(8 * (b2 * (a2 - 1) - 1));
 		v = v.multiply(c);
 		v = v.add(4 * (b2 * (a2 - 1) + 1));
 		v = v.sqrt();
 
 		Complex u = v.multiply(-1);
-		u = MathSupplement.addmul(u, ab_2, c);
+		u = MathSupplementIIRJ.addmul(u, ab_2, c);
 		u = u.add(ab_2);
 
-		v = MathSupplement.addmul(v, ab_2, c);
+		v = MathSupplementIIRJ.addmul(v, ab_2, c);
 		v = v.add(ab_2);
 
 		Complex d = new Complex(0);
-		d = MathSupplement.addmul(d, 2 * (b - 1), c).add(2 * (1 + b));
+		d = MathSupplementIIRJ.addmul(d, 2 * (b - 1), c).add(2 * (1 + b));
 
-		return new ComplexPair(u.divide(d), v.divide(d));
+		return new ComplexPairIIRJ(u.divide(d), v.divide(d));
 	}
 
 }

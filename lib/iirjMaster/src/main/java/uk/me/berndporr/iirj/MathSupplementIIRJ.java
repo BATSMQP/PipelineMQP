@@ -18,7 +18,7 @@
  *  Copyright (c) 2016 by Bernd Porr
  */
 
-package uk.me.berndporr.iirj;
+package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 
@@ -27,7 +27,7 @@ import org.apache.commons.math3.complex.Complex;
  * Useful math functions which come back over and over again
  *
  */
-public class MathSupplement {
+public class MathSupplementIIRJ {
 	
 	public static double doubleLn10 =2.3025850929940456840179914546844;
 

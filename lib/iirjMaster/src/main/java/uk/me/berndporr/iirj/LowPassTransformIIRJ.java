@@ -19,14 +19,14 @@
  */
 
 
-package uk.me.berndporr.iirj;
+package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 
 /**
  * Transforms from an analogue lowpass filter to a digital lowpass filter
  */
-public class LowPassTransform {
+public class LowPassTransformIIRJ {
 
 	private double f;
 
@@ -43,7 +43,7 @@ public class LowPassTransform {
 		return (one.add(c)).divide(one.subtract(c));
 	}
 
-	public LowPassTransform(double fc, LayoutBase digital, LayoutBase analog) {
+	public LowPassTransformIIRJ(double fc, LayoutBaseIIRJ digital, LayoutBaseIIRJ analog) {
 		digital.reset();
 
 		if (fc < 0) {
@@ -60,13 +60,13 @@ public class LowPassTransform {
 		int numPoles = analog.getNumPoles();
 		int pairs = numPoles / 2;
 		for (int i = 0; i < pairs; ++i) {
-			PoleZeroPair pair = analog.getPair(i);
+			PoleZeroPairIIRJ pair = analog.getPair(i);
 			digital.addPoleZeroConjugatePairs(transform(pair.poles.first),
 					transform(pair.zeros.first));
 		}
 
 		if ((numPoles & 1) == 1) {
-			PoleZeroPair pair = analog.getPair(pairs);
+			PoleZeroPairIIRJ pair = analog.getPair(pairs);
 			digital.add(transform(pair.poles.first),
 					transform(pair.zeros.first));
 		}

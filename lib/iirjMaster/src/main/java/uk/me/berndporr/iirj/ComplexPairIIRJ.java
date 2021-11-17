@@ -19,7 +19,7 @@
  */
 
 
-package uk.me.berndporr.iirj;
+package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 
@@ -28,18 +28,18 @@ import org.apache.commons.math3.complex.Complex;
  * A complex pair
  *
  */
-public class ComplexPair {
+public class ComplexPairIIRJ {
 
         public Complex first;
         public Complex second;
 
-        ComplexPair (Complex c1,
+        ComplexPairIIRJ (Complex c1,
                      Complex c2) {
             first = c1;
             second = c2;
         }
 
-        ComplexPair (Complex c1) {
+        ComplexPairIIRJ (Complex c1) {
             first = c1;
             second = new Complex(0,0);
         }

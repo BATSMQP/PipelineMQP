@@ -19,7 +19,7 @@
  */
 
 
-package uk.me.berndporr.iirj;
+package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.complex.ComplexUtils;
@@ -31,13 +31,13 @@ import org.apache.commons.math3.complex.ComplexUtils;
  * of the 2nd order filters which also imply if it's direct form I or II
  *
  */
-public class Cascade {
+public class CascadeIIRJ {
 
 	// coefficients
-	private Biquad[] m_biquads;
+	private BiquadIIRJ[] m_biquads;
 
 	// the states of the filters
-	private DirectFormAbstract[] m_states;
+	private DirectFormAbstractIIRJ[] m_states;
 
 	// number of biquads in the system
 	private int m_numBiquads;
@@ -48,11 +48,11 @@ public class Cascade {
 		return m_numBiquads;
 	}
 
-	public Biquad getBiquad(int index) {
+	public BiquadIIRJ getBiquad(int index) {
 		return m_biquads[index];
 	}
 
-	public Cascade() {
+	public CascadeIIRJ() {
 		m_numBiquads = 0;
 		m_biquads = null;
 		m_states = null;
@@ -81,13 +81,13 @@ public class Cascade {
 		Complex cbot = new Complex(1);
 
 		for (int i = 0; i < m_numBiquads; i++) {
-			Biquad stage = m_biquads[i];
+			BiquadIIRJ stage = m_biquads[i];
 			Complex cb = new Complex(1);
 			Complex ct = new Complex(stage.getB0() / stage.getA0());
-			ct = MathSupplement.addmul(ct, stage.getB1() / stage.getA0(), czn1);
-			ct = MathSupplement.addmul(ct, stage.getB2() / stage.getA0(), czn2);
-			cb = MathSupplement.addmul(cb, stage.getA1() / stage.getA0(), czn1);
-			cb = MathSupplement.addmul(cb, stage.getA2() / stage.getA0(), czn2);
+			ct = MathSupplementIIRJ.addmul(ct, stage.getB1() / stage.getA0(), czn1);
+			ct = MathSupplementIIRJ.addmul(ct, stage.getB2() / stage.getA0(), czn2);
+			cb = MathSupplementIIRJ.addmul(cb, stage.getA1() / stage.getA0(), czn1);
+			cb = MathSupplementIIRJ.addmul(cb, stage.getA2() / stage.getA0(), czn2);
 			ch = ch.multiply(ct);
 			cbot = cbot.multiply(cb);
 		}
@@ -103,28 +103,28 @@ public class Cascade {
 		}
 	}
 
-	public void setLayout(LayoutBase proto, int filterTypes) {
+	public void setLayout(LayoutBaseIIRJ proto, int filterTypes) {
 		numPoles = proto.getNumPoles();
 		m_numBiquads = (numPoles + 1) / 2;
-		m_biquads = new Biquad[m_numBiquads];
+		m_biquads = new BiquadIIRJ[m_numBiquads];
 		switch (filterTypes) {
-		case DirectFormAbstract.DIRECT_FORM_I:
-			m_states = new DirectFormI[m_numBiquads];
+		case DirectFormAbstractIIRJ.DIRECT_FORM_I:
+			m_states = new DirectFormiIIRJ[m_numBiquads];
 			for (int i = 0; i < m_numBiquads; i++) {
-				m_states[i] = new DirectFormI();
+				m_states[i] = new DirectFormiIIRJ();
 			}
 			break;
-		case DirectFormAbstract.DIRECT_FORM_II:
+		case DirectFormAbstractIIRJ.DIRECT_FORM_II:
 		default:
-			m_states = new DirectFormII[m_numBiquads];
+			m_states = new DirectFormiiIIRJ[m_numBiquads];
 			for (int i = 0; i < m_numBiquads; i++) {
-				m_states[i] = new DirectFormII();
+				m_states[i] = new DirectFormiiIIRJ();
 			}
 			break;
 		}
 		for (int i = 0; i < m_numBiquads; ++i) {
-			PoleZeroPair p = proto.getPair(i);
-			m_biquads[i] = new Biquad();
+			PoleZeroPairIIRJ p = proto.getPair(i);
+			m_biquads[i] = new BiquadIIRJ();
 			m_biquads[i].setPoleZeroPair(p);
 		}
 		applyScale(proto.getNormalGain()

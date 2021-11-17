@@ -18,8 +18,7 @@
  *  Copyright (c) 2016 by Bernd Porr
  */
 
-package uk.me.berndporr.iirj;
-
+package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
 import org.apache.commons.math3.complex.Complex;
 
 /**
@@ -28,9 +27,9 @@ import org.apache.commons.math3.complex.Complex;
  * ChebyshevII(); Then call one of the methods below to create low-,high-,band-,
  * or stopband filters. For example: chebyshevII.bandPass(2,250,50,5,0.5);
  */
-public class ChebyshevII extends Cascade {
+public class ChebyshevII extends CascadeIIRJ {
 
-	class AnalogLowPass extends LayoutBase {
+	class AnalogLowPass extends LayoutBaseIIRJ {
 
 		private int nPoles;
 
@@ -44,8 +43,8 @@ public class ChebyshevII extends Cascade {
 		public void design(double stopBandDb) {
 			reset();
 
-			double eps = Math.sqrt(1. / (Math.exp(stopBandDb * 0.1 * MathSupplement.doubleLn10) - 1));
-			double v0 = MathSupplement.asinh(1 / eps) / nPoles;
+			double eps = Math.sqrt(1. / (Math.exp(stopBandDb * 0.1 * MathSupplementIIRJ.doubleLn10) - 1));
+			double v0 = MathSupplementIIRJ.asinh(1 / eps) / nPoles;
 			double sinh_v0 = -Math.sinh(v0);
 			double cosh_v0 = Math.cosh(v0);
 			double fn = Math.PI / (2 * nPoles);
@@ -74,9 +73,9 @@ public class ChebyshevII extends Cascade {
 		AnalogLowPass m_analogProto = new AnalogLowPass(order);
 		m_analogProto.design(rippleDb);
 
-		LayoutBase m_digitalProto = new LayoutBase(order);
+		LayoutBaseIIRJ m_digitalProto = new LayoutBaseIIRJ(order);
 
-		new LowPassTransform(cutoffFrequency / sampleRate, m_digitalProto, m_analogProto);
+		new LowPassTransformIIRJ(cutoffFrequency / sampleRate, m_digitalProto, m_analogProto);
 
 		setLayout(m_digitalProto, directFormType);
 	}
@@ -94,7 +93,7 @@ public class ChebyshevII extends Cascade {
 	 *            passband ripple in decibel sensible value: 1dB
 	 */
 	public void lowPass(int order, double sampleRate, double cutoffFrequency, double rippleDb) {
-		setupLowPass(order, sampleRate, cutoffFrequency, rippleDb, DirectFormAbstract.DIRECT_FORM_II);
+		setupLowPass(order, sampleRate, cutoffFrequency, rippleDb, DirectFormAbstractIIRJ.DIRECT_FORM_II);
 	}
 
 	/**
@@ -122,9 +121,9 @@ public class ChebyshevII extends Cascade {
 		AnalogLowPass m_analogProto = new AnalogLowPass(order);
 		m_analogProto.design(rippleDb);
 
-		LayoutBase m_digitalProto = new LayoutBase(order);
+		LayoutBaseIIRJ m_digitalProto = new LayoutBaseIIRJ(order);
 
-		new HighPassTransform(cutoffFrequency / sampleRate, m_digitalProto, m_analogProto);
+		new HighPassTransformIIRJ(cutoffFrequency / sampleRate, m_digitalProto, m_analogProto);
 
 		setLayout(m_digitalProto, directFormType);
 	}
@@ -142,7 +141,7 @@ public class ChebyshevII extends Cascade {
 	 *            passband ripple in decibel sensible value: 1dB
 	 */
 	public void highPass(int order, double sampleRate, double cutoffFrequency, double rippleDb) {
-		setupHighPass(order, sampleRate, cutoffFrequency, rippleDb, DirectFormAbstract.DIRECT_FORM_II);
+		setupHighPass(order, sampleRate, cutoffFrequency, rippleDb, DirectFormAbstractIIRJ.DIRECT_FORM_II);
 	}
 
 	/**
@@ -170,9 +169,9 @@ public class ChebyshevII extends Cascade {
 		AnalogLowPass m_analogProto = new AnalogLowPass(order);
 		m_analogProto.design(rippleDb);
 
-		LayoutBase m_digitalProto = new LayoutBase(order * 2);
+		LayoutBaseIIRJ m_digitalProto = new LayoutBaseIIRJ(order * 2);
 
-		new BandStopTransform(centerFrequency / sampleRate, widthFrequency / sampleRate, m_digitalProto, m_analogProto);
+		new BandStopTransformIIRJ(centerFrequency / sampleRate, widthFrequency / sampleRate, m_digitalProto, m_analogProto);
 
 		setLayout(m_digitalProto, directFormType);
 	}
@@ -192,7 +191,7 @@ public class ChebyshevII extends Cascade {
 	 *            passband ripple in decibel sensible value: 1dB
 	 */
 	public void bandStop(int order, double sampleRate, double centerFrequency, double widthFrequency, double rippleDb) {
-		setupBandStop(order, sampleRate, centerFrequency, widthFrequency, rippleDb, DirectFormAbstract.DIRECT_FORM_II);
+		setupBandStop(order, sampleRate, centerFrequency, widthFrequency, rippleDb, DirectFormAbstractIIRJ.DIRECT_FORM_II);
 	}
 
 	/**
@@ -222,9 +221,9 @@ public class ChebyshevII extends Cascade {
 		AnalogLowPass m_analogProto = new AnalogLowPass(order);
 		m_analogProto.design(rippleDb);
 
-		LayoutBase m_digitalProto = new LayoutBase(order * 2);
+		LayoutBaseIIRJ m_digitalProto = new LayoutBaseIIRJ(order * 2);
 
-		new BandPassTransform(centerFrequency / sampleRate, widthFrequency / sampleRate, m_digitalProto, m_analogProto);
+		new BandPassTransformIIRJ(centerFrequency / sampleRate, widthFrequency / sampleRate, m_digitalProto, m_analogProto);
 
 		setLayout(m_digitalProto, directFormType);
 
@@ -245,7 +244,7 @@ public class ChebyshevII extends Cascade {
 	 *            passband ripple in decibel sensible value: 1dB
 	 */
 	public void bandPass(int order, double sampleRate, double centerFrequency, double widthFrequency, double rippleDb) {
-		setupBandPass(order, sampleRate, centerFrequency, widthFrequency, rippleDb, DirectFormAbstract.DIRECT_FORM_II);
+		setupBandPass(order, sampleRate, centerFrequency, widthFrequency, rippleDb, DirectFormAbstractIIRJ.DIRECT_FORM_II);
 	}
 
 	/**

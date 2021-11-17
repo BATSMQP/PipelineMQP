@@ -18,7 +18,7 @@
  *  Copyright (c) 2016 by Bernd Porr
  */
 
-package uk.me.berndporr.iirj;
+package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 
@@ -28,24 +28,24 @@ import org.apache.commons.math3.complex.Complex;
  * storage as PoleZeroPairs so that we have as always a 2nd order filter
  *
  */
-public class LayoutBase {
+public class LayoutBaseIIRJ {
 
 	private int m_numPoles;
-	private PoleZeroPair[] m_pair;
+	private PoleZeroPairIIRJ[] m_pair;
 	private double m_normalW;
 	private double m_normalGain;
 
-	public LayoutBase(PoleZeroPair[] pairs) {
+	public LayoutBaseIIRJ(PoleZeroPairIIRJ[] pairs) {
 		m_numPoles = pairs.length * 2;
 		m_pair = pairs;
 	}
 
-	public LayoutBase(int numPoles) {
+	public LayoutBaseIIRJ(int numPoles) {
 		m_numPoles = 0;
 		if ((numPoles % 2) == 1) {
-			m_pair = new PoleZeroPair[numPoles / 2 + 1];
+			m_pair = new PoleZeroPairIIRJ[numPoles / 2 + 1];
 		} else {
-			m_pair = new PoleZeroPair[numPoles / 2];
+			m_pair = new PoleZeroPairIIRJ[numPoles / 2];
 		}
 	}
 
@@ -58,7 +58,7 @@ public class LayoutBase {
 	}
 
 	public void add(Complex pole, Complex zero) {
-		m_pair[m_numPoles / 2] = new PoleZeroPair(pole, zero);
+		m_pair[m_numPoles / 2] = new PoleZeroPairIIRJ(pole, zero);
 		++m_numPoles;
 	}
 
@@ -66,18 +66,18 @@ public class LayoutBase {
 		if (pole == null) System.out.println("LayoutBase addConj() pole == null");
 		if (zero == null) System.out.println("LayoutBase addConj() zero == null");
 		if (m_pair == null) System.out.println("LayoutBase addConj() m_pair == null");
-		m_pair[m_numPoles / 2] = new PoleZeroPair(pole, zero, pole.conjugate(),
+		m_pair[m_numPoles / 2] = new PoleZeroPairIIRJ(pole, zero, pole.conjugate(),
 				zero.conjugate());
 		m_numPoles += 2;
 	}
 
-	public void add(ComplexPair poles, ComplexPair zeros) {
-		m_pair[m_numPoles / 2] = new PoleZeroPair(poles.first, zeros.first,
+	public void add(ComplexPairIIRJ poles, ComplexPairIIRJ zeros) {
+		m_pair[m_numPoles / 2] = new PoleZeroPairIIRJ(poles.first, zeros.first,
 				poles.second, zeros.second);
 		m_numPoles += 2;
 	}
 
-	public PoleZeroPair getPair(int pairIndex) {
+	public PoleZeroPairIIRJ getPair(int pairIndex) {
 		return m_pair[pairIndex];
 	}
 

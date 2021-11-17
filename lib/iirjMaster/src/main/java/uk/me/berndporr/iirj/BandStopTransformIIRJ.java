@@ -18,13 +18,13 @@
  *  Copyright (c) 2016 by Bernd Porr
  */
 
-package uk.me.berndporr.iirj;
+package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
 import org.apache.commons.math3.complex.Complex;
 
 /**
  * Transforms from an analogue lowpass filter to a digital bandstop filter
  */
-public class BandStopTransform {
+public class BandStopTransformIIRJ {
 
 
   private double wc;
@@ -35,10 +35,10 @@ public class BandStopTransform {
   private double b2;
 
 
-  public BandStopTransform(double fc,
+  public BandStopTransformIIRJ(double fc,
 			   double fw,
-			   LayoutBase digital,
-			   LayoutBase analog) {
+			   LayoutBaseIIRJ digital,
+			   LayoutBaseIIRJ analog) {
         digital.reset();
 
 	if (fc < 0) {
@@ -69,16 +69,16 @@ public class BandStopTransform {
         int numPoles = analog.getNumPoles();
         int pairs = numPoles / 2;
         for (int i = 0; i < pairs; i++) {
-            PoleZeroPair pair = analog.getPair(i);
-            ComplexPair p = transform(pair.poles.first);
-            ComplexPair z = transform(pair.zeros.first);
+            PoleZeroPairIIRJ pair = analog.getPair(i);
+            ComplexPairIIRJ p = transform(pair.poles.first);
+            ComplexPairIIRJ z = transform(pair.zeros.first);
             digital.addPoleZeroConjugatePairs(p.first, z.first);
             digital.addPoleZeroConjugatePairs(p.second, z.second);
         }
 
         if ((numPoles & 1) == 1) {
-            ComplexPair poles = transform(analog.getPair(pairs).poles.first);
-            ComplexPair zeros = transform(analog.getPair(pairs).zeros.first);
+            ComplexPairIIRJ poles = transform(analog.getPair(pairs).poles.first);
+            ComplexPairIIRJ zeros = transform(analog.getPair(pairs).zeros.first);
 
             digital.add(poles, zeros);
         }
@@ -89,14 +89,14 @@ public class BandStopTransform {
             digital.setNormal(0, analog.getNormalGain());
     }
 
-    private ComplexPair transform(Complex c) {
+    private ComplexPairIIRJ transform(Complex c) {
         if (c.isInfinite())
             c = new Complex(-1);
         else
             c = ((new Complex(1)).add(c)).divide((new Complex(1)).subtract(c)); // bilinear
 
         Complex u = new Complex(0);
-        u = MathSupplement.addmul(u, 4 * (b2 + a2 - 1), c);
+        u = MathSupplementIIRJ.addmul(u, 4 * (b2 + a2 - 1), c);
         u = u.add(8 * (b2 - a2 + 1));
         u = u.multiply(c);
         u = u.add(4 * (a2 + b2 - 1));
@@ -104,16 +104,16 @@ public class BandStopTransform {
 
         Complex v = u.multiply(-.5);
         v = v.add(a);
-        v = MathSupplement.addmul(v, -a, c);
+        v = MathSupplementIIRJ.addmul(v, -a, c);
 
         u = u.multiply(.5);
         u = u.add(a);
-        u = MathSupplement.addmul(u, -a, c);
+        u = MathSupplementIIRJ.addmul(u, -a, c);
 
         Complex d = new Complex(b + 1);
-        d = MathSupplement.addmul(d, b - 1, c);
+        d = MathSupplementIIRJ.addmul(d, b - 1, c);
 
-        return new ComplexPair(u.divide(d), v.divide(d));
+        return new ComplexPairIIRJ(u.divide(d), v.divide(d));
     }
 
 }

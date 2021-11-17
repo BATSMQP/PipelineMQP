@@ -19,7 +19,7 @@
  */
 
 
-package uk.me.berndporr.iirj;
+package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.complex.ComplexUtils;
@@ -32,13 +32,13 @@ import org.apache.commons.math3.complex.ComplexUtils;
  *         low-,high-,band-, or stopband filters. For example:
  *         butterworth.bandPass(2,250,50,5);
  */
-public class Butterworth extends Cascade {
+public class ButterworthIIRJ extends CascadeIIRJ {
 
-	class AnalogLowPass extends LayoutBase {
+	class AnalogLowPassIIRJ extends LayoutBaseIIRJ {
 
 		private int nPoles;
 
-		public AnalogLowPass(int _nPoles) {
+		public AnalogLowPassIIRJ(int _nPoles) {
 			super(_nPoles);
 			nPoles = _nPoles;
 			setNormal(0, 1);
@@ -62,12 +62,12 @@ public class Butterworth extends Cascade {
 	private void setupLowPass(int order, double sampleRate,
 			double cutoffFrequency, int directFormType) {
 
-		AnalogLowPass m_analogProto = new AnalogLowPass(order);
+		AnalogLowPassIIRJ m_analogProto = new AnalogLowPassIIRJ(order);
 		m_analogProto.design();
 
-		LayoutBase m_digitalProto = new LayoutBase(order);
+		LayoutBaseIIRJ m_digitalProto = new LayoutBaseIIRJ(order);
 
-		new LowPassTransform(cutoffFrequency / sampleRate, m_digitalProto,
+		new LowPassTransformIIRJ(cutoffFrequency / sampleRate, m_digitalProto,
 				m_analogProto);
 
 		setLayout(m_digitalProto, directFormType);
@@ -85,7 +85,7 @@ public class Butterworth extends Cascade {
 	 */
 	public void lowPass(int order, double sampleRate, double cutoffFrequency) {
 		setupLowPass(order, sampleRate, cutoffFrequency,
-				DirectFormAbstract.DIRECT_FORM_II);
+				DirectFormAbstractIIRJ.DIRECT_FORM_II);
 	}
 
 	/**
@@ -112,12 +112,12 @@ public class Butterworth extends Cascade {
 	private void setupHighPass(int order, double sampleRate,
 			double cutoffFrequency, int directFormType) {
 
-		AnalogLowPass m_analogProto = new AnalogLowPass(order);
+		AnalogLowPassIIRJ m_analogProto = new AnalogLowPassIIRJ(order);
 		m_analogProto.design();
 
-		LayoutBase m_digitalProto = new LayoutBase(order);
+		LayoutBaseIIRJ m_digitalProto = new LayoutBaseIIRJ(order);
 
-		new HighPassTransform(cutoffFrequency / sampleRate, m_digitalProto,
+		new HighPassTransformIIRJ(cutoffFrequency / sampleRate, m_digitalProto,
 				m_analogProto);
 
 		setLayout(m_digitalProto, directFormType);
@@ -152,7 +152,7 @@ public class Butterworth extends Cascade {
 	 */
 	public void highPass(int order, double sampleRate, double cutoffFrequency) {
 		setupHighPass(order, sampleRate, cutoffFrequency,
-				DirectFormAbstract.DIRECT_FORM_II);
+				DirectFormAbstractIIRJ.DIRECT_FORM_II);
 	}
 
 	
@@ -161,12 +161,12 @@ public class Butterworth extends Cascade {
 	private void setupBandStop(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, int directFormType) {
 
-		AnalogLowPass m_analogProto = new AnalogLowPass(order);
+		AnalogLowPassIIRJ m_analogProto = new AnalogLowPassIIRJ(order);
 		m_analogProto.design();
 
-		LayoutBase m_digitalProto = new LayoutBase(order * 2);
+		LayoutBaseIIRJ m_digitalProto = new LayoutBaseIIRJ(order * 2);
 
-		new BandStopTransform(centerFrequency / sampleRate, widthFrequency
+		new BandStopTransformIIRJ(centerFrequency / sampleRate, widthFrequency
 				/ sampleRate, m_digitalProto, m_analogProto);
 
 		setLayout(m_digitalProto, directFormType);
@@ -187,7 +187,7 @@ public class Butterworth extends Cascade {
 	public void bandStop(int order, double sampleRate, double centerFrequency,
 			double widthFrequency) {
 		setupBandStop(order, sampleRate, centerFrequency, widthFrequency,
-				DirectFormAbstract.DIRECT_FORM_II);
+				DirectFormAbstractIIRJ.DIRECT_FORM_II);
 	}
 
 	/**
@@ -216,12 +216,12 @@ public class Butterworth extends Cascade {
 	private void setupBandPass(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, int directFormType) {
 
-		AnalogLowPass m_analogProto = new AnalogLowPass(order);
+		AnalogLowPassIIRJ m_analogProto = new AnalogLowPassIIRJ(order);
 		m_analogProto.design();
 
-		LayoutBase m_digitalProto = new LayoutBase(order * 2);
+		LayoutBaseIIRJ m_digitalProto = new LayoutBaseIIRJ(order * 2);
 
-		new BandPassTransform(centerFrequency / sampleRate, widthFrequency
+		new BandPassTransformIIRJ(centerFrequency / sampleRate, widthFrequency
 				/ sampleRate, m_digitalProto, m_analogProto);
 
 		setLayout(m_digitalProto, directFormType);
@@ -243,7 +243,7 @@ public class Butterworth extends Cascade {
 	public void bandPass(int order, double sampleRate, double centerFrequency,
 			double widthFrequency) {
 		setupBandPass(order, sampleRate, centerFrequency, widthFrequency,
-				DirectFormAbstract.DIRECT_FORM_II);
+				DirectFormAbstractIIRJ.DIRECT_FORM_II);
 	}
 
 	/**

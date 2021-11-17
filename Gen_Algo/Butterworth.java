@@ -22,7 +22,9 @@
  * @author  Sambit Paul
  * @version 1.1
  */
-import uk.me.berndporr.iirj.*;
+
+ 
+//import uk.me.berndporr.iirj.*;
  import java.util.Scanner; // Claire Nicolas Edit
  import java.util.*;  //Claire Nicolas Edit
 
@@ -50,7 +52,7 @@ public class Butterworth implements _IIRFilter {
     public double[][] SpecificSection(double startT, double endT){
         int Length= (int) (endT-startT*this.samplingFreq);
         double Length2 = Length;
-        this.output= new double[Double.valueOf(Length)][2];
+        this.output= new double[Double.valueOf()][2];
         int j= 0; 
        for ( int i = 0; i < this.signal.length; i++) {
                if ( this.signal[i][0]< startT | this.signal[i][0]>endT ) { //this is assuming that col 1 = time 2= data
@@ -74,7 +76,7 @@ public class Butterworth implements _IIRFilter {
      completes a lowpass filter over a desired range and prints the figure */
     public double[][] lowPassFilter(int order, double cutoffFreq, double[][] TSSignal, double startTime, double endTime) {
         SpecificSection(startTime, endTime)
-        lp = new Butterworth();
+        lib.iirj.Butterworth lp = new uk.me.berndporr.iirj.Butterworth();
         lp.lowPass(order, this.samplingFreq, cutoffFreq);
         for (int i =0; i<this.output.length; i++) {
             this.output[i] = lp.filter(this.signal[i]);
