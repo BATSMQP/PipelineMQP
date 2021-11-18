@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="newStudy.css">
 
-    <title>BATS: Study</title>
+    <title>BATS: Home</title>
   </head>
   <body>
 
@@ -45,43 +45,39 @@
 
     <div id="main">
 
-      <div id="studyNameHeader">
-        <h3 id="studyNameTitle" class="inline">Study Name</h3>
-        <button type="submit" id="analyzeDataButton" class="btn btn-primary inline">Analyze Data</button>
+      <div id="userHomeHeader">
+        <h3 id="welcomeHeading" class="inline">Welcome</h3>
+        <button type="submit" id="goToNewStudyButton" class="btn btn-primary inline">New Study</button>
       </div>
-      <h4 id="dataTableName">Data</h4>
+      <h4 id="dataTableName">Active Studies</h4>
 
         <div class="table-responsive">
           <table id="toolkitTable" class="table table-hover">
             <thead>
               <tr>
-                <th scope="col">Name of Data</th>
+                <th scope="col">Name of Study</th>
                 <th scope="col">Last Modified</th>
                 <th scope="col">By</th>
-                <th scope="col">Data Type</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>ID 12345: Vocal</td>
+                <td>PTSD/MDD Relationship Study</td>
                 <td>9/13/21 10:00 AM</td>
                 <td>NDraudt</td>
-                <td>.mvm</td>
+                <td>Open</td>
               </tr>
               <tr>
-                <td>ID 12346: EEG</td>
+                <td>Viewing Polytrauma Through Speech</td>
                 <td>7/01/21 10:00 AM</td>
                 <td>Claire</td>
-                <td>.raw</td>
+                <td>Closed</td>
               </tr>
 
             </tbody>
           </table>
         </div>
-        <button type="submit" id="addNewData" class="btn btn-primary">Add New Data</button>
-        </br>
-        <h6 class="inline">People With Access:</h6>
-        <p class="inline">NDraudt, Claire, Lewass, CarlosV</p>
 
     </div>
 
