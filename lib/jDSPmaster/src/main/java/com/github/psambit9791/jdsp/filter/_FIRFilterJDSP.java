@@ -8,10 +8,10 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package lib.jDSPmaster.src.main.java.com.github.psambit9791.jdsp.filter;
+package com.github.psambit9791.jdsp.filter;
 
-import lib.jDSPmaster.src.main.java.com.github.psambit9791.jdsp.misc.UtilMethods;
-import lib.jDSPmaster.src.main.java.com.github.psambit9791.jdsp.signal.Convolution;
+import com.github.psambit9791.jdsp.misc.UtilMethods;
+import com.github.psambit9791.jdsp.signal.Convolution;
 
 /**
  * <h1>Finite Impulse Response Filter Class</h1>

@@ -1,4 +1,4 @@
-package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
+package uk.me.berndporr.iirj;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more

@@ -18,7 +18,7 @@
  *  Copyright (c) 2016 by Bernd Porr
  */
 
-package lib.iirjMaster.src.main.java.uk.me.berndporr.iirj;
+package uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 
