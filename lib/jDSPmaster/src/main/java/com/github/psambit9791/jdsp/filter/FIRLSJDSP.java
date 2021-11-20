@@ -10,10 +10,10 @@
  *
  */
 
-package lib.jDSPmaster.src.main.java.com.github.psambit9791.jdsp.filter;
+package com.github.psambit9791.jdsp.filter;
 
 
-import lib.jDSPmaster.src.main.java.com.github.psambit9791.jdsp.misc.UtilMethods;
+import com.github.psambit9791.jdsp.misc.UtilMethods;
 import org.apache.commons.math3.linear.*;
 
 //import javax.rmi.CORBA.Util;
