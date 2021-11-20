@@ -9,22 +9,22 @@ public class AuthUser{
 	public String firstName;
 	public String lastName;
 	public String username;
-	public String password;
+	public String pass;
 	public String email;
 	
 	public String getAuthUserId() {return authUserId;}
 	public String getFirstName() {return firstName;}
 	public String getLastName() {return lastName;}
 	public String getUsername() {return username;}
-	public String getPassword() {return password;}
+	public String getPass() {return pass;}
 	public String getEmail() {return email;}
 	
-	public AuthUser(String authUserId, String firstName, String lastName, String username, String password, String email) {
+	public AuthUser(String authUserId, String firstName, String lastName, String username, String pass, String email) {
 		this.authUserId = authUserId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
-		this.password = password;
+		this.pass = pass;
 		this.email = email;
 	}
 	
@@ -33,7 +33,7 @@ public class AuthUser{
 		this.firstName = null;
 		this.lastName = null;
 		this.username = null;
-		this.password = null;
+		this.pass = null;
 		this.email = null;
 	}
 	

@@ -25,7 +25,7 @@ create table `AuthUser`(
 `firstName` varchar(36),
 `lastName` varchar(50),
 `username` varchar(36),
-`password` varchar(36),
+`pass` varchar(36),
 `email` varchar(50),
 PRIMARY KEY (`authUserId`)
 );

@@ -1,17 +1,12 @@
 package com.amazonaws.lambda.demo.db;
 
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.amazonaws.lambda.demo.model.Alternative;
 import com.amazonaws.lambda.demo.model.AuthUser;
-import com.amazonaws.lambda.demo.model.Choice;
-import com.amazonaws.lambda.demo.model.Feedback;
-import com.amazonaws.lambda.demo.model.Member;
 import com.amazonaws.lambda.demo.model.Study;
-import com.amazonaws.lambda.demo.model.Vote;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
 
 public class BatsDAO { 
 
@@ -68,12 +63,12 @@ public class BatsDAO {
 	          return false;
 	      }
 //	      logger.log("choice.numMembers in addChoice before insert: " + choice.numMembers);
-	      ps = conn.prepareStatement("INSERT INTO AuthUser (authUserId, firstName, lastName, username, password, email) values(?,?,?,?,?,?);");
+	      ps = conn.prepareStatement("INSERT INTO AuthUser (authUserId, firstName, lastName, username, pass, email) values(?,?,?,?,?,?);");
 	      ps.setString(1, authUser.authUserId);
 	      ps.setString(2, authUser.firstName);
 	      ps.setString(3, authUser.lastName);
 	      ps.setString(4, authUser.username);
-	      ps.setString(5, authUser.password);
+	      ps.setString(5, authUser.pass);
 	      ps.setString(6, authUser.email);
 	      { logger.log("ps for insert (in addAuthUser): " + ps); }
 	      ps.execute();
@@ -99,10 +94,11 @@ public class BatsDAO {
 	           return false;
 	       }
 
-	       ps = conn.prepareStatement("INSERT INTO Study (studyId, institutionsInvolved, studyDescription, studyName, studyContact, studyNotes, visibility, isIrbApproved, studyStartDate, studyEndDate, authUserId) values(?,?,?,?,?,?,?,?,?,?,?);");
+	       ps = conn.prepareStatement("INSERT INTO Study (studyId, institutionsInvolved, studyDescription, studyName, studyShortName, studyContact, studyNotes, visibility, isIrbApproved, studyStartDate, studyEndDate, authUserId) values(?,?,?,?,?,?,?,?,?,?,?,?);");
 	       ps.setString(1, study.institutionsInvolved);
 	       ps.setString(2, study.studyDescription);
 	       ps.setString(3, study.studyName);
+	       ps.setString(3, study.studyShortName);
 	       ps.setString(4, study.studyContact);
 	       ps.setString(5, study.studyNotes);
 	       ps.setString(6, study.visibility);
@@ -828,6 +824,7 @@ public class BatsDAO {
 	  String institutionsInvolved = resultSet.getString("institutionsInvolved");
 	  String studyDescription = resultSet.getNString("studyDescription");
 	  String studyName = resultSet.getString("studyName");
+	  String studyShortName = resultSet.getString("studyShortName");
 	  String studyContact = resultSet.getString("studyContact");
 	  String studyNotes = resultSet.getString("studyNotes");
 	  String visibility = resultSet.getString("visibility");
@@ -840,7 +837,7 @@ public class BatsDAO {
 	  }
 	  { logger.log("studyEndDate: " + studyEndDate); }
 	  String authUserId = resultSet.getString("authUserId");
-	  return new Study(studyId, institutionsInvolved, studyDescription, studyName, studyContact, studyNotes, visibility, isIrbApproved, studyStartDate, studyEndDate, authUserId); 
+	  return new Study(studyId, institutionsInvolved, studyDescription, studyName, studyShortName, studyContact, studyNotes, visibility, isIrbApproved, studyStartDate, studyEndDate, authUserId); 
   }
 	
 
