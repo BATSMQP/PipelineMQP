@@ -10,7 +10,7 @@
 
 package com.github.psambit9791.jdsp.filter;
 
-import uk.me.berndporr.iirj.ButterworthIIRJ;
+//import uk.me.berndporr.iirj.ButterworthIIRJ;
 
 
 /**
@@ -47,7 +47,7 @@ public class ButterworthJDSP implements _IIRFilterJDSP {
      */
     public double[] lowPassFilter(int order, double cutoffFreq) {
         this.output = new double[this.signal.length];
-        ButterworthIIRJ lp = new ButterworthIIRJ();
+        uk.me.berndporr.iirj.ButterworthIIRJ lp = new uk.me.berndporr.iirj.ButterworthIIRJ();
         lp.lowPass(order, this.samplingFreq, cutoffFreq);
         for (int i =0; i<this.output.length; i++) {
             this.output[i] = lp.filter(this.signal[i]);
@@ -63,7 +63,7 @@ public class ButterworthJDSP implements _IIRFilterJDSP {
      */
     public double[] highPassFilter(int order, double cutoffFreq) {
         this.output = new double[this.signal.length];
-        ButterworthIIRJ hp = new ButterworthIIRJ();
+        uk.me.berndporr.iirj.ButterworthIIRJ hp = new  uk.me.berndporr.iirj.ButterworthIIRJ();
         hp.highPass(order, this.samplingFreq, cutoffFreq);
         for (int i =0; i<this.output.length; i++) {
             this.output[i] = hp.filter(this.signal[i]);
@@ -86,7 +86,7 @@ public class ButterworthJDSP implements _IIRFilterJDSP {
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];
-        ButterworthIIRJ bp = new ButterworthIIRJ();
+        uk.me.berndporr.iirj.ButterworthIIRJ bp = new  uk.me.berndporr.iirj.ButterworthIIRJ();
         bp.bandPass(order, this.samplingFreq, centreFreq, width);
         for (int i=0; i<this.output.length; i++) {
             this.output[i] = bp.filter(this.signal[i]);
@@ -109,7 +109,7 @@ public class ButterworthJDSP implements _IIRFilterJDSP {
         double centreFreq = (highCutoff + lowCutoff)/2.0;
         double width = Math.abs(highCutoff - lowCutoff);
         this.output = new double[this.signal.length];
-        ButterworthIIRJ bs = new ButterworthIIRJ();
+        uk.me.berndporr.iirj.ButterworthIIRJ bs = new  uk.me.berndporr.iirj.ButterworthIIRJ();
         bs.bandStop(order, this.samplingFreq, centreFreq, width);
         for (int i=0; i<this.output.length; i++) {
             this.output[i] = bs.filter(this.signal[i]);

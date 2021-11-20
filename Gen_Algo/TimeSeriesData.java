@@ -2,7 +2,7 @@ package Gen_Algo;
 
 import lib.jDSPmaster.src.main.java.com.github.psambit9791.jdsp.filter.ButterworthJDSP;
 
-public class DataRegion {
+public class TimeSeriesData {
     private double[][] signal;
     // double samplingFreq;
     private double[][] output;
@@ -13,7 +13,7 @@ public class DataRegion {
      * @param s Signal to be filtered
      * @param Fs Sampling frequency of input signal
      */
-    public DataRegion(double[][] data, double Fs) {
+    public TimeSeriesData(double[][] data, double Fs) {
         this.signal = data;
         //this.samplingFreq = Fs;
     }
