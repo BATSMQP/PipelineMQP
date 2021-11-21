@@ -18,6 +18,12 @@ public class TimeSeriesData {
         //this.samplingFreq = Fs;
     }
 
+    public TimeSeriesData(double[][] data) {
+        this.signal = data;
+        //this.samplingFreq = Fs;
+    }
+
+
   
      /**
      * This method .
@@ -69,6 +75,15 @@ public class TimeSeriesData {
             time[row] = this.signal[row][0];
         }
         return time;
+    }
+
+    public static double[][] Refill2dArray(double[] Time, double[] Signal){
+        double[][] Data = new double[Time.length][2];  
+     for (int row = 0; row < Data.length; row++){
+             Data[row][0]= Time[row];
+             Data[row][1]= Signal[row];
+     }
+     return Data;
     }
 
 
