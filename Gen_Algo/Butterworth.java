@@ -1,35 +1,47 @@
  package Gen_Algo;
  import java.util.Scanner; // Claire Nicolas Edit
  import java.util.*;  //Claire Nicolas Edit
- import lib.jDSPmaster.src.main.java.com.github.psambit9791.jdsp.filter.ButterworthJDSP;
+ import lib.jdsp.filter.ButterworthJDSP;
  import Graphing.Graphing_Simp;
- import Gen_Algo.DataRegion;
+ import Gen_Algo.TimeSeriesData;
 
 public class Butterworth{
 
-
-    public ButterworthJDSP LowPass(DataRegion Data, int startT, int endT,int Fs, int order, double cutOff){
-        Data.AnalyseRange(startT, endT);
+    public ButterworthJDSP LowPassnPrint(TimeSeriesData Data, int startT, int endT,int Fs, int order, double cutOff){
+        Data.AnalyseRange(startT, endT, Fs);
         double[] Time= Data.GetTime(); 
         double[] signal= Data.GetSignal(); 
         ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
         double[] result = flt.lowPassFilter(order, cutOff);
+        Graph
         return flt;
     }
 
-    public ButterworthJDSP HighPass(ButterworthJDSP BW){
-
-        return BW;
+    public ButterworthJDSP HighPass(TimeSeriesData Data, int startT, int endT,int Fs, int order, double cutOff){
+        Data.AnalyseRange(startT, endT, Fs);
+        double[] Time= Data.GetTime(); 
+        double[] signal= Data.GetSignal(); 
+        ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
+        double[] result = flt.highPassFilter(order, cutOff);
+        return flt;
     }
 
-    public ButterworthJDSP Bandpass(ButterworthJDSP BW){
-
-        return BW;
+    public ButterworthJDSP Bandpass(TimeSeriesData Data, int startT, int endT,int Fs, int order, double lowCutOff, double highCutOff){
+        Data.AnalyseRange(startT, endT, Fs);
+        double[] Time= Data.GetTime(); 
+        double[] signal= Data.GetSignal(); 
+        ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
+        double[] result = flt.bandPassFilter(order, lowCutOff, highCutOff);
+        return flt;
     }
 
-    public ButterworthJDSP BandStop(ButterworthJDSP BW){
-
-        return BW;
+    public ButterworthJDSP BandStop(TimeSeriesData Data, int startT, int endT,int Fs, int order, double lowCutOff, double highCutOff){
+        Data.AnalyseRange(startT, endT, Fs);
+        double[] Time= Data.GetTime(); 
+        double[] signal= Data.GetSignal(); 
+        ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
+        double[] result = flt.bandPassFilter(order, lowCutOff, highCutOff);
+        return flt;
     }
     public static void main(String[] args){
 
@@ -57,9 +69,4 @@ public class Butterworth{
 
     }
 
-    @Override
-    public double[][] lowPassFilter(int order, double cutoffFreq) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

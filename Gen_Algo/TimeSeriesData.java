@@ -1,6 +1,6 @@
 package Gen_Algo; 
 
-import lib.jDSPmaster.src.main.java.com.github.psambit9791.jdsp.filter.ButterworthJDSP;
+import lib.jdsp.filter.ButterworthJDSP;
 
 public class TimeSeriesData {
     private double[][] signal;

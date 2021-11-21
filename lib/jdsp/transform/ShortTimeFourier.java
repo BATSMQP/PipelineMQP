@@ -1,8 +1,7 @@
-package com.github.psambit9791.jdsp.transform;
-
-import com.github.psambit9791.jdsp.misc.UtilMethods;
-import com.github.psambit9791.jdsp.windows.Rectangular;
-import com.github.psambit9791.jdsp.windows._Window;
+package lib.jdsp.transform;
+import lib.jdsp.misc.UtilMethods;
+import lib.jdsp.windows.Rectangular;
+import lib.jdsp.windows._Window;
 import org.apache.commons.math3.complex.Complex;
 
 import java.util.Arrays;
