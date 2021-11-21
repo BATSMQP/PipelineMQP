@@ -1,5 +1,4 @@
 package Gen_Algo;
-import Data.*;
 
 import java.io.BufferedReader; import java.io.IOException; import java.nio.charset.StandardCharsets; import java.nio.file.Files; import java.nio.file.Path; import java.nio.file.Paths; import java.util.ArrayList; import java.util.List;
 import java.util.Scanner;
@@ -12,7 +11,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 public class ReadFile {
     
-    private static String[][] fromCSV(String fileName) 
+    public static String[][] fromCSV(String fileName) 
     {   
         
 
@@ -62,7 +61,7 @@ public class ReadFile {
         return datarray; 
     }
 
-    private static double[][] fromCSVtoD2(String fileName, int col0, int col1) 
+    public static double[][] fromCSVtoD2(String fileName, int col0, int col1) 
     {
         String[][] s = fromCSV(fileName);
         List<Double> dat = new ArrayList<Double>();
