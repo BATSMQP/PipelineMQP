@@ -10,12 +10,12 @@
  *
  */
 
-package com.github.psambit9791.jdsp.transform;
+package lib.jdsp.transform;
 
-import com.github.psambit9791.jdsp.misc.UtilMethods;
-import com.github.psambit9791.jdsp.signal.ComplexConvolution;
-import com.github.psambit9791.jdsp.signal.Convolution;
-import com.github.psambit9791.jdsp.signal.Generate;
+import lib.jdsp.misc.UtilMethods;
+import lib.jdsp.signal.ComplexConvolution;
+import lib.jdsp.signal.Convolution;
+import lib.jdsp.signal.Generate;
 import org.apache.commons.math3.complex.Complex;
 
 /**

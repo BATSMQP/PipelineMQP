@@ -1,65 +1,93 @@
  package Gen_Algo;
  import java.util.Scanner; // Claire Nicolas Edit
  import java.util.*;  //Claire Nicolas Edit
- import lib.jDSPmaster.src.main.java.com.github.psambit9791.jdsp.filter.ButterworthJDSP;
+ import lib.jdsp.filter.ButterworthJDSP;
  import Graphing.Graphing_Simp;
- import Gen_Algo.DataRegion;
+ import Gen_Algo.TimeSeriesData;
+ import Gen_Algo.ReadFile;
 
 public class Butterworth{
 
-
-    public ButterworthJDSP LowPass(DataRegion Data, int startT, int endT,int Fs, int order, double cutOff){
-        Data.AnalyseRange(startT, endT);
+    public static double[][] LowPass(TimeSeriesData Data, int startT, int endT,int Fs, int order, double cutOff){
+        Data.AnalyseRange(startT, endT, Fs);
         double[] Time= Data.GetTime(); 
         double[] signal= Data.GetSignal(); 
         ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
         double[] result = flt.lowPassFilter(order, cutOff);
-        return flt;
+        double[][] LowPassed = TimeSeriesData.Refill2dArray(Time, result);
+        return LowPassed;
     }
 
-    public ButterworthJDSP HighPass(ButterworthJDSP BW){
-
-        return BW;
+    public static double[][] HighPass(TimeSeriesData Data, int startT, int endT,int Fs, int order, double cutOff){
+        Data.AnalyseRange(startT, endT, Fs);
+        double[] Time= Data.GetTime(); 
+        double[] signal= Data.GetSignal(); 
+        ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
+        double[] result = flt.highPassFilter(order, cutOff);
+        double[][] HighPassed = new double[Time][result]
+        return HighPassed;
     }
 
-    public ButterworthJDSP Bandpass(ButterworthJDSP BW){
-
-        return BW;
+    public static double[][] BandPass(TimeSeriesData Data, int startT, int endT,int Fs, int order, double lowCutOff, double highCutOff){
+        Data.AnalyseRange(startT, endT, Fs);
+        double[] Time= Data.GetTime(); 
+        double[] signal= Data.GetSignal(); 
+        ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
+        double[] result = flt.bandPassFilter(order, lowCutOff, highCutOff);
+        double[][] BandPassed = new double[Time][result]
+        return BandPassed;
     }
 
-    public ButterworthJDSP BandStop(ButterworthJDSP BW){
-
-        return BW;
+    public static double[][] BandStop(TimeSeriesData Data, int startT, int endT,int Fs, int order, double lowCutOff, double highCutOff){
+        Data.AnalyseRange(startT, endT, Fs);
+        double[] Time= Data.GetTime(); 
+        double[] signal= Data.GetSignal(); 
+        ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
+        double[] result = flt.bandPassFilter(order, lowCutOff, highCutOff);
+        double[][] BandStopped = new double[Time][result]
+        return BandStopped;
     }
     public static void main(String[] args){
-
         Scanner keyboard = new Scanner(System.in);  
         System.out.print("Enter path to csv: ");  
-        String str= keyboard.nextLine();    
-        Scanner sc = new Scanner(new File(str));
-        double[][] trial1=  (  );
+        String path= keyboard.nextLine();    
+        System.out.print("What column represents the time of collection: ");  
+        int Time= keyboard.nextInt();
         System.out.print("What is the Sampling frequency: ");  
-        double Fs= keyboard.nextDouble(); 
+        int Fs= keyboard.nextInt(); 
+        System.out.print("What column number has the data we wish to analyse: ");  
+        int Signal= keyboard.nextInt();
+        TimeSeriesData Data= new TimeSeriesData(ReadFile.fromCSVtoD2(path,Time, Signal));
+        System.out.print("What time would you like the analysis to start: ");  
+        int startT= keyboard.nextInt();
+        System.out.print("What time would you like the analysis to end: ");  
+        int endT= keyboard.nextInt();
+        System.out.print("What is the order of the filter: ");  
+        int order= keyboard.nextInt();
         System.out.print("What filter would you like to use between Highpass, Lowpass, Bandpass, and Bandstop: ");  
         String ChooseFilter= keyboard.nextLine(); 
         if (ChooseFilter =="Lowpass"){
-            LowPass()
+            System.out.print("What is the cutoff signal you wish to use for the lowpass: ");  
+            double cutOff= keyboard.nextDouble();
+            double[][] LowPassed= LowPass(Data,startT, endT, Fs, order,  cutOff);
+            Graphing_Simp(LowPassed.);
+        } else if(ChooseFilter =="Highpass" ){
+            System.out.print("What is the cutoff signal you wish to use for the filter: ");  
+            double cutOff= keyboard.nextDouble();
+            double[][] HighPassed= HighPass(Data,startT, endT, Fs, order,  cutOff);
+        } else if(ChooseFilter =="Bandpass" ){
+            System.out.print("What is the lower cutoff signal you wish to use for the filter: ");  
+            double lowcutOff= keyboard.nextDouble();
+            System.out.print("What is the higher cutoff signal you wish to use for the filter: ");  
+            double highcutOff= keyboard.nextDouble();
+            double[][] BandPassed= BandPass(Data,startT, endT, Fs, order,  lowcutOff, highcutOff);
+        } else if(ChooseFilter =="Bandstop" ){
+            System.out.print("What is the lower cutoff signal you wish to use for the filter: ");  
+            double lowcutOff= keyboard.nextDouble();
+            System.out.print("What is the higher cutoff signal you wish to use for the filter: ");  
+            double highcutOff= keyboard.nextDouble();
+            double[][] BandStopped= BandStop(Data,startT, endT, Fs, order,  lowcutOff, highcutOff);
         }
-        System.out.print("What is the Sampling frequency: ");  
-        double Fs= keyboard.nextDouble(); 
-        
-        System.out.print("What is the order of the filter: ");  
-        int order= keyboard.nextInt(); 
-        System.out.print("What is the cutoff frequency: ");  
-        double cutOff= keyboard.nextDouble(); 
-        ButterworthJDSP flt = new ButterworthJDSP(signal, Fs); //signal is of type double[]
-        double[] result = flt.lowPassFilter(order, cutOff); //get the result after filtering
-
-    }
-
-    @Override
-    public double[][] lowPassFilter(int order, double cutoffFreq) {
-        // TODO Auto-generated method stub
-        return null;
+   
     }
 }

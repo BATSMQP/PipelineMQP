@@ -10,7 +10,7 @@
  *
  */
 
-package com.github.psambit9791.jdsp.transform;
+package lib.jdsp.transform;
 
 import org.apache.commons.math3.complex.Complex;
 
