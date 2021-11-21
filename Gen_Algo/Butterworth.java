@@ -24,7 +24,7 @@ public class Butterworth{
         double[] signal= Data.GetSignal(); 
         ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
         double[] result = flt.highPassFilter(order, cutOff);
-        double[][] HighPassed = new double[Time][result]
+        double[][] HighPassed = TimeSeriesData.Refill2dArray(Time, result);
         return HighPassed;
     }
 
@@ -34,7 +34,7 @@ public class Butterworth{
         double[] signal= Data.GetSignal(); 
         ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
         double[] result = flt.bandPassFilter(order, lowCutOff, highCutOff);
-        double[][] BandPassed = new double[Time][result]
+        double[][] BandPassed = TimeSeriesData.Refill2dArray(Time, result);
         return BandPassed;
     }
 
@@ -44,7 +44,7 @@ public class Butterworth{
         double[] signal= Data.GetSignal(); 
         ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
         double[] result = flt.bandPassFilter(order, lowCutOff, highCutOff);
-        double[][] BandStopped = new double[Time][result]
+        double[][] BandStopped = TimeSeriesData.Refill2dArray(Time, result);
         return BandStopped;
     }
     public static void main(String[] args){
@@ -70,23 +70,26 @@ public class Butterworth{
             System.out.print("What is the cutoff signal you wish to use for the lowpass: ");  
             double cutOff= keyboard.nextDouble();
             double[][] LowPassed= LowPass(Data,startT, endT, Fs, order,  cutOff);
-            Graphing_Simp(LowPassed.);
+            Graphing.Graphing_Simp.printThisD2(LowPassed);
         } else if(ChooseFilter =="Highpass" ){
             System.out.print("What is the cutoff signal you wish to use for the filter: ");  
             double cutOff= keyboard.nextDouble();
             double[][] HighPassed= HighPass(Data,startT, endT, Fs, order,  cutOff);
+            Graphing.Graphing_Simp.printThisD2(HighPassed);
         } else if(ChooseFilter =="Bandpass" ){
             System.out.print("What is the lower cutoff signal you wish to use for the filter: ");  
             double lowcutOff= keyboard.nextDouble();
             System.out.print("What is the higher cutoff signal you wish to use for the filter: ");  
             double highcutOff= keyboard.nextDouble();
             double[][] BandPassed= BandPass(Data,startT, endT, Fs, order,  lowcutOff, highcutOff);
+            Graphing.Graphing_Simp.printThisD2(BandPassed);
         } else if(ChooseFilter =="Bandstop" ){
             System.out.print("What is the lower cutoff signal you wish to use for the filter: ");  
             double lowcutOff= keyboard.nextDouble();
             System.out.print("What is the higher cutoff signal you wish to use for the filter: ");  
             double highcutOff= keyboard.nextDouble();
             double[][] BandStopped= BandStop(Data,startT, endT, Fs, order,  lowcutOff, highcutOff);
+            Graphing.Graphing_Simp.printThisD2(BandStopped);
         }
    
     }
