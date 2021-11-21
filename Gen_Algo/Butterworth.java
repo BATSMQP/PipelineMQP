@@ -58,20 +58,21 @@ public class Butterworth{
         System.out.print("What column number has the data we wish to analyse: ");  
         int Signal= keyboard.nextInt();
         TimeSeriesData Data= new TimeSeriesData(ReadFile.fromCSVtoD2(path,Time, Signal));
+        Graphing.Graphing_Simp.printThisD2(ReadFile.fromCSVtoD2(path,Time, Signal));
         System.out.print("What time would you like the analysis to start: ");  
         int startT= keyboard.nextInt();
         System.out.print("What time would you like the analysis to end: ");  
         int endT= keyboard.nextInt();
         System.out.print("What is the order of the filter: ");  
         int order= keyboard.nextInt();
-        System.out.print("What filter would you like to use between Highpass, Lowpass, Bandpass, and Bandstop: ");  
-        String ChooseFilter= keyboard.nextLine(); 
-        if (ChooseFilter =="Lowpass"){
+        //System.out.print("What filter would you like to use between Highpass, Lowpass, Bandpass, and Bandstop: ");  
+        //String ChooseFilter= keyboard.nextLine(); 
+        //if (ChooseFilter.contains("LP")){
             System.out.print("What is the cutoff signal you wish to use for the lowpass: ");  
             double cutOff= keyboard.nextDouble();
             double[][] LowPassed= LowPass(Data,startT, endT, Fs, order,  cutOff);
             Graphing.Graphing_Simp.printThisD2(LowPassed);
-        } else if(ChooseFilter =="Highpass" ){
+        /* } else if(ChooseFilter =="Highpass" ){
             System.out.print("What is the cutoff signal you wish to use for the filter: ");  
             double cutOff= keyboard.nextDouble();
             double[][] HighPassed= HighPass(Data,startT, endT, Fs, order,  cutOff);
@@ -90,7 +91,7 @@ public class Butterworth{
             double highcutOff= keyboard.nextDouble();
             double[][] BandStopped= BandStop(Data,startT, endT, Fs, order,  lowcutOff, highcutOff);
             Graphing.Graphing_Simp.printThisD2(BandStopped);
-        }
+        } */
    
     }
 }

@@ -1,5 +1,8 @@
 package Gen_Algo; 
 
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+
 import lib.jdsp.filter.ButterworthJDSP;
 
 public class TimeSeriesData {
@@ -57,7 +60,7 @@ public class TimeSeriesData {
      */
     public double[] GetSignal( ){
         int numRows = this.signal.length;
-        double[] signal = this.signal[numRows];
+        double[] signal = new double[numRows];
         for(int row = 0; row < numRows; row++) {
             signal[row] = this.signal[row][1];
         }
@@ -70,7 +73,9 @@ public class TimeSeriesData {
      */
     public double[] GetTime( ){
         int numRows = this.signal.length;
-        double[] time = this.signal[numRows];
+        double[] time = new double[numRows];
+       // double[][] time= this.signal.clone();
+        //double[] time2= DoubleStream.range(0, this.signal.length).map(i -> this.signal[i].length < column ? defaultVal : this.signal[i][column]).toArray();
         for(int row = 0; row < numRows; row++) {
             time[row] = this.signal[row][0];
         }
@@ -79,9 +84,9 @@ public class TimeSeriesData {
 
     public static double[][] Refill2dArray(double[] Time, double[] Signal){
         double[][] Data = new double[Time.length][2];  
-     for (int row = 0; row < Data.length; row++){
-             Data[row][0]= Time[row];
-             Data[row][1]= Signal[row];
+     for (int row = 0; row < Time.length; row++){
+        Data[row][0]= Time[row];
+        Data[row][1]= Signal[row];
      }
      return Data;
     }
