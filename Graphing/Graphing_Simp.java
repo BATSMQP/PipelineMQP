@@ -43,29 +43,30 @@ public class Graphing_Simp extends JPanel{
         }return max;
     }       
 
-    public static void printThisD2(double[][] d){
-        JFrame frame =new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public static void printThisD2(double[][] d/* , JFrame j */){
+        JFrame j =new JFrame();
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Graphing_Simp.coordinates=d;
-        frame.add(new Graphing_Simp());
-        frame.setSize(400,400);
-        frame.setLocation(200,200);
-        frame.setVisible(true);
+        j.add(new Graphing_Simp());
+        j.setSize(400,400);
+        j.setLocation(200,200);
+        j.setVisible(true);
+        j.setTitle(j.getName());
     }
         
     public static void main(String args[]){
-        JFrame frame =new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame j =new JFrame();
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Graphing_Simp.coordinates[0][0]= 3;
         Graphing_Simp.coordinates[0][1]= 4;
         Graphing_Simp.coordinates[1][0]= 6;
         Graphing_Simp.coordinates[1][1]= 4;
         Graphing_Simp.coordinates[2][0]= 6;
         Graphing_Simp.coordinates[2][1]= 2;
-        frame.add(new Graphing_Simp());
-        frame.setSize(400,400);
-        frame.setLocation(200,200);
-        frame.setVisible(true);
+        j.add(new Graphing_Simp());
+        j.setSize(400,400);
+        j.setLocation(200,200);
+        j.setVisible(true);
     }
 
 }
