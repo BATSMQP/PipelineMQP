@@ -2,8 +2,8 @@ package com.amazonaws.lambda.demo.db;
 
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 
 import com.amazonaws.lambda.demo.model.AuthUser;
 import com.amazonaws.lambda.demo.model.Study;
@@ -83,8 +83,11 @@ public class BatsDAO {
 	 
    public boolean addStudy(Study study, LambdaLogger logger) throws Exception {
 	   try {
+		   { logger.log("In addStudy 1 (BatsDao)"); }
 	       PreparedStatement ps = conn.prepareStatement("SELECT * FROM Study WHERE studyId = ?;");
+	       { logger.log("In addStudy 2 (BatsDao)"); }
 	       ps.setString(1, study.studyId);
+	       { logger.log("In addStudy 3 (BatsDao)"); }
 	       ResultSet resultSet = ps.executeQuery();
 	       { logger.log("ps for select (in addStudy): " + ps); }
 	       // already present?
@@ -95,21 +98,23 @@ public class BatsDAO {
 	       }
 
 	       ps = conn.prepareStatement("INSERT INTO Study (studyId, institutionsInvolved, studyDescription, studyName, studyShortName, studyContact, studyNotes, visibility, isIrbApproved, studyStartDate, studyEndDate, authUserId) values(?,?,?,?,?,?,?,?,?,?,?,?);");
-	       ps.setString(1, study.institutionsInvolved);
-	       ps.setString(2, study.studyDescription);
-	       ps.setString(3, study.studyName);
-	       ps.setString(3, study.studyShortName);
-	       ps.setString(4, study.studyContact);
-	       ps.setString(5, study.studyNotes);
-	       ps.setString(6, study.visibility);
-	       ps.setBoolean(7, study.isIrbApproved);
-	       ps.setTimestamp(8, study.studyStartDate);
+	       ps.setString(1, study.studyId);
+	       ps.setString(2, study.institutionsInvolved);
+	       ps.setString(3, study.studyDescription);
+	       ps.setString(4, study.studyName);
+	       ps.setString(5, study.studyShortName);
+	       ps.setString(6, study.studyContact);
+	       ps.setString(7, study.studyNotes);
+	       ps.setString(8, study.visibility);
+	       ps.setBoolean(9, study.isIrbApproved);
+	       ps.setTimestamp(10, study.studyStartDate);
 	       if(study.studyEndDate != null) {
-	       	ps.setTimestamp(9, study.studyEndDate);
+	       	ps.setTimestamp(11, study.studyEndDate);
 	       } else {
-	       	ps.setTimestamp(9, null);
+	       	ps.setTimestamp(11, null);
 	       }
-	       ps.setString(10, study.authUserId);
+	       ps.setString(12, study.authUserId);
+	       { logger.log("In addStudy p2 (BatsDao)"); }
 	       { logger.log("ps for insert (in addStudy): " + ps); }
 	       ps.execute();
 //	       boolean test;

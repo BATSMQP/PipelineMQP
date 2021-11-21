@@ -35,6 +35,7 @@ create table `Study`(
 `institutionsInvolved`varchar(200),
 `studyDescription` varchar(300),
 `studyName` varchar(150),
+`studyShortName` varchar(150),
 `studyContact` varchar(50),
 `studyNotes` varchar(500),
 `visibility` varchar(10),
