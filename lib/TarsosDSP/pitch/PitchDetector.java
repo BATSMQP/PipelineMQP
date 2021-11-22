@@ -42,5 +42,8 @@ public interface PitchDetector {
 	 * @return An estimation of the pitch in Hz or -1 if no pitch is detected or
 	 *         present in the buffer.
 	 */
-	PitchDetectionResult getPitch(final float[] audioBuffer);
+	/*  PitchDetectionResult getPitch(final float[] audioBuffer) {
+		// TODO Auto-generated method stub
+		return null;
+	} */
 }

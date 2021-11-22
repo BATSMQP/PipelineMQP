@@ -49,22 +49,23 @@ public class AMDF implements PitchDetector{
 	private static final double DEFAULT_RATIO = 5.0;
 	private static final double DEFAULT_SENSITIVITY = 0.1;
 	
-	private final float sampleRate;
+	private static float sampleRate;
 	
-	private final double[] amd;
-	private final long maxPeriod;
-	private final long minPeriod;	
-	private final double ratio;
-	private final double sensitivity;
+	private static double[] amd;
+	private static long maxPeriod;
+	private static long minPeriod;	
+	private static double ratio;
+	private static double sensitivity;
 	
 	/**
 	 * The result of the pitch detection iteration.
 	 */
-	private final PitchDetectionResult result;
+	private static PitchDetectionResult result;
 
 	public AMDF(float sampleRate, int bufferSize) {
 		this(sampleRate,bufferSize,DEFAULT_MIN_FREQUENCY,DEFAULT_MAX_FREQUENCY);
 	}
+	
 	
 	public AMDF(float sampleRate, int bufferSize,double minFrequency,double maxFrequency) {
 		this.sampleRate = sampleRate;
@@ -76,8 +77,18 @@ public class AMDF implements PitchDetector{
 		result = new PitchDetectionResult();
 	}
 
-	@Override
-	public PitchDetectionResult getPitch(float[] audioBuffer) {
+	public AMDF(float sampleRate, double[] amd,long maxPeriod, long minPeriod, double ratio, double sensitivity, int bufferSize,double minFrequency,double maxFrequency) {
+		this.amd= amd;	
+		this.ratio=ratio;
+		this.sensitivity=sensitivity;
+		this.sampleRate = sampleRate;
+		this.maxPeriod = Math.round(sampleRate / minFrequency + 0.5);
+		this.minPeriod = Math.round(sampleRate / maxFrequency + 0.5);
+		result = new PitchDetectionResult();
+	}
+
+	//@Override
+	public static PitchDetectionResult getPitch(float[] audioBuffer) {
 		int t = 0;
 		float f0 = -1;
 		double minval = Double.POSITIVE_INFINITY;
