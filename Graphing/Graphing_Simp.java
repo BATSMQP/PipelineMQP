@@ -12,6 +12,7 @@ import java.awt.geom.*;
 public class Graphing_Simp extends JPanel{
     public static double [][] coordinates=new double[100][2];
     static int mar=50;
+    boolean notplaced=true;
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g1=(Graphics2D)g;
@@ -32,13 +33,17 @@ public class Graphing_Simp extends JPanel{
             g1.fill(new Ellipse2D.Double(x1-2,y1-2,3,3));
         }
         
-        /* String s =""+getMax(0);
+        String s =""+getMax(0);
 
         JLabel jlabel = new JLabel(s);
         jlabel.setFont(new Font("Verdana",1,10));
-        jlabel.setLocation(getWidth()-mar, getHeight()-mar+10);
-        add(jlabel); */
+        //jlabel.setLocation(width-mar, height-mar+10);
+        jlabel.setLocation(0,0);
         
+        if(notplaced){
+            this.add(jlabel); 
+            notplaced = false;
+        }
         
     }
 

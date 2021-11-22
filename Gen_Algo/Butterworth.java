@@ -1,12 +1,17 @@
  package Gen_Algo;
  import java.util.Scanner; // Claire Nicolas Edit
- import java.util.*;  //Claire Nicolas Edit
+
+import javax.swing.JFrame;
+
+import java.util.*;  //Claire Nicolas Edit
  import lib.jdsp.filter.ButterworthJDSP;
  import Graphing.Graphing_Simp;
  import Gen_Algo.TimeSeriesData;
  import Gen_Algo.ReadFile;
 
 public class Butterworth{
+    static JFrame j1 = new JFrame();
+    static JFrame j2 = new JFrame();
 
     public static double[][] LowPass(TimeSeriesData Data, int startT, int endT,int Fs, int order, double cutOff){
         Data.AnalyseRange(startT, endT,Fs);
@@ -62,7 +67,7 @@ public class Butterworth{
         int Signal= keyboard.nextInt();
 
         TimeSeriesData Data= new TimeSeriesData(ReadFile.fromCSVtoD2(path,Time, Signal));
-        Graphing.Graphing_Simp.printThisD2(ReadFile.fromCSVtoD2(path,Time, Signal));
+        Graphing.Graphing_Simp.printThisD2(ReadFile.fromCSVtoD2(path,Time, Signal),j1);
 
         System.out.print("What time would you like the analysis to start: ");  
         int startT= keyboard.nextInt();
@@ -80,26 +85,26 @@ public class Butterworth{
             System.out.print("What is the cutoff signal you wish to use for the filter (<.50): ");  
             double cutOff= keyboard.nextDouble();
             double[][] LowPassed= LowPass(Data,startT, endT, Fs, order,  cutOff);
-            Graphing.Graphing_Simp.printThisD2(LowPassed);
+            Graphing.Graphing_Simp.printThisD2(LowPassed,j2);
         } else if(ChooseFilter == 2){
             System.out.print("What is the cutoff signal you wish to use for the filter (<.50): ");  
             double cutOff= keyboard.nextDouble();
             double[][] HighPassed= HighPass(Data,startT, endT, Fs, order,  cutOff);
-            Graphing.Graphing_Simp.printThisD2(HighPassed);
+            Graphing.Graphing_Simp.printThisD2(HighPassed,j2);
         } else if(ChooseFilter == 3 ){
             System.out.print("What is the lower cutoff signal you wish to use for the filter: ");  
             double lowcutOff= keyboard.nextDouble();
             System.out.print("What is the higher cutoff signal you wish to use for the filter: ");  
             double highcutOff= keyboard.nextDouble();
             double[][] BandPassed= BandPass(Data,startT, endT, Fs, order,  lowcutOff, highcutOff);
-            Graphing.Graphing_Simp.printThisD2(BandPassed);
+            Graphing.Graphing_Simp.printThisD2(BandPassed,j2);
         } else if(ChooseFilter == 4 ){
             System.out.print("What is the lower cutoff signal you wish to use for the filter: ");  
             double lowcutOff= keyboard.nextDouble();
             System.out.print("What is the higher cutoff signal you wish to use for the filter: ");  
             double highcutOff= keyboard.nextDouble();
             double[][] BandStopped= BandStop(Data,startT, endT, Fs, order,  lowcutOff, highcutOff);
-            Graphing.Graphing_Simp.printThisD2(BandStopped);
+            Graphing.Graphing_Simp.printThisD2(BandStopped,j2);
         } 
     }
    
