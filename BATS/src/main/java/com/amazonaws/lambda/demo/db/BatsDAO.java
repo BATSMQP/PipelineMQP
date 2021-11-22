@@ -4,6 +4,7 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import java.sql.*;
 //import java.util.ArrayList;
 //import java.util.List;
+import java.util.ArrayList;
 
 import com.amazonaws.lambda.demo.model.AuthUser;
 import com.amazonaws.lambda.demo.model.Study;
@@ -130,6 +131,27 @@ public class BatsDAO {
 	   } catch (Exception e) {
 	       throw new Exception("Failed to insert study: " + e.getMessage());
 	   }
+	}
+   
+	 public ArrayList<Study> getAllStudies(String authUserId, LambdaLogger logger) throws Exception {
+	 
+	 try {
+	     PreparedStatement ps = conn.prepareStatement("SELECT * FROM Study where authUserId=? order by studyStartDate;");
+	     ps.setString(1, authUserId);
+	     ResultSet resultSet = ps.executeQuery();
+	     ArrayList<Study> fs = new ArrayList<Study>();
+	     while (resultSet.next()) {
+	     	fs.add(generateStudy(resultSet, logger));
+	     }
+	     resultSet.close();
+	     ps.close();
+	     
+	     return fs;
+	
+	 } catch (Exception e) {
+	 	e.printStackTrace();
+	     throw new Exception("Failed in getting studies for the auth user: " + e.getMessage());
+	 }
 	}
 
 //    public Choice getChoice(String cid, LambdaLogger logger) throws Exception {

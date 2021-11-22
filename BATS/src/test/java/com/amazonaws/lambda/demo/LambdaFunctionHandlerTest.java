@@ -17,6 +17,8 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.amazonaws.lambda.demo.http.GetStudiesRequest;
+import com.amazonaws.lambda.demo.http.GetStudiesResponse;
 import com.amazonaws.lambda.demo.http.NewStudyRequest;
 import com.amazonaws.lambda.demo.http.NewStudyResponse;
 import com.amazonaws.services.lambda.runtime.Context;
@@ -120,6 +122,16 @@ public class LambdaFunctionHandlerTest {
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
     	System.out.println("response.study: " + response.study);
+    }
+    
+    @Test
+    public void testGetStudiesHandler() {
+    	GetStudiesHandler csh = new GetStudiesHandler();
+    	GetStudiesRequest r = new GetStudiesRequest("123");
+    	GetStudiesResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.studies: " + response.studies);
     }
 
 //    @Test
