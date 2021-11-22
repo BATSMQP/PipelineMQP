@@ -21,26 +21,15 @@
 * 
 */
 
+package lib.TarsosDSP.util.fft;
 
-package lib.TarsosDSP.pitch;
+public class ScaledHammingWindow extends WindowFunction {
 
-/**
- * A pitch detector is capable of analyzing a buffer with audio information
- * and return a pitch estimation in Hz.
- * 
- * @author Joren Six
- */
-public interface PitchDetector {
-	/**
-	 * Analyzes a buffer with audio information and estimates a pitch in Hz.
-	 * Currently this interface only allows one pitch per buffer.
-	 * 
-	 * @param audioBuffer
-	 *            The buffer with audio information. The information in the
-	 *            buffer is not modified so it can be (re)used for e.g. FFT
-	 *            analysis.
-	 * @return An estimation of the pitch in Hz or -1 if no pitch is detected or
-	 *         present in the buffer.
-	 */
-	PitchDetectionResult getPitch(final float[] audioBuffer);
+	@Override
+	protected float value(int length, int index) {
+		double scale = 1.0 / (double)length / 0.54;
+		double factor = TWO_PI / (double)length;
+		return (float) (scale * (25.0/46.0 - 21.0/46.0 * Math.cos(factor * index)));
+	}
+
 }

@@ -22,10 +22,10 @@
 */
 
 
-package be.tarsos.dsp.pitch;
+package lib.TarsosDSP.pitch;
 
-import be.tarsos.dsp.AudioEvent;
-import be.tarsos.dsp.AudioProcessor;
+import lib.TarsosDSP.AudioEvent;
+import lib.TarsosDSP.AudioProcessor;
 
 
 /**

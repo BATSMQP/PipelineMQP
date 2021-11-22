@@ -24,7 +24,7 @@
 
 /**
  */
-package be.tarsos.dsp.pitch;
+package lib.TarsosDSP.pitch;
 
 import java.util.ArrayList;
 import java.util.List;

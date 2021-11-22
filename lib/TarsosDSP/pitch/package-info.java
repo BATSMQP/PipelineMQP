@@ -25,4 +25,4 @@
 /**
  * Signal processing methods for pitch estimation. 
  */
-package be.tarsos.dsp.pitch;
+package lib.TarsosDSP.pitch;

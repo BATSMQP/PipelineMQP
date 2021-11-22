@@ -34,9 +34,9 @@
 *
 */
 
-package be.tarsos.dsp.pitch;
+package lib.TarsosDSP.pitch;
 
-import be.tarsos.dsp.util.fft.FloatFFT;
+import lib.TarsosDSP.util.fft.FloatFFT;
 
 /**
  * An implementation of the YIN pitch tracking algorithm which uses an FFT to

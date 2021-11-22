@@ -22,14 +22,14 @@
 */
 
 
-package be.tarsos.dsp;
+package lib.TarsosDSP;
 
 import java.nio.ByteOrder;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Logger;
 
-import be.tarsos.dsp.io.TarsosDSPAudioFormat;
+import lib.TarsosDSP.io.TarsosDSPAudioFormat;
 
 
 /**

@@ -22,12 +22,12 @@
 */
 
 
-package be.tarsos.dsp;
+package lib.TarsosDSP;
 
 import java.util.Arrays;
 
-import be.tarsos.dsp.io.TarsosDSPAudioFloatConverter;
-import be.tarsos.dsp.io.TarsosDSPAudioFormat;
+import lib.TarsosDSP.io.TarsosDSPAudioFloatConverter;
+import lib.TarsosDSP.io.TarsosDSPAudioFormat;
 
 /**
  * An audio event flows through the processing pipeline. The object is reused for performance reasons.
