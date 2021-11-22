@@ -34,7 +34,7 @@ public class TimeSeriesData {
      * @param endT is the end of the range that will be analysed
      * @return double[][] shortened signal
      */
-    public double[][] AnalyseRange (int startT, int endT, int Fs) {
+    public double[][] AnalyseRange (int startT, int endT,int Fs) {
             this.output= new double[endT-startT*Fs][2];
             int j= 0; 
            for ( int i = 0; i < this.signal.length; i++) {
@@ -89,6 +89,15 @@ public class TimeSeriesData {
         Data[row][1]= Signal[row];
      }
      return Data;
+    }
+
+    public static float[] Double2Float(double[] Array){
+        float[] FloatArray= new float[Array.length];
+        for(int row=0; row< Array.length;row++){
+            float DataPt= (float)Array[row];
+            FloatArray[row]= DataPt;
+        }
+        return FloatArray;
     }
 
 

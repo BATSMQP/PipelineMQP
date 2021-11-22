@@ -9,7 +9,7 @@
 public class Butterworth{
 
     public static double[][] LowPass(TimeSeriesData Data, int startT, int endT,int Fs, int order, double cutOff){
-        Data.AnalyseRange(startT, endT, Fs);
+        Data.AnalyseRange(startT, endT,Fs);
         double[] Time= Data.GetTime(); 
         double[] signal= Data.GetSignal(); 
         ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
@@ -19,7 +19,7 @@ public class Butterworth{
     }
 
     public static double[][] HighPass(TimeSeriesData Data, int startT, int endT,int Fs, int order, double cutOff){
-        Data.AnalyseRange(startT, endT, Fs);
+        Data.AnalyseRange(startT, endT,Fs);
         double[] Time= Data.GetTime(); 
         double[] signal= Data.GetSignal(); 
         ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
