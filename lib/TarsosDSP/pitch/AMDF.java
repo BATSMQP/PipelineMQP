@@ -21,7 +21,7 @@
 * 
 */
 
-package be.tarsos.dsp.pitch;
+package lib.TarsosDSP.pitch;
 
 /**
  * <p>
