@@ -8,6 +8,11 @@ import java.util.ArrayList;
 
 import com.amazonaws.lambda.demo.model.AuthUser;
 import com.amazonaws.lambda.demo.model.Data;
+import com.amazonaws.lambda.demo.model.Facial;
+import com.amazonaws.lambda.demo.model.LogData;
+import com.amazonaws.lambda.demo.model.Neural;
+import com.amazonaws.lambda.demo.model.Speech;
+import com.amazonaws.lambda.demo.model.StressIndicators;
 import com.amazonaws.lambda.demo.model.Study;
 
 public class BatsDAO { 
@@ -155,32 +160,32 @@ public class BatsDAO {
 	 }
 	}
 	 
-	 public Data getDataForStudy(String studyId, LambdaLogger logger) throws Exception {
-		 
-	 try {
-		 Data data;
-		 data.neural = getNeural(studyId, logger);
-		 data.facial = getFacial(studyId, logger);
-		 data.speech = getSpeech(studyId, logger);
-		 data.stressIndicators = getStressIndicators(studyId, logger);
-		 data.logData = getLogData(studyId, logger);
-//	     PreparedStatement ps = conn.prepareStatement("SELECT * FROM Study where authUserId=? order by studyStartDate;");
-//	     ps.setString(1, authUserId);
-//	     ResultSet resultSet = ps.executeQuery();
-//	     ArrayList<D> fs = new ArrayList<Study>();
-//	     while (resultSet.next()) {
-//	     	fs.add(generateStudy(resultSet, logger));
-//	     }
-//	     resultSet.close();
-//	     ps.close();
-//	     
-//	     return fs;
-	
-	 } catch (Exception e) {
-	 	e.printStackTrace();
-	     throw new Exception("Failed in getting studies for the auth user: " + e.getMessage());
-	 }
-	}
+//	 public Data getDataForStudy(String studyId, LambdaLogger logger) throws Exception {
+//		 
+//	 try {
+//		 Data data;
+//		 data.neural = getNeural(studyId, logger);
+//		 data.facial = getFacial(studyId, logger);
+//		 data.speech = getSpeech(studyId, logger);
+//		 data.stressIndicators = getStressIndicators(studyId, logger);
+//		 data.logData = getLogData(studyId, logger);
+////	     PreparedStatement ps = conn.prepareStatement("SELECT * FROM Study where authUserId=? order by studyStartDate;");
+////	     ps.setString(1, authUserId);
+////	     ResultSet resultSet = ps.executeQuery();
+////	     ArrayList<D> fs = new ArrayList<Study>();
+////	     while (resultSet.next()) {
+////	     	fs.add(generateStudy(resultSet, logger));
+////	     }
+////	     resultSet.close();
+////	     ps.close();
+////	     
+////	     return fs;
+//	
+//	 } catch (Exception e) {
+//	 	e.printStackTrace();
+//	     throw new Exception("Failed in getting studies for the auth user: " + e.getMessage());
+//	 }
+//	}
 
 //    public Choice getChoice(String cid, LambdaLogger logger) throws Exception {
 //        
@@ -894,6 +899,59 @@ public class BatsDAO {
 	  String authUserId = resultSet.getString("authUserId");
 	  return new Study(studyId, institutionsInvolved, studyDescription, studyName, studyShortName, studyContact, studyNotes, visibility, isIrbApproved, studyStartDate, studyEndDate, authUserId); 
   }
-	
+  private Neural generateNeural(ResultSet resultSet,LambdaLogger logger) throws Exception {
+	  String neuralId  = resultSet.getString("neuralId");
+	  Timestamp time = resultSet.getTimestamp("time");
+	  { logger.log("time: " + time); }
+	  String timeIncr = resultSet.getString("timeIncr");
+	  String SR = resultSet.getString("SR");
+	  String logMarker = resultSet.getString("logMarker");
+	  String logQuestion = resultSet.getString("logQuestion");
+	  String logAnswer = resultSet.getString("logAnswer");
+	  String participantId = resultSet.getString("participantId");
+	  return new Neural(neuralId, time, timeIncr, SR, logMarker, logQuestion, logAnswer, participantId); 
+  }
+  private Facial generateFacial(ResultSet resultSet,LambdaLogger logger) throws Exception {
+	  String facialId  = resultSet.getString("facialId");
+	  Timestamp time = resultSet.getTimestamp("time");
+	  { logger.log("time: " + time); }
+	  String timeIncr = resultSet.getString("timeIncr");
+	  String SR = resultSet.getString("SR");
+	  String video = resultSet.getString("video");
+	  double facialPositionQuantification = resultSet.getDouble("facialPositionQuantification");
+	  String participantId = resultSet.getString("participantId");
+	  return new Facial(facialId, time, timeIncr, SR, video, facialPositionQuantification, participantId); 
+  }
+  private Speech generateSpeech(ResultSet resultSet,LambdaLogger logger) throws Exception {
+	  String speechId  = resultSet.getString("speechId");
+	  Timestamp time = resultSet.getTimestamp("time");
+	  { logger.log("time: " + time); }
+	  String timeIncr = resultSet.getString("timeIncr");
+	  String SR = resultSet.getString("SR");
+	  String waveforms = resultSet.getString("waveforms");
+	  String participantId = resultSet.getString("participantId");
+	  return new Speech(speechId, time, timeIncr, SR, waveforms, participantId); 
+  }
+  private StressIndicators generateStressIndicators(ResultSet resultSet,LambdaLogger logger) throws Exception {
+	  String siId  = resultSet.getString("siId");
+	  Timestamp time = resultSet.getTimestamp("time");
+	  { logger.log("time: " + time); }
+	  String timeIncr = resultSet.getString("timeIncr");
+	  String SR = resultSet.getString("SR");
+	  String heartbeatWaveform = resultSet.getString("heartbeatWaveform");
+	  double bloodPressure = resultSet.getDouble("bloodPressure");
+	  String participantId = resultSet.getString("participantId");
+	  return new StressIndicators(siId, time, timeIncr, SR, heartbeatWaveform, bloodPressure, participantId); 
+  }
+  private LogData generateLogData(ResultSet resultSet,LambdaLogger logger) throws Exception {
+	  String logDataId  = resultSet.getString("logDataId");
+	  double changeOfSeverityOverTime = resultSet.getDouble("changeOfSeverityOverTime");
+	  String question = resultSet.getString("question");
+	  String answer = resultSet.getString("answer");
+	  Timestamp startOfSymptoms = resultSet.getTimestamp("startOfSymptoms");
+	  { logger.log("startOfSymptoms: " + startOfSymptoms); }
+	  String participantId = resultSet.getString("participantId");
+	  return new LogData(logDataId, changeOfSeverityOverTime, question, answer, startOfSymptoms, participantId); 
+  }
 
 }

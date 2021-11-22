@@ -17,6 +17,8 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.amazonaws.lambda.demo.http.GetDataRequest;
+import com.amazonaws.lambda.demo.http.GetDataResponse;
 import com.amazonaws.lambda.demo.http.GetStudiesRequest;
 import com.amazonaws.lambda.demo.http.GetStudiesResponse;
 import com.amazonaws.lambda.demo.http.NewStudyRequest;
@@ -133,6 +135,16 @@ public class LambdaFunctionHandlerTest {
     	System.out.println("response.error: " + response.error);
     	System.out.println("response.studies: " + response.studies);
     }
+    
+//    @Test
+//    public void testGetDataHandler() {
+//    	GetDataHandler csh = new GetDataHandler();
+//    	GetDataRequest r = new GetDataRequest("123", "db467099-bae9-4cc1-8f81-ea5b629f816e");
+//    	GetDataResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.data: " + response.data);
+//    }
 
 //    @Test
 //    public void testSignInChoiceHandler() {

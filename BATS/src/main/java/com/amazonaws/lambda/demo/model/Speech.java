@@ -7,19 +7,19 @@ import java.util.Iterator;
 public class Speech{
 	public final String speechId;
 	public Timestamp time;
-	public Timestamp timeIncr;
+	public String timeIncr;
 	public String SR;
 	public String waveforms;
 	public String participantId;
 	
 	public String getSpeechId() {return speechId;}
 	public Timestamp getTime() {return time;}
-	public Timestamp getTimeIncr() {return timeIncr;}
+	public String getTimeIncr() {return timeIncr;}
 	public String getSR() {return SR;}
 	public String getWaveforms() {return waveforms;}
 	public String getParticipantId() {return participantId;}
 	
-	public Speech(String speechId, Timestamp time, Timestamp timeIncr, String SR, String waveforms, String participantId) {
+	public Speech(String speechId, Timestamp time, String timeIncr, String SR, String waveforms, String participantId) {
 		this.speechId = speechId;
 		this.time = time;
 		this.timeIncr = timeIncr;

@@ -7,7 +7,7 @@ import java.util.Iterator;
 public class Facial{
 	public final String facialId;
 	public Timestamp time;
-	public Timestamp timeIncr;
+	public String timeIncr;
 	public String SR;
 	public String video;
 	public double facialPositionQuantification;
@@ -15,13 +15,13 @@ public class Facial{
 	
 	public String getFacialId() {return facialId;}
 	public Timestamp getTime() {return time;}
-	public Timestamp getTimeIncr() {return timeIncr;}
+	public String getTimeIncr() {return timeIncr;}
 	public String getSR() {return SR;}
 	public String getVideo() {return video;}
 	public double getFacialPositionQuantification() {return facialPositionQuantification;}
 	public String getParticipantId() {return participantId;}
 	
-	public Facial(String facialId, Timestamp time, Timestamp timeIncr, String SR, String video, double facialPositionQuantification, String participantId) {
+	public Facial(String facialId, Timestamp time, String timeIncr, String SR, String video, double facialPositionQuantification, String participantId) {
 		this.facialId = facialId;
 		this.time = time;
 		this.timeIncr = timeIncr;

@@ -7,7 +7,7 @@ import java.util.Iterator;
 public class Neural{
 	public final String neuralId;
 	public Timestamp time;
-	public Timestamp timeIncr;
+	public String timeIncr;
 	public String SR;
 	public String logMarker;
 	public String logQuestion;
@@ -16,14 +16,14 @@ public class Neural{
 	
 	public String getNeuralId() {return neuralId;}
 	public Timestamp getTime() {return time;}
-	public Timestamp getTimeIncr() {return timeIncr;}
+	public String getTimeIncr() {return timeIncr;}
 	public String getSR() {return SR;}
 	public String getLogMarker() {return logMarker;}
 	public String getLogQuestion() {return logQuestion;}
 	public String getLogAnswer() {return logAnswer;}
 	public String getParticipantId() {return participantId;}
 	
-	public Neural(String neuralId, Timestamp time, Timestamp timeIncr, String SR, String logMarker, String logQuestion, String logAnswer, String participantId) {
+	public Neural(String neuralId, Timestamp time, String timeIncr, String SR, String logMarker, String logQuestion, String logAnswer, String participantId) {
 		this.neuralId = neuralId;
 		this.time = time;
 		this.timeIncr = timeIncr;
