@@ -51,47 +51,57 @@ public class Butterworth{
         Scanner keyboard = new Scanner(System.in);  
         System.out.print("Enter path to csv: ");  
         String path= keyboard.nextLine();    
+
         System.out.print("What column represents the time of collection: ");  
         int Time= keyboard.nextInt();
+
         System.out.print("What is the Sampling frequency: ");  
         int Fs= keyboard.nextInt(); 
+
         System.out.print("What column number has the data we wish to analyse: ");  
         int Signal= keyboard.nextInt();
+
         TimeSeriesData Data= new TimeSeriesData(ReadFile.fromCSVtoD2(path,Time, Signal));
         Graphing.Graphing_Simp.printThisD2(ReadFile.fromCSVtoD2(path,Time, Signal));
+
         System.out.print("What time would you like the analysis to start: ");  
         int startT= keyboard.nextInt();
+
         System.out.print("What time would you like the analysis to end: ");  
         int endT= keyboard.nextInt();
+
         System.out.print("What is the order of the filter: ");  
         int order= keyboard.nextInt();
-        //System.out.print("What filter would you like to use between Highpass, Lowpass, Bandpass, and Bandstop: ");  
-        //String ChooseFilter= keyboard.nextLine(); 
-        //if (ChooseFilter.contains("LP")){
-            System.out.print("What is the cutoff signal you wish to use for the lowpass: ");  
+
+        System.out.print("What filter would you like to use between Lowpass= 1, Highpass=2, Bandpass=3, and Bandstop=4: ");  
+        int ChooseFilter= keyboard.nextInt(); 
+
+        if (ChooseFilter== 1){
+            System.out.print("What is the cutoff signal you wish to use for the filter (<.50): ");  
             double cutOff= keyboard.nextDouble();
             double[][] LowPassed= LowPass(Data,startT, endT, Fs, order,  cutOff);
             Graphing.Graphing_Simp.printThisD2(LowPassed);
-        /* } else if(ChooseFilter =="Highpass" ){
-            System.out.print("What is the cutoff signal you wish to use for the filter: ");  
+        } else if(ChooseFilter == 2){
+            System.out.print("What is the cutoff signal you wish to use for the filter (<.50): ");  
             double cutOff= keyboard.nextDouble();
             double[][] HighPassed= HighPass(Data,startT, endT, Fs, order,  cutOff);
             Graphing.Graphing_Simp.printThisD2(HighPassed);
-        } else if(ChooseFilter =="Bandpass" ){
+        } else if(ChooseFilter == 3 ){
             System.out.print("What is the lower cutoff signal you wish to use for the filter: ");  
             double lowcutOff= keyboard.nextDouble();
             System.out.print("What is the higher cutoff signal you wish to use for the filter: ");  
             double highcutOff= keyboard.nextDouble();
             double[][] BandPassed= BandPass(Data,startT, endT, Fs, order,  lowcutOff, highcutOff);
             Graphing.Graphing_Simp.printThisD2(BandPassed);
-        } else if(ChooseFilter =="Bandstop" ){
+        } else if(ChooseFilter == 4 ){
             System.out.print("What is the lower cutoff signal you wish to use for the filter: ");  
             double lowcutOff= keyboard.nextDouble();
             System.out.print("What is the higher cutoff signal you wish to use for the filter: ");  
             double highcutOff= keyboard.nextDouble();
             double[][] BandStopped= BandStop(Data,startT, endT, Fs, order,  lowcutOff, highcutOff);
             Graphing.Graphing_Simp.printThisD2(BandStopped);
-        } */
-   
+        } 
     }
+   
+
 }
