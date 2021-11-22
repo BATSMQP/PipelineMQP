@@ -22,8 +22,12 @@ public class Graphing_Simp extends JPanel{
         g1.draw(new Line2D.Double(mar,mar,mar,height-mar));
         g1.draw(new Line2D.Double(mar,height-mar,width-mar,height-mar));
         //double x=(double)(width-2*mar)/(coordinates.length-1);
-        double scaleY = (double)(height-2*mar)/getMax(1);
-        double scaleX = (double)(width-2*mar)/getMax(0);
+
+        double MaxX = getMax(0);
+        double MaxY = getMax(1);
+
+        double scaleY = (double)(height-2*mar)/MaxY;
+        double scaleX = (double)(width-2*mar)/MaxX;
         g1.setPaint(Color.BLUE);
         
 
@@ -33,17 +37,20 @@ public class Graphing_Simp extends JPanel{
             g1.fill(new Ellipse2D.Double(x1-2,y1-2,3,3));
         }
         
-        String s =""+getMax(0);
+        String s =""+MaxX;
 
-        JLabel jlabel = new JLabel(s);
-        jlabel.setFont(new Font("Verdana",1,10));
-        //jlabel.setLocation(width-mar, height-mar+10);
-        jlabel.setLocation(0,0);
+        g1.setFont(new Font("Verdana",1,10));
+        g1.setPaint(Color.BLACK);
+        //System.out.print(s);
         
-        if(notplaced){
-            this.add(jlabel); 
-            notplaced = false;
-        }
+        g1.drawString(s, width-mar, height-mar+10); 
+
+        s="0";
+        g1.drawString(s, mar-10, height-mar+10);
+
+        s=""+MaxY;
+        g1.drawString(s, mar-10, mar-10);
+        
         
     }
 
