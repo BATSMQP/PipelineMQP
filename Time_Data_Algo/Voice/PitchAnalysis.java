@@ -3,7 +3,7 @@ import java.util.Scanner;
 import Gen_Algo.TimeSeriesData;
 import lib.TarsosDSP.pitch.AMDF;
 import lib.TarsosDSP.pitch.PitchDetectionResult;
-import lib.TarsosDSP.pitch.PitchDetector;
+//import lib.TarsosDSP.pitch.PitchDetector;
 import Gen_Algo.ReadFile;
 
 public class PitchAnalysis {
@@ -19,8 +19,7 @@ public class PitchAnalysis {
     }
 
     //function that uses pitch test w/ different sliding windows=> would help understand how pitch changes over time
-
-    public float[] AMDFwindow(TimeSeriesData Data,int Wsize){
+    public static float[] AMDFwindow(TimeSeriesData Data,int Wsize){
         double[] Signal= Data.GetSignal();
         float[] SignalF= TimeSeriesData.Double2Float(Signal);
         double[] Time= Data.GetTime();
@@ -32,11 +31,14 @@ public class PitchAnalysis {
             return Invalid; 
         }//Calculating the pitch average of the window
         for(int i=Wsize; i<Wsize; i++){
-            startT= 
+            int startT=i;
+            int endT= i+Wsize;
+            
         }
-
+        int k= 0;//num of windows
         PitchDetectionResult Pitched=AMDF.getPitch(SignalF);
         float pitchAverage= Pitched.getPitch();
+        float[] pitchAverages= new float[k];
 
         return pitchAverages;
     }
@@ -62,14 +64,11 @@ public class PitchAnalysis {
             int endT= keyboard.nextInt();
             float Averaged = AMDFpa(Data,startT,endT,Fs);
             System.out.println("The Signal's average pitch from "+startT+" to "+endT+" seconds is "+Averaged);
+        }else if(ChooseFilter==2){
+            System.out.print("How big would you like the windows to be ");  
+            int Wsize= keyboard.nextInt();
+            float[] Averaged= AMDFwindow(Data,Wsize);
+            System.out.println("The Signal's average pitches for a window size "+Wsize+" is "+Averaged);
         }
-
-        
-        System.out.print("What is the order of the filter: ");  
-        int order= keyboard.nextInt();
-
-        System.out.print("What filter would you like to use between Lowpass= 1, Highpass=2, Bandpass=3, and Bandstop=4: ");  
-        int ChooseFilter= keyboard.nextInt(); 
-
     }
 }

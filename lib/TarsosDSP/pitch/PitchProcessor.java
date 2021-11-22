@@ -26,6 +26,7 @@ package lib.TarsosDSP.pitch;
 
 import lib.TarsosDSP.AudioEvent;
 import lib.TarsosDSP.AudioProcessor;
+import lib.TarsosDSP.pitch.AMDF;
 
 
 /**
