@@ -31,7 +31,7 @@
             <div class="collapse navbar-collapse" id="navbarExample01">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item active">
-                  <a class="nav-link" aria-current="page" href="#">Home</a>
+                  <a class="nav-link" aria-current="page" href="userHome.html">Home</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">About</a>
@@ -47,7 +47,7 @@
 
       <div id="studyNameHeader">
         <h3 id="studyNameTitle" class="inline">Study Name</h3>
-        <button type="submit" id="analyzeDataButton" class="btn btn-primary inline">Analyze Data</button>
+        <button type="submit" id="analyzeDataButton" onclick="window.location.href='selectToolkits.html'" class="btn btn-primary inline">Analyze Data</button>
       </div>
       <h4 id="dataTableName">Data</h4>
 
@@ -62,7 +62,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr onclick="window.location.href='viewData.html'">
                 <td>ID 12345: Vocal</td>
                 <td>9/13/21 10:00 AM</td>
                 <td>NDraudt</td>
@@ -78,7 +78,7 @@
             </tbody>
           </table>
         </div>
-        <button type="submit" id="addNewData" class="btn btn-primary">Add New Data</button>
+        <button type="submit" id="addNewData" onclick="window.location.href='uploadAnalysisTool.html'" class="btn btn-primary">Add New Data</button>
         </br>
         <h6 class="inline">People With Access:</h6>
         <p class="inline">NDraudt, Claire, Lewass, CarlosV</p>
