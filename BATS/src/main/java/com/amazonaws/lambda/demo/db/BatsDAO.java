@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import com.amazonaws.lambda.demo.model.AuthUser;
+import com.amazonaws.lambda.demo.model.Data;
 import com.amazonaws.lambda.demo.model.Study;
 
 public class BatsDAO { 
@@ -147,6 +148,33 @@ public class BatsDAO {
 	     ps.close();
 	     
 	     return fs;
+	
+	 } catch (Exception e) {
+	 	e.printStackTrace();
+	     throw new Exception("Failed in getting studies for the auth user: " + e.getMessage());
+	 }
+	}
+	 
+	 public Data getDataForStudy(String studyId, LambdaLogger logger) throws Exception {
+		 
+	 try {
+		 Data data;
+		 data.neural = getNeural(studyId, logger);
+		 data.facial = getFacial(studyId, logger);
+		 data.speech = getSpeech(studyId, logger);
+		 data.stressIndicators = getStressIndicators(studyId, logger);
+		 data.logData = getLogData(studyId, logger);
+//	     PreparedStatement ps = conn.prepareStatement("SELECT * FROM Study where authUserId=? order by studyStartDate;");
+//	     ps.setString(1, authUserId);
+//	     ResultSet resultSet = ps.executeQuery();
+//	     ArrayList<D> fs = new ArrayList<Study>();
+//	     while (resultSet.next()) {
+//	     	fs.add(generateStudy(resultSet, logger));
+//	     }
+//	     resultSet.close();
+//	     ps.close();
+//	     
+//	     return fs;
 	
 	 } catch (Exception e) {
 	 	e.printStackTrace();
