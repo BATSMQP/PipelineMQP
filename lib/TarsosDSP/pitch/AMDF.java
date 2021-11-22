@@ -44,23 +44,23 @@ package lib.TarsosDSP.pitch;
 public class AMDF implements PitchDetector{
 	
 	
-	private static final double DEFAULT_MIN_FREQUENCY = 82.0;
-	private static final double DEFAULT_MAX_FREQUENCY = 1000.0;
-	private static final double DEFAULT_RATIO = 5.0;
-	private static final double DEFAULT_SENSITIVITY = 0.1;
+	public static final double DEFAULT_MIN_FREQUENCY = 82.0;
+	public static final double DEFAULT_MAX_FREQUENCY = 1000.0;
+	public static final double DEFAULT_RATIO = 5.0;
+	public static final double DEFAULT_SENSITIVITY = 0.1;
 	
-	private static float sampleRate;
+	public static float sampleRate;
 	
-	private static double[] amd;
-	private static long maxPeriod;
-	private static long minPeriod;	
-	private static double ratio;
-	private static double sensitivity;
+	public static double[] amd;
+	public static long maxPeriod;
+	public static long minPeriod;	
+	public static double ratio;
+	public static double sensitivity;
 	
 	/**
 	 * The result of the pitch detection iteration.
 	 */
-	private static PitchDetectionResult result;
+	public static PitchDetectionResult result;
 
 	public AMDF(float sampleRate, int bufferSize) {
 		this(sampleRate,bufferSize,DEFAULT_MIN_FREQUENCY,DEFAULT_MAX_FREQUENCY);
@@ -77,18 +77,18 @@ public class AMDF implements PitchDetector{
 		result = new PitchDetectionResult();
 	}
 
-	public AMDF(float sampleRate, double[] amd,long maxPeriod, long minPeriod, double ratio, double sensitivity, int bufferSize,double minFrequency,double maxFrequency) {
-		this.amd= amd;	
+	/* public AMDF(float sampleRate, double[] amd,long maxPeriod, long minPeriod, double ratio, double sensitivity, int bufferSize,double minFrequency,double maxFrequency) {
+		AMDF.amd= amd;	
 		this.ratio=ratio;
 		this.sensitivity=sensitivity;
 		this.sampleRate = sampleRate;
 		this.maxPeriod = Math.round(sampleRate / minFrequency + 0.5);
 		this.minPeriod = Math.round(sampleRate / maxFrequency + 0.5);
 		result = new PitchDetectionResult();
-	}
+	} */
 
 	//@Override
-	public static PitchDetectionResult getPitch(float[] audioBuffer) {
+	public static float getPitch(float[] audioBuffer) {
 		int t = 0;
 		float f0 = -1;
 		double minval = Double.POSITIVE_INFINITY;
@@ -98,7 +98,6 @@ public class AMDF implements PitchDetector{
 		double[] calcSub = new double[0];
 
 		int maxShift = audioBuffer.length;
-		
 
 		for (int i = 0; i < maxShift; i++) {
 			frames1 = new double[maxShift - i + 1];
@@ -159,10 +158,10 @@ public class AMDF implements PitchDetector{
 			f0 = sampleRate/minpos;
 		}
 		
-		result.setPitch(f0);
-		result.setPitched(-1!=f0);
-		result.setProbability(-1);
+		float pitch= f0;
+		//result.setPitched(-1!=f0);
+		//result.setProbability(-1);
 
-		return result;
+		return pitch;
 	}	
 }
