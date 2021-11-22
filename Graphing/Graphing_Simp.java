@@ -11,7 +11,7 @@ import java.awt.geom.*;
 
 public class Graphing_Simp extends JPanel{
     public static double [][] coordinates=new double[100][2];
-    int mar=50;
+    static int mar=50;
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g1=(Graphics2D)g;
@@ -24,17 +24,25 @@ public class Graphing_Simp extends JPanel{
         double scaleY = (double)(height-2*mar)/getMax(1);
         double scaleX = (double)(width-2*mar)/getMax(0);
         g1.setPaint(Color.BLUE);
+        
 
         for(int i=0;i<coordinates.length;i++){
             double x1=mar+coordinates[i][0]*scaleX;
-            double y1=height-mar-scaleY*coordinates[i][1];
-            g1.fill(new Ellipse2D.Double(x1-2,y1-2,4,4));
+            double y1=height-mar-scaleY*coordinates[i][1]; 
+            g1.fill(new Ellipse2D.Double(x1-2,y1-2,3,3));
         }
         
+        /* String s =""+getMax(0);
+
+        JLabel jlabel = new JLabel(s);
+        jlabel.setFont(new Font("Verdana",1,10));
+        jlabel.setLocation(getWidth()-mar, getHeight()-mar+10);
+        add(jlabel); */
         
         
     }
-    private double getMax(int dim){
+
+    public double getMax(int dim){
         double max=-Integer.MAX_VALUE;
         for(int i=0;i<coordinates.length;i++){
             if(coordinates[i][dim]>max)
@@ -43,8 +51,8 @@ public class Graphing_Simp extends JPanel{
         }return max;
     }       
 
-    public static void printThisD2(double[][] d/* , JFrame j */){
-        JFrame j =new JFrame();
+    public static void printThisD2(double[][] d , JFrame j ){
+        //JFrame j =new JFrame();
         j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Graphing_Simp.coordinates=d;
         j.add(new Graphing_Simp());
@@ -52,6 +60,8 @@ public class Graphing_Simp extends JPanel{
         j.setLocation(200,200);
         j.setVisible(true);
         j.setTitle(j.getName());
+
+        
     }
         
     public static void main(String args[]){
