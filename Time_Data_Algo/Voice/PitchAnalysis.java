@@ -2,19 +2,28 @@ package Time_Data_Algo.Voice;
 import java.util.Scanner;
 import Gen_Algo.TimeSeriesData;
 import lib.TarsosDSP.pitch.AMDF;
+//import lib.TarsosDSP.pitch.AMDF.getPitch;
 import lib.TarsosDSP.pitch.PitchDetectionResult;
 //import lib.TarsosDSP.pitch.PitchDetector;
 import Gen_Algo.ReadFile;
 
+import javax.swing.JFrame;
+
 public class PitchAnalysis {
+    static JFrame j1 = new JFrame();
+    static JFrame j2 = new JFrame();
     
     //function that runs an AMDF pitch analysis over a given region
     public static float AMDFpa(TimeSeriesData Data,int startT, int endT, int Fs){
         TimeSeriesData Data2= new TimeSeriesData(Data.AnalyseRange(startT, endT, Fs));
         double[] Signal= Data2.GetSignal();
         float[] SignalF= TimeSeriesData.Double2Float(Signal);
-        PitchDetectionResult Pitched=AMDF.getPitch(SignalF);
-        float pitchAverage= Pitched.getPitch();
+        float FsS= (float)Fs;
+        AMDF test= new AMDF(Fs, Signal.length, 0, 100);
+        //AMDF.amd= Signal;
+        //PitchDetectionResult Pitched=AMDF.getPitch(SignalF);
+        //float pitchAverage= Pitched.getPitch();
+        float pitchAverage= test.getPitch(SignalF);
         return pitchAverage;
     }
 
@@ -25,6 +34,8 @@ public class PitchAnalysis {
         double[] Time= Data.GetTime();
         float[] TimeF= TimeSeriesData.Double2Float(Time);
         int n=Time.length;
+        int k= 1;
+        float[] pitchAverages= new float[k];
         if (n<Wsize){ //if the Wsize is too big we cant make it
             System.out.println("Invalid");
             float[] Invalid= new float[1];
@@ -33,13 +44,12 @@ public class PitchAnalysis {
         for(int i=Wsize; i<Wsize; i++){
             int startT=i;
             int endT= i+Wsize;
-            
+            return pitchAverages;
         }
-        int k= 0;//num of windows
-        PitchDetectionResult Pitched=AMDF.getPitch(SignalF);
-        float pitchAverage= Pitched.getPitch();
-        float[] pitchAverages= new float[k];
-
+        //int k= 0;//num of windows
+        // PitchDetectionResult Pitched=AMDF.getPitch(SignalF);
+        // float pitchAverage= Pitched.getPitch();
+        //float[] pitchAverages= new float[k];
         return pitchAverages;
     }
 
@@ -54,7 +64,7 @@ public class PitchAnalysis {
         System.out.print("What column number has the data we wish to analyse: ");  
         int Signal= keyboard.nextInt();
         TimeSeriesData Data= new TimeSeriesData(ReadFile.fromCSVtoD2(path,Time, Signal));
-        Graphing.Graphing_Simp.printThisD2(ReadFile.fromCSVtoD2(path,Time, Signal));
+        Graphing.Graphing_Simp.printThisD2(ReadFile.fromCSVtoD2(path,Time, Signal),j1);
         System.out.print("Would you like to determine the total pitch average of the file(opt 1), or view the change in pitch averges throughout the document(Opt 2) ");  
         int ChooseFilter= keyboard.nextInt(); 
         if (ChooseFilter==1){
