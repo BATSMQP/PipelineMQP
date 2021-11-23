@@ -148,10 +148,12 @@ public class BatsDAO {
 	     ArrayList<Study> fs = new ArrayList<Study>();
 	     while (resultSet.next()) {
 	     	fs.add(generateStudy(resultSet, logger));
+	     	{ logger.log("studies in while (in getStudies): " + fs); }
 	     }
 	     resultSet.close();
 	     ps.close();
 	     
+	     { logger.log("studies after (in getStudies): " + fs); }
 	     return fs;
 	
 	 } catch (Exception e) {
