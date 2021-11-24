@@ -9,10 +9,15 @@ import java.util.ArrayList;
 import com.amazonaws.lambda.demo.model.AuthUser;
 import com.amazonaws.lambda.demo.model.Data;
 import com.amazonaws.lambda.demo.model.Facial;
+import com.amazonaws.lambda.demo.model.FacialStudy;
 import com.amazonaws.lambda.demo.model.LogData;
+import com.amazonaws.lambda.demo.model.LogDataStudy;
 import com.amazonaws.lambda.demo.model.Neural;
+import com.amazonaws.lambda.demo.model.NeuralStudy;
 import com.amazonaws.lambda.demo.model.Speech;
+import com.amazonaws.lambda.demo.model.SpeechStudy;
 import com.amazonaws.lambda.demo.model.StressIndicators;
+import com.amazonaws.lambda.demo.model.StressIndicatorsStudy;
 import com.amazonaws.lambda.demo.model.Study;
 
 public class BatsDAO { 
@@ -141,54 +146,205 @@ public class BatsDAO {
    
 	 public ArrayList<Study> getAllStudies(String authUserId, LambdaLogger logger) throws Exception {
 	 
+		try {
+		     PreparedStatement ps = conn.prepareStatement("SELECT * FROM Study where authUserId=? order by studyStartDate;");
+		     ps.setString(1, authUserId);
+		     ResultSet resultSet = ps.executeQuery();
+		     ArrayList<Study> fs = new ArrayList<Study>();
+		     while (resultSet.next()) {
+		     	fs.add(generateStudy(resultSet, logger));
+		     	{ logger.log("studies in while (in getStudies): " + fs); }
+		     }
+		     resultSet.close();
+		     ps.close();
+		     
+		     { logger.log("studies after (in getStudies): " + fs); }
+		     return fs;
+		
+		 } catch (Exception e) {
+		 	e.printStackTrace();
+		     throw new Exception("Failed in getting studies for the auth user: " + e.getMessage());
+		 }
+	}
+	 
+	public Data getDataForStudy(String studyId, LambdaLogger logger) throws Exception {
+		 
 	 try {
-	     PreparedStatement ps = conn.prepareStatement("SELECT * FROM Study where authUserId=? order by studyStartDate;");
-	     ps.setString(1, authUserId);
-	     ResultSet resultSet = ps.executeQuery();
-	     ArrayList<Study> fs = new ArrayList<Study>();
-	     while (resultSet.next()) {
-	     	fs.add(generateStudy(resultSet, logger));
-	     	{ logger.log("studies in while (in getStudies): " + fs); }
-	     }
-	     resultSet.close();
-	     ps.close();
-	     
-	     { logger.log("studies after (in getStudies): " + fs); }
-	     return fs;
+		 Data data = new Data();
+		 data.neural = getAllNeural(studyId, logger);
+		 data.facial = getAllFacial(studyId, logger);
+		 data.speech = getAllSpeech(studyId, logger);
+		 data.stressIndicators = getAllStressIndicators(studyId, logger);
+		 data.logData = getAllLogData(studyId, logger);
+		 
+		 return data;
 	
 	 } catch (Exception e) {
 	 	e.printStackTrace();
-	     throw new Exception("Failed in getting studies for the auth user: " + e.getMessage());
+	     throw new Exception("Failed in getting data for the study: " + e.getMessage());
 	 }
 	}
 	 
-//	 public Data getDataForStudy(String studyId, LambdaLogger logger) throws Exception {
-//		 
-//	 try {
-//		 Data data;
-//		 data.neural = getNeural(studyId, logger);
-//		 data.facial = getFacial(studyId, logger);
-//		 data.speech = getSpeech(studyId, logger);
-//		 data.stressIndicators = getStressIndicators(studyId, logger);
-//		 data.logData = getLogData(studyId, logger);
-////	     PreparedStatement ps = conn.prepareStatement("SELECT * FROM Study where authUserId=? order by studyStartDate;");
-////	     ps.setString(1, authUserId);
-////	     ResultSet resultSet = ps.executeQuery();
-////	     ArrayList<D> fs = new ArrayList<Study>();
-////	     while (resultSet.next()) {
-////	     	fs.add(generateStudy(resultSet, logger));
-////	     }
-////	     resultSet.close();
-////	     ps.close();
-////	     
-////	     return fs;
-//	
-//	 } catch (Exception e) {
-//	 	e.printStackTrace();
-//	     throw new Exception("Failed in getting studies for the auth user: " + e.getMessage());
-//	 }
-//	}
+	public ArrayList<Neural> getAllNeural(String studyId, LambdaLogger logger) throws Exception {
+		try {
+	      PreparedStatement ps = conn.prepareStatement("SELECT * FROM NeuralStudy WHERE studyId = ?;");
+	      ps.setString(1, studyId);
+	      ResultSet resultSet = ps.executeQuery();
+	      { logger.log("ps for select (in getAllNeural): " + ps); }
+	      // already present?
+	      ArrayList<NeuralStudy> ns = new ArrayList<NeuralStudy>();
+	      while (resultSet.next()) {
+	    	  ns.add(generateNeuralStudy(resultSet, logger));
+	          resultSet.close();
+	      }
+	      ArrayList<Neural> nStudies = new ArrayList<Neural>();
+	      String neuralId = "";
+	      for(int i = 0; i < ns.size(); i++) {
+	    	  neuralId = ns.get(i).neuralId;
+		      ps = conn.prepareStatement("SELECT * FROM Neural WHERE neuralId = ?;");
+		      ps.setString(1, neuralId);
+		      resultSet = ps.executeQuery();
+		      { logger.log("ps for select (in getAllNeural): " + ps); }
+		      while (resultSet.next()) {
+		    	  nStudies.add(generateNeural(resultSet, logger));
+		          resultSet.close();
+		      }
+	      }
+	      return nStudies;
+	
+	  } catch (Exception e) {
+	      throw new Exception("Failed to get Neural: " + e.getMessage());
+	  }
+	}
+	
+	public ArrayList<Facial> getAllFacial(String studyId, LambdaLogger logger) throws Exception {
+		try {
+	      PreparedStatement ps = conn.prepareStatement("SELECT * FROM FacialStudy WHERE studyId = ?;");
+	      ps.setString(1, studyId);
+	      ResultSet resultSet = ps.executeQuery();
+	      { logger.log("ps for select (in getAllFacial): " + ps); }
+	      // already present?
+	      ArrayList<FacialStudy> fs = new ArrayList<FacialStudy>();
+	      while (resultSet.next()) {
+	    	  fs.add(generateFacialStudy(resultSet, logger));
+	          resultSet.close();
+	      }
+	      ArrayList<Facial> fStudies = new ArrayList<Facial>();
+	      String facialId = "";
+	      for(int i = 0; i < fs.size(); i++) {
+	    	  facialId = fs.get(i).facialId;
+		      ps = conn.prepareStatement("SELECT * FROM Facial WHERE facialId = ?;");
+		      ps.setString(1, facialId);
+		      resultSet = ps.executeQuery();
+		      { logger.log("ps for select (in getAllFacial): " + ps); }
+		      while (resultSet.next()) {
+		    	  fStudies.add(generateFacial(resultSet, logger));
+		          resultSet.close();
+		      }
+	      }
+	      return fStudies;
+	
+	  } catch (Exception e) {
+	      throw new Exception("Failed to get Facial: " + e.getMessage());
+	  }
+	}
 
+	public ArrayList<Speech> getAllSpeech(String studyId, LambdaLogger logger) throws Exception {
+		try {
+	      PreparedStatement ps = conn.prepareStatement("SELECT * FROM SpeechStudy WHERE studyId = ?;");
+	      ps.setString(1, studyId);
+	      ResultSet resultSet = ps.executeQuery();
+	      { logger.log("ps for select (in getAllSpeech): " + ps); }
+	      // already present?
+	      ArrayList<SpeechStudy> ss = new ArrayList<SpeechStudy>();
+	      while (resultSet.next()) {
+	    	  ss.add(generateSpeechStudy(resultSet, logger));
+	          resultSet.close();
+	      }
+	      ArrayList<Speech> sStudies = new ArrayList<Speech>();
+	      String speechId = "";
+	      for(int i = 0; i < ss.size(); i++) {
+	    	  speechId = ss.get(i).speechId;
+		      ps = conn.prepareStatement("SELECT * FROM Speech WHERE speechId = ?;");
+		      ps.setString(1, speechId);
+		      resultSet = ps.executeQuery();
+		      { logger.log("ps for select (in getAllSpeech): " + ps); }
+		      while (resultSet.next()) {
+		    	  sStudies.add(generateSpeech(resultSet, logger));
+		          resultSet.close();
+		      }
+	      }
+	      return sStudies;
+	
+	  } catch (Exception e) {
+	      throw new Exception("Failed to get Speech: " + e.getMessage());
+	  }
+	}
+
+	public ArrayList<StressIndicators> getAllStressIndicators(String studyId, LambdaLogger logger) throws Exception {
+		try {
+	      PreparedStatement ps = conn.prepareStatement("SELECT * FROM StressIndicatorsStudy WHERE studyId = ?;");
+	      ps.setString(1, studyId);
+	      ResultSet resultSet = ps.executeQuery();
+	      { logger.log("ps for select (in getAllStressIndicators): " + ps); }
+	      // already present?
+	      ArrayList<StressIndicatorsStudy> ss = new ArrayList<StressIndicatorsStudy>();
+	      while (resultSet.next()) {
+	    	  ss.add(generateStressIndicatorsStudy(resultSet, logger));
+	          resultSet.close();
+	      }
+	      ArrayList<StressIndicators> sStudies = new ArrayList<StressIndicators>();
+	      String siId = "";
+	      for(int i = 0; i < ss.size(); i++) {
+	    	  siId = ss.get(i).siId;
+		      ps = conn.prepareStatement("SELECT * FROM StressIndicators WHERE siId = ?;");
+		      ps.setString(1, siId);
+		      resultSet = ps.executeQuery();
+		      { logger.log("ps for select (in getAllStressIndicators): " + ps); }
+		      while (resultSet.next()) {
+		    	  sStudies.add(generateStressIndicators(resultSet, logger));
+		          resultSet.close();
+		      }
+	      }
+	      return sStudies;
+	
+	  } catch (Exception e) {
+	      throw new Exception("Failed to get StressIndicators: " + e.getMessage());
+	  }
+	}
+	
+	public ArrayList<LogData> getAllLogData(String studyId, LambdaLogger logger) throws Exception {
+		try {
+	      PreparedStatement ps = conn.prepareStatement("SELECT * FROM LogDataStudy WHERE studyId = ?;");
+	      ps.setString(1, studyId);
+	      ResultSet resultSet = ps.executeQuery();
+	      { logger.log("ps for select (in getAllLogData): " + ps); }
+	      // already present?
+	      ArrayList<LogDataStudy> ls = new ArrayList<LogDataStudy>();
+	      while (resultSet.next()) {
+	    	  ls.add(generateLogDataStudy(resultSet, logger));
+	          resultSet.close();
+	      }
+	      ArrayList<LogData> lStudies = new ArrayList<LogData>();
+	      String logDataId = "";
+	      for(int i = 0; i < ls.size(); i++) {
+	    	  logDataId = ls.get(i).logDataId;
+		      ps = conn.prepareStatement("SELECT * FROM LogData WHERE logDataId = ?;");
+		      ps.setString(1, logDataId);
+		      resultSet = ps.executeQuery();
+		      { logger.log("ps for select (in getAllLogData): " + ps); }
+		      while (resultSet.next()) {
+		    	  lStudies.add(generateLogData(resultSet, logger));
+		          resultSet.close();
+		      }
+	      }
+	      return lStudies;
+	
+	  } catch (Exception e) {
+	      throw new Exception("Failed to get LogData: " + e.getMessage());
+	  }
+	}
+	
 //    public Choice getChoice(String cid, LambdaLogger logger) throws Exception {
 //        
 //        try {
@@ -954,6 +1110,31 @@ public class BatsDAO {
 	  { logger.log("startOfSymptoms: " + startOfSymptoms); }
 	  String participantId = resultSet.getString("participantId");
 	  return new LogData(logDataId, changeOfSeverityOverTime, question, answer, startOfSymptoms, participantId); 
+  }
+  private NeuralStudy generateNeuralStudy(ResultSet resultSet,LambdaLogger logger) throws Exception {
+	  String neuralId  = resultSet.getString("neuralId");
+	  String studyId = resultSet.getString("studyId");
+	  return new NeuralStudy(neuralId, studyId); 
+  }
+  private FacialStudy generateFacialStudy(ResultSet resultSet,LambdaLogger logger) throws Exception {
+	  String facialId  = resultSet.getString("facialId");
+	  String studyId = resultSet.getString("studyId");
+	  return new FacialStudy(facialId, studyId); 
+  }
+  private SpeechStudy generateSpeechStudy(ResultSet resultSet,LambdaLogger logger) throws Exception {
+	  String speechId  = resultSet.getString("speechId");
+	  String studyId = resultSet.getString("studyId");
+	  return new SpeechStudy(speechId, studyId); 
+  }
+  private StressIndicatorsStudy generateStressIndicatorsStudy(ResultSet resultSet,LambdaLogger logger) throws Exception {
+	  String siId  = resultSet.getString("siId");
+	  String studyId = resultSet.getString("studyId");
+	  return new StressIndicatorsStudy(siId, studyId); 
+  }
+  private LogDataStudy generateLogDataStudy(ResultSet resultSet,LambdaLogger logger) throws Exception {
+	  String logDataId  = resultSet.getString("logDataId");
+	  String studyId = resultSet.getString("studyId");
+	  return new LogDataStudy(logDataId, studyId); 
   }
 
 }
