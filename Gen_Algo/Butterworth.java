@@ -1,6 +1,5 @@
  package Gen_Algo;
  import java.util.Scanner; // Claire Nicolas Edit
-
 import javax.swing.JFrame;
 
 import java.util.*;  //Claire Nicolas Edit

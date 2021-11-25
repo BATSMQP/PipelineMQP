@@ -14,6 +14,7 @@ public class PitchAnalysis {
     static JFrame j2 = new JFrame();
     
     //function that runs an AMDF pitch analysis over a given region
+    //be careful cause they assume the frequency char are the same and dont change over a short window (20 ms-100ms) and then it will calculated 1 pitch and DOES AMD ASK FOR THAT MIN VAL AND MAX VAL???????
     public static float AMDFpa(TimeSeriesData Data,int startT, int endT, int Fs){
         TimeSeriesData Data2= new TimeSeriesData(Data.AnalyseRange(startT, endT, Fs));
         double[] Signal= Data2.GetSignal();
@@ -26,6 +27,8 @@ public class PitchAnalysis {
         float pitchAverage= test.getPitch(SignalF);
         return pitchAverage;
     }
+
+    //DO THE SLIDING WINDOW OURSELVES AND TO THE AVERAGE OF THAT
 
     //function that uses pitch test w/ different sliding windows=> would help understand how pitch changes over time
     public static float[] AMDFwindow(TimeSeriesData Data,int Wsize){

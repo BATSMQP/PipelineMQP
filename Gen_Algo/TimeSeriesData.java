@@ -27,7 +27,6 @@ public class TimeSeriesData {
     }
 
 
-  
      /**
      * This method .
      * @param startT is the beginning of the range that will be analysed

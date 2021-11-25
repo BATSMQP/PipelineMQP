@@ -6,7 +6,6 @@ import java.util.List;
 public class CutOff {
     public List<Double[]> bellow(double[][] a,int colD,int colT,double cut){
         List<Double[]> d = new ArrayList<Double[]>();
-
         for(int i=0; i<a.length;i++){
             if(cut<=a[i][colD]){
                 Double[] t = new Double[2];
@@ -15,7 +14,6 @@ public class CutOff {
                 d.add(t);
             }
         }
-
         return d;
     }
 
