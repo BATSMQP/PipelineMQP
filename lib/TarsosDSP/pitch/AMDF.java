@@ -137,21 +137,24 @@ public class AMDF implements PitchDetector{
 		System.out.print("minperiod "+minPeriod+"     ");
 		System.out.print("maxperiod "+maxPeriod+"     ");
 		int MinPeriodINT = (int)minPeriod;
-		int MaxPeriodINT= (int)maxPeriod;
-		int TopBound= MaxPeriodINT;
-		if((MinPeriodINT+amd.length)<MaxPeriodINT){
+		//int MaxPeriodINT= (int)maxPeriod;
+		int TopBound= 2147483647;
+		if((MinPeriodINT+amd.length)<TopBound){
 			TopBound= MinPeriodINT+amd.length;
 		}
 		System.out.print("  AMDlength"+amd.length);
 		System.out.print("  MinPeriodINT"+MinPeriodINT);
+		//System.out.print("  MaxPeriodINT"+MaxPeriodINT);
 		System.out.print("  TopBound"+ TopBound);
 		for (int j = MinPeriodINT; j <TopBound-1; j++){
-			System.out.print("amd[j]="+amd[j]);
+			//System.out.print("amd[j]="+amd[j]);
 			if(amd[j] > maxval)	{
 				maxval = amd[j];
+				System.out.print("amd["+j+"]="+amd[j]+"  ");
 		   }
 			if(amd[j] < minval){
-				 minval = amd[j];
+				minval = amd[j];
+				System.out.print("amd["+j+"]="+amd[j]+"  ");
 			}
 		}
 		int cutoff = (int) Math.round((sensitivity * (maxval - minval)) + minval);
