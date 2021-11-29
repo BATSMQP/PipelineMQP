@@ -1,4 +1,7 @@
 package Stats_Func;
+
+import Gen_Algo.ReadFile;
+
 public class mean{
     
     //TODO: make array able to have nondoubles but ignore them
@@ -19,6 +22,11 @@ public class mean{
 
         m= All(ar,0);
         System.out.println(m);
+
+        double[][] test= ReadFile.fromCSVtoD2("Data\\hw_200.csv",0,1);
+        double mean= All(test,1);
+        System.out.print(mean);
+
     }
 
     public static double Array(double[][] ar, int rowMin, int rowMax, int col){

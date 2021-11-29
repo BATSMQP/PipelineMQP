@@ -23,6 +23,8 @@
 
 package lib.TarsosDSP.pitch;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 /**
  * <p>
  * A pitch extractor that extracts the Average Magnitude Difference (AMDF) from
@@ -89,6 +91,8 @@ public class AMDF implements PitchDetector{
 
 	//@Override
 	public static PitchDetectionResult AvgPitch(float[] audioBuffer) {
+		System.out.println(ArrayUtils.toString(audioBuffer));
+		
 		int t = 0;
 		float f0 = -1; //so nothing is happening to it...why
 		double minval = Double.POSITIVE_INFINITY;
@@ -110,15 +114,17 @@ public class AMDF implements PitchDetector{
 			frames2 = new double[maxShift - i + 1];
 			t = 0;
 			for (int aux1 = 0; aux1 < maxShift - i; aux1++) {
-				t = t + 1;
-				frames1[t] = audioBuffer[aux1];
+				t = t + 1; //counter from frames
+				frames1[t] = audioBuffer[aux1]; //Frames1
 
 			}
+			System.out.println(ArrayUtils.toString(frames1));
 			t = 0;
 			for (int aux2 = i; aux2 < maxShift; aux2++) {
 				t = t + 1;
 				frames2[t] = audioBuffer[aux2];
 			}
+			System.out.println(ArrayUtils.toString(frames2));
 
 			int frameLength = frames1.length;
 			calcSub = new double[frameLength];
@@ -130,7 +136,7 @@ public class AMDF implements PitchDetector{
 			for (int l = 0; l < frameLength; l++) {
 				summation +=  Math.abs(calcSub[l]);
 			}
-			amd[i] = summation;
+			amd[i] = summation; //lots of different summations of differences between 2 arrays (that )
 			//System.out.print(amd[i]+"     ");
 		}
 
