@@ -33,18 +33,18 @@ public class TimeSeriesData {
      * @param endT is the end of the range that will be analysed
      * @return double[][] shortened signal
      */
-    public double[][] AnalyseRange (int startT, int endT,int Fs) {
+    public TimeSeriesData AnalyseRange (int startT, int endT,int Fs) {
             this.output= new double[endT-startT*Fs][2];
             int j= 0; 
            for ( int i = 0; i < this.signal.length; i++) {
-                   if ( this.signal[i][0]< startT | this.signal[i][0]>endT ) { //this is assuming that col 1 = time 2= data
+                   if ( this.signal[i][0]> startT | this.signal[i][0]<endT ) { //this is assuming that col 1 = time 2= data
                         this.output[j][0] =this.signal[i][0];
                         this.output[j][1] = this.signal[i][1];
                         j++;
                    }
-            return this.output;
+            return this;
             }
-        return this.output;
+        return this;
         }
 
     public ButterworthJDSP ConvertBWJDSP(double Fs){

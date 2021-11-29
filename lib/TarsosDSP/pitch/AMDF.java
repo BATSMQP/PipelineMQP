@@ -91,7 +91,7 @@ public class AMDF implements PitchDetector{
 
 	//@Override
 	public static PitchDetectionResult AvgPitch(float[] audioBuffer) {
-		System.out.println(ArrayUtils.toString(audioBuffer));
+		//System.out.println(ArrayUtils.toString(audioBuffer));
 		
 		int t = 0;
 		float f0 = -1; //so nothing is happening to it...why
@@ -108,6 +108,9 @@ public class AMDF implements PitchDetector{
 			System.out.print("  "+amd[i]+"   ");
 		} */
 		
+		amd = new double[audioBuffer.length];
+
+		PitchDetectionResult result = new PitchDetectionResult();
 
 		for (int i = 0; i < maxShift; i++) {
 			frames1 = new double[maxShift - i + 1];
@@ -118,13 +121,13 @@ public class AMDF implements PitchDetector{
 				frames1[t] = audioBuffer[aux1]; //Frames1
 
 			}
-			System.out.println(ArrayUtils.toString(frames1));
+			//System.out.println(ArrayUtils.toString(frames1));
 			t = 0;
 			for (int aux2 = i; aux2 < maxShift; aux2++) {
 				t = t + 1;
 				frames2[t] = audioBuffer[aux2];
 			}
-			System.out.println(ArrayUtils.toString(frames2));
+			//System.out.println(ArrayUtils.toString(frames2));
 
 			int frameLength = frames1.length;
 			calcSub = new double[frameLength];
@@ -140,27 +143,12 @@ public class AMDF implements PitchDetector{
 			//System.out.print(amd[i]+"     ");
 		}
 
-		System.out.print("minperiod "+minPeriod+"     ");
-		System.out.print("maxperiod "+maxPeriod+"     ");
-		int MinPeriodINT = (int)minPeriod;
-		//int MaxPeriodINT= (int)maxPeriod;
-		int TopBound= 2147483647;
-		if((MinPeriodINT+amd.length)<TopBound){
-			TopBound= MinPeriodINT+amd.length;
-		}
-		System.out.print("  AMDlength"+amd.length);
-		System.out.print("  MinPeriodINT"+MinPeriodINT);
-		//System.out.print("  MaxPeriodINT"+MaxPeriodINT);
-		System.out.print("  TopBound"+ TopBound);
-		for (int j = MinPeriodINT; j <TopBound-1; j++){
-			//System.out.print("amd[j]="+amd[j]);
-			if(amd[j] > maxval)	{
-				maxval = amd[j];
-				System.out.print("amd["+j+"]="+amd[j]+"  ");
-		   }
+		for (int j = (int)minPeriod; j < (int)maxPeriod; j++){
 			if(amd[j] < minval){
-				minval = amd[j];
-				System.out.print("amd["+j+"]="+amd[j]+"  ");
+				 minval = amd[j];
+			}
+			if(amd[j] > maxval)	{
+				 maxval = amd[j];
 			}
 		}
 		int cutoff = (int) Math.round((sensitivity * (maxval - minval)) + minval);
@@ -181,18 +169,15 @@ public class AMDF implements PitchDetector{
 		          minpos = i;
 			}
 		}
-		System.out.print(amd[minpos] * ratio);
-		System.out.print("        ");
-		System.out.print(maxval);
+
 		if(Math.round(amd[minpos] * ratio) < maxval){
 			f0 = sampleRate/minpos;
 		}
 		
-		float pitch= f0;
+		result.setPitch(f0);
 		result.setPitched(-1!=f0);
 		result.setProbability(-1);
-		return result;
 
-		//return pitch;
+		return result;
 	}	
 }

@@ -6,6 +6,7 @@ import lib.TarsosDSP.pitch.AMDF;
 import lib.TarsosDSP.pitch.PitchDetectionResult;
 //import lib.TarsosDSP.pitch.PitchDetector;
 import Gen_Algo.ReadFile;
+//import java.lang.Integer.floatValue();
 
 import javax.swing.JFrame;
 
@@ -15,12 +16,17 @@ public class PitchAnalysis {
     
     //function that runs an AMDF pitch analysis over a given region
     //be careful cause they assume the frequency char are the same and dont change over a short window (20 ms-100ms) and then it will calculated 1 pitch and DOES AMD ASK FOR THAT MIN VAL AND MAX VAL???????
-    public static float AMDFpa(TimeSeriesData Data,int startT, int endT, int Fs){
-        TimeSeriesData Data2= new TimeSeriesData(Data.AnalyseRange(startT, endT, Fs));
-        double[] Signal= Data2.GetSignal();
-        float[] SignalF= TimeSeriesData.Double2Float(Signal);
+    public static float AMDFpa(double[] ds,int startT, int endT, int Fs){
+        //TimeSeriesData Data2= new TimeSeriesData(Data.AnalyseRange(startT, endT, Fs));
+        //double[] Signal= Data2.GetSignal();
+       // float[] SignalF= java.lang.Integer.floatValue(Data);
+      
+        float[] SignalF= new float[ds.length];
+        for(int i= 0; i<ds.length;i++){
+            SignalF[i]=(float)ds[i];
+        }
         float FsS= (float)Fs;
-        AMDF test= new AMDF(Fs, Signal.length, 0, 100);
+        //AMDF test= new AMDF(Fs, Data.length, 0, 100);
 
         //AMDF.amd= Signal;
         PitchDetectionResult Pitched= AMDF.AvgPitch(SignalF);
@@ -73,7 +79,9 @@ public class PitchAnalysis {
         int startT= keyboard.nextInt();
         System.out.print("What time would you like the analysis to end: ");  
         int endT= keyboard.nextInt();
-        float Averaged = AMDFpa(Data,startT,endT,Fs);
+        
+        TimeSeriesData DataF= Data.AnalyseRange(startT,endT,Fs);
+        float Averaged = AMDFpa(DataF.GetSignal(),startT,endT,Fs);
          System.out.println("The Signal's average pitch from "+startT+" to "+endT+" seconds is "+Averaged);
     
     }
