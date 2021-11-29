@@ -88,9 +88,9 @@ public class AMDF implements PitchDetector{
 	} */
 
 	//@Override
-	public static float getPitch(float[] audioBuffer) {
+	public static PitchDetectionResult AvgPitch(float[] audioBuffer) {
 		int t = 0;
-		float f0 = -1;
+		float f0 = -1; //so nothing is happening to it...why
 		double minval = Double.POSITIVE_INFINITY;
 		double maxval = Double.NEGATIVE_INFINITY;
 		double[] frames1 = new double[0];
@@ -98,6 +98,12 @@ public class AMDF implements PitchDetector{
 		double[] calcSub = new double[0];
 
 		int maxShift = audioBuffer.length;
+		//System.out.print(maxShift);
+		//System.out.print("                    ");
+		/* for(int i=0; i < amd.length; i++){
+			System.out.print("  "+amd[i]+"   ");
+		} */
+		
 
 		for (int i = 0; i < maxShift; i++) {
 			frames1 = new double[maxShift - i + 1];
@@ -125,14 +131,27 @@ public class AMDF implements PitchDetector{
 				summation +=  Math.abs(calcSub[l]);
 			}
 			amd[i] = summation;
+			//System.out.print(amd[i]+"     ");
 		}
-		
-		for (int j = (int)minPeriod; j < (int)maxPeriod; j++){
+
+		System.out.print("minperiod "+minPeriod+"     ");
+		System.out.print("maxperiod "+maxPeriod+"     ");
+		int MinPeriodINT = (int)minPeriod;
+		int MaxPeriodINT= (int)maxPeriod;
+		int TopBound= MaxPeriodINT;
+		if((MinPeriodINT+amd.length)<MaxPeriodINT){
+			TopBound= MinPeriodINT+amd.length;
+		}
+		System.out.print("  AMDlength"+amd.length);
+		System.out.print("  MinPeriodINT"+MinPeriodINT);
+		System.out.print("  TopBound"+ TopBound);
+		for (int j = MinPeriodINT; j <TopBound-1; j++){
+			System.out.print("amd[j]="+amd[j]);
+			if(amd[j] > maxval)	{
+				maxval = amd[j];
+		   }
 			if(amd[j] < minval){
 				 minval = amd[j];
-			}
-			if(amd[j] > maxval)	{
-				 maxval = amd[j];
 			}
 		}
 		int cutoff = (int) Math.round((sensitivity * (maxval - minval)) + minval);
@@ -153,15 +172,18 @@ public class AMDF implements PitchDetector{
 		          minpos = i;
 			}
 		}
-
+		System.out.print(amd[minpos] * ratio);
+		System.out.print("        ");
+		System.out.print(maxval);
 		if(Math.round(amd[minpos] * ratio) < maxval){
 			f0 = sampleRate/minpos;
 		}
 		
 		float pitch= f0;
-		//result.setPitched(-1!=f0);
-		//result.setProbability(-1);
+		result.setPitched(-1!=f0);
+		result.setProbability(-1);
+		return result;
 
-		return pitch;
+		//return pitch;
 	}	
 }

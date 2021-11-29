@@ -72,7 +72,7 @@ public class PitchDetectionResult {
 	 * A copy constructor. Since PitchDetectionResult objects are reused for performance reasons, creating a copy can be practical.
 	 * @param other
 	 */
-	public PitchDetectionResult(PitchDetectionResult other){
+	public  PitchDetectionResult(PitchDetectionResult other){
 		this.pitch = other.pitch;
 		this.probability = other.probability;
 		this.pitched = other.pitched;

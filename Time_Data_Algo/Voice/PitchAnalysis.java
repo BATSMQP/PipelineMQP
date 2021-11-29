@@ -21,10 +21,11 @@ public class PitchAnalysis {
         float[] SignalF= TimeSeriesData.Double2Float(Signal);
         float FsS= (float)Fs;
         AMDF test= new AMDF(Fs, Signal.length, 0, 100);
+
         //AMDF.amd= Signal;
-        //PitchDetectionResult Pitched=AMDF.getPitch(SignalF);
-        //float pitchAverage= Pitched.getPitch();
-        float pitchAverage= test.getPitch(SignalF);
+        PitchDetectionResult Pitched= AMDF.AvgPitch(SignalF);
+        float pitchAverage= Pitched.getPitch();
+       // float pitchAverage= test.getPitch(SignalF);
         return pitchAverage;
     }
 
@@ -68,20 +69,12 @@ public class PitchAnalysis {
         int Signal= keyboard.nextInt();
         TimeSeriesData Data= new TimeSeriesData(ReadFile.fromCSVtoD2(path,Time, Signal));
         Graphing.Graphing_Simp.printThisD2(ReadFile.fromCSVtoD2(path,Time, Signal),j1);
-        System.out.print("Would you like to determine the total pitch average of the file(opt 1), or view the change in pitch averges throughout the document(Opt 2) ");  
-        int ChooseFilter= keyboard.nextInt(); 
-        if (ChooseFilter==1){
-            System.out.print("What time would you like the analysis to start: ");  
-            int startT= keyboard.nextInt();
-            System.out.print("What time would you like the analysis to end: ");  
-            int endT= keyboard.nextInt();
-            float Averaged = AMDFpa(Data,startT,endT,Fs);
-            System.out.println("The Signal's average pitch from "+startT+" to "+endT+" seconds is "+Averaged);
-        }else if(ChooseFilter==2){
-            System.out.print("How big would you like the windows to be ");  
-            int Wsize= keyboard.nextInt();
-            float[] Averaged= AMDFwindow(Data,Wsize);
-            System.out.println("The Signal's average pitches for a window size "+Wsize+" is "+Averaged);
-        }
+        System.out.print("What time would you like the analysis to start, please remember that for better accuracy, the sample should be between 25ms and 100ms long: ");  
+        int startT= keyboard.nextInt();
+        System.out.print("What time would you like the analysis to end: ");  
+        int endT= keyboard.nextInt();
+        float Averaged = AMDFpa(Data,startT,endT,Fs);
+         System.out.println("The Signal's average pitch from "+startT+" to "+endT+" seconds is "+Averaged);
+    
     }
 }
