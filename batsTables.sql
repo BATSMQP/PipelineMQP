@@ -27,7 +27,8 @@ create table `AuthUser`(
 `username` varchar(36),
 `pass` varchar(36),
 `email` varchar(50),
-PRIMARY KEY (`authUserId`)
+PRIMARY KEY (`authUserId`),
+UNIQUE (username)
 );
 
 create table `Study`(

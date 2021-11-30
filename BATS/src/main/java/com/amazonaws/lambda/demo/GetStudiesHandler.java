@@ -40,7 +40,7 @@ public class GetStudiesHandler implements RequestHandler<GetStudiesRequest, GetS
 		}
 		catch(Exception e) {
 			fail = true;
-			failMessage = "Failed to get the studies for the auth user";
+			failMessage = "Error: Failed to get the studies for the auth user";
 		}
 		
 		GetStudiesResponse response;

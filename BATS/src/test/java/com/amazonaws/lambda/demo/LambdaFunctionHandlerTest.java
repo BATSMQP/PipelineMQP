@@ -21,8 +21,12 @@ import com.amazonaws.lambda.demo.http.GetDataRequest;
 import com.amazonaws.lambda.demo.http.GetDataResponse;
 import com.amazonaws.lambda.demo.http.GetStudiesRequest;
 import com.amazonaws.lambda.demo.http.GetStudiesResponse;
+import com.amazonaws.lambda.demo.http.LoginRequest;
+import com.amazonaws.lambda.demo.http.LoginResponse;
 import com.amazonaws.lambda.demo.http.NewStudyRequest;
 import com.amazonaws.lambda.demo.http.NewStudyResponse;
+import com.amazonaws.lambda.demo.http.RegisterRequest;
+import com.amazonaws.lambda.demo.http.RegisterResponse;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
@@ -103,8 +107,8 @@ public class LambdaFunctionHandlerTest {
         // TODO: customize your mock logic for s3 client
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentType(CONTENT_TYPE);
-        when(s3Object.getObjectMetadata()).thenReturn(objectMetadata);
-        when(s3Client.getObject(getObjectRequest.capture())).thenReturn(s3Object);
+//        when(s3Object.getObjectMetadata()).thenReturn(objectMetadata);
+//        when(s3Client.getObject(getObjectRequest.capture())).thenReturn(s3Object);
     }
 
     private Context createContext() {
@@ -144,6 +148,56 @@ public class LambdaFunctionHandlerTest {
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
     	System.out.println("response.data: " + response.data);
+    }
+    
+    @Test
+    public void testLoginHandler1() {
+    	LoginHandler csh = new LoginHandler();
+    	LoginRequest r = new LoginRequest("exampleUser", "password");
+    	LoginResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.username: " + response.username);
+    }
+    
+    @Test
+    public void testLoginHandler2() {
+    	LoginHandler csh = new LoginHandler();
+    	LoginRequest r = new LoginRequest("exampleUser", "wrong");
+    	LoginResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.username: " + response.username);
+    }
+    
+    @Test
+    public void testLoginHandler3() {
+    	LoginHandler csh = new LoginHandler();
+    	LoginRequest r = new LoginRequest("wrong", "password");
+    	LoginResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.username: " + response.username);
+    }
+    
+    @Test
+    public void testRegisterHandler1() {
+    	RegisterHandler csh = new RegisterHandler();
+    	RegisterRequest r = new RegisterRequest("test2", "pass", "email@gmail.com");
+    	RegisterResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.username: " + response.username);
+    }
+    
+    @Test
+    public void testRegisterHandler2() {
+    	RegisterHandler csh = new RegisterHandler();
+    	RegisterRequest r = new RegisterRequest("exampleUser", "pass", "email@gmail.com");
+    	RegisterResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.username: " + response.username);
     }
 
 //    @Test

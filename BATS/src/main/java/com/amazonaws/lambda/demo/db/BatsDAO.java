@@ -36,15 +36,15 @@ public class BatsDAO {
     	}
     }
     
-    public AuthUser getAuthUser(String authUserId, LambdaLogger logger) throws Exception {
+    public AuthUser getAuthUser(String username, LambdaLogger logger) throws Exception {
       
       try {
       	{ logger.log("in getAuthUser"); }
       	AuthUser authUser = null;
           { logger.log("authUser = null"); }
           { logger.log("con= " + conn); }
-          PreparedStatement ps = conn.prepareStatement("SELECT * FROM AuthUser WHERE authUserId=?;");
-          ps.setString(1, authUserId);
+          PreparedStatement ps = conn.prepareStatement("SELECT * FROM AuthUser WHERE username=?;");
+          ps.setString(1, username);
           ResultSet resultSet = ps.executeQuery();
           
           while (resultSet.next()) {
@@ -53,7 +53,7 @@ public class BatsDAO {
           }
           resultSet.close();
           ps.close();
-          { logger.log("authUser after while loop (in getAuthUser): " + authUser.toString()); }
+//          { logger.log("authUser after while loop (in getAuthUser): " + authUser.toString()); }
           return authUser;
 
       } catch (Exception e) {
@@ -1033,9 +1033,9 @@ public class BatsDAO {
 	  String firstName = resultSet.getString("firstName");
 	  String lastName = resultSet.getString("lastName");
 	  String username = resultSet.getString("username");
-	  String password = resultSet.getString("password");
+	  String pass = resultSet.getString("pass");
 	  String email = resultSet.getString("email");
-	  return new AuthUser(authUserId, firstName, lastName, username, password, email);
+	  return new AuthUser(authUserId, firstName, lastName, username, pass, email);
 	}
   private Study generateStudy(ResultSet resultSet,LambdaLogger logger) throws Exception {
 	  String studyId  = resultSet.getString("studyId");
