@@ -101,6 +101,8 @@ public class AMDF implements PitchDetector{
 		double[] frames2 = new double[0];
 		double[] calcSub = new double[0];
 
+		System.out.print("Lenght: "+audioBuffer.length);
+
 		int maxShift = audioBuffer.length;
 		//System.out.print(maxShift);
 		//System.out.print("                    ");
