@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>BATS</title>
+
+    <!-- import the webpage's javascript file -->
+    <script src="../js/script.js" defer></script>
+    <script src="../js/api.js"></script>
   </head>
   <body>
 
@@ -49,8 +53,8 @@
               <h1 class="display-4">BATS</h1>
               <p class="lead">Biosignal Analysis of (Poly)Trauma System</p>
               <p class="lead">
-                <a class="btn btn-primary btn-lg" href="/login" role="button" >Login</a>
-                <a class="btn btn-secondary btn-lg" href="/register" role="button" >Register</a>
+                <a class="btn btn-primary btn-lg" role="button" onclick="JavaScript:handleLoginClick()">Login</a>
+                <a class="btn btn-secondary btn-lg" role="button" onclick="JavaScript:handleRegisterClick()">Register</a>
             </p>
             </div>
           </div>

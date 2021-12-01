@@ -1,15 +1,12 @@
 // all access driven through BASE. Must end with a SLASH
 // be sure you change to accommodate your specific API Gateway entry point
-var base_url = "https://kz2hm5qn2b.execute-api.us-east-2.amazonaws.com/Iteration_1/";
+var base_url = "https://es7rigcmle.execute-api.us-east-2.amazonaws.com/beta/";
 
-var CreateChoice_url = base_url + "CreateChoice"; // POST
-var SubmitFeedback_url = base_url + "SubmitFeedback"; // POST
-var UpVote_url = base_url + "UpVote"; // POST
-var DownVote_url = base_url + "DownVote"; // POST
-var SignInChoice_url = base_url + "SignInChoice"; // POST
-var DeleteChoice_url = base_url + "DeleteChoice"; // POST
-var ShowAllChoices_url = base_url + "ShowAllChoices"; // GET
-var ChooseAlternative_url = base_url + "ChooseAlternative"; // POST
-var RemoveUpVote_url = base_url + "RemoveUpVote"; // POST //use this?
-var RemoveDownVote_url = base_url + "RemoveDownVote"; // POST // use this?
-var RefreshChoice_url = base_url + "RefreshChoice"; // POST/
+var CreateStudy_url = base_url + "CreateStudy"; //POST
+var GetData_url = base_url + "GetData"; //POST
+var getStudies_url = base_url + "getStudies"; //POST
+var Login_url = base_url + "Login"; //POST
+var newData_url = base_url + "newData"; //POST
+var newTool_url = base_url + "newTool"; //POST
+var Register_url = base_url + "Register"; //POST
+var saveAnalysis_url = base_url + "saveAnalysis"; //POST

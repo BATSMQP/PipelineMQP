@@ -1,13 +1,13 @@
 //has 3 html pages in here
 
-////////////////INITIAL OPTIONS PAGE//////////////////////////
+////////////////MAIN PAGE//////////////////////////
 
-function handleCreateClick() {
-    window.location.href = "CreateChoice.html";
+function handleLoginClick() {
+    window.location.href = "login.html";
 }
 
-function handleChoiceLoginClick() {
-    window.location.href = "ChoiceSignIn.html";
+function handleRegisterClick() {
+    window.location.href = "register.html";
 }
 
 ////////////////CREATE CHOICE PAGE/////////////////////////////////////////
