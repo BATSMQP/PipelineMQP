@@ -10,53 +10,28 @@ function handleRegisterClick() {
     window.location.href = "register.html";
 }
 
-////////////////CREATE CHOICE PAGE/////////////////////////////////////////
+////////////////LOGIN PAGE/////////////////////////////////////////
 
-function checkCreateChoice() {
-    var choiceDesc = document.getElementById("choiceDesc").value;
-    var alt1 = document.getElementById("alt1").value;
-    var alt2 = document.getElementById("alt2").value;
-    var numMembers = document.getElementById("numTeamMem").value;
+function checkLogin() {
+    var user = document.getElementById("loginUsername").value;
+    var pass = document.getElementById("loginPassword").value;
 
-    if (choiceDesc == "") {
-        alert("Please enter a description before continuing");
+    if (username == "") {
+        alert("Please enter a username before continuing");
         return false;
     }
 
-    if (alt1 == "" || alt2 == "") {
-        alert("Please enter at least two choices. Do not skip boxes.");
+    if (password == "") {
+        alert("Please enter a password before continuing");
         return false;
     }
 
+    var json = {username: user, password: pass};
 
-    if (numMembers == "") {
-        alert("Please enter the number of team members before continuing");
-        return false;
-    }
-
-    var alternatives = [];
-    alternatives.push(alt1);
-    alternatives.push(alt2);
-
-    //only adds alts that have a value
-    var altString = "alt";
-    for (var i = 3; i < 6; i++) {
-        var altStringVar = altString + i;
-
-        if (document.getElementById(altStringVar).value != "") {
-            alternatives.push(document.getElementById(altStringVar).value);
-        }
-    }
-
-    var data = {};
-    data["description"] = choiceDesc;
-    data["alternatives"] = alternatives;
-    data["numOfMembers"] = numMembers;
-
-    var js = JSON.stringify(data);
+    var js = JSON.stringify(json);
     console.log("JS:" + js);
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", CreateChoice_url, true);
+    xhr.open("POST", Login_url, true);
 
     console.log("after post");
     // send the collected data as JSON
@@ -70,46 +45,48 @@ function checkCreateChoice() {
 
         if (xhr.readyState == XMLHttpRequest.DONE) {
             console.log("XHR:" + xhr.responseText);
-            processCreateChoiceResponse(xhr.responseText);
+            processLoginResponse(xhr.responseText);
         } else {
             console.log("got an error");
-            processCreateChoiceResponse("N/A");
+            processLoginResponse("N/A");
         }
     };
 
     return false;
 }
 
-function processCreateChoiceResponse(result) {
+function processLoginResponse(result) {
     console.log("result:" + result);
     var js = JSON.parse(result);
 
     var status = js["statusCode"];
-    var choice = js["choice"];
+    var username = js["username"];
 
     if (status == 200) {
-        var id = choice[0];
-        id = id["cid"];
+        window.location.href = "userHome.html";
 
-        var choiceText = document.createElement("p");
+        // var id = choice[0];
+        // id = id["cid"];
 
-        var textString = "CHOICE ID IS: <b>" +
-            id +
-            "</b><br>Please copy and paste this to access your newly created choice.<br> Afterwards navigate to Homepage or Sign into Choice";
+        // var choiceText = document.createElement("p");
+
+        // var textString = "CHOICE ID IS: <b>" +
+        //     id +
+        //     "</b><br>Please copy and paste this to access your newly created choice.<br> Afterwards navigate to Homepage or Sign into Choice";
 
 
-        choiceText.innerHTML = textString;
+        // choiceText.innerHTML = textString;
 
-        //make button ID cid to easily add functionality later on
-        choiceText.id = id;
-        // Insert text
-        document.body.appendChild(choiceText);
+        // //make button ID cid to easily add functionality later on
+        // choiceText.id = id;
+        // // Insert text
+        // document.body.appendChild(choiceText);
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
 
         var textString = "<p> error: " + msg + "</p>";
-
-        choiceText.innerHTML = textString;
+        loginText = document.getElementById("loginText");
+        loginText.innerHTML = textString;
     }
 }
