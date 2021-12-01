@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Interpreter",
+            "request": "launch",
+            "mainClass": "Interpreter.Interpreter",
+            "projectName": "PipelineMQP_d46bcdbb"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
