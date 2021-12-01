@@ -3,12 +3,20 @@ import java.io.*;
 
 import org.python.util.PythonInterpreter; 
 import org.python.core.*; 
+import com.mathworks.engine.*;
 
 public class Interpreter{
     public static void main(String[] args){
         PythonInterpreter python = new PythonInterpreter();
 
         python.execfile("Interpreter/HelloWorld.py");
+
+        // Start Matlab
+        Future<MatlabEngine> engine = MatlabEngine.startMatlabAsync();
+        MatlabEngine eng = engine.get();
+        // Change directory and evaluate your function
+        eng.eval("cd 'path/to/your/function'");
+        eng.feval("yourFunction", param1, param2, ...);
 
         // int number1 = 10;
         // int number2 = 32;
