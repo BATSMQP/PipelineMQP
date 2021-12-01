@@ -16,12 +16,12 @@ function checkLogin() {
     var user = document.getElementById("loginUsername").value;
     var pass = document.getElementById("loginPassword").value;
 
-    if (username == "") {
+    if (user == "") {
         alert("Please enter a username before continuing");
         return false;
     }
 
-    if (password == "") {
+    if (pass == "") {
         alert("Please enter a password before continuing");
         return false;
     }
