@@ -3,16 +3,16 @@ import java.io.*;
 
 import org.python.util.PythonInterpreter;
 import org.python.util.*; 
-//import org.python.core.*; 
+import org.python.core.*; 
 //import com.mathworks.engine.*;
 
 public class PyInterpreter{
      //static PythonInterpreter python = new PythonInterpreter();
     public static void main(String[] args){
         PythonInterpreter python = new PythonInterpreter();
-        try{
-            python.execfile("Interpreter/HelloWorld.py");
-        }catch(Exception e) {System.out.println(e);}
+        //pyInterp.exec("print('Hello Python World!')");
+        //make a main in python and then run the sub function that asks for user input and calls the function
+        python.execfile("Interpreter/Main.py");
     }
 }
 
