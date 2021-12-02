@@ -188,3 +188,74 @@ function processRegisterResponse(result) {
         regText.innerHTML = textString;
     }
 }
+
+////////////////NEW STUDY PAGE/////////////////////////////////////////
+
+function checkNewStudy() {
+    var inputStudyName = document.getElementById("inputStudyName").value;
+    var inputShortStudyName = document.getElementById("inputShortStudyName").value;
+    var inputStudyAbstract = document.getElementById("inputStudyAbstract").value;
+    var aid = "5d5ef618-06ef-4667-ad40-34ad4cf02da5";
+
+    if (inputStudyName == "") {
+        alert("Please enter a study name before continuing");
+        return false;
+    }
+
+    // if (inputStudyAbstract == "") {
+    //     alert("Please enter a study abstract before continuing");
+    //     return false;
+    // }
+
+    // if (inputShortStudyName == "") {
+    //     alert("Please enter a short study name before continuing");
+    //     return false;
+    // }
+
+    var json = {name: inputStudyName, shortName: inputShortStudyName, studyAbstract: inputStudyAbstract, authUserId: aid};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", CreateStudy_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processNewStudyResponse(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processNewStudyResponse("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processNewStudyResponse(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var study = js["study"];
+
+    if (status == 200) {
+        window.location.href = "userHome.html";
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
+
+        var textString = "<p> error: " + msg + "</p>";
+        newStudyText = document.getElementById("newStudyText");
+        renewStudyTextgText.innerHTML = textString;
+    }
+}
