@@ -15,8 +15,8 @@ public class Interpreter{
         Future<MatlabEngine> engine = MatlabEngine.startMatlabAsync();
         MatlabEngine eng = engine.get();
         // Change directory and evaluate your function
-        eng.eval("cd 'path/to/your/function'");
-        eng.feval("yourFunction", param1, param2, ...);
+        eng.eval("cd 'Interpreter/HelloMatlab.m'");
+        eng.feval("HelloMatlab");
 
         // int number1 = 10;
         // int number2 = 32;
