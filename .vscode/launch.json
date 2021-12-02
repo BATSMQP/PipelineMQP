@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch PyInterpreter",
+            "request": "launch",
+            "mainClass": "Interpreter.PyInterpreter",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
             "name": "Launch Interpreter",
             "request": "launch",
             "mainClass": "Interpreter.Interpreter",

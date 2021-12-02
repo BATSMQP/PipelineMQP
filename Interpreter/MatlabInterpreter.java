@@ -7,7 +7,7 @@ public class MatlabInterpreter{
     public static void main(String[] args){
         PythonInterpreter python = new PythonInterpreter();
 
-        python.execfile("Interpreter/HelloWorld.py");
+        //python.execfile("Interpreter/HelloWorld.py");
 
         // Start Matlab
         Future<MatlabEngine> engine = MatlabEngine.startMatlabAsync();
