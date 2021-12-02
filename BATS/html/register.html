@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Register</title>
+
+    <!-- import the webpage's javascript file -->
+    <script src="../js/script.js" defer></script>
+    <script src="../js/api.js"></script>
   </head>
   <body>
 
@@ -47,26 +51,33 @@
             <div class="jumbotron">
                 <div class="display-4" style="text-align:center;">Register User</div>
                 <div class="card-body">
-                    <form action="/auth/register" method="POST">
+                    <form id="register" onsubmit="return checkRegister()" action="">
     
                         <div class="mb-3">
-                          <label for="username" class="form-label">Username</label>
-                          <input type="text" class="form-control" id="username" name="username">
+                          <label for="regUsername" class="form-label">Username</label>
+                          <input type="text" class="form-control" id="regUsername" name="username">
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="regEmail" class="form-label">Email</label>
+                          <input type="email" class="form-control" id="regEmail" name="password">
+                      </div>
+    
+                        <div class="mb-3">
+                            <label for="regPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="regPassword" name="password">
                         </div>
     
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>
-    
-                        <div class="mb-3">
-                            <label for="passwordConfirm" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm">
+                            <label for="regPasswordConfirm" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="regPasswordConfirm" name="passwordConfirm">
                         </div>
     
     
                         <button type="submit" class="btn btn-primary">Register User</button>
                       </form>
+
+                      <p id="regText"></p>
     
                 </div>
               </div>
