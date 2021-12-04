@@ -8,12 +8,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/newStudy.css">
-    <!-- <script src="/userHome.js" defer></script> -->
 
     <title>BATS: Home</title>
 
     <!-- import the webpage's javascript file -->
     <script src="../js/script.js" defer></script>
+    <!-- <script src="../js/userHome.js" defer></script> -->
     <script src="../js/api.js"></script>
   </head>
   <body>
@@ -52,22 +52,23 @@
 
       <div id="userHomeHeader">
         <h3 id="welcomeHeading" class="inline">Welcome</h3>
+        <h3 id="welcomeUser" class="inline"></h3>
         <button type="submit" id="goToNewStudyButton" onclick="window.location.href='newStudy.html'" class="btn btn-primary inline">New Study</button>
       </div>
-      <h4 id="dataTableName">Active Studies</h4>
+      <h4 id="dataTableName">Studies</h4>
 
         <div class="table-responsive">
-          <table id="toolkitTable" class="table table-hover">
+          <table id="tableOfStudiesOnUserHome" class="table table-hover">
             <thead>
               <tr>
-                <th scope="col">Name of Study</th>
-                <th scope="col">Last Modified</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Short Name</th>
+                <th scope="col">Abstract</th>
                 <th scope="col">By</th>
-                <th scope="col">Status</th>
               </tr>
             </thead>
-            <tbody>
-              <tr onclick="window.location.href='studyPage.html'">
+            <tbody id="studyTableTbody">
+              <!-- <tr onclick="window.location.href='studyPage.html'">
                 <td>PTSD/MDD Relationship Study</td>
                 <td>9/13/21 10:00 AM</td>
                 <td>NDraudt</td>
@@ -78,7 +79,7 @@
                 <td>7/01/21 10:00 AM</td>
                 <td>Claire</td>
                 <td>Closed</td>
-              </tr>
+              </tr> -->
 
             </tbody>
           </table>
@@ -90,6 +91,12 @@
         <a class="navbar-brand" href="#">BATS 2022</a>
       </nav>
 
+    <script>
+      window.onload = function() {
+        checkGetStudies();
+      }
+    </script>
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
