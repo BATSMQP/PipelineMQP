@@ -1,4 +1,7 @@
 var currentUser;
+var currentStudyId;
+var currentStudyName;
+var currentAuthUserId;
 
 ////////////////MAIN PAGE//////////////////////////
 
@@ -318,6 +321,8 @@ function processGetStudiesResponse(result) {
             tableString += study["studyId"];
             tableString += '", "';
             tableString += study["authUserId"];
+            tableString += '", "';
+            tableString += study["studyName"];
             tableString += '")';
             tableString += "'>";
             tableString += "<td>";
@@ -342,17 +347,110 @@ function processGetStudiesResponse(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
-
-        // var textString = "<p> error: " + msg + "</p>";
-        // newStudyText = document.getElementById("newStudyText");
-        // renewStudyTextgText.innerHTML = textString;
     }
 }
 
-function studyClicked(studyId, authUserId) {
+function studyClicked(studyId, authUserId, studyName) {
     console.log("in studyClicked");
     console.log("studyId: " + studyId);
     console.log("authUserId: " + authUserId);
+    currentStudyId = studyId;
+    currentAuthUserId = authUserId;
+    currentStudyName = studyName;
     window.location.href = "studyPage.html";
-    //call getData
+}
+
+function checkGetData() {
+    // var authUserName = document.getElementById("").value;
+    // var aid = "5d5ef618-06ef-4667-ad40-34ad4cf02da5";
+
+    var studyNameOnStudyPage = document.getElementById("studyNameOnStudyPage");
+    console.log("currrentStudyName: " + currentStudyName);
+    console.log("studyNameOnStudyPage: " + studyNameOnStudyPage);
+    console.log("innerhtml: " + studyNameOnStudyPage.innerHTML);
+    studyNameOnStudyPage.innerHTML = currentStudyName;
+
+    var json = {authUserId: currentAuthUserId, studyId: currentStudyId};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", GetData_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processGetDataResponse(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processGetDataResponse("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processGetDataResponse(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var data = js["data"];
+
+    if (status == 200) {
+        console.log("getData status 200");
+
+        // var studyTable = document.getElementById("tableOfStudiesOnUserHome");
+        // var study;
+        // var tableString = "";
+  
+        // for(let i = 0; i < studies.length; i++){
+        //     study = studies[i];
+        //     //studyName = study["studyName"]
+        //     //studyShortName = study["studyShortName"]
+        //     //abstract = study["studyDescription"]
+        //     //by = study["authUserId"]
+
+        //     //create row to be inserted
+        //     tableString += "<tr onclick='JavaScript:studyClicked(";
+        //     tableString += '"';
+        //     tableString += study["studyId"];
+        //     tableString += '", "';
+        //     tableString += study["authUserId"];
+        //     tableString += '", "';
+        //     tableString += study["studyName"];
+        //     tableString += '")';
+        //     tableString += "'>";
+        //     tableString += "<td>";
+        //     tableString += study["studyName"];
+        //     tableString += "</td>";
+        //     tableString += "<td>";
+        //     tableString += study["studyShortName"];
+        //     tableString += "</td>";
+        //     tableString += "<td>";
+        //     tableString += study["studyDescription"];
+        //     tableString += "</td>";
+        //     tableString += "<td>";
+        //     tableString += study["authUserId"];
+        //     tableString += "</td>";
+        //     tableString += "</tr>";           
+        // }
+        // // tableString += "</tbody>";
+        // console.log(tableString);
+
+        // studyTableTbody = document.getElementById("studyTableTbody");
+        // studyTableTbody.innerHTML = tableString;
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
+    }
 }

@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="../css/newStudy.css">
 
     <title>BATS: Study</title>
+
+    <!-- import the webpage's javascript file -->
+    <script src="../js/script.js" defer></script>
+    <!-- <script src="../js/userHome.js" defer></script> -->
+    <script src="../js/api.js"></script>
   </head>
   <body>
 
@@ -46,7 +51,7 @@
     <div id="main">
 
       <div id="studyNameHeader">
-        <h3 id="studyNameTitle" class="inline">Study Name</h3>
+        <h3 id="studyNameOnStudyPage" class="inline">Study Name</h3>
         <button type="submit" id="analyzeDataButton" onclick="window.location.href='selectToolkits.html'" class="btn btn-primary inline">Analyze Data</button>
       </div>
       <h4 id="dataTableName">Data</h4>
@@ -88,6 +93,12 @@
       <nav class="navbar fixed-bottom navbar-dark bg-dark">
         <a class="navbar-brand" href="#">BATS 2022</a>
       </nav>
+
+      <script>
+        window.onload = function() {
+          checkGetData();
+        }
+      </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
