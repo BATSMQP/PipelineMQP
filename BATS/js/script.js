@@ -313,7 +313,13 @@ function processGetStudiesResponse(result) {
             //by = study["authUserId"]
 
             //create row to be inserted
-            tableString += "<tr>";
+            tableString += "<tr onclick='JavaScript:studyClicked(";
+            tableString += '"';
+            tableString += study["studyId"];
+            tableString += '", "';
+            tableString += study["authUserId"];
+            tableString += '")';
+            tableString += "'>";
             tableString += "<td>";
             tableString += study["studyName"];
             tableString += "</td>";
@@ -333,22 +339,6 @@ function processGetStudiesResponse(result) {
 
         studyTableTbody = document.getElementById("studyTableTbody");
         studyTableTbody.innerHTML = tableString;
-        // var id = choice[0];
-        // id = id["cid"];
-
-        // var choiceText = document.createElement("p");
-
-        // var textString = "CHOICE ID IS: <b>" +
-        //     id +
-        //     "</b><br>Please copy and paste this to access your newly created choice.<br> Afterwards navigate to Homepage or Sign into Choice";
-
-
-        // choiceText.innerHTML = textString;
-
-        // //make button ID cid to easily add functionality later on
-        // choiceText.id = id;
-        // // Insert text
-        // document.body.appendChild(choiceText);
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
@@ -357,4 +347,12 @@ function processGetStudiesResponse(result) {
         // newStudyText = document.getElementById("newStudyText");
         // renewStudyTextgText.innerHTML = textString;
     }
+}
+
+function studyClicked(studyId, authUserId) {
+    console.log("in studyClicked");
+    console.log("studyId: " + studyId);
+    console.log("authUserId: " + authUserId);
+    window.location.href = "studyPage.html";
+    //call getData
 }
