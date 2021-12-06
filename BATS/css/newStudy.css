@@ -62,9 +62,15 @@
     float: right;
 }
 
-#addNewData {
-    width: 100%;
+#addNewData, #addNewTool {
+    width: 48%;
     margin-bottom: 20px;
+    /* display: inline-block; */
+}
+
+#addNewDataToolDiv {
+    width: 100%;
+    display: inline-block;
 }
 
 .form-control {

@@ -454,3 +454,69 @@ function processGetDataResponse(result) {
         console.log("error:" + msg);
     }
 }
+
+////////////////New Tool PAGE/////////////////////////////////////////
+
+function checkNewTool() {
+    var user = document.getElementById("loginUsername").value;
+    var pass = document.getElementById("loginPassword").value;
+
+    if (user == "") {
+        alert("Please enter a username before continuing");
+        return false;
+    }
+
+    if (pass == "") {
+        alert("Please enter a password before continuing");
+        return false;
+    }
+
+    var json = {username: user, password: pass};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", Login_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processNewToolResponse(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processNewToolResponse("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processNewToolResponse(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var username = js["username"];
+    currentUser = username;
+
+    if (status == 200) {
+        window.location.href = "userHome.html";
+        // window.onload = checkUsername(username);
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
+
+        var textString = "<p> error: " + msg + "</p>";
+        loginText = document.getElementById("loginText");
+        loginText.innerHTML = textString;
+    }
+}

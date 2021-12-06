@@ -7,9 +7,14 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="newStudy.css">
+    <link rel="stylesheet" href="../css/newStudy.css">
 
     <title>BATS: Upload Analysis Tool</title>
+
+    <!-- import the webpage's javascript file -->
+    <script src="../js/script.js" defer></script>
+    <!-- <script src="../js/userHome.js" defer></script> -->
+    <script src="../js/api.js"></script>
   </head>
   <body>
 
@@ -48,7 +53,7 @@
         <h3 id="title">Upload Personal Analysis Tool:</h3>
         <h6 id="otherText">Must be coded in Java, Python, or Matlab.</h6>
 
-        <form>
+        <form id="newTool" onsubmit="return checkNewTool()" action="">
           <div class="row mb-3 align-items-center">
             <div class="col-auto">
                 <label for="inputGroupFile02" class="form-label">File:</label>
@@ -80,7 +85,7 @@
             <label class="form-check-label" for="logData">Log Data</label>
           </div>
           </br>
-          <button type="submit" id="confirmButton" class="btn btn-primary">Confirm</button>
+          <button type="submit" id="confirmUploadNewToolButton" class="btn btn-primary">Confirm</button>
         </form>
 
     </div>
