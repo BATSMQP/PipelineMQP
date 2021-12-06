@@ -1,24 +1,28 @@
 package com.amazonaws.lambda.demo.model;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Iterator;
-
 public class Document{
 	public final String documentId;
 	public String filename;
+	public String name;
+	public String dataType;
 	
 	public String getDocumentId() {return documentId;}
 	public String getFilename() {return filename;}
+	public String getName() {return name;}
+	public String getDataType() {return dataType;}
 	
-	public Document(String documentId, String filename) {
+	public Document(String documentId, String filename, String name, String dataType) {
 		this.documentId = documentId;
 		this.filename = filename;
+		this.name = name;
+		this.dataType = dataType;
 	}
 	
 	public Document() {
 		this.documentId = null;
 		this.filename = null;
+		this.name = null;
+		this.dataType = null;
 	}
 	
 	public boolean equals(Object o) {
@@ -33,7 +37,7 @@ public class Document{
 	}
 	
 	public String toString() {
-		return "Document " + documentId + " is filename: " + filename + ".";
+		return "Document " + name + " " + documentId + " is filename: " + filename + " of dataType: " + dataType + ".";
 	}
 	
 }

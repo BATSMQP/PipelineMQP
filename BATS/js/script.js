@@ -184,7 +184,7 @@ function checkNewStudy() {
     var inputStudyName = document.getElementById("inputStudyName").value;
     var inputShortStudyName = document.getElementById("inputShortStudyName").value;
     var inputStudyAbstract = document.getElementById("inputStudyAbstract").value;
-    var aid = "5d5ef618-06ef-4667-ad40-34ad4cf02da5";
+    var aid = "74a00780-3a82-4a32-bf61-7d03b4860e89";
 
     if (inputStudyName == "") {
         alert("Please enter a study name before continuing");
@@ -263,7 +263,7 @@ function processNewStudyResponse(result) {
 
 function checkGetStudies() {
     // var authUserName = document.getElementById("").value;
-    var aid = "5d5ef618-06ef-4667-ad40-34ad4cf02da5";
+    var aid = "74a00780-3a82-4a32-bf61-7d03b4860e89";
 
     var json = {authUserId: aid};
 

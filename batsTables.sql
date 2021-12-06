@@ -68,6 +68,8 @@ FOREIGN KEY (`studyGroupId`) REFERENCES StudyGroup(`studyGroupId`) on delete cas
 create table `Document`(
 `documentId` varchar(36),
 `filename` varchar(50),
+`name` varchar(50),
+`dataType` varchar(20),
 PRIMARY KEY (`documentId`)
 );
 

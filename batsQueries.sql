@@ -1,6 +1,7 @@
 INSERT INTO AuthUser (authUserId, firstName, lastName, username, pass, email) values("123", "Example", "User", "exampleUser", "password", "exampleUser@gmail.com");
 
 select * from AuthUser;
+select * from Document;
 select * from Study;
 SELECT * FROM Study where authUserId="5d5ef618-06ef-4667-ad40-34ad4cf02da5" order by studyStartDate;
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.amazonaws.lambda.demo.model.AuthUser;
 import com.amazonaws.lambda.demo.model.Data;
+import com.amazonaws.lambda.demo.model.Document;
 import com.amazonaws.lambda.demo.model.Facial;
 import com.amazonaws.lambda.demo.model.FacialStudy;
 import com.amazonaws.lambda.demo.model.LogData;
@@ -93,6 +94,33 @@ public class BatsDAO {
 	  }
 	}
 	 
+	public boolean addDocument(Document document, LambdaLogger logger) throws Exception {
+	  try {
+	      PreparedStatement ps = conn.prepareStatement("SELECT * FROM Document WHERE documentId = ?;");
+	      ps.setString(1, document.documentId);
+	      ResultSet resultSet = ps.executeQuery();
+	      { logger.log("ps for select (in addDocument): " + ps); }
+	      // already present?
+	      while (resultSet.next()) {
+	    	  Document c = generateDocument(resultSet, logger);
+	          resultSet.close();
+	          return false;
+	      }
+
+	      ps = conn.prepareStatement("INSERT INTO Document (documentId, filename, name, dataType) values(?,?,?,?);");
+	      ps.setString(1, document.documentId);
+	      ps.setString(2, document.filename);
+	      ps.setString(3, document.name);
+	      ps.setString(4, document.dataType);
+	      { logger.log("ps for insert (in addDocument): " + ps); }
+	      ps.execute();
+	      return true;
+	
+	  } catch (Exception e) {
+	      throw new Exception("Failed to insert document: " + e.getMessage());
+	  }
+	}
+ 
    public boolean addStudy(Study study, LambdaLogger logger) throws Exception {
 	   try {
 		   { logger.log("In addStudy 1 (BatsDao)"); }
@@ -1037,6 +1065,13 @@ public class BatsDAO {
 	  String email = resultSet.getString("email");
 	  return new AuthUser(authUserId, firstName, lastName, username, pass, email);
 	}
+	private Document generateDocument(ResultSet resultSet,LambdaLogger logger) throws Exception {
+		  String documentId  = resultSet.getString("documentId");
+		  String filename = resultSet.getString("filename");
+		  String name = resultSet.getString("name");
+		  String dataType = resultSet.getString("dataType");
+		  return new Document(documentId, filename, name, dataType);
+		}
   private Study generateStudy(ResultSet resultSet,LambdaLogger logger) throws Exception {
 	  String studyId  = resultSet.getString("studyId");
 	  String institutionsInvolved = resultSet.getString("institutionsInvolved");

@@ -25,6 +25,8 @@ import com.amazonaws.lambda.demo.http.LoginRequest;
 import com.amazonaws.lambda.demo.http.LoginResponse;
 import com.amazonaws.lambda.demo.http.NewStudyRequest;
 import com.amazonaws.lambda.demo.http.NewStudyResponse;
+import com.amazonaws.lambda.demo.http.NewToolRequest;
+import com.amazonaws.lambda.demo.http.NewToolResponse;
 import com.amazonaws.lambda.demo.http.RegisterRequest;
 import com.amazonaws.lambda.demo.http.RegisterResponse;
 import com.amazonaws.services.lambda.runtime.Context;
@@ -198,6 +200,16 @@ public class LambdaFunctionHandlerTest {
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
     	System.out.println("response.username: " + response.username);
+    }
+    
+    @Test
+    public void testNewToolHandler() {
+    	NewToolHandler csh = new NewToolHandler();
+    	NewToolRequest r = new NewToolRequest("tool", "tool name", "txt");
+    	NewToolResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.tool: " + response.tool);
     }
 
 //    @Test
