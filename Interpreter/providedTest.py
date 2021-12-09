@@ -1,6 +1,6 @@
 # Example 1: short-term feature extraction
-from pyAudioAnalysis import ShortTermFeatures as aF
-from pyAudioAnalysis import audioBasicIO as aIO 
+from lib.pyAudioAnalysisMaster.pyAudioAnalysis import ShortTermFeatures as aF
+from lib.pyAudioAnalysisMaster.pyAudioAnalysis import audioBasicIO as aIO 
 import numpy as np 
 import plotly.graph_objs as go 
 import plotly
