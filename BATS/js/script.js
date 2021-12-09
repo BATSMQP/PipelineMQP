@@ -184,6 +184,13 @@ function checkNewStudy() {
     var inputStudyName = document.getElementById("inputStudyName").value;
     var inputShortStudyName = document.getElementById("inputShortStudyName").value;
     var inputStudyAbstract = document.getElementById("inputStudyAbstract").value;
+    var inputStudyInstitutionsInvolved = document.getElementById("inputStudyInstitutionsInvolved").value;
+    var inputStudyStudyContact = document.getElementById("inputStudyStudyContact").value;
+    var inputStudyStudyNotes = document.getElementById("inputStudyStudyNotes").value;
+    var inputStudyIsIrbApprovedYes = document.getElementById("inputStudyIsIrbApprovedYes").value;
+    var inputStudyIsIrbApprovedNo = document.getElementById("inputStudyIsIrbApprovedNo").value;
+    var inputStudyVisibilityYes = document.getElementById("inputStudyVisibilityYes").value;
+    var inputStudyVisibilityNo = document.getElementById("inputStudyVisibilityNo").value;
     var aid = "74a00780-3a82-4a32-bf61-7d03b4860e89";
 
     if (inputStudyName == "") {
@@ -458,25 +465,35 @@ function processGetDataResponse(result) {
 ////////////////New Tool PAGE/////////////////////////////////////////
 
 function checkNewTool() {
-    var user = document.getElementById("loginUsername").value;
-    var pass = document.getElementById("loginPassword").value;
+    var fn = document.getElementById("inputToolFile").value;
+    var n = document.getElementById("inputToolName").value;
 
-    if (user == "") {
-        alert("Please enter a username before continuing");
+    var fn2 = fn.split("\\");
+    var fn3 = fn2[fn2.length-1].split(".");
+
+    console.log("filename: " + fn);
+    console.log("fn2: " + fn2);
+    console.log("fn3: " + fn3);
+    console.log("fn3[0]: " + fn3[0]);
+    console.log("fn3[1]: " + fn3[1]);
+    console.log("name: " + n);
+
+    if (fn == "") {
+        alert("Please upload a file before continuing");
         return false;
     }
 
-    if (pass == "") {
-        alert("Please enter a password before continuing");
+    if (n == "") {
+        alert("Please enter a name for the analysis tool before continuing");
         return false;
     }
 
-    var json = {username: user, password: pass};
+    var json = {filename: fn3[0], name: n, dataType: fn3[1]};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", Login_url, true);
+    xhr.open("POST", newTool_url, true);
 
     console.log("after post");
     // send the collected data as JSON
@@ -505,12 +522,10 @@ function processNewToolResponse(result) {
     var js = JSON.parse(result);
 
     var status = js["statusCode"];
-    var username = js["username"];
-    currentUser = username;
+    var tool = js["tool"];
 
     if (status == 200) {
-        window.location.href = "userHome.html";
-        // window.onload = checkUsername(username);
+        window.location.href = "studyPage.html";
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
