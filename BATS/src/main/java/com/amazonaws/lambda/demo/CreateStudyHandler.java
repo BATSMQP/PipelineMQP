@@ -21,24 +21,14 @@ public class CreateStudyHandler implements RequestHandler<NewStudyRequest, NewSt
 
 	LambdaLogger logger;
 
-	private Study createStudy(String studyName, String studyShortName, String studyDescription, String authUserId){
+	private Study createStudy(String studyName, String studyShortName, String studyDescription, String institutionsInvolved, String studyContact, String studyNotes, String isIrbApproved, String visibility, String authUserId){
 		if (logger != null) logger.log("in createStudy");
 		String studyId = UUID.randomUUID().toString();
 		
 		long millis=System.currentTimeMillis();  
 		Timestamp currentDate =new Timestamp(millis); 
-//		String currentDate = date.toString();
 		
-//		String ii = "";
-//		String sn = "";
-//		if(institutionsInvolved != null) { 
-//			ii = institutionsInvolved;
-//		}
-//		if(studyNotes != null) { 
-//			sn = studyNotes;
-//		}
-		
-		Study study = new Study(studyId, studyName, studyShortName, studyDescription, currentDate, authUserId);
+		Study study = new Study(studyId, institutionsInvolved, studyDescription, studyName, studyShortName, studyContact, studyNotes, visibility, isIrbApproved, currentDate, null, authUserId);
 		
 		return study;
 	}
@@ -51,7 +41,7 @@ public class CreateStudyHandler implements RequestHandler<NewStudyRequest, NewSt
 		boolean fail = false;
 		String failMessage = "";
 
-		Study study = createStudy(req.getName(), req.getShortName(), req.getStudyAstract(), req.getAuthUserId());
+		Study study = createStudy(req.getName(), req.getShortName(), req.getStudyAstract(), req.getInstitutionsInvolved(), req.getStudyContact(), req.getStudyNotes(), req.getisIrbApproved(), req.getVisibility(), req.getAuthUserId());
 		try {
 			dao.addStudy(study, logger);
 		}

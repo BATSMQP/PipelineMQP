@@ -125,7 +125,7 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testCreateStudyHandler() {
     	CreateStudyHandler csh = new CreateStudyHandler();
-    	NewStudyRequest r = new NewStudyRequest("testStudyInEclipse", "ts", "abstract", "123");
+    	NewStudyRequest r = new NewStudyRequest("testStudyInEclipse", "ts", "abstract", "institutionsInvolved", "studyContact", "studyNotes", "isIrbApproved", "visibility", "123");
     	NewStudyResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
@@ -135,7 +135,7 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testGetStudiesHandler() {
     	GetStudiesHandler csh = new GetStudiesHandler();
-    	GetStudiesRequest r = new GetStudiesRequest("123");
+    	GetStudiesRequest r = new GetStudiesRequest("74a00780-3a82-4a32-bf61-7d03b4860e89", "lauren");
     	GetStudiesResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);

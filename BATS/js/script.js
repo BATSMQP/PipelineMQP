@@ -198,6 +198,22 @@ function checkNewStudy() {
         return false;
     }
 
+    var inputStudyIsIrbApproved = "";
+    if(inputStudyIsIrbApprovedYes){
+        inputStudyIsIrbApproved = "yes";
+    } else if(inputStudyIsIrbApprovedNo){
+        inputStudyIsIrbApproved = "no";
+    }
+
+    var inputStudyVisibility = "";
+    if(inputStudyVisibilityYes){
+        inputStudyVisibility = "yes";
+    } else if(inputStudyVisibilityNo){
+        inputStudyVisibility = "no";
+    }
+
+    var json = {name: inputStudyName, shortName: inputShortStudyName, studyAbstract: inputStudyAbstract, institutionsInvolved: inputStudyInstitutionsInvolved, studyContact: inputStudyStudyContact, studyNotes: inputStudyStudyNotes, isIrbApproved: inputStudyIsIrbApproved, visibility: inputStudyVisibility, authUserId: aid};
+
     // if (inputStudyAbstract == "") {
     //     alert("Please enter a study abstract before continuing");
     //     return false;
@@ -207,8 +223,6 @@ function checkNewStudy() {
     //     alert("Please enter a short study name before continuing");
     //     return false;
     // }
-
-    var json = {name: inputStudyName, shortName: inputShortStudyName, studyAbstract: inputStudyAbstract, authUserId: aid};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
@@ -271,8 +285,9 @@ function processNewStudyResponse(result) {
 function checkGetStudies() {
     // var authUserName = document.getElementById("").value;
     var aid = "74a00780-3a82-4a32-bf61-7d03b4860e89";
+    var user = "lauren";
 
-    var json = {authUserId: aid};
+    var json = {authUserId: aid, username: user};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);

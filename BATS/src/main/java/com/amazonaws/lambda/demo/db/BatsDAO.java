@@ -146,7 +146,7 @@ public class BatsDAO {
 	       ps.setString(6, study.studyContact);
 	       ps.setString(7, study.studyNotes);
 	       ps.setString(8, study.visibility);
-	       ps.setBoolean(9, study.isIrbApproved);
+	       ps.setString(9, study.isIrbApproved);
 	       ps.setTimestamp(10, study.studyStartDate);
 	       if(study.studyEndDate != null) {
 	       	ps.setTimestamp(11, study.studyEndDate);
@@ -1081,7 +1081,7 @@ public class BatsDAO {
 	  String studyContact = resultSet.getString("studyContact");
 	  String studyNotes = resultSet.getString("studyNotes");
 	  String visibility = resultSet.getString("visibility");
-	  boolean isIrbApproved = resultSet.getBoolean("isIrbApproved");
+	  String isIrbApproved = resultSet.getString("isIrbApproved");
 	  Timestamp studyStartDate = resultSet.getTimestamp("studyStartDate");
 	  { logger.log("studyStartDate: " + studyStartDate); }
 	  Timestamp studyEndDate = null;
