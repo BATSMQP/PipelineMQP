@@ -1,8 +1,3 @@
-var currentUser;
-var currentStudyId;
-var currentStudyName;
-var currentAuthUserId;
-
 ////////////////MAIN PAGE//////////////////////////
 
 function handleLoginClick() {
@@ -14,6 +9,10 @@ function handleRegisterClick() {
 }
 
 ////////////////LOGIN PAGE/////////////////////////////////////////
+
+function setWelcomeUser(){
+    document.getElementById('welcomeUser').innerHTML = localStorage.getItem('currentUser');
+}
 
 function checkLogin() {
     var user = document.getElementById("loginUsername").value;
@@ -64,7 +63,9 @@ function processLoginResponse(result) {
 
     var status = js["statusCode"];
     var username = js["username"];
-    currentUser = username;
+    var authUserId = js["authUserId"];
+    localStorage.setItem('currentUser', username);
+    localStorage.setItem('currentAuthUserId', authUserId);
 
     if (status == 200) {
         window.location.href = "userHome.html";
@@ -147,7 +148,9 @@ function processRegisterResponse(result) {
 
     var status = js["statusCode"];
     var username = js["username"];
-    currentUser = username;
+    var authUserId = js["authUserId"];
+    localStorage.setItem('currentUser', username);
+    localStorage.setItem('currentAuthUserId', authUserId);
 
     if (status == 200) {
         window.location.href = "userHome.html";
@@ -191,7 +194,7 @@ function checkNewStudy() {
     var inputStudyIsIrbApprovedNo = document.getElementById("inputStudyIsIrbApprovedNo").value;
     var inputStudyVisibilityYes = document.getElementById("inputStudyVisibilityYes").value;
     var inputStudyVisibilityNo = document.getElementById("inputStudyVisibilityNo").value;
-    var aid = "74a00780-3a82-4a32-bf61-7d03b4860e89";
+    // var aid = "74a00780-3a82-4a32-bf61-7d03b4860e89";
 
     if (inputStudyName == "") {
         alert("Please enter a study name before continuing");
@@ -212,17 +215,7 @@ function checkNewStudy() {
         inputStudyVisibility = "no";
     }
 
-    var json = {name: inputStudyName, shortName: inputShortStudyName, studyAbstract: inputStudyAbstract, institutionsInvolved: inputStudyInstitutionsInvolved, studyContact: inputStudyStudyContact, studyNotes: inputStudyStudyNotes, isIrbApproved: inputStudyIsIrbApproved, visibility: inputStudyVisibility, authUserId: aid};
-
-    // if (inputStudyAbstract == "") {
-    //     alert("Please enter a study abstract before continuing");
-    //     return false;
-    // }
-
-    // if (inputShortStudyName == "") {
-    //     alert("Please enter a short study name before continuing");
-    //     return false;
-    // }
+    var json = {name: inputStudyName, shortName: inputShortStudyName, studyAbstract: inputStudyAbstract, institutionsInvolved: inputStudyInstitutionsInvolved, studyContact: inputStudyStudyContact, studyNotes: inputStudyStudyNotes, isIrbApproved: inputStudyIsIrbApproved, visibility: inputStudyVisibility, authUserId: localStorage.getItem('currentAuthUserId')};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
@@ -270,24 +263,15 @@ function processNewStudyResponse(result) {
     }
 }
 
-// function checkUsername(username) {
-//     welcomeUser = document.getElementById("welcomeUser");
-//     welcomeUser.innerHTML = username;
-// }
-
-// window.onload = function() {
-//     welcomeUser = document.getElementById("welcomeUser");
-//     welcomeUser.innerHTML = currentUser;
-// }
-
 ////////////////USER HOME PAGE/////////////////////////////////////////
 
 function checkGetStudies() {
-    // var authUserName = document.getElementById("").value;
-    var aid = "74a00780-3a82-4a32-bf61-7d03b4860e89";
-    var user = "lauren";
+    // var aid = "74a00780-3a82-4a32-bf61-7d03b4860e89";
+    // var user = "lauren";
+    console.log("currentAuthUserId: " + localStorage.getItem('currentAuthUserId'));
+    console.log("currentUser: " + localStorage.getItem('currentUser'));
 
-    var json = {authUserId: aid, username: user};
+    var json = {authUserId: localStorage.getItem('currentAuthUserId'), username: localStorage.getItem('currentUser')};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
@@ -376,23 +360,23 @@ function studyClicked(studyId, authUserId, studyName) {
     console.log("in studyClicked");
     console.log("studyId: " + studyId);
     console.log("authUserId: " + authUserId);
-    currentStudyId = studyId;
-    currentAuthUserId = authUserId;
-    currentStudyName = studyName;
+    console.log("studyName (in studyClicked): " + studyName);
+    localStorage.setItem('currentStudyId', studyId);
+    // localStorage.setItem('currentAuthUserId', authUserId);
+    localStorage.setItem('studyName', studyName);
+    currentStudyName = localStorage.getItem('studyName');
+    console.log("currentStudyName (in studyClicked): " + currentStudyName);
     window.location.href = "studyPage.html";
 }
 
 function checkGetData() {
-    // var authUserName = document.getElementById("").value;
-    // var aid = "5d5ef618-06ef-4667-ad40-34ad4cf02da5";
-
     var studyNameOnStudyPage = document.getElementById("studyNameOnStudyPage");
-    console.log("currrentStudyName: " + currentStudyName);
-    console.log("studyNameOnStudyPage: " + studyNameOnStudyPage);
-    console.log("innerhtml: " + studyNameOnStudyPage.innerHTML);
+    currentStudyName = localStorage.getItem('studyName');
+    console.log("currrentStudyName (in checkGetData): " + currentStudyName);
+    console.log("innerhtml of studyNameOnStudyPage (in checkGetData): " + studyNameOnStudyPage.innerHTML);
     studyNameOnStudyPage.innerHTML = currentStudyName;
 
-    var json = {authUserId: currentAuthUserId, studyId: currentStudyId};
+    var json = {authUserId: localStorage.getItem('currentAuthUserId'), studyId: localStorage.getItem('currentStudyId')};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);

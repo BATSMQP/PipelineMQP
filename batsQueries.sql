@@ -3,7 +3,7 @@ INSERT INTO AuthUser (authUserId, firstName, lastName, username, pass, email) va
 select * from AuthUser;
 select * from Document;
 select * from Study;
-SELECT * FROM Study where authUserId="74a00780-3a82-4a32-bf61-7d03b4860e89" order by studyStartDate;
+SELECT * FROM Study where authUserId="92200336-c7e4-4056-9043-ecad5847dcd2" order by studyStartDate;
 
 SELECT * FROM Study WHERE studyId = '36fedd99-7d08-484a-84ad-c2bcd3545776';
 

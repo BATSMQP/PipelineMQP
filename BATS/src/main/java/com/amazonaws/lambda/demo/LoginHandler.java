@@ -34,6 +34,7 @@ public class LoginHandler implements RequestHandler<LoginRequest, LoginResponse>
 		
 		AuthUser authUser = null;
 		String username = "";
+		String authUserId = "";
 		
 		//See if there is a user with that username
 			//if so, if password is wrong error - wrong password
@@ -45,6 +46,7 @@ public class LoginHandler implements RequestHandler<LoginRequest, LoginResponse>
 		try {
 			authUser = dao.getAuthUser(req.getUsername(), logger);
 			username = authUser.username;
+			authUserId = authUser.authUserId;
 		}
 		catch(Exception e) {
 			fail = true;
@@ -64,9 +66,9 @@ public class LoginHandler implements RequestHandler<LoginRequest, LoginResponse>
 		
 		LoginResponse response;
 		if (fail) {
-			response = new LoginResponse(failMessage, 400, username);
+			response = new LoginResponse(failMessage, 400, username, authUserId);
 		} else {
-			response = new LoginResponse("none", 200, username);
+			response = new LoginResponse("none", 200, username, authUserId);
 		}
 
 		return response;

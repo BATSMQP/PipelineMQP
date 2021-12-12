@@ -35,6 +35,7 @@ public class RegisterHandler implements RequestHandler<RegisterRequest, Register
 		String failMessage = "";
 		
 		String username = "";
+		String authUserId = "";
 		
 		//See if there is a user with that username
 			//if so, error there is an AuthUser with that usernam
@@ -45,6 +46,7 @@ public class RegisterHandler implements RequestHandler<RegisterRequest, Register
 		try {
 			dao.addAuthUser(authUser, logger);
 			username = authUser.getUsername();
+			authUserId =  authUser.authUserId;
 		}
 		catch(Exception e) {
 			fail = true;
@@ -53,9 +55,9 @@ public class RegisterHandler implements RequestHandler<RegisterRequest, Register
 		
 		RegisterResponse response;
 		if (fail) {
-			response = new RegisterResponse(failMessage, 400, username);
+			response = new RegisterResponse(failMessage, 400, username, authUserId);
 		} else {
-			response = new RegisterResponse("none", 200, username);
+			response = new RegisterResponse("none", 200, username, authUserId);
 		}
 
 		return response;

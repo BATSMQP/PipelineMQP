@@ -160,6 +160,7 @@ public class LambdaFunctionHandlerTest {
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
     	System.out.println("response.username: " + response.username);
+    	System.out.println("response.authUserId: " + response.authUserId);
     }
     
     @Test
@@ -170,6 +171,7 @@ public class LambdaFunctionHandlerTest {
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
     	System.out.println("response.username: " + response.username);
+    	System.out.println("response.authUserId: " + response.authUserId);
     }
     
     @Test
