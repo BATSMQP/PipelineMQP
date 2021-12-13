@@ -467,6 +467,12 @@ function processGetDataResponse(result) {
 
 function setContent() {
     var file = document.getElementById('inputToolFile').files[0];
+    //set iframe
+    const obj_url = URL.createObjectURL(document.getElementById('inputToolFile').files[0]);
+    const iframe = document.getElementById('uploadedToolViewer');
+    iframe.setAttribute('src', obj_url);
+    URL.revokeObjectURL(obj_url);
+
     const reader = new FileReader();
     reader.readAsText(file);
     reader.onload = function(evt) {
@@ -474,7 +480,9 @@ function setContent() {
         console.log(evt.target.result);
         console.log("reader.result: ");
         console.log(reader.result);
-        content = reader.result;
+        content = reader.result.toString();
+        console.log("in setContent content: "+ reader.result);
+        console.log("in setContent content.toString(): " + content);
     };
 }
 
@@ -522,7 +530,7 @@ function checkNewTool() {
         return false;
     }
 
-    var json = {filename: content, name: n, dataType: fn3[1]};
+    var json = {file: content, name: n, dataType: fn3[1]};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);

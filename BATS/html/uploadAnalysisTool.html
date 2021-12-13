@@ -72,7 +72,7 @@
                 <label for="inputName" class="form-label">Name:</label>
             </div>
             <div class="col-auto input">
-                <input type="name" class="form-control" id="inputToolName">
+                <input type="name" class="form-control" id="inputToolName" accept=".java,.py,.m">
             </div>
           </div>
 
@@ -95,16 +95,6 @@
       <nav class="navbar fixed-bottom navbar-dark bg-dark">
         <a class="navbar-brand" href="#">BATS 2022</a>
       </nav>
-
-    <script>
-      // document.getElementById('inputToolFile').addEventListener("change", setContent, false);
-      function testing(){
-        const obj_url = URL.createObjectURL(document.getElementById('inputToolFile').files[0]);
-        const iframe = document.getElementById('uploadedToolViewer');
-        iframe.setAttribute('src', obj_url);
-        // URL.revokeObjectURL(obj_url);
-      }
-    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
