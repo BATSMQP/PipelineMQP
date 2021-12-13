@@ -21,6 +21,8 @@ import com.amazonaws.lambda.demo.http.GetDataRequest;
 import com.amazonaws.lambda.demo.http.GetDataResponse;
 import com.amazonaws.lambda.demo.http.GetStudiesRequest;
 import com.amazonaws.lambda.demo.http.GetStudiesResponse;
+import com.amazonaws.lambda.demo.http.GetUsernameRequest;
+import com.amazonaws.lambda.demo.http.GetUsernameResponse;
 import com.amazonaws.lambda.demo.http.LoginRequest;
 import com.amazonaws.lambda.demo.http.LoginResponse;
 import com.amazonaws.lambda.demo.http.NewStudyRequest;
@@ -212,6 +214,16 @@ public class LambdaFunctionHandlerTest {
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
     	System.out.println("response.tool: " + response.tool);
+    }
+    
+    @Test
+    public void testGetUsernameHandler() {
+    	GetUsernameHandler csh = new GetUsernameHandler();
+    	GetUsernameRequest r = new GetUsernameRequest("a2d6f410-de84-4a2b-8e93-392193571ba3");
+    	GetUsernameResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.tool: " + response.username);
     }
 
 //    @Test

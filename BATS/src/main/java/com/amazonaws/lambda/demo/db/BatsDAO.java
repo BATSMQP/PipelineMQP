@@ -373,6 +373,29 @@ public class BatsDAO {
 	  }
 	}
 	
+	public String getUsername(String authUserId, LambdaLogger logger) throws Exception {
+		 
+		try {
+		     PreparedStatement ps = conn.prepareStatement("SELECT * FROM AuthUser where authUserId=?;");
+		     ps.setString(1, authUserId);
+		     ResultSet resultSet = ps.executeQuery();
+		     AuthUser authUser = null;
+		     while (resultSet.next()) {
+		     	authUser = generateAuthUser(resultSet, logger);
+		     	{ logger.log("authUser in while (in getUsername): " + authUser); }
+		     }
+		     resultSet.close();
+		     ps.close();
+		     
+		     
+		     return authUser.getUsername();
+		
+		 } catch (Exception e) {
+		 	e.printStackTrace();
+		     throw new Exception("Failed in getting username for the auth user: " + e.getMessage());
+		 }
+	}
+	
 //    public Choice getChoice(String cid, LambdaLogger logger) throws Exception {
 //        
 //        try {
