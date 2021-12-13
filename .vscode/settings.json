@@ -1,6 +1,7 @@
 {
     "python.analysis.extraPaths": [
         "./lib/pyAudioAnalysis-master/pyAudioAnalysis",
-        "./lib/pyAudioAnalysis-master"
+        "./lib/pyAudioAnalysis-master",
+        "./lib/pyAudioAnalysisMaster/pyAudioAnalysis"
     ]
 }

@@ -1,9 +1,13 @@
 # Example 1: short-term feature extraction
-from lib.pyAudioAnalysisMaster.pyAudioAnalysis import ShortTermFeatures as aF
-from lib.pyAudioAnalysisMaster.pyAudioAnalysis import audioBasicIO as aIO 
+import sys
+#from lib.pyAudioAnalysisMaster import pyAudioAnalysis
+sys.path.insert(1,'lib/pyAudioAnalysisMaster/pyAudioAnalysis')
+import ShortTermFeatures as aF
+import audioBasicIO as aIO 
 import numpy as np 
-import plotly.graph_objs as go 
 import plotly
+import plotly.graph_objs as go 
+
 import IPython
 
 # read audio data from file 
