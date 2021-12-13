@@ -60,7 +60,7 @@
             </div>
             <div class="col-auto">
               <div class="input-group mb-3">
-                <input type="file" class="form-control" id="inputToolFile">
+                <input type="file" class="form-control" id="inputToolFile" onchange="return setContent()">
               </div>
           </div>
           </div>
@@ -97,12 +97,12 @@
       </nav>
 
     <script>
-      document.getElementById('inputToolFile').addEventListener("change", testing, false);
+      // document.getElementById('inputToolFile').addEventListener("change", setContent, false);
       function testing(){
         const obj_url = URL.createObjectURL(document.getElementById('inputToolFile').files[0]);
         const iframe = document.getElementById('uploadedToolViewer');
         iframe.setAttribute('src', obj_url);
-        URL.revokeObjectURL(obj_url);
+        // URL.revokeObjectURL(obj_url);
       }
     </script>
 

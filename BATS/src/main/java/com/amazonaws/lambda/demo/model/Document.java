@@ -2,25 +2,25 @@ package com.amazonaws.lambda.demo.model;
 
 public class Document{
 	public final String documentId;
-	public String filename;
+	public String file;
 	public String name;
 	public String dataType;
 	
 	public String getDocumentId() {return documentId;}
-	public String getFilename() {return filename;}
+	public String getFile() {return file;}
 	public String getName() {return name;}
 	public String getDataType() {return dataType;}
 	
-	public Document(String documentId, String filename, String name, String dataType) {
+	public Document(String documentId, String file, String name, String dataType) {
 		this.documentId = documentId;
-		this.filename = filename;
+		this.file = file;
 		this.name = name;
 		this.dataType = dataType;
 	}
 	
 	public Document() {
 		this.documentId = null;
-		this.filename = null;
+		this.file = null;
 		this.name = null;
 		this.dataType = null;
 	}
@@ -37,7 +37,7 @@ public class Document{
 	}
 	
 	public String toString() {
-		return "Document " + name + " " + documentId + " is filename: " + filename + " of dataType: " + dataType + ".";
+		return "Document " + name + " " + documentId + " is of dataType: " + dataType + ".";
 	}
 	
 }

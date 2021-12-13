@@ -1,3 +1,5 @@
+var content;
+
 ////////////////MAIN PAGE//////////////////////////
 
 function handleLoginClick() {
@@ -463,6 +465,19 @@ function processGetDataResponse(result) {
 
 ////////////////New Tool PAGE/////////////////////////////////////////
 
+function setContent() {
+    var file = document.getElementById('inputToolFile').files[0];
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function(evt) {
+        console.log("in reader.onload");
+        console.log(evt.target.result);
+        console.log("reader.result: ");
+        console.log(reader.result);
+        content = reader.result;
+    };
+}
+
 function checkNewTool() {
     var fn = document.getElementById("inputToolFile").value;
     var n = document.getElementById("inputToolName").value;
@@ -477,6 +492,26 @@ function checkNewTool() {
     console.log("fn3[1]: " + fn3[1]);
     console.log("name: " + n);
 
+    // const iframe = document.getElementById('uploadedToolViewer');
+    // const obj_url = URL.createObjectURL(document.getElementById('inputToolFile').files[0]);
+    // console.log("iframe.value: " + iframe.value);
+    // console.log("iframe.innerHTML: " + iframe.innerHTML);
+    // console.log("iframe.src: " + iframe.src);
+    // console.log("obj_url: " + obj_url);
+
+    // var file = document.getElementById('inputToolFile').files[0];
+    // var content;
+    // const reader = new FileReader();
+    // reader.readAsText(file);
+    // reader.onload = function(evt) {
+    //     console.log("in reader.onload");
+    //     console.log(evt.target.result);
+    //     console.log("reader.result: ");
+    //     console.log(reader.result);
+    //     content = reader.result;
+    // };
+    
+
     if (fn == "") {
         alert("Please upload a file before continuing");
         return false;
@@ -487,7 +522,7 @@ function checkNewTool() {
         return false;
     }
 
-    var json = {filename: fn3[0], name: n, dataType: fn3[1]};
+    var json = {filename: content, name: n, dataType: fn3[1]};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);

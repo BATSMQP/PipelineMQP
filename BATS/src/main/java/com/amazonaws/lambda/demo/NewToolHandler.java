@@ -18,11 +18,11 @@ public class NewToolHandler implements RequestHandler<NewToolRequest, NewToolRes
 
 	LambdaLogger logger;
 
-	private Document createDocument(String filename, String name, String dataType){
+	private Document createDocument(String file, String name, String dataType){
 		if (logger != null) logger.log("in createDocument");
 		String documentId = UUID.randomUUID().toString();
 		
-		Document document = new Document(documentId, name, filename, dataType);
+		Document document = new Document(documentId, file, name, dataType);
 		
 		return document;
 	}
@@ -35,7 +35,7 @@ public class NewToolHandler implements RequestHandler<NewToolRequest, NewToolRes
 		boolean fail = false;
 		String failMessage = "";
 
-		Document document = createDocument(req.getFilepath(), req.getName(), req.getDataType());
+		Document document = createDocument(req.getFile(), req.getName(), req.getDataType());
 		try {
 			dao.addDocument(document, logger);
 		}

@@ -107,9 +107,9 @@ public class BatsDAO {
 	          return false;
 	      }
 
-	      ps = conn.prepareStatement("INSERT INTO Document (documentId, filename, name, dataType) values(?,?,?,?);");
+	      ps = conn.prepareStatement("INSERT INTO Document (documentId, file, name, dataType) values(?,?,?,?);");
 	      ps.setString(1, document.documentId);
-	      ps.setString(2, document.filename);
+	      ps.setString(2, document.file);
 	      ps.setString(3, document.name);
 	      ps.setString(4, document.dataType);
 	      { logger.log("ps for insert (in addDocument): " + ps); }
@@ -1067,10 +1067,10 @@ public class BatsDAO {
 	}
 	private Document generateDocument(ResultSet resultSet,LambdaLogger logger) throws Exception {
 		  String documentId  = resultSet.getString("documentId");
-		  String filename = resultSet.getString("filename");
+		  String file = resultSet.getString("file");
 		  String name = resultSet.getString("name");
 		  String dataType = resultSet.getString("dataType");
-		  return new Document(documentId, filename, name, dataType);
+		  return new Document(documentId, file, name, dataType);
 		}
   private Study generateStudy(ResultSet resultSet,LambdaLogger logger) throws Exception {
 	  String studyId  = resultSet.getString("studyId");
