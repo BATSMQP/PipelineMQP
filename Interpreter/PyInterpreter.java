@@ -1,4 +1,4 @@
-package Interpreter;
+
 import java.io.*;
 
 import org.python.util.PythonInterpreter;
@@ -12,7 +12,7 @@ public class PyInterpreter{
         PythonInterpreter python = new PythonInterpreter();
         //pyInterp.exec("print('Hello Python World!')");
         //make a main in python and then run the sub function that asks for user input and calls the function
-        python.execfile("Interpreter/Main.py");
+        python.execfile("Interpreter\\Main.py");
     }
 }
 

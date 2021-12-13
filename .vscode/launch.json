@@ -8,6 +8,13 @@
             "type": "java",
             "name": "Launch PyInterpreter",
             "request": "launch",
+            "mainClass": "PyInterpreter",
+            "projectName": "PipelineMQP_de9018c3"
+        },
+        {
+            "type": "java",
+            "name": "Launch PyInterpreter",
+            "request": "launch",
             "mainClass": "Interpreter.PyInterpreter",
             "projectName": "PipelineMQP_1b4f2704"
         },
