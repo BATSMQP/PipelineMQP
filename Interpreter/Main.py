@@ -3,11 +3,15 @@
 ##functionName= input("Please name the function you wish to use: ")
 ##how do we make this ask for the right 
 print('This ran')
-
-import import_test.py
+import matplotlib.pyplot as plt
+import numpy as np
+import import_test
 
 import_test
 
+import providedTest
+
+providedTest
 
 # signalPath = input("What file woud you like to input: ")
 # signal= wave.open(signalPath, 'r')

@@ -13,7 +13,7 @@ import IPython
 # read audio data from file 
 # (returns sampling freq and signal as a numpy array)
 fs, s = aIO.read_audio_file("data/object.wav")
-
+##lib/pyAudioAnalysisMaster/pyAudioAnalysis/   possible extenssion needed
 # play the initial and the generated files in notebook:
 IPython.display.display(IPython.display.Audio("data/object.wav"))
 
