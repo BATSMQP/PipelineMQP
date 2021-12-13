@@ -1,2 +1,4 @@
 /bin/
-venv\pyvenv.cfg
+*.venv\pyvenv.cfg
+.venv/pyvenv.cfg
+.venv/pyvenv.cfg
