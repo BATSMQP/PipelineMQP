@@ -6,6 +6,14 @@
     /* overflow: scroll; */
 }
 
+#mainUserHome {
+    padding: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 15px;
+    /* overflow: scroll; */
+}
+
 #title {
     padding-bottom: 10px;
     text-align: center;
