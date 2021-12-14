@@ -269,6 +269,7 @@ function processNewStudyResponse(result) {
 var usernameOfAU;
 
 function checkGetUsername(aid) {
+    var result = "";
     var json = {authUserId: aid};
 
     var js = JSON.stringify(json);
@@ -288,29 +289,34 @@ function checkGetUsername(aid) {
 
         if (xhr.readyState == XMLHttpRequest.DONE) {
             console.log("XHR:" + xhr.responseText);
-            processGetUsernameResponse(xhr.responseText);
+            result = processGetUsernameResponse(xhr.responseText);
         } else {
             console.log("got an error");
-            processGetUsernameResponse("N/A");
+            result = processGetUsernameResponse("N/A");
         }
     };
 
-    return false;
+    return result;
 }
 
 function processGetUsernameResponse(result) {
+    var r = "";
     console.log("result:" + result);
     var js = JSON.parse(result);
 
     var status = js["statusCode"];
     var username = js["username"];
+    console.log("in processGetUsernameResponse username: " + username);
 
     if (status == 200) {
-        usernameOfAU = username;
+        r = username;
+        // localStorage.setItem("usernameOfAU", username);
+        console.log("in processGetUsernameResponse r: " + r);
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
     }
+    return r;
 }
 
 function checkGetStudies() {
@@ -363,6 +369,7 @@ function processGetStudiesResponse(result) {
         for(let i = 0; i < studies.length; i++){
             study = studies[i];
             checkGetUsername(study["authUserId"]);
+            console.log("in processGetStudiesResponse usernameOfAU: " + localStorage.getItem("usernameOfAU"));
 
             //studyName = study["studyName"]
             //studyShortName = study["studyShortName"]
@@ -386,7 +393,7 @@ function processGetStudiesResponse(result) {
             tableString += study["studyDescription"];
             tableString += "</td>";
             tableString += "<td>";
-            tableString += usernameOfAU;
+            tableString += localStorage.getItem("usernameOfAU");
             tableString += "</td>";
             tableString += "<td>";
             tableString += study["studyContact"];

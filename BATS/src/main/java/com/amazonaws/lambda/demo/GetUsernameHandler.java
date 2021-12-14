@@ -41,7 +41,7 @@ public class GetUsernameHandler implements RequestHandler<GetUsernameRequest, Ge
 		}
 		catch(Exception e) {
 			fail = true;
-			failMessage = "Error: Failed to get the username for the auth user";
+			failMessage = "Error: Failed to get the username for the auth user with authUserId: " + req.getAuthUserId() + "; username: " + username;
 		}
 		
 		GetUsernameResponse response;
