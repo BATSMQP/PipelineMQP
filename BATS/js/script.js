@@ -266,10 +266,54 @@ function processNewStudyResponse(result) {
 }
 
 ////////////////USER HOME PAGE/////////////////////////////////////////
+var usernameOfAU;
+
+function checkGetUsername(aid) {
+    var json = {authUserId: aid};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", GetUsername_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processGetUsernameResponse(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processGetUsernameResponse("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processGetUsernameResponse(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var username = js["username"];
+
+    if (status == 200) {
+        usernameOfAU = username;
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
+    }
+}
 
 function checkGetStudies() {
-    // var aid = "74a00780-3a82-4a32-bf61-7d03b4860e89";
-    // var user = "lauren";
     console.log("currentAuthUserId: " + localStorage.getItem('currentAuthUserId'));
     console.log("currentUser: " + localStorage.getItem('currentUser'));
 
@@ -318,6 +362,8 @@ function processGetStudiesResponse(result) {
   
         for(let i = 0; i < studies.length; i++){
             study = studies[i];
+            checkGetUsername(study["authUserId"]);
+
             //studyName = study["studyName"]
             //studyShortName = study["studyShortName"]
             //abstract = study["studyDescription"]
@@ -337,13 +383,28 @@ function processGetStudiesResponse(result) {
             tableString += study["studyName"];
             tableString += "</td>";
             tableString += "<td>";
-            tableString += study["studyShortName"];
-            tableString += "</td>";
-            tableString += "<td>";
             tableString += study["studyDescription"];
             tableString += "</td>";
             tableString += "<td>";
-            tableString += study["authUserId"];
+            tableString += usernameOfAU;
+            tableString += "</td>";
+            tableString += "<td>";
+            tableString += study["studyContact"];
+            tableString += "</td>";
+            tableString += "<td>";
+            tableString += study["institutionsInvolved"];
+            tableString += "</td>";
+            tableString += "<td>";
+            tableString += study["studyNotes"];
+            tableString += "</td>";
+            tableString += "<td>";
+            tableString += study["isIrbApproved"];
+            tableString += "</td>";
+            tableString += "<td>";
+            tableString += study["visibility"];
+            tableString += "</td>";
+            tableString += "<td>";
+            tableString += "date";
             tableString += "</td>";
             tableString += "</tr>";           
         }

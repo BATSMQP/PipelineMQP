@@ -10,3 +10,4 @@ var newData_url = base_url + 'newData'; //POST
 var newTool_url = base_url + 'newTool'; //POST
 var Register_url = base_url + 'Register'; //POST
 var saveAnalysis_url = base_url + 'saveAnalysis'; //POST
+var GetUsername_url = base_url + 'GetUsername'; //POST
