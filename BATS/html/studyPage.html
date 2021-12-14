@@ -49,14 +49,25 @@
 
     <div id="main">
 
-      <div id="studyNameHeader">
-        <h3 id="studyNameOnStudyPage" class="inline">Study Name</h3>
-        <button type="submit" id="analyzeDataButton" onclick="window.location.href='selectToolkits.html'" class="btn btn-primary inline">Analyze Data</button>
-      </div>
-      <h4 id="dataTableName">Data</h4>
+      <div class="row">
 
-        <div class="table-responsive">
-          <table id="toolkitTable" class="table table-hover">
+        <div class="col-md-6">
+
+          <h3 id="studyNameOnStudyPage">Study Name</h3>
+
+        </div>
+
+        <div class="col-md-6">
+
+          <button type="submit" id="analyzeDataButton" onclick="window.location.href='selectToolkits.html'" class="btn-outline-primary btn-lg float-right " >Analyze Data</button>
+
+        </div>
+
+        <h2 class="sub-header col-md-6 mt-4">Data</h2>
+        <h2 class="sub-header col-md-6 mt-4">Analysis Tools</h2>
+
+        <div class="table-responsive col-md-6">
+          <table id="toolkitTable" class="table table-hover table-bordered">
             <thead>
               <tr>
                 <th scope="col">Name of Data</th>
@@ -82,10 +93,49 @@
             </tbody>
           </table>
         </div>
-        <div id="addNewDataToolDiv"> 
-          <button type="submit" id="addNewData" onclick="window.location.href='uploadData.html'" class="btn btn-primary">Add New Data</button>
-          <button type="submit" id="addNewTool" onclick="window.location.href='uploadAnalysisTool.html'" class="btn btn-primary">Add New Analysis Tool</button>
-      </div>  
+
+
+
+        <div class="table-responsive col-md-6">
+          <table id="toolkitTable" class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Tool Name</th>
+                <th scope="col">Data Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr onclick="window.location.href='viewData.html'">
+                <td>ID 12345: Vocal</td>
+                <td>.mvm</td>
+              </tr>
+              <tr>
+                <td>ID 12346: EEG</td>
+                <td>.raw</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-6 text-center">
+          <button type="submit" id="addNewData" onclick="window.location.href='uploadData.html'" class="btn-secondary mb-2 btn-sm ">Add New Data</button>
+
+        </div>
+        
+
+        <div class="col-md-6 text-center">
+
+          <button type="submit" id="addNewTool" onclick="window.location.href='uploadAnalysisTool.html'" class="btn-secondary mb-2 btn-sm">Add New Analysis Tool</button>
+
+        </div>
+
+      </div>
+
+
+
+
+
       </br>
         <h6 class="inline">People With Access:</h6>
         <p class="inline" id="authUsersForStudy"></p>
