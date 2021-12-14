@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Graphing_Simp",
+            "request": "launch",
+            "mainClass": "Graphing.Graphing_Simp",
+            "projectName": "PipelineMQP"
+        },
+        {
+            "type": "java",
+            "name": "Launch PyInterpreter",
+            "request": "launch",
+            "mainClass": "Interpreter.PyInterpreter",
+            "projectName": "PipelineMQP"
+        },
+        {
+            "type": "java",
             "name": "Launch PyInterpreter",
             "request": "launch",
             "mainClass": "Interpreter.PyInterpreter",
