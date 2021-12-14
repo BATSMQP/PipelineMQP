@@ -30,8 +30,10 @@ plot= False """
 
 
 print('This ran')
-import matplotlib.pyplot as plt
-import numpy as np
+
+import sys
+sys.path.insert(1,'lib/pyAudioAnalysisMaster/pyAudioAnalysis')
+
 import import_test
 
 import_test

@@ -14,8 +14,11 @@ public class PyInterpreter{
         PythonInterpreter python = new PythonInterpreter();
         //pyInterp.exec("print('Hello Python World!')");
         //make a main in python and then run the sub function that asks for user input and calls the function
-        python.execfile("Interpreter/Main.py");
+        python.execfile("Interpreter/main.py");
+        //python.exec("import Interpreter.import_test.py");
+
         //python.execfile("Interpreter/import_test.py");
+        python.close();
     }
 }
 
