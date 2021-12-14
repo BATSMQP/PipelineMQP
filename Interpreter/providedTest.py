@@ -10,12 +10,13 @@ import plotly.graph_objs as go
 
 import IPython
 
+
 # read audio data from file 
 # (returns sampling freq and signal as a numpy array)
-fs, s = aIO.read_audio_file("data/object.wav")
+fs, s = aIO.read_audio_file("lib/pyAudioAnalysisMaster/pyAudioAnalysis/data/3WORDS.wav")
 ##lib/pyAudioAnalysisMaster/pyAudioAnalysis/   possible extenssion needed
 # play the initial and the generated files in notebook:
-IPython.display.display(IPython.display.Audio("data/object.wav"))
+IPython.display.display(IPython.display.Audio("lib/pyAudioAnalysisMaster/pyAudioAnalysis/data/3WORDS.wav"))
 
 # print duration in seconds:
 duration = len(s) / float(fs)
