@@ -86,9 +86,15 @@
     width: 400px;
 }
 
-#StudyList{
+#StudyList {
     border:2px solid #ccc; 
     width:300px; 
     height: 100px; 
     overflow-y: scroll;
-  }
+}
+
+.backBtn {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: -45px;
+}

@@ -14,6 +14,7 @@ drop table Facial;
 drop table Speech;
 drop table StressIndicators;
 drop table LogData;
+drop table Tag;
 drop table Document;
 drop table Participant;
 drop table StudyGroup;
@@ -71,6 +72,15 @@ create table `Document`(
 `name` varchar(50),
 `dataType` varchar(20),
 PRIMARY KEY (`documentId`)
+);
+
+create table `Tag`(
+`tagId` varchar(36),
+`documentId` varchar(36),
+`name` varchar(100),
+`value` varchar(100),
+PRIMARY KEY (`tagId`),
+FOREIGN KEY (`documentId`) REFERENCES Document(`documentId`) on delete cascade
 );
 
 create table `Neural`(
