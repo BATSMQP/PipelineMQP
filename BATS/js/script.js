@@ -14,6 +14,7 @@ function handleRegisterClick() {
 
 function setWelcomeUser(){
     document.getElementById('welcomeUser').innerHTML = localStorage.getItem('currentUser');
+    console.log("currentAuthUserId in checkNewStudy: " + localStorage.getItem('currentAuthUserId'));
 }
 
 function checkLogin() {
@@ -53,6 +54,7 @@ function checkLogin() {
         } else {
             console.log("got an error");
             processLoginResponse("N/A");
+            console.log("currentAuthUserId in checkLogin: " + localStorage.getItem('currentAuthUserId'));
         }
     };
 
@@ -68,6 +70,8 @@ function processLoginResponse(result) {
     var authUserId = js["authUserId"];
     localStorage.setItem('currentUser', username);
     localStorage.setItem('currentAuthUserId', authUserId);
+    console.log("currentAuthUserId in processLoginResponse: " + localStorage.getItem("authUserId"));
+    console.log("currentUser in processLoginResponse: " + localStorage.getItem("currentUser"));
 
     if (status == 200) {
         window.location.href = "userHome.html";
@@ -196,7 +200,6 @@ function checkNewStudy() {
     var inputStudyIsIrbApprovedNo = document.getElementById("inputStudyIsIrbApprovedNo").value;
     var inputStudyVisibilityYes = document.getElementById("inputStudyVisibilityYes").value;
     var inputStudyVisibilityNo = document.getElementById("inputStudyVisibilityNo").value;
-    // var aid = "74a00780-3a82-4a32-bf61-7d03b4860e89";
 
     if (inputStudyName == "") {
         alert("Please enter a study name before continuing");
@@ -216,6 +219,8 @@ function checkNewStudy() {
     } else if(inputStudyVisibilityNo){
         inputStudyVisibility = "no";
     }
+
+    console.log("currentAuthUserId in checkNewStudy: " + localStorage.getItem('currentAuthUserId'));
 
     var json = {name: inputStudyName, shortName: inputShortStudyName, studyAbstract: inputStudyAbstract, institutionsInvolved: inputStudyInstitutionsInvolved, studyContact: inputStudyStudyContact, studyNotes: inputStudyStudyNotes, isIrbApproved: inputStudyIsIrbApproved, visibility: inputStudyVisibility, authUserId: localStorage.getItem('currentAuthUserId')};
 
@@ -266,7 +271,6 @@ function processNewStudyResponse(result) {
 }
 
 ////////////////USER HOME PAGE/////////////////////////////////////////
-var usernameOfAU;
 
 function checkGetUsername(aid) {
     var result = "";
@@ -310,7 +314,7 @@ function processGetUsernameResponse(result) {
 
     if (status == 200) {
         r = username;
-        // localStorage.setItem("usernameOfAU", username);
+        localStorage.setItem("usernameOfAU", username);
         console.log("in processGetUsernameResponse r: " + r);
     } else {
         var msg = js["error"];
@@ -320,8 +324,8 @@ function processGetUsernameResponse(result) {
 }
 
 function checkGetStudies() {
-    console.log("currentAuthUserId: " + localStorage.getItem('currentAuthUserId'));
-    console.log("currentUser: " + localStorage.getItem('currentUser'));
+    console.log("currentAuthUserId in checkGetStudies: " + localStorage.getItem('currentAuthUserId'));
+    console.log("currentUser in checkGetStudies: " + localStorage.getItem('currentUser'));
 
     var json = {authUserId: localStorage.getItem('currentAuthUserId'), username: localStorage.getItem('currentUser')};
 
@@ -371,49 +375,45 @@ function processGetStudiesResponse(result) {
             checkGetUsername(study["authUserId"]);
             console.log("in processGetStudiesResponse usernameOfAU: " + localStorage.getItem("usernameOfAU"));
 
-            //studyName = study["studyName"]
-            //studyShortName = study["studyShortName"]
-            //abstract = study["studyDescription"]
-            //by = study["authUserId"]
 
-            //create row to be inserted
-            tableString += "<tr onclick='JavaScript:studyClicked(";
-            tableString += '"';
-            tableString += study["studyId"];
-            tableString += '", "';
-            tableString += study["authUserId"];
-            tableString += '", "';
-            tableString += study["studyName"];
-            tableString += '")';
-            tableString += "'>";
-            tableString += "<td>";
-            tableString += study["studyName"];
-            tableString += "</td>";
-            tableString += "<td>";
-            tableString += study["studyDescription"];
-            tableString += "</td>";
-            tableString += "<td>";
-            tableString += localStorage.getItem("usernameOfAU");
-            tableString += "</td>";
-            tableString += "<td>";
-            tableString += study["studyContact"];
-            tableString += "</td>";
-            tableString += "<td>";
-            tableString += study["institutionsInvolved"];
-            tableString += "</td>";
-            tableString += "<td>";
-            tableString += study["studyNotes"];
-            tableString += "</td>";
-            tableString += "<td>";
-            tableString += study["isIrbApproved"];
-            tableString += "</td>";
-            tableString += "<td>";
-            tableString += study["visibility"];
-            tableString += "</td>";
-            tableString += "<td>";
-            tableString += "date";
-            tableString += "</td>";
-            tableString += "</tr>";           
+                //create row to be inserted
+                tableString += "<tr onclick='JavaScript:studyClicked(";
+                tableString += '"';
+                tableString += study["studyId"];
+                tableString += '", "';
+                tableString += study["authUserId"];
+                tableString += '", "';
+                tableString += study["studyName"];
+                tableString += '")';
+                tableString += "'>";
+                tableString += "<td>";
+                tableString += study["studyName"];
+                tableString += "</td>";
+                tableString += "<td>";
+                tableString += study["studyDescription"];
+                tableString += "</td>";
+                tableString += "<td>";
+                tableString += localStorage.getItem("usernameOfAU");
+                tableString += "</td>";
+                tableString += "<td>";
+                tableString += study["studyContact"];
+                tableString += "</td>";
+                tableString += "<td>";
+                tableString += study["institutionsInvolved"];
+                tableString += "</td>";
+                tableString += "<td>";
+                tableString += study["studyNotes"];
+                tableString += "</td>";
+                tableString += "<td>";
+                tableString += study["isIrbApproved"];
+                tableString += "</td>";
+                tableString += "<td>";
+                tableString += study["visibility"];
+                tableString += "</td>";
+                tableString += "<td>";
+                tableString += "date";
+                tableString += "</td>";
+                tableString += "</tr>";                    
         }
         // tableString += "</tbody>";
         console.log(tableString);

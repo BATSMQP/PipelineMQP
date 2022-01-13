@@ -219,11 +219,11 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testGetUsernameHandler() {
     	GetUsernameHandler csh = new GetUsernameHandler();
-    	GetUsernameRequest r = new GetUsernameRequest("a2d6f410-de84-4a2b-8e93-392193571ba3");
+    	GetUsernameRequest r = new GetUsernameRequest("1031e3f5-7ad4-415e-a50f-e270642b746c");
     	GetUsernameResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
-    	System.out.println("response.tool: " + response.username);
+    	System.out.println("response.username: " + response.username);
     }
 
 //    @Test
