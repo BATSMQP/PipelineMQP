@@ -8,8 +8,8 @@ import java.io.IOException;
 public class Table2CSV {
     public static void main(String[] args) {
         String[][] a=new String[4][2];
-        a[0][0]="0.0";
-        a[1][1]="1.1";
+        a[0][0]="0.2";
+        a[1][1]="1.2";
         col2("test", a);
         
     }
