@@ -8,13 +8,17 @@ import java.io.IOException;
 public class Table2CSV {
     public static void main(String[] args) {
         String[][] a=new String[4][2];
-        a[0][0]="0.2";
-        a[1][1]="1.2";
-        col2("test", a);
-        
+        a[0][0]="0.3";
+        a[1][1]="1.3";
+        Stri("test", a,2);
+
+        double[][] b=new double[4][2];
+        b[0][0]=0.3;
+        b[1][1]=1.3;
+        Doub("test_d", b,2);
     }
 
-    public static void col2(String name, String[][] a) {
+    public static void Stri(String name, String[][] a, int colNum) {
         //TODO: make work for all col numbers, just a string apend thing
         //TODO: naming conventions improve
         try{
@@ -42,5 +46,17 @@ public class Table2CSV {
             e.printStackTrace();
         }
         return;
+    }
+
+    public static void Doub(String name, double[][] a,int colNum) {
+        String[][] s=new String[a.length][colNum];
+        for(int i=0; i<a.length; i++) {
+
+            for(int j=0; j<colNum;j++){
+                s[i][j] = ""+a[i][j];
+            }
+         
+        }
+        Stri(name, s, colNum);
     }
 }

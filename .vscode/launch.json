@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch RunAlgo",
+            "request": "launch",
+            "mainClass": "UpperLevel.RunAlgo",
+            "projectName": "PipelineMQP_de9018c3"
+        },
+        {
+            "type": "java",
             "name": "Launch Table2CSV",
             "request": "launch",
             "mainClass": "Gen_Algo.Table2CSV",
