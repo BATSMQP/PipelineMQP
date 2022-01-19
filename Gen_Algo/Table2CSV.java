@@ -15,6 +15,8 @@ public class Table2CSV {
     }
 
     public static void col2(String name, String[][] a) {
+        //TODO: make work for all col numbers, just a string apend thing
+        //TODO: naming conventions improve
         try{
             File file = new File("./Data/",name+".csv" ); //KEY IS DIR ex."./local-storage/" and fileName='comp.html'
 
