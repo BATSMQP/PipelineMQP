@@ -7,28 +7,23 @@ public class Document{
 	public String file;
 	public String name;
 	public String dataType;
-	public HashMap<String, String> tags = new HashMap<String, String>();
+	public String ext;
+//	public HashMap<String, String> tags = new HashMap<String, String>();
 	
 	public String getDocumentId() {return documentId;}
 	public String getFile() {return file;}
 	public String getName() {return name;}
 	public String getDataType() {return dataType;}
-	public HashMap<String, String> getTags() { return tags;}
+	public String getExt() {return ext;}
+//	public HashMap<String, String> getTags() { return tags;}
 	
-	public Document(String documentId, String file, String name, String dataType, HashMap<String, String> tags) {
+	public Document(String documentId, String file, String name, String dataType, String ext) {
 		this.documentId = documentId;
 		this.file = file;
 		this.name = name;
 		this.dataType = dataType;
-		this.tags = tags;
-	}
-	
-	public Document(String documentId, String file, String name, String dataType) {
-		this.documentId = documentId;
-		this.file = file;
-		this.name = name;
-		this.dataType = dataType;
-		this.tags = null;
+		this.ext = ext;
+//		this.tags = tags;
 	}
 	
 	public Document() {
@@ -36,16 +31,17 @@ public class Document{
 		this.file = null;
 		this.name = null;
 		this.dataType = null;
-		this.tags = null;
+		this.ext = null;
+//		this.tags = null;
 	}
 	
-	public void addTag(String name, String value) {
-		tags.put(name, value);
-	}
+//	public void addTag(String name, String value) {
+//		tags.put(name, value);
+//	}
 	
-	public void addTags(HashMap<String, String> tags) {
-		this.tags = tags;
-	}
+//	public void addTags(HashMap<String, String> tags) {
+//		this.tags = tags;
+//	}
 	
 	public boolean equals(Object o) {
 		if (o == null) { return false; }
@@ -59,7 +55,7 @@ public class Document{
 	}
 	
 	public String toString() {
-		return "Document " + name + " " + documentId + " is of dataType: " + dataType + ".";
+		return "Document " + name + " " + documentId + " with ext of " + ext + " is of dataType: " + dataType + ".";
 	}
 	
 }

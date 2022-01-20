@@ -72,6 +72,7 @@ create table `Document`(
 `file` varchar(65535),
 `name` varchar(50),
 `dataType` varchar(20),
+`ext` varchar(20),
 PRIMARY KEY (`documentId`)
 );
 

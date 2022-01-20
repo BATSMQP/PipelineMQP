@@ -7,14 +7,14 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import java.util.UUID;
 
 import com.amazonaws.lambda.demo.db.BatsDAO;
-import com.amazonaws.lambda.demo.http.NewToolRequest;
-import com.amazonaws.lambda.demo.http.NewToolResponse;
+import com.amazonaws.lambda.demo.http.NewDataRequest;
+import com.amazonaws.lambda.demo.http.NewDataResponse;
 import com.amazonaws.lambda.demo.model.Document;
 
 
  //this is where we create a choice
 
-public class NewToolHandler implements RequestHandler<NewToolRequest, NewToolResponse> {
+public class NewDataHandler implements RequestHandler<NewDataRequest, NewDataResponse> {
 
 	LambdaLogger logger;
 
@@ -28,7 +28,7 @@ public class NewToolHandler implements RequestHandler<NewToolRequest, NewToolRes
 	}
 
 	@Override
-	public NewToolResponse handleRequest(NewToolRequest req, Context context) {
+	public NewDataResponse handleRequest(NewDataRequest req, Context context) {
 		logger = context.getLogger();
 		logger.log(req.toString());
 		BatsDAO dao = new BatsDAO();
@@ -41,14 +41,14 @@ public class NewToolHandler implements RequestHandler<NewToolRequest, NewToolRes
 		}
 		catch(Exception e) {
 			fail = true;
-			failMessage = "Error adding tool document to the database";
+			failMessage = "Error adding data document to the database";
 		}
 		
-		NewToolResponse response;
+		NewDataResponse response;
 		if (fail) {
-			response = new NewToolResponse(failMessage, 400, document);
+			response = new NewDataResponse(failMessage, 400, document);
 		} else {
-			response = new NewToolResponse("none", 200, document);
+			response = new NewDataResponse("none", 200, document);
 		}
 
 		return response;

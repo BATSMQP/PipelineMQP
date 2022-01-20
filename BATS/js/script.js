@@ -639,7 +639,7 @@ function checkNewTool() {
     var js = JSON.stringify(json);
     console.log("JS:" + js);
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", newTool_url, true);
+    xhr.open("POST", NewTool_url, true);
 
     console.log("after post");
     // send the collected data as JSON
@@ -691,7 +691,7 @@ function checkNewData() {
     var isNeuralData = document.getElementById("newNeuralData").checked;
     var isSpeechData = document.getElementById("newSpeechData").checked;
     var isSiData = document.getElementById("newSiData").checked;
-    var isLogData = document.getElementById("newSogData").checked;
+    var isLogData = document.getElementById("newLogData").checked;
 
     var fn2 = fn.split("\\");
     var fn3 = fn2[fn2.length-1].split(".");
@@ -749,7 +749,7 @@ function checkNewData() {
     var js = JSON.stringify(json);
     console.log("JS:" + js);
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", newData_url, true);
+    xhr.open("POST", NewData_url, true);
 
     console.log("after post");
     // send the collected data as JSON
