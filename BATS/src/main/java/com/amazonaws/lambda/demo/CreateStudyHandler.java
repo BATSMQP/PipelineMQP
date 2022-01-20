@@ -28,7 +28,7 @@ public class CreateStudyHandler implements RequestHandler<NewStudyRequest, NewSt
 		long millis=System.currentTimeMillis();  
 		Timestamp currentDate =new Timestamp(millis); 
 		
-		Study study = new Study(studyId, institutionsInvolved, studyDescription, studyName, studyShortName, studyContact, studyNotes, visibility, isIrbApproved, currentDate, null, authUserId);
+		Study study = new Study(studyId, institutionsInvolved, studyDescription, studyName, studyShortName, studyContact, studyNotes, visibility, isIrbApproved, currentDate, null, currentDate, authUserId);
 		
 		return study;
 	}

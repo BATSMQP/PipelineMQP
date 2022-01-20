@@ -1,6 +1,6 @@
 package com.amazonaws.lambda.demo.http;
 
-import com.amazonaws.lambda.demo.model.Data;
+import com.amazonaws.lambda.demo.model.Document;
 
 /**
  * In most cases the response is the name of the constant that was being created.
@@ -11,16 +11,16 @@ import com.amazonaws.lambda.demo.model.Data;
 public class NewDataResponse {
 	public final String error;
 	public final int statusCode;
-	public final Data data;
+	public final Document data;
 	
-	public NewDataResponse (String s, int statusCode, Data data) {
+	public NewDataResponse (String s, int statusCode, Document data) {
 		this.error = s;
 		this.statusCode = statusCode;
 		this.data = data;
 	}
 	
 	// 200 means success
-	public NewDataResponse (String s, Data data) {
+	public NewDataResponse (String s, Document data) {
 		this.error = s;
 		this.statusCode = 200;
 		this.data = data;
@@ -30,7 +30,7 @@ public class NewDataResponse {
 
 	public int getStatusCode() { return statusCode;}
 	
-	public Data getData() {return data;}
+	public Document getData() {return data;}
 	
 	public String toString() {
 		return "NewDataResponse(" + data + ": " + error + ")";

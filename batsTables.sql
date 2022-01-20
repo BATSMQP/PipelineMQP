@@ -44,6 +44,7 @@ create table `Study`(
 `isIrbApproved` varchar(10),
 `studyStartDate` Timestamp,
 `studyEndDate` Timestamp,
+`lastMod` Timestamp,
 `authUserId` varchar(36),
 PRIMARY KEY (`studyId`),
 FOREIGN KEY (`authUserId`) REFERENCES AuthUser(`authUserId`) on delete cascade

@@ -9,22 +9,26 @@ public class NewToolRequest {
 	String file;
 	String name;
 	String dataType;
+	String ext;
 
 	public String getFile() { return file; }
 	public String getName() { return name;}
 	public String getDataType() { return dataType;}
+	public String getExt() { return ext;}
 	public void setFile(String file) { this.file = file; }
 	public void setName(String name) { this.name = name; }
 	public void setDataType(String dataType) { this.dataType = dataType; }
+	public void setExt(String ext) { this.ext = ext; }
 	
 	public String toString() {
-		return "NewToolRequest(" + file + ", "+ name + ", " + dataType + ")";
+		return "NewToolRequest(" + file + ", "+ name + ", " + dataType + ", " +  ext + ")";
 	}
 	
-	public NewToolRequest (String file, String name, String dataType) {
+	public NewToolRequest (String file, String name, String dataType, String ext) {
 		this.file = file;
 		this.name = name;
 		this.dataType = dataType;
+		this.ext = ext;
 	}
 	
 	public NewToolRequest() {

@@ -54,7 +54,7 @@
 
         <h3 id="title">Upload Data:</h3>
 
-        <form id="newTool" onsubmit="return checkNewTool()" action="">
+        <form id="newData" onsubmit="return checkNewData()" action="">
           <div class="row mb-3 align-items-center">
             <div class="col-auto">
                 <label for="inputGroupFile02" class="form-label">File:</label>
@@ -79,7 +79,29 @@
 
           <p>Data Type:</p>
 
-          <div class="list-group d-flex mb-4" style="width: 350px;">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="newFacialData">
+            <label class="form-check-label" for="newFacialData">Facial Data</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="newNeuralData">
+            <label class="form-check-label" for="newNeuralData">Neural Data</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="newSpeechData">
+            <label class="form-check-label" for="newSpeechData">Speech Data</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="newSiData">
+            <label class="form-check-label" for="newSiData">Stress Indicators Data</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="newLogData">
+            <label class="form-check-label" for="newLogData">Log Data</label>
+          </div>
+          </br>
+
+          <!-- <div class="list-group d-flex mb-4" style="width: 350px;">
             <button type="button" id="logData"style="text-align: left" class="list-group-item">Log</button>
             <button type="button" id="neuralData" style="text-align: left" class="list-group-item">Neural</button>
             <button type="button" id="FacialData" style="text-align: left" class="list-group-item">Facial</button>
@@ -93,11 +115,12 @@
                     </div>
                     <input type="text" class="form-control" placeholder="Value" aria-label="Username" aria-describedby="basic-addon1">
                   </div>
-          </div>
+          </div> -->
 
         <!-- List Group Data Type -->
 
-        <p>Study:</p>
+        <!-- The following section is commented out for now -->
+        <!-- <p>Study:</p>
 
         <div class="form-check mb-3" id="StudyList">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> This is checkbox <br />
@@ -108,7 +131,7 @@
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> This is checkbox <br />         
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> This is checkbox <br />
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> This is checkbox <br />
-        </div>
+        </div> -->
 
         <!--
           <div class="form-check form-check-inline">
@@ -122,7 +145,7 @@
         -->
 
           </br>
-          <button type="submit" id="confirmUploadNewToolButton" class="btn btn-primary mb-5">Upload</button>
+          <button type="submit" id="confirmUploadNewDataButton" class="btn btn-primary mb-5">Upload</button>
         </form>
 
     </div>

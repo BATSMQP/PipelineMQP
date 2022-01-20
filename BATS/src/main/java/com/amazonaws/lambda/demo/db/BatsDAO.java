@@ -137,7 +137,7 @@ public class BatsDAO {
 	           return false;
 	       }
 
-	       ps = conn.prepareStatement("INSERT INTO Study (studyId, institutionsInvolved, studyDescription, studyName, studyShortName, studyContact, studyNotes, visibility, isIrbApproved, studyStartDate, studyEndDate, authUserId) values(?,?,?,?,?,?,?,?,?,?,?,?);");
+	       ps = conn.prepareStatement("INSERT INTO Study (studyId, institutionsInvolved, studyDescription, studyName, studyShortName, studyContact, studyNotes, visibility, isIrbApproved, studyStartDate, studyEndDate, lastMod, authUserId) values(?,?,?,?,?,?,?,?,?,?,?,?,?);");
 	       ps.setString(1, study.studyId);
 	       ps.setString(2, study.institutionsInvolved);
 	       ps.setString(3, study.studyDescription);
@@ -153,7 +153,8 @@ public class BatsDAO {
 	       } else {
 	       	ps.setTimestamp(11, null);
 	       }
-	       ps.setString(12, study.authUserId);
+	       ps.setTimestamp(12, study.lastMod);
+	       ps.setString(13, study.authUserId);
 	       { logger.log("In addStudy p2 (BatsDao)"); }
 	       { logger.log("ps for insert (in addStudy): " + ps); }
 	       ps.execute();
@@ -175,7 +176,7 @@ public class BatsDAO {
 	 public ArrayList<Study> getAllStudies(String authUserId, LambdaLogger logger) throws Exception {
 	 
 		try {
-		     PreparedStatement ps = conn.prepareStatement("SELECT * FROM Study where authUserId=? order by studyStartDate;");
+		     PreparedStatement ps = conn.prepareStatement("SELECT * FROM Study where authUserId=? order by lastMod;");
 		     ps.setString(1, authUserId);
 		     ResultSet resultSet = ps.executeQuery();
 		     ArrayList<Study> fs = new ArrayList<Study>();
@@ -1112,8 +1113,10 @@ public class BatsDAO {
 		  studyEndDate = resultSet.getTimestamp("studyEndDate");
 	  }
 	  { logger.log("studyEndDate: " + studyEndDate); }
+	  Timestamp lastMod = resultSet.getTimestamp("lastMod");
+	  { logger.log("lastMod: " + lastMod); }
 	  String authUserId = resultSet.getString("authUserId");
-	  return new Study(studyId, institutionsInvolved, studyDescription, studyName, studyShortName, studyContact, studyNotes, visibility, isIrbApproved, studyStartDate, studyEndDate, authUserId); 
+	  return new Study(studyId, institutionsInvolved, studyDescription, studyName, studyShortName, studyContact, studyNotes, visibility, isIrbApproved, studyStartDate, studyEndDate, lastMod, authUserId); 
   }
   private Neural generateNeural(ResultSet resultSet,LambdaLogger logger) throws Exception {
 	  String neuralId  = resultSet.getString("neuralId");

@@ -16,6 +16,7 @@ public class Study{
 	public String isIrbApproved;
 	public Timestamp studyStartDate;
 	public Timestamp studyEndDate;
+	public Timestamp lastMod;
 	public String authUserId;
 	
 	public String getStudyId() {return studyId;}
@@ -29,9 +30,10 @@ public class Study{
 	public String getIsIrbApproved() {return isIrbApproved;}
 	public Timestamp getStudyStartDate() {return studyStartDate;}
 	public Timestamp getStudyEndDate() {return studyEndDate;}
+	public Timestamp getLastMod() {return lastMod;}
 	public String getAuthUserId() {return authUserId;}
 	
-	public Study(String studyId, String institutionsInvolved, String studyDescription, String studyName, String studyShortName, String studyContact, String studyNotes, String visibility, String isIrbApproved, Timestamp studyStartDate, Timestamp studyEndDate, String authUserId) {
+	public Study(String studyId, String institutionsInvolved, String studyDescription, String studyName, String studyShortName, String studyContact, String studyNotes, String visibility, String isIrbApproved, Timestamp studyStartDate, Timestamp studyEndDate, Timestamp lastMod, String authUserId) {
 		this.studyId = studyId;
 		this.institutionsInvolved = institutionsInvolved;
 		this.studyDescription = studyDescription;
@@ -43,6 +45,7 @@ public class Study{
 		this.isIrbApproved = isIrbApproved;
 		this.studyStartDate = studyStartDate;
 		this.studyEndDate = studyEndDate;
+		this.lastMod = lastMod;
 		this.authUserId = authUserId;
 	}
 	
@@ -57,6 +60,7 @@ public class Study{
 		this.visibility = "";
 		this.isIrbApproved = "";
 		this.studyStartDate = studyStartDate;
+		this.lastMod = studyStartDate;
 		this.studyEndDate = null;
 		this.authUserId = authUserId;
 	}
@@ -73,6 +77,7 @@ public class Study{
 		this.isIrbApproved = null;
 		this.studyStartDate = null;
 		this.studyEndDate = null;
+		this.lastMod = null;
 		this.authUserId = null;
 	}
 	

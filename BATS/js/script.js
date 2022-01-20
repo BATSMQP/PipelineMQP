@@ -557,6 +557,11 @@ function setContent() {
 function checkNewTool() {
     var fn = document.getElementById("inputToolFile").value;
     var n = document.getElementById("inputToolName").value;
+    var isFacialData = document.getElementById("facialData").checked;
+    var isNeuralData = document.getElementById("neuralData").checked;
+    var isSpeechData = document.getElementById("speechData").checked;
+    var isSiData = document.getElementById("siData").checked;
+    var isLogData = document.getElementById("logData").checked;
 
     var fn2 = fn.split("\\");
     var fn3 = fn2[fn2.length-1].split(".");
@@ -598,7 +603,38 @@ function checkNewTool() {
         return false;
     }
 
-    var json = {file: content, name: n, dataType: fn3[1]};
+    var selDataType = "";
+    if(isFacialData){
+        selDataType += "Facial";
+    }
+    if(isNeuralData){
+        if(selDataType != ""){
+            selDataType += ",";
+        }
+        selDataType += "Neural";
+    }
+    if(isSpeechData){
+        if(selDataType != ""){
+            selDataType += ",";
+        }
+        selDataType += "Speech";
+    }
+    if(isSiData){
+        if(selDataType != ""){
+            selDataType += ",";
+        }
+        selDataType += "Stress Indicators";
+    }
+    if(isLogData){
+        if(selDataType != ""){
+            selDataType += ",";
+        }
+        selDataType += "Log Data";
+    }
+
+    console.log("In checkNewTool selDataType: " + selDataType);
+
+    var json = {file: content, name: n, dataType: selDataType, ext: fn3[1]};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
@@ -628,6 +664,116 @@ function checkNewTool() {
 }
 
 function processNewToolResponse(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var tool = js["tool"];
+
+    if (status == 200) {
+        window.location.href = "studyPage.html";
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
+
+        var textString = "<p> error: " + msg + "</p>";
+        loginText = document.getElementById("loginText");
+        loginText.innerHTML = textString;
+    }
+}
+
+//NEWDATA PAGE
+
+function checkNewData() {
+    var fn = document.getElementById("inputToolFile").value;
+    var n = document.getElementById("inputToolName").value;
+    var isFacialData = document.getElementById("facialData").checked;
+    var isNeuralData = document.getElementById("neuralData").checked;
+    var isSpeechData = document.getElementById("speechData").checked;
+    var isSiData = document.getElementById("siData").checked;
+    var isLogData = document.getElementById("logData").checked;
+
+    var fn2 = fn.split("\\");
+    var fn3 = fn2[fn2.length-1].split(".");
+
+    console.log("filename: " + fn);
+    console.log("fn2: " + fn2);
+    console.log("fn3: " + fn3);
+    console.log("fn3[0]: " + fn3[0]);
+    console.log("fn3[1]: " + fn3[1]);
+    console.log("name: " + n);    
+
+    if (fn == "") {
+        alert("Please upload a file before continuing");
+        return false;
+    }
+
+    if (n == "") {
+        alert("Please enter a name for the analysis tool before continuing");
+        return false;
+    }
+
+    var selDataType = "";
+    if(isFacialData){
+        selDataType += "Facial";
+    }
+    if(isNeuralData){
+        if(selDataType != ""){
+            selDataType += ",";
+        }
+        selDataType += "Neural";
+    }
+    if(isSpeechData){
+        if(selDataType != ""){
+            selDataType += ",";
+        }
+        selDataType += "Speech";
+    }
+    if(isSiData){
+        if(selDataType != ""){
+            selDataType += ",";
+        }
+        selDataType += "Stress Indicators";
+    }
+    if(isLogData){
+        if(selDataType != ""){
+            selDataType += ",";
+        }
+        selDataType += "Log Data";
+    }
+
+    console.log("In checkNewData selDataType: " + selDataType);
+
+    var json = {file: content, name: n, dataType: selDataType, ext: fn3[1]};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", newData_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processNewDataResponse(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processNewDataResponse("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processNewDataResponse(result) {
     console.log("result:" + result);
     var js = JSON.parse(result);
 

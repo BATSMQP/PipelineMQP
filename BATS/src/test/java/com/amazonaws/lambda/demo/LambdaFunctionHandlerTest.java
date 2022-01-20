@@ -127,7 +127,7 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testCreateStudyHandler() {
     	CreateStudyHandler csh = new CreateStudyHandler();
-    	NewStudyRequest r = new NewStudyRequest("testStudyInEclipse", "ts", "abstract", "institutionsInvolved", "studyContact", "studyNotes", "isIrbApproved", "visibility", "123");
+    	NewStudyRequest r = new NewStudyRequest("testStudyInEclipse", "ts", "abstract", "institutionsInvolved", "studyContact", "studyNotes", "isIrbApproved", "visibility", "91c9465f-9a0d-4c6f-9f19-b5a813d2ce34");
     	NewStudyResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
@@ -137,7 +137,7 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testGetStudiesHandler() {
     	GetStudiesHandler csh = new GetStudiesHandler();
-    	GetStudiesRequest r = new GetStudiesRequest("74a00780-3a82-4a32-bf61-7d03b4860e89", "lauren");
+    	GetStudiesRequest r = new GetStudiesRequest("91c9465f-9a0d-4c6f-9f19-b5a813d2ce34", "test");
     	GetStudiesResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
@@ -147,7 +147,7 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testGetDataHandler() {
     	GetDataHandler csh = new GetDataHandler();
-    	GetDataRequest r = new GetDataRequest("123", "db467099-bae9-4cc1-8f81-ea5b629f816e");
+    	GetDataRequest r = new GetDataRequest("123", "91c9465f-9a0d-4c6f-9f19-b5a813d2ce34");
     	GetDataResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
@@ -219,7 +219,7 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testGetUsernameHandler() {
     	GetUsernameHandler csh = new GetUsernameHandler();
-    	GetUsernameRequest r = new GetUsernameRequest("1031e3f5-7ad4-415e-a50f-e270642b746c");
+    	GetUsernameRequest r = new GetUsernameRequest("91c9465f-9a0d-4c6f-9f19-b5a813d2ce34");
     	GetUsernameResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
