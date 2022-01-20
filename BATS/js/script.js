@@ -685,13 +685,13 @@ function processNewToolResponse(result) {
 //NEWDATA PAGE
 
 function checkNewData() {
-    var fn = document.getElementById("inputToolFile").value;
-    var n = document.getElementById("inputToolName").value;
-    var isFacialData = document.getElementById("facialData").checked;
-    var isNeuralData = document.getElementById("neuralData").checked;
-    var isSpeechData = document.getElementById("speechData").checked;
-    var isSiData = document.getElementById("siData").checked;
-    var isLogData = document.getElementById("logData").checked;
+    var fn = document.getElementById("dataInputToolFile").value;
+    var n = document.getElementById("dataInputToolName").value;
+    var isFacialData = document.getElementById("newFacialData").checked;
+    var isNeuralData = document.getElementById("newNeuralData").checked;
+    var isSpeechData = document.getElementById("newSpeechData").checked;
+    var isSiData = document.getElementById("newSiData").checked;
+    var isLogData = document.getElementById("newSogData").checked;
 
     var fn2 = fn.split("\\");
     var fn3 = fn2[fn2.length-1].split(".");
@@ -778,7 +778,7 @@ function processNewDataResponse(result) {
     var js = JSON.parse(result);
 
     var status = js["statusCode"];
-    var tool = js["tool"];
+    var data = js["data"];
 
     if (status == 200) {
         window.location.href = "studyPage.html";
