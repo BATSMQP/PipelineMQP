@@ -634,7 +634,7 @@ function checkNewTool() {
 
     console.log("In checkNewTool selDataType: " + selDataType);
 
-    var json = {file: content, name: n, dataType: selDataType, ext: fn3[1]};
+    var json = {file: content, filename: fn3[0], name: n, dataType: selDataType, ext: fn3[1]};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
@@ -744,7 +744,7 @@ function checkNewData() {
 
     console.log("In checkNewData selDataType: " + selDataType);
 
-    var json = {file: content, name: n, dataType: selDataType, ext: fn3[1]};
+    var json = {file: content, filename: fn3[0], name: n, dataType: selDataType, ext: fn3[1], studyId: localStorage.getItem(currentStudyId), authUserId: localStorage.getItem(currentAuthUserId)};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);

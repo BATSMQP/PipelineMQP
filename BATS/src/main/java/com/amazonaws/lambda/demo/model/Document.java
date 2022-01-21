@@ -1,37 +1,45 @@
 package com.amazonaws.lambda.demo.model;
 
-import java.util.HashMap;
+//import java.util.HashMap;
 
 public class Document{
 	public final String documentId;
 	public String file;
+	public String filename;
 	public String name;
 	public String dataType;
 	public String ext;
+	public String docType;
 //	public HashMap<String, String> tags = new HashMap<String, String>();
 	
 	public String getDocumentId() {return documentId;}
 	public String getFile() {return file;}
+	public String getFilename() {return filename;}
 	public String getName() {return name;}
 	public String getDataType() {return dataType;}
 	public String getExt() {return ext;}
+	public String getDocType() {return docType;}
 //	public HashMap<String, String> getTags() { return tags;}
 	
-	public Document(String documentId, String file, String name, String dataType, String ext) {
+	public Document(String documentId, String file, String filename, String name, String dataType, String ext, String docType) {
 		this.documentId = documentId;
 		this.file = file;
+		this.filename = filename;
 		this.name = name;
 		this.dataType = dataType;
 		this.ext = ext;
+		this.docType = docType;
 //		this.tags = tags;
 	}
 	
 	public Document() {
 		this.documentId = null;
 		this.file = null;
+		this.filename = null;
 		this.name = null;
 		this.dataType = null;
 		this.ext = null;
+		this.docType = null;
 //		this.tags = null;
 	}
 	
@@ -55,7 +63,7 @@ public class Document{
 	}
 	
 	public String toString() {
-		return "Document " + name + " " + documentId + " with ext of " + ext + " is of dataType: " + dataType + ".";
+		return docType + " Document " + name + " " + documentId + " " + filename + "." + ext + " is of dataType: " + dataType + ".";
 	}
 	
 }

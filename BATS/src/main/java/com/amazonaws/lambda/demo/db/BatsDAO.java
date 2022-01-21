@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import com.amazonaws.lambda.demo.model.AuthUser;
+import com.amazonaws.lambda.demo.model.AuthUserDocument;
 import com.amazonaws.lambda.demo.model.Data;
 import com.amazonaws.lambda.demo.model.Document;
 import com.amazonaws.lambda.demo.model.Facial;
@@ -20,6 +21,7 @@ import com.amazonaws.lambda.demo.model.SpeechStudy;
 import com.amazonaws.lambda.demo.model.StressIndicators;
 import com.amazonaws.lambda.demo.model.StressIndicatorsStudy;
 import com.amazonaws.lambda.demo.model.Study;
+import com.amazonaws.lambda.demo.model.StudyDocument;
 
 public class BatsDAO { 
 
@@ -107,17 +109,70 @@ public class BatsDAO {
 	          return false;
 	      }
 
-	      ps = conn.prepareStatement("INSERT INTO Document (documentId, file, name, dataType) values(?,?,?,?);");
+	      ps = conn.prepareStatement("INSERT INTO Document (documentId, file, filename, name, dataType, ext, docType) values(?,?,?,?,?,?,?);");
 	      ps.setString(1, document.documentId);
 	      ps.setString(2, document.file);
-	      ps.setString(3, document.name);
-	      ps.setString(4, document.dataType);
+	      ps.setString(3, document.filename);
+	      ps.setString(4, document.name);
+	      ps.setString(5, document.dataType);
+	      ps.setString(6, document.ext);
+	      ps.setString(7, document.docType);
 	      { logger.log("ps for insert (in addDocument): " + ps); }
 	      ps.execute();
 	      return true;
 	
 	  } catch (Exception e) {
 	      throw new Exception("Failed to insert document: " + e.getMessage());
+	  }
+	}
+	
+	public boolean addStudyDocument(StudyDocument studyDocument, LambdaLogger logger) throws Exception {
+	  try {
+	      PreparedStatement ps = conn.prepareStatement("SELECT * FROM StudyDocument WHERE documentId = ?;");
+	      ps.setString(1, studyDocument.documentId);
+	      ResultSet resultSet = ps.executeQuery();
+	      { logger.log("ps for select (in addStudyDocument): " + ps); }
+	      // already present?
+	      while (resultSet.next()) {
+	    	  StudyDocument c = generateStudyDocument(resultSet, logger);
+	          resultSet.close();
+	          return false;
+	      }
+
+	      ps = conn.prepareStatement("INSERT INTO StudyDocument (studyId, documentId) values(?,?);");
+	      ps.setString(1, studyDocument.studyId);
+	      ps.setString(2, studyDocument.documentId);
+	      { logger.log("ps for insert (in addStuudyDocument): " + ps); }
+	      ps.execute();
+	      return true;
+	
+	  } catch (Exception e) {
+	      throw new Exception("Failed to insert StudyDocument: " + e.getMessage());
+	  }
+	}
+	
+	public boolean addAuthUserDocument(AuthUserDocument authUserDocument, LambdaLogger logger) throws Exception {
+	  try {
+	      PreparedStatement ps = conn.prepareStatement("SELECT * FROM AuthUserDocument WHERE documentId = ?;");
+	      ps.setString(1, authUserDocument.documentId);
+	      ResultSet resultSet = ps.executeQuery();
+	      { logger.log("ps for select (in addAuthUserDocument): " + ps); }
+	      // already present?
+	      while (resultSet.next()) {
+	    	  AuthUserDocument c = generateAuthUserDocument(resultSet, logger);
+	          resultSet.close();
+	          return false;
+	      }
+
+	      ps = conn.prepareStatement("INSERT INTO AuthUserDocument (authUserId, documentId) values(?,?);");
+	      ps.setString(1, authUserDocument.authUserId);
+	      ps.setString(2, authUserDocument.documentId);
+	      { logger.log("ps for insert (in addAuthUserDocument): " + ps); }
+	      ps.execute();
+	      return true;
+	
+	  } catch (Exception e) {
+	      throw new Exception("Failed to insert StudyDocument: " + e.getMessage());
 	  }
 	}
  
@@ -1092,9 +1147,12 @@ public class BatsDAO {
 	private Document generateDocument(ResultSet resultSet,LambdaLogger logger) throws Exception {
 		  String documentId  = resultSet.getString("documentId");
 		  String file = resultSet.getString("file");
+		  String filename = resultSet.getString("filename");
 		  String name = resultSet.getString("name");
 		  String dataType = resultSet.getString("dataType");
-		  return new Document(documentId, file, name, dataType);
+		  String ext = resultSet.getString("ext");
+		  String docType = resultSet.getString("docType");
+		  return new Document(documentId, file, filename, name, dataType, ext, docType);
 		}
   private Study generateStudy(ResultSet resultSet,LambdaLogger logger) throws Exception {
 	  String studyId  = resultSet.getString("studyId");
@@ -1196,6 +1254,16 @@ public class BatsDAO {
 	  String logDataId  = resultSet.getString("logDataId");
 	  String studyId = resultSet.getString("studyId");
 	  return new LogDataStudy(logDataId, studyId); 
+  }
+  private StudyDocument generateStudyDocument(ResultSet resultSet,LambdaLogger logger) throws Exception {
+	  String studyId  = resultSet.getString("studyId");
+	  String documentId = resultSet.getString("documentId");
+	  return new StudyDocument(studyId, documentId); 
+  }
+  private AuthUserDocument generateAuthUserDocument(ResultSet resultSet,LambdaLogger logger) throws Exception {
+	  String authUserId  = resultSet.getString("authUserId");
+	  String documentId = resultSet.getString("documentId");
+	  return new AuthUserDocument(authUserId, documentId); 
   }
 
 }

@@ -23,6 +23,8 @@ import com.amazonaws.lambda.demo.model.Study;
 
  //this is where we create a choice
 
+//This lambda function gets all of the data documents for the currentUser
+
 public class GetDataHandler implements RequestHandler<GetDataRequest, GetDataResponse> {
 
 	LambdaLogger logger;

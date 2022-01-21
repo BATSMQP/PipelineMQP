@@ -9,6 +9,7 @@ drop table SpeechStudy;
 drop table StressIndicatorsStudy;
 drop table LogDataStudy;
 drop table StudyDocument;
+drop table AuthUserDocument;
 drop table Neural;
 drop table Facial;
 drop table Speech;
@@ -70,9 +71,11 @@ FOREIGN KEY (`studyGroupId`) REFERENCES StudyGroup(`studyGroupId`) on delete cas
 create table `Document`(
 `documentId` varchar(36),
 `file` varchar(65535),
+`filename` varchar(50),
 `name` varchar(50),
 `dataType` varchar(20),
 `ext` varchar(20),
+`docType` varchar(20),
 PRIMARY KEY (`documentId`)
 );
 
@@ -148,6 +151,12 @@ create table `StudyDocument`(
 `studyId` varchar(36),
 `documentId` varchar(36),
 PRIMARY KEY (`studyId`, `documentId`)
+);
+
+create table `AuthUserDocument`(
+`authUserId` varchar(36),
+`documentId` varchar(36),
+PRIMARY KEY (`authUserId`, `documentId`)
 );
 
 create table `NeuralStudy`(
