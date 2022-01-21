@@ -435,7 +435,9 @@ function studyClicked(studyId, authUserId, studyName) {
     // localStorage.setItem('currentAuthUserId', authUserId);
     localStorage.setItem('studyName', studyName);
     currentStudyName = localStorage.getItem('studyName');
+    currentStudyId = localStorage.getItem('currentStudyId');
     console.log("currentStudyName (in studyClicked): " + currentStudyName);
+    console.log("currentStudyId (in studyClicked): " + currentStudyId);
     window.location.href = "studyPage.html";
 }
 
@@ -744,7 +746,7 @@ function checkNewData() {
 
     console.log("In checkNewData selDataType: " + selDataType);
 
-    var json = {file: content, filename: fn3[0], name: n, dataType: selDataType, ext: fn3[1], studyId: localStorage.getItem(currentStudyId), authUserId: localStorage.getItem(currentAuthUserId)};
+    var json = {file: content, filename: fn3[0], name: n, dataType: selDataType, ext: fn3[1], studyId: localStorage.getItem("currentStudyId"), authUserId: localStorage.getItem("currentAuthUserId")};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
