@@ -17,6 +17,7 @@ import com.amazonaws.lambda.demo.http.GetStudiesResponse;
 import com.amazonaws.lambda.demo.http.NewStudyRequest;
 import com.amazonaws.lambda.demo.http.NewStudyResponse;
 import com.amazonaws.lambda.demo.model.Data;
+import com.amazonaws.lambda.demo.model.Document;
 import com.amazonaws.lambda.demo.model.Study;
 //import com.amazonaws.lambda.demo.model.AuthUser;
 
@@ -37,15 +38,15 @@ public class GetDataHandler implements RequestHandler<GetDataRequest, GetDataRes
 		boolean fail = false;
 		String failMessage = "";
 		
-		Data data = new Data();
+		ArrayList<Document> data = new ArrayList<Document>();
 		
 
 		try {
-			data = dao.getDataForStudy(req.getStudyId(), logger);
+			data = dao.getDataForAuthUser(req.getAuthUserId(), logger);
 		}
 		catch(Exception e) {
 			fail = true;
-			failMessage = "Failed to get the data for the studyId";
+			failMessage = "Failed to get the data for the authUserId";
 		}
 		
 		GetDataResponse response;

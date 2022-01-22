@@ -11,19 +11,19 @@ import com.amazonaws.lambda.demo.model.Document;
  * if an error of some sort, then the response describes that error.
  *  
  */
-public class GetDataResponse {
+public class GetStudyDataResponse {
 	public final String error;
 	public final int statusCode;
 	public ArrayList<Document> data;
 	
-	public GetDataResponse (String s, int statusCode, ArrayList<Document> data) {
+	public GetStudyDataResponse (String s, int statusCode, ArrayList<Document> data) {
 		this.error = s;
 		this.statusCode = statusCode;
 		this.data = data;
 	}
 	
 	// 200 means success
-	public GetDataResponse (String s, ArrayList<Document> data) {
+	public GetStudyDataResponse (String s, ArrayList<Document> data) {
 		this.error = s;
 		this.statusCode = 200;
 		this.data = data;
@@ -36,6 +36,6 @@ public class GetDataResponse {
 	public ArrayList<Document> getData() {return data;}
 	
 	public String toString() {
-		return "GetDataResponse(" + data + ": " + error + ")";
+		return "GetStudyDataResponse(" + data + ": " + error + ")";
 	}
 }

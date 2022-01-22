@@ -21,6 +21,8 @@ import com.amazonaws.lambda.demo.http.GetDataRequest;
 import com.amazonaws.lambda.demo.http.GetDataResponse;
 import com.amazonaws.lambda.demo.http.GetStudiesRequest;
 import com.amazonaws.lambda.demo.http.GetStudiesResponse;
+import com.amazonaws.lambda.demo.http.GetStudyDataRequest;
+import com.amazonaws.lambda.demo.http.GetStudyDataResponse;
 import com.amazonaws.lambda.demo.http.GetUsernameRequest;
 import com.amazonaws.lambda.demo.http.GetUsernameResponse;
 import com.amazonaws.lambda.demo.http.LoginRequest;
@@ -147,8 +149,18 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testGetDataHandler() {
     	GetDataHandler csh = new GetDataHandler();
-    	GetDataRequest r = new GetDataRequest("123", "91c9465f-9a0d-4c6f-9f19-b5a813d2ce34");
+    	GetDataRequest r = new GetDataRequest("testAuthUser");
     	GetDataResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.data: " + response.data);
+    }
+    
+    @Test
+    public void testGetStudyDataHandler() {
+    	GetStudyDataHandler csh = new GetStudyDataHandler();
+    	GetStudyDataRequest r = new GetStudyDataRequest("ff9aeab7-b842-48ce-8e21-d7516292662c");
+    	GetStudyDataResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
     	System.out.println("response.data: " + response.data);
@@ -209,7 +221,7 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testNewToolHandler() {
     	NewToolHandler csh = new NewToolHandler();
-    	NewToolRequest r = new NewToolRequest("tool", "tool name", "txt");
+    	NewToolRequest r = new NewToolRequest("tool", "toolname", "Tool Name", "Speech", "txt");
     	NewToolResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
@@ -219,7 +231,7 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testGetUsernameHandler() {
     	GetUsernameHandler csh = new GetUsernameHandler();
-    	GetUsernameRequest r = new GetUsernameRequest("91c9465f-9a0d-4c6f-9f19-b5a813d2ce34");
+    	GetUsernameRequest r = new GetUsernameRequest("testAuthUser");
     	GetUsernameResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);

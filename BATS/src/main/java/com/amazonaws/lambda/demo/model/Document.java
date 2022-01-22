@@ -6,10 +6,10 @@ public class Document{
 	public final String documentId;
 	public String file;
 	public String filename;
-	public String name;
-	public String dataType;
+	public String name; //user given name
+	public String dataType; //"Neural", "Facial", "Speech", "Stress Indicators", or "Log Data"
 	public String ext;
-	public String docType;
+	public String docType; //"Data" or "Tool"
 //	public HashMap<String, String> tags = new HashMap<String, String>();
 	
 	public String getDocumentId() {return documentId;}

@@ -251,23 +251,75 @@ public class BatsDAO {
 		 }
 	}
 	 
-	public Data getDataForStudy(String studyId, LambdaLogger logger) throws Exception {
+	public ArrayList<Document> getDataForStudy(String studyId, LambdaLogger logger) throws Exception {
 		 
 	 try {
-		 Data data = new Data();
-		 data.neural = getAllNeural(studyId, logger);
-		 data.facial = getAllFacial(studyId, logger);
-		 data.speech = getAllSpeech(studyId, logger);
-		 data.stressIndicators = getAllStressIndicators(studyId, logger);
-		 data.logData = getAllLogData(studyId, logger);
-		 
-		 return data;
+		  PreparedStatement ps = conn.prepareStatement("SELECT * FROM StudyDocument WHERE studyId = ?;");
+	      ps.setString(1, studyId);
+	      ResultSet resultSet = ps.executeQuery();
+	      { logger.log("ps for select (in getDataForStudy): " + ps); }
+	      // already present?
+	      ArrayList<StudyDocument> dataDocumentIds = new ArrayList<StudyDocument>();
+	      while (resultSet.next()) {
+	    	  dataDocumentIds.add(generateStudyDocument(resultSet, logger));
+	          resultSet.close();
+	      }
+	      ArrayList<Document> dataDocuments = new ArrayList<Document>();
+	      
+	      for(int i = 0; i < dataDocumentIds.size(); i++) {
+	    	  PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM Document WHERE documentId = ? AND docType = 'Data';");
+		      ps2.setString(1, dataDocumentIds.get(i).documentId);
+		      ResultSet resultSet2 = ps2.executeQuery();
+		      { logger.log("ps2 for select (in getDataForStudy): " + ps2); }
+		      // already present?
+		      while (resultSet2.next()) {
+		    	  dataDocuments.add(generateDocument(resultSet2, logger));
+		          resultSet2.close();
+		      }
+	      }
+	      
+	      return dataDocuments;
 	
 	 } catch (Exception e) {
 	 	e.printStackTrace();
 	     throw new Exception("Failed in getting data for the study: " + e.getMessage());
 	 }
 	}
+	
+	public ArrayList<Document> getDataForAuthUser(String authUserId, LambdaLogger logger) throws Exception {
+		 
+		 try {
+			  PreparedStatement ps = conn.prepareStatement("SELECT * FROM AuthUserDocument WHERE authUserId = ?;");
+		      ps.setString(1, authUserId);
+		      ResultSet resultSet = ps.executeQuery();
+		      { logger.log("ps for select (in getDataForAuthUser): " + ps); }
+		      // already present?
+		      ArrayList<AuthUserDocument> dataDocumentIds = new ArrayList<AuthUserDocument>();
+		      while (resultSet.next()) {
+		    	  dataDocumentIds.add(generateAuthUserDocument(resultSet, logger));
+		          resultSet.close();
+		      }
+		      ArrayList<Document> dataDocuments = new ArrayList<Document>();
+		      
+		      for(int i = 0; i < dataDocumentIds.size(); i++) {
+		    	  PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM Document WHERE documentId = ? AND docType = 'Data';");
+			      ps2.setString(1, dataDocumentIds.get(i).documentId);
+			      ResultSet resultSet2 = ps2.executeQuery();
+			      { logger.log("ps2 for select (in getDataForStudy): " + ps2); }
+			      // already present?
+			      while (resultSet2.next()) {
+			    	  dataDocuments.add(generateDocument(resultSet2, logger));
+			          resultSet2.close();
+			      }
+		      }
+		      
+		      return dataDocuments;
+		
+		 } catch (Exception e) {
+		 	e.printStackTrace();
+		     throw new Exception("Failed in getting data for the study: " + e.getMessage());
+		 }
+		}
 	 
 	public ArrayList<Neural> getAllNeural(String studyId, LambdaLogger logger) throws Exception {
 		try {
