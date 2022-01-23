@@ -543,7 +543,7 @@ function checkGetStudyData() {
     var js = JSON.stringify(json);
     console.log("JS:" + js);
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", getStudies_url, true);
+    xhr.open("POST", GetStudyData_url, true);
 
     console.log("after post");
     // send the collected data as JSON
@@ -643,6 +643,10 @@ function dataClicked(documentId, authUserId, filename, name) {
     console.log("currentDocumentId (in studyClicked): " + currentDocumentId);
     window.location.href = "studyPage.html";
 }
+/////////////////Select Algorithm PAGE///////////////////////////////////////////////////////////
+
+
+
 ////////////////New Tool PAGE/////////////////////////////////////////
 
 function setContent() {
