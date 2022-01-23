@@ -644,6 +644,19 @@ function dataClicked(documentId, authUserId, filename, name) {
 }
 /////////////////Select Algorithm PAGE///////////////////////////////////////////////////////////
 
+function algoClicked(documentId, authUserId, filename) {
+    console.log("in algoClicked");
+    console.log("documentId: " + documentId);
+    console.log("authUserId: " + authUserId);
+    console.log("filename (in algoClicked): " + filename);
+    localStorage.setItem('currentDocumentId', documentId);
+    // localStorage.setItem('currentAuthUserId', authUserId);
+    localStorage.setItem('filename', filename);
+    currentFileName = localStorage.getItem('filename');
+    currentDocumentId = localStorage.getItem('currentDocumentId');
+    console.log("currentFileName (in algoClicked): " + currentFileName);
+    console.log("currentDocumentId (in algoClicked): " + currentDocumentId);
+}
 
 
 ////////////////New Tool PAGE/////////////////////////////////////////
