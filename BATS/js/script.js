@@ -640,7 +640,6 @@ function dataClicked(documentId, authUserId, filename, name) {
     console.log("currentFileName (in dataClicked): " + currentFileName);
     console.log("currentName (in dataClicked): " + currentName);
     console.log("currentDocumentId (in dataClicked): " + currentDocumentId);
-    window.location.href = "studyPage.html";
 }
 /////////////////Select Algorithm PAGE///////////////////////////////////////////////////////////
 
@@ -656,7 +655,6 @@ function algoClicked(documentId, authUserId, filename) {
     currentDocumentId = localStorage.getItem('currentDocumentId');
     console.log("currentFileName (in algoClicked): " + currentFileName);
     console.log("currentDocumentId (in algoClicked): " + currentDocumentId);
-    window.location.href = "studyPage.html";
 }
 
 
