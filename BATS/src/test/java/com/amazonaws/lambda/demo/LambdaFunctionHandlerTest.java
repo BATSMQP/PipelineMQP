@@ -27,6 +27,8 @@ import com.amazonaws.lambda.demo.http.GetUsernameRequest;
 import com.amazonaws.lambda.demo.http.GetUsernameResponse;
 import com.amazonaws.lambda.demo.http.LoginRequest;
 import com.amazonaws.lambda.demo.http.LoginResponse;
+import com.amazonaws.lambda.demo.http.NewDataRequest;
+import com.amazonaws.lambda.demo.http.NewDataResponse;
 import com.amazonaws.lambda.demo.http.NewStudyRequest;
 import com.amazonaws.lambda.demo.http.NewStudyResponse;
 import com.amazonaws.lambda.demo.http.NewToolRequest;
@@ -221,11 +223,21 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testNewToolHandler() {
     	NewToolHandler csh = new NewToolHandler();
-    	NewToolRequest r = new NewToolRequest("tool", "toolname", "Tool Name", "Speech", "txt");
+    	NewToolRequest r = new NewToolRequest("TOOL", "TOOLNAME", "TOOL NAME", "Speech", "txt");
     	NewToolResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
     	System.out.println("response.tool: " + response.tool);
+    }
+  
+    @Test
+    public void testNewDataHandler() {
+    	NewDataHandler csh = new NewDataHandler();
+    	NewDataRequest r = new NewDataRequest("data", "dataname", "Data Name", "Facial", "csv", "ff9aeab7-b842-48ce-8e21-d7516292662c", "testAuthUser");
+    	NewDataResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.data: " + response.data);
     }
     
     @Test

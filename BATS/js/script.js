@@ -645,11 +645,32 @@ function dataClicked(documentId, authUserId, filename, name) {
 }
 ////////////////New Tool PAGE/////////////////////////////////////////
 
-function setContent() {
+function setToolContent() {
     var file = document.getElementById('inputToolFile').files[0];
     //set iframe
     const obj_url = URL.createObjectURL(document.getElementById('inputToolFile').files[0]);
     const iframe = document.getElementById('uploadedToolViewer');
+    iframe.setAttribute('src', obj_url);
+    URL.revokeObjectURL(obj_url);
+
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function(evt) {
+        console.log("in reader.onload");
+        console.log(evt.target.result);
+        console.log("reader.result: ");
+        console.log(reader.result);
+        content = reader.result.toString();
+        console.log("in setContent content: "+ reader.result);
+        console.log("in setContent content.toString(): " + content);
+    };
+}
+
+function setDataContent() {
+    var file = document.getElementById('dataInputToolFile').files[0];
+    //set iframe
+    const obj_url = URL.createObjectURL(document.getElementById('dataInputToolFile').files[0]);
+    const iframe = document.getElementById('uploadedDataViewer');
     iframe.setAttribute('src', obj_url);
     URL.revokeObjectURL(obj_url);
 
