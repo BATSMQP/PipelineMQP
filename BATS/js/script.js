@@ -538,7 +538,7 @@ function checkGetStudyData() {
     console.log("currentAuthUserId in checkGetStudyData: " + localStorage.getItem('currentAuthUserId'));
     console.log("currentUser in checkGetStudyData: " + localStorage.getItem('currentUser'));
 
-    var json = {authUserId: localStorage.getItem('currentAuthUserId'), username: localStorage.getItem('currentUser')};
+    var json = {studyId: localStorage.getItem("currentStudyId")};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
@@ -577,13 +577,13 @@ function processGetStudyDataResponse(result) {
     if (status == 200) {
         console.log("getStudyData status 200");
 
-        var dataTable = document.getElementById("DataTable");
+        // var dataTable = document.getElementById("DataTable");
         var tableString = "";
   
         for(let i = 0; i < data.length; i++){
             // data = dataStudies[i];
-            checkGetUsername(study["authUserId"]);
-            console.log("in processGetStudyDaraResponse usernameOfAU: " + localStorage.getItem("usernameOfAU"));
+            // checkGetUsername(study["authUserId"]);
+            // console.log("in processGetStudyDaraResponse usernameOfAU: " + localStorage.getItem("usernameOfAU"));
 
 
                 //create row to be inserted
@@ -632,15 +632,15 @@ function dataClicked(documentId, authUserId, filename, name) {
     console.log("name (in dataClicked): " + name);
     localStorage.setItem('currentDocumentId', documentId);
     // localStorage.setItem('currentAuthUserId', authUserId);
-    localStorage.setItem('filename', filename);
-    localStorage.setItem('name', name);
-    currentFileName = localStorage.getItem('filename');
-    currentName = localStorage.getItem('name');
+    // localStorage.setItem('filename', filename);
+    // localStorage.setItem('name', name);
+    // currentFileName = localStorage.getItem('filename');
+    // currentName = localStorage.getItem('name');
     currentDocumentId = localStorage.getItem('currentDocumentId');
-    console.log("currentFileName (in studyClicked): " + currentFileName);
-    console.log("currentName (in studyClicked): " + currentName);
+    // console.log("currentFileName (in studyClicked): " + currentFileName);
+    // console.log("currentName (in studyClicked): " + currentName);
     console.log("currentDocumentId (in studyClicked): " + currentDocumentId);
-    window.location.href = "studyPage.html";
+    // window.location.href = "studyPage.html";
 }
 /////////////////Select Algorithm PAGE///////////////////////////////////////////////////////////
 
