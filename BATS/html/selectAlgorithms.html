@@ -8,6 +8,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/newStudy.css">
+    <!-- import the webpage's javascript file -->
+    <script src="../js/script.js" defer></script>
+    <!-- <script src="../js/userHome.js" defer></script> -->
+    <script src="../js/api.js"></script>
 
     <title>BATS: Select Algorithms</title>
   </head>
@@ -43,6 +47,8 @@
         <!-- Navbar -->
     </header>
 
+    <a class="btn btn-secondary backBtn" href="selectData.html" role="button">Back</a>
+
     <div id="main">
 
         <h3 id="title">Algorithms</h3>
@@ -74,7 +80,8 @@
         
 
         </br>
-        <button type="submit" id="nextButton" class="btn btn-primary">Next</button>
+        <!-- Also get button to run checkRunAlg when clicked - onclick -->
+        <button type="submit" id="nextButton" class="btn btn-primary" href="viewData.html">Analyze Data</button>
 
     </div>
 
