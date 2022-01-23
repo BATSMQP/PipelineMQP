@@ -637,13 +637,27 @@ function dataClicked(documentId, authUserId, filename, name) {
     currentFileName = localStorage.getItem('filename');
     currentName = localStorage.getItem('name');
     currentDocumentId = localStorage.getItem('currentDocumentId');
-    console.log("currentFileName (in studyClicked): " + currentFileName);
-    console.log("currentName (in studyClicked): " + currentName);
-    console.log("currentDocumentId (in studyClicked): " + currentDocumentId);
+    console.log("currentFileName (in dataClicked): " + currentFileName);
+    console.log("currentName (in dataClicked): " + currentName);
+    console.log("currentDocumentId (in dataClicked): " + currentDocumentId);
     window.location.href = "studyPage.html";
 }
 /////////////////Select Algorithm PAGE///////////////////////////////////////////////////////////
 
+function algoClicked(documentId, authUserId, filename) {
+    console.log("in algoClicked");
+    console.log("documentId: " + documentId);
+    console.log("authUserId: " + authUserId);
+    console.log("filename (in algoClicked): " + filename);
+    localStorage.setItem('currentDocumentId', documentId);
+    // localStorage.setItem('currentAuthUserId', authUserId);
+    localStorage.setItem('filename', filename);
+    currentFileName = localStorage.getItem('filename');
+    currentDocumentId = localStorage.getItem('currentDocumentId');
+    console.log("currentFileName (in algoClicked): " + currentFileName);
+    console.log("currentDocumentId (in algoClicked): " + currentDocumentId);
+    window.location.href = "studyPage.html";
+}
 
 
 ////////////////New Tool PAGE/////////////////////////////////////////
