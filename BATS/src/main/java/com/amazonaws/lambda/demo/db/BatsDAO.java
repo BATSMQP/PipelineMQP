@@ -262,8 +262,10 @@ public class BatsDAO {
 	      ArrayList<StudyDocument> dataDocumentIds = new ArrayList<StudyDocument>();
 	      while (resultSet.next()) {
 	    	  dataDocumentIds.add(generateStudyDocument(resultSet, logger));
-	          resultSet.close();
 	      }
+	      resultSet.close();
+		  ps.close();
+		     
 	      ArrayList<Document> dataDocuments = new ArrayList<Document>();
 	      
 	      for(int i = 0; i < dataDocumentIds.size(); i++) {
@@ -274,8 +276,9 @@ public class BatsDAO {
 		      // already present?
 		      while (resultSet2.next()) {
 		    	  dataDocuments.add(generateDocument(resultSet2, logger));
-		          resultSet2.close();
 		      }
+		      resultSet2.close();
+			  ps2.close();
 	      }
 	      
 	      return dataDocuments;
@@ -297,8 +300,10 @@ public class BatsDAO {
 		      ArrayList<AuthUserDocument> dataDocumentIds = new ArrayList<AuthUserDocument>();
 		      while (resultSet.next()) {
 		    	  dataDocumentIds.add(generateAuthUserDocument(resultSet, logger));
-		          resultSet.close();
 		      }
+		      resultSet.close();
+			  ps.close();
+		      
 		      ArrayList<Document> dataDocuments = new ArrayList<Document>();
 		      
 		      for(int i = 0; i < dataDocumentIds.size(); i++) {
@@ -309,8 +314,9 @@ public class BatsDAO {
 			      // already present?
 			      while (resultSet2.next()) {
 			    	  dataDocuments.add(generateDocument(resultSet2, logger));
-			          resultSet2.close();
 			      }
+			      resultSet2.close();
+				  ps2.close();
 		      }
 		      
 		      return dataDocuments;
