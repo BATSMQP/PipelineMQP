@@ -572,17 +572,16 @@ function processGetStudyDataResponse(result) {
     var js = JSON.parse(result);
 
     var status = js["statusCode"];
-    var dataStudies = js["dataStudies"];
+    var data = js["data"];
 
     if (status == 200) {
         console.log("getStudyData status 200");
 
         var dataTable = document.getElementById("DataTable");
-        var data;
         var tableString = "";
   
-        for(let i = 0; i < dataStudies.length; i++){
-            data = dataStudies[i];
+        for(let i = 0; i < data.length; i++){
+            // data = dataStudies[i];
             checkGetUsername(study["authUserId"]);
             console.log("in processGetStudyDaraResponse usernameOfAU: " + localStorage.getItem("usernameOfAU"));
 
