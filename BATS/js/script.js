@@ -627,16 +627,16 @@ function dataClicked(documentId, authUserId, filename, name) {
     console.log("authUserId: " + authUserId);
     console.log("filename (in dataClicked): " + filename);
     console.log("name (in dataClicked): " + name);
-    localStorage.setItem('currentDocumentId', documentId);
+    localStorage.setItem('currentDataDocumentId', documentId);
     // localStorage.setItem('currentAuthUserId', authUserId);
     localStorage.setItem('filename', filename);
     localStorage.setItem('name', name);
     currentFileName = localStorage.getItem('filename');
     currentName = localStorage.getItem('name');
-    currentDocumentId = localStorage.getItem('currentDocumentId');
+    currentDataDocumentId = localStorage.getItem('currentDataDocumentId');
     console.log("currentFileName (in dataClicked): " + currentFileName);
     console.log("currentName (in dataClicked): " + currentName);
-    console.log("currentDocumentId (in dataClicked): " + currentDocumentId);
+    console.log("currentDataDocumentId (in dataClicked): " + currentDataDocumentId);
 }
 /////////////////Select Algorithm PAGE///////////////////////////////////////////////////////////
 
@@ -654,7 +654,7 @@ function algoClicked(toolDocumentId, algName) {
 }
 
 function checkRunAlg() {
-    var json = {dataDocumentId: localStorage.getItem('currentDataDocumentId'), dataDocumentId: localStorage.getItem('currentDocumentId'), algName: localStorage.getItem('currentAlgName')};
+    var json = {dataDocumentId: localStorage.getItem('currentDataDocumentId'), toolDocumentId: "", algName: localStorage.getItem('currentAlgName')};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
@@ -688,47 +688,18 @@ function processRunAlgResponse(result) {
     var js = JSON.parse(result);
 
     var status = js["statusCode"];
-    var data = js["data"];
+    var resultFile = js["resultFile"];
+    var image = js["image"];
+
 
     if (status == 200) {
-        console.log("getStudyData status 200");
+        console.log("RunAlg status 200");
+        var frameResultFile = document.getElementById("uploadedResultFile").value;
+        var frameImage = document.getElementById("uploadedImage").value;
 
         var dataTable = document.getElementById("DataTable");
         var tableString = "";
   
-        for(let i = 0; i < data.length; i++){
-            // data = dataStudies[i];
-            checkGetUsername(study["authUserId"]);
-            console.log("in processGetStudyDaraResponse usernameOfAU: " + localStorage.getItem("usernameOfAU"));
-
-
-                //create row to be inserted
-                tableString += "<tr onclick='JavaScript:dataClicked(";
-                tableString += '"';
-                tableString += data["documentId"];
-                tableString += '", "';
-                tableString += data["authUserId"];
-                tableString += '", "';
-                tableString += data["filename"];
-                tableString += '", "';
-                tableString += data["name"];
-                tableString += '")';
-                tableString += "'>";
-
-                tableString += "<td>";
-                tableString += data["name"];
-                tableString += "</td>";
-
-                tableString += "<td>";
-                tableString += data["filename"];
-                tableString += "</td>";
-
-                tableString += "<td>";
-                tableString += data["dataType"];
-                tableString += "</td>";
-
-                tableString += "</tr>";                    
-        }
         // tableString += "</tbody>";
         console.log(tableString);
 
@@ -738,6 +709,50 @@ function processRunAlgResponse(result) {
         var msg = js["error"];
         console.log("error:" + msg);
     }
+}
+
+function setUploadedResultFile() {
+    //var file = document.getElementById('uploadedResultFile').files[0];
+    var file = "Bats result file"
+    //set iframe
+    const obj_url = URL.createObjectURL(file);
+    const iframe = document.getElementById('uploadedResultFile');
+    iframe.setAttribute('src', obj_url);
+    URL.revokeObjectURL(obj_url);
+
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function(evt) {
+        console.log("in reader.onload");
+        console.log(evt.target.result);
+        console.log("reader.result: ");
+        console.log(reader.result);
+        content = reader.result.toString();
+        console.log("in setContent content: "+ reader.result);
+        console.log("in setContent content.toString(): " + content);
+    };
+}
+
+function setUploadedImage() {
+    //var file = document.getElementById('uploadedImage').files[0];
+    var file = "Bats image"
+    //set iframe
+    const obj_url = URL.createObjectURL(file);
+    const iframe = document.getElementById('uploadedImage');
+    iframe.setAttribute('src', obj_url);
+    URL.revokeObjectURL(obj_url);
+
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function(evt) {
+        console.log("in reader.onload");
+        console.log(evt.target.result);
+        console.log("reader.result: ");
+        console.log(reader.result);
+        content = reader.result.toString();
+        console.log("in setContent content: "+ reader.result);
+        console.log("in setContent content.toString(): " + content);
+    };
 }
 
 
