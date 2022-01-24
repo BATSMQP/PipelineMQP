@@ -18,6 +18,16 @@ public class RunAlgo {
             //Graphing.Graphing_Simp.printThisD2(LowPassed,j2);
             Gen_Algo.Table2CSV.Doub(f.getName()+"_lowpassed", LowPassed,2);
             
+        }else if(algo=="ttest"){
+            double[][] ar=Gen_Algo.ReadFile.fromCSVtoD2(f.getAbsolutePath(),0, 1);
+            double[] m= new double[3];
+            double[][] m2= new double[3][1];
+            m= Stats_Func.tTest.sameSizeAll(ar,0,1);
+            m2[0][0]=m[0];
+            m2[1][0]=m[1];
+            m2[2][0]=m[2];
+            Gen_Algo.Table2CSV.Doub(f.getName()+"_ttested",m2,1);
+
         }else{
             System.out.println("This algorithm is not curently available");
             return;
@@ -26,8 +36,8 @@ public class RunAlgo {
     }
 
     public static void main(String[] args) {
-        String name="hw_200";
+        String name="test_d";
         File file = new File("./Data/",name+".csv" );
-        run(file, "lowpass");
+        run(file, "ttest");
     }
 }

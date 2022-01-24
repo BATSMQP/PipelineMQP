@@ -7,17 +7,20 @@ import java.io.IOException;
 
 public class Table2CSV {
     public static void main(String[] args) {
-        String[][] a=new String[4][3];
+        /* String[][] a=new String[4][3];
         a[0][0]="0.3";
         a[1][1]="1.3";
         a[2][2]="2.3";
-        Stri("test", a,3);
+        Stri("test", a,3); */
 
-        double[][] b=new double[4][3];
+        double[][] b=new double[3][2];
         b[0][0]=0.3;
+        b[1][0]=1.3;
+        b[2][0]=2.3;
+        b[0][1]=0.3;
         b[1][1]=1.3;
-        b[2][2]=2.3;
-        Doub("test_d", b,3);
+        b[2][1]=2.5;
+        Doub("test_d", b,2);
     }
 
     public static void Stri(String name, String[][] a, int colNum) {
