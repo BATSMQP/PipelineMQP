@@ -50,12 +50,22 @@
     <div id="main">
 
         <h3 id="title">View Analysis Result</h3>
+
+        <iframe id="uploadedResultFile"></iframe>
+        <iframe id="uploadedImage"></iframe>
         
     </div>
 
       <nav class="navbar fixed-bottom navbar-dark bg-dark">
         <a class="navbar-brand" href="#">BATS 2022</a>
       </nav>
+
+      <script>
+        window.onload = function() {
+          setUploadedResultFile();
+          setUploadedImage();
+        }
+      </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
