@@ -35,6 +35,8 @@ import com.amazonaws.lambda.demo.http.NewToolRequest;
 import com.amazonaws.lambda.demo.http.NewToolResponse;
 import com.amazonaws.lambda.demo.http.RegisterRequest;
 import com.amazonaws.lambda.demo.http.RegisterResponse;
+import com.amazonaws.lambda.demo.http.RunAlgRequest;
+import com.amazonaws.lambda.demo.http.RunAlgResponse;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
@@ -248,6 +250,18 @@ public class LambdaFunctionHandlerTest {
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
     	System.out.println("response.username: " + response.username);
+    }
+    
+    @Test
+    public void testRunAlgHandler() {
+    	RunAlgHandler csh = new RunAlgHandler();
+    	RunAlgRequest r = new RunAlgRequest("8d430131-8a99-4c1c-a2ff-3bf4783643ea", "", "lowpass");
+    	RunAlgResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.resultFile: " + response.resultFile);
+    	System.out.println("response.image: " + response.image);
+
     }
 
 //    @Test

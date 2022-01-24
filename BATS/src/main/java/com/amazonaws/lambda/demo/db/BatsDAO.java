@@ -510,6 +510,29 @@ public class BatsDAO {
 		 }
 	}
 	
+	public Document getDocument(String documentId, LambdaLogger logger) throws Exception {
+		 
+		try {
+		     PreparedStatement ps = conn.prepareStatement("SELECT * FROM Document where documentId=?;");
+		     ps.setString(1, documentId);
+		     ResultSet resultSet = ps.executeQuery();
+		     Document document = null;
+		     while (resultSet.next()) {
+		    	 document = generateDocument(resultSet, logger);
+		     	{ logger.log("Document in while (in getDocument): " + document); }
+		     }
+		     resultSet.close();
+		     ps.close();
+		     
+		     
+		     return document;
+		
+		 } catch (Exception e) {
+		 	e.printStackTrace();
+		     throw new Exception("Failed in getting document for the documentId: " + e.getMessage());
+		 }
+	}
+	
 //    public Choice getChoice(String cid, LambdaLogger logger) throws Exception {
 //        
 //        try {
