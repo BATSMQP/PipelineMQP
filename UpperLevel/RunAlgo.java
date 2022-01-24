@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Scanner;
 
 import Gen_Algo.Butterworth;
+import Interpreter.PyInterpreter;
 
 public class RunAlgo {
     public static void run(File f,String algo){
@@ -28,6 +29,9 @@ public class RunAlgo {
             m2[2][0]=m[2];
             Gen_Algo.Table2CSV.Doub(f.getName()+"_ttested",m2,1);
 
+        }else if(algo=="graphwav"){
+            PyInterpreter.graphWav();
+            return;
         }else{
             System.out.println("This algorithm is not curently available");
             return;
