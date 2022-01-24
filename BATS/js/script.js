@@ -448,7 +448,7 @@ function checkGetData() {
     console.log("innerhtml of studyNameOnStudyPage (in checkGetData): " + studyNameOnStudyPage.innerHTML);
     studyNameOnStudyPage.innerHTML = currentStudyName;
 
-    var json = {authUserId: localStorage.getItem('currentAuthUserId'), studyId: localStorage.getItem('currentStudyId')};
+    var json = {authUserId: localStorage.getItem('currentAuthUserId')};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
@@ -535,10 +535,7 @@ function processGetDataResponse(result) {
 ////////////////Select Data Page////////////////////////////////////////////////////////////////////
 
 function checkGetStudyData() {
-    console.log("currentAuthUserId in checkGetStudyData: " + localStorage.getItem('currentAuthUserId'));
-    console.log("currentUser in checkGetStudyData: " + localStorage.getItem('currentUser'));
-
-    var json = {studyId: localStorage.getItem("currentStudyId")};
+    var json = {studyId: localStorage.getItem('currentStudyId')};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
@@ -577,13 +574,13 @@ function processGetStudyDataResponse(result) {
     if (status == 200) {
         console.log("getStudyData status 200");
 
-        // var dataTable = document.getElementById("DataTable");
+        var dataTable = document.getElementById("DataTable");
         var tableString = "";
   
         for(let i = 0; i < data.length; i++){
             // data = dataStudies[i];
-            // checkGetUsername(study["authUserId"]);
-            // console.log("in processGetStudyDaraResponse usernameOfAU: " + localStorage.getItem("usernameOfAU"));
+            checkGetUsername(study["authUserId"]);
+            console.log("in processGetStudyDaraResponse usernameOfAU: " + localStorage.getItem("usernameOfAU"));
 
 
                 //create row to be inserted
@@ -632,31 +629,117 @@ function dataClicked(documentId, authUserId, filename, name) {
     console.log("name (in dataClicked): " + name);
     localStorage.setItem('currentDocumentId', documentId);
     // localStorage.setItem('currentAuthUserId', authUserId);
-    // localStorage.setItem('filename', filename);
-    // localStorage.setItem('name', name);
-    // currentFileName = localStorage.getItem('filename');
-    // currentName = localStorage.getItem('name');
+    localStorage.setItem('filename', filename);
+    localStorage.setItem('name', name);
+    currentFileName = localStorage.getItem('filename');
+    currentName = localStorage.getItem('name');
     currentDocumentId = localStorage.getItem('currentDocumentId');
-    // console.log("currentFileName (in studyClicked): " + currentFileName);
-    // console.log("currentName (in studyClicked): " + currentName);
-    console.log("currentDocumentId (in studyClicked): " + currentDocumentId);
-    // window.location.href = "studyPage.html";
+    console.log("currentFileName (in dataClicked): " + currentFileName);
+    console.log("currentName (in dataClicked): " + currentName);
+    console.log("currentDocumentId (in dataClicked): " + currentDocumentId);
 }
 /////////////////Select Algorithm PAGE///////////////////////////////////////////////////////////
 
-function algoClicked(documentId, authUserId, filename) {
+function algoClicked(toolDocumentId, algName) {
     console.log("in algoClicked");
-    console.log("documentId: " + documentId);
-    console.log("authUserId: " + authUserId);
-    console.log("filename (in algoClicked): " + filename);
-    localStorage.setItem('currentToolDocumentId', documentId);
+    console.log("toolDocumentId: " + toolDocumentId);
+    console.log("algName (in algoClicked): " + algName);
+    localStorage.setItem('currenttoolDocumentId', toolDocumentId);
     // localStorage.setItem('currentAuthUserId', authUserId);
-    localStorage.setItem('toolFilename', filename);
-    currentFileName = localStorage.getItem('toolFilename');
-    currentDocumentId = localStorage.getItem('currentToolDocumentId');
-    console.log("currentFileName (in algoClicked): " + currentFileName);
-    console.log("currentDocumentId (in algoClicked): " + currentDocumentId);
+    localStorage.setItem('algName', algName);
+    currentAlgName = localStorage.getItem('algName');
+    currentToolDocumentId = localStorage.getItem('currentToolDocumentId');
+    console.log("currentAlgName (in algoClicked): " + currentAlgName);
+    console.log("currentToolDocumentId (in algoClicked): " + currentToolDocumentId);
 }
+
+function checkRunAlg() {
+    var json = {dataDocumentId: localStorage.getItem('currentDataDocumentId'), dataDocumentId: localStorage.getItem('currentDocumentId'), algName: localStorage.getItem('currentAlgName')};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", RunAlg_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processRunAlgResponse(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processRunAlgResponse("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processRunAlgResponse(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var data = js["data"];
+
+    if (status == 200) {
+        console.log("getStudyData status 200");
+
+        var dataTable = document.getElementById("DataTable");
+        var tableString = "";
+  
+        for(let i = 0; i < data.length; i++){
+            // data = dataStudies[i];
+            checkGetUsername(study["authUserId"]);
+            console.log("in processGetStudyDaraResponse usernameOfAU: " + localStorage.getItem("usernameOfAU"));
+
+
+                //create row to be inserted
+                tableString += "<tr onclick='JavaScript:dataClicked(";
+                tableString += '"';
+                tableString += data["documentId"];
+                tableString += '", "';
+                tableString += data["authUserId"];
+                tableString += '", "';
+                tableString += data["filename"];
+                tableString += '", "';
+                tableString += data["name"];
+                tableString += '")';
+                tableString += "'>";
+
+                tableString += "<td>";
+                tableString += data["name"];
+                tableString += "</td>";
+
+                tableString += "<td>";
+                tableString += data["filename"];
+                tableString += "</td>";
+
+                tableString += "<td>";
+                tableString += data["dataType"];
+                tableString += "</td>";
+
+                tableString += "</tr>";                    
+        }
+        // tableString += "</tbody>";
+        console.log(tableString);
+
+        DataTableBody = document.getElementById("DataTableBody");
+        DataTableBody.innerHTML = tableString;
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
+    }
+}
+
 
 
 ////////////////New Tool PAGE/////////////////////////////////////////
