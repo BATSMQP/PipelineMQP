@@ -576,36 +576,33 @@ function processGetStudyDataResponse(result) {
 
         var dataTable = document.getElementById("DataTable");
         var tableString = "";
+        var doc;
   
         for(let i = 0; i < data.length; i++){
-            // data = dataStudies[i];
-            checkGetUsername(study["authUserId"]);
-            console.log("in processGetStudyDaraResponse usernameOfAU: " + localStorage.getItem("usernameOfAU"));
-
-
+                doc = data[i];
                 //create row to be inserted
                 tableString += "<tr onclick='JavaScript:dataClicked(";
                 tableString += '"';
-                tableString += data["documentId"];
+                tableString += doc["documentId"];
                 tableString += '", "';
-                tableString += data["authUserId"];
+                tableString += doc["authUserId"];
                 tableString += '", "';
-                tableString += data["filename"];
+                tableString += doc["filename"];
                 tableString += '", "';
-                tableString += data["name"];
+                tableString += doc["name"];
                 tableString += '")';
                 tableString += "'>";
 
                 tableString += "<td>";
-                tableString += data["name"];
+                tableString += doc["name"];
                 tableString += "</td>";
 
                 tableString += "<td>";
-                tableString += data["filename"];
+                tableString += doc["filename"];
                 tableString += "</td>";
 
                 tableString += "<td>";
-                tableString += data["dataType"];
+                tableString += doc["dataType"];
                 tableString += "</td>";
 
                 tableString += "</tr>";                    
@@ -637,6 +634,7 @@ function dataClicked(documentId, authUserId, filename, name) {
     console.log("currentFileName (in dataClicked): " + currentFileName);
     console.log("currentName (in dataClicked): " + currentName);
     console.log("currentDataDocumentId (in dataClicked): " + currentDataDocumentId);
+    window.location.href = "selectAlgorithms.html";
 }
 /////////////////Select Algorithm PAGE///////////////////////////////////////////////////////////
 
@@ -651,6 +649,7 @@ function algoClicked(toolDocumentId, algName) {
     currentToolDocumentId = localStorage.getItem('currentToolDocumentId');
     console.log("currentAlgName (in algoClicked): " + currentAlgName);
     console.log("currentToolDocumentId (in algoClicked): " + currentToolDocumentId);
+    window.location.href = "algoResult.html";
 }
 
 function checkRunAlg() {
