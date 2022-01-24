@@ -649,11 +649,11 @@ function algoClicked(documentId, authUserId, filename) {
     console.log("documentId: " + documentId);
     console.log("authUserId: " + authUserId);
     console.log("filename (in algoClicked): " + filename);
-    localStorage.setItem('currentDocumentId', documentId);
+    localStorage.setItem('currentToolDocumentId', documentId);
     // localStorage.setItem('currentAuthUserId', authUserId);
-    localStorage.setItem('filename', filename);
-    currentFileName = localStorage.getItem('filename');
-    currentDocumentId = localStorage.getItem('currentDocumentId');
+    localStorage.setItem('toolFilename', filename);
+    currentFileName = localStorage.getItem('toolFilename');
+    currentDocumentId = localStorage.getItem('currentToolDocumentId');
     console.log("currentFileName (in algoClicked): " + currentFileName);
     console.log("currentDocumentId (in algoClicked): " + currentDocumentId);
 }
