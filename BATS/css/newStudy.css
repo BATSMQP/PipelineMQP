@@ -133,6 +133,14 @@
     width: 80%;
 }
 
+#userHomeHeader, #goToNewStudyButton, #goToViewDataButton{
+    display: inline-block;
+}
+
+#userHomeHeader{
+    width: 72%;
+}
+
 .form-control {
     width: 400px;
 }
