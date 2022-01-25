@@ -75,29 +75,19 @@
         <h2 class="sub-header col-md-6 mt-4">Analysis Tools</h2>
 
         <div class="table-responsive col-md-6">
-          <table id="toolkitTable" class="table table-hover table-bordered">
+          <table id="studyPageDataTable" class="table table-hover table-bordered">
             <thead>
               <tr>
                 <th scope="col">Name of Data</th>
-                <th scope="col">Last Modified</th>
-                <th scope="col">By</th>
+                <th scope="col">Filename</th>
+                <th scope="col">File Extension</th>
                 <th scope="col">Data Type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr onclick="window.location.href='viewData.html'">
-                <td>ID 12345: Vocal</td>
-                <td>9/13/21 10:00 AM</td>
-                <td>NDraudt</td>
-                <td>Neural</td>
-              </tr>
+            <tbody id="studyPageDataTableBody">
               <tr>
-                <td>ID 12346: EEG</td>
-                <td>7/01/21 10:00 AM</td>
-                <td>Claire</td>
-                <td>Speech</td>
+                <td id="loadingTableData">Loading...</td>
               </tr>
-
             </tbody>
           </table>
         </div>
@@ -105,44 +95,24 @@
 
 
         <div class="table-responsive col-md-6">
-          <table id="toolkitTable" class="table table-hover table-bordered">
+          <table id="studyPageToolTable" class="table table-hover table-bordered">
             <thead>
               <tr>
-                <th scope="col">Tool Name</th>
-                <th scope="col">Data Type</th>
+                <th scope="col">Name of Tool</th>
+                <th scope="col">Filename</th>
+                <th scope="col">File Extension</th>
+                <th scope="col">For Data Type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr onclick="window.location.href='viewData.html'">
-                <td>ID 12345: Vocal</td>
-                <td>.mvm</td>
-              </tr>
+            <tbody id="studyPageToolTableBody">
               <tr>
-                <td>ID 12346: EEG</td>
-                <td>.raw</td>
+                <td id="loadingTableData">Loading...</td>
               </tr>
-
             </tbody>
           </table>
         </div>
 
-        <!-- <div class="col-md-6 text-center">
-          <button type="submit" id="addNewData" onclick="window.location.href='uploadData.html'" class="btn-secondary mb-2 btn-sm ">Add New Data</button>
-
-        </div>
-        
-
-        <div class="col-md-6 text-center">
-
-          <button type="submit" id="addNewTool" onclick="window.location.href='uploadAnalysisTool.html'" class="btn-secondary mb-2 btn-sm">Add New Analysis Tool</button>
-
-        </div> -->
-
       </div>
-
-
-
-
 
       </br>
         <h6 class="inline">People With Access:</h6>
@@ -156,8 +126,10 @@
 
       <script>
         window.onload = function() {
-          checkGetData();
+          // checkGetData();
           loadStudyPage();
+          getStudyDataForStudyPage();
+          getStudyToolsForStudyPage();
         }
       </script>
 

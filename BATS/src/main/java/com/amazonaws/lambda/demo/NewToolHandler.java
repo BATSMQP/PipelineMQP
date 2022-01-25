@@ -9,7 +9,9 @@ import java.util.UUID;
 import com.amazonaws.lambda.demo.db.BatsDAO;
 import com.amazonaws.lambda.demo.http.NewToolRequest;
 import com.amazonaws.lambda.demo.http.NewToolResponse;
+import com.amazonaws.lambda.demo.model.AuthUserDocument;
 import com.amazonaws.lambda.demo.model.Document;
+import com.amazonaws.lambda.demo.model.StudyDocument;
 
 
  //this is where we create a choice
@@ -42,6 +44,26 @@ public class NewToolHandler implements RequestHandler<NewToolRequest, NewToolRes
 		catch(Exception e) {
 			fail = true;
 			failMessage = "Error adding tool document to the database";
+		}
+		
+		//add document to StudyDocument
+		StudyDocument studyDocument = createStudyDocument(req.getStudyId(), document.getDocumentId());
+		try {
+			dao.addStudyDocument(studyDocument, logger);
+		}
+		catch(Exception e) {
+			fail = true;
+			failMessage = "Error adding StudyDocument to the database";
+		}
+		
+		//add document to AuthUserDocument
+		AuthUserDocument authUserDocument = createAuthUserDocument(req.getAuthUserId(), document.getDocumentId());
+		try {
+			dao.addAuthUserDocument(authUserDocument, logger);
+		}
+		catch(Exception e) {
+			fail = true;
+			failMessage = "Error adding AuthUserDocument to the database";
 		}
 		
 		NewToolResponse response;

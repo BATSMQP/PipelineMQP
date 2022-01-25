@@ -9,7 +9,11 @@ select * from AuthUserDocument;
 select * from StudyDocument;
 select * from Study;
 select file from Document where name="api once again";
-delete from Document where file=NULL;
+delete from Study where studyId="c9ca105a-23c6-4654-9e9a-cbb5e34a1523";
+delete from Study where studyId="ce6cf359-1a0f-4f9d-bac5-13158dfc02d6";
+delete from Study where studyId="d4d2288c-b2d0-41c2-97be-9d58b687698d";
+delete from Study where studyId="e87c2949-740c-448d-9c24-d93b6b6c8207";
+delete from Study where studyId="f3f502f0-12ea-45ff-948e-e4f19ab4df0e";
 
 -- SELECT * FROM Document WHERE studyId =  AND docType="Data"; 
 

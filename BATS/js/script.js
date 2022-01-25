@@ -937,8 +937,8 @@ function processNewToolResponse(result) {
         console.log("error:" + msg);
 
         var textString = "<p> error: " + msg + "</p>";
-        loginText = document.getElementById("loginText");
-        loginText.innerHTML = textString;
+        // loginText = document.getElementById("loginText");
+        // loginText.innerHTML = textString;
     }
 }
 
@@ -1050,5 +1050,159 @@ function processNewDataResponse(result) {
         var textString = "<p> error: " + msg + "</p>";
         loginText = document.getElementById("loginText");
         loginText.innerHTML = textString;
+    }
+}
+
+function getStudyDataForStudyPage() {
+    var json = {studyId: localStorage.getItem('currentStudyId')};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", GetStudyData_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processGetStudyDataResponse2(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processGetStudyDataResponse2("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processGetStudyDataResponse2(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var data = js["data"];
+
+    if (status == 200) {
+        console.log("getStudyData status 200");
+
+        var tableString = "";
+        var doc;
+  
+        for(let i = 0; i < data.length; i++){
+                doc = data[i];
+                //create row to be inserted
+                tableString += "<tr>";
+
+                tableString += "<td>";
+                tableString += doc["name"];
+                tableString += "</td>";
+
+                tableString += "<td>";
+                tableString += doc["filename"];
+                tableString += "</td>";
+
+                tableString += "<td>";
+                tableString += doc["ext"];
+                tableString += "</td>";
+
+                tableString += "<td>";
+                tableString += doc["docType"];
+                tableString += "</td>";
+
+                tableString += "</tr>";                    
+        }
+        // tableString += "</tbody>";
+        // console.log(tableString);
+
+        DataTableBody = document.getElementById("studyPageDataTableBody");
+        DataTableBody.innerHTML = tableString;
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
+    }
+}
+
+function getStudyToolsForStudyPage() {
+    var json = {studyId: localStorage.getItem('currentStudyId')};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", GetStudyTools_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processGetStudyDataResponse3(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processGetStudyDataResponse3("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processGetStudyDataResponse3(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var tools = js["tools"];
+
+    if (status == 200) {
+        console.log("getStudyData status 200");
+
+        var tableString = "";
+        var tool;
+  
+        for(let i = 0; i < tools.length; i++){
+                tool = tools[i];
+                //create row to be inserted
+                tableString += "<tr>";
+
+                tableString += "<td>";
+                tableString += tool["name"];
+                tableString += "</td>";
+
+                tableString += "<td>";
+                tableString += tool["filename"];
+                tableString += "</td>";
+
+                tableString += "<td>";
+                tableString += tool["ext"];
+                tableString += "</td>";
+
+                tableString += "<td>";
+                tableString += tool["docType"];
+                tableString += "</td>";
+
+                tableString += "</tr>";                    
+        }
+        // tableString += "</tbody>";
+        // console.log(tableString);
+
+        DataTableBody = document.getElementById("studyPageToolTableBody");
+        DataTableBody.innerHTML = tableString;
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
     }
 }
