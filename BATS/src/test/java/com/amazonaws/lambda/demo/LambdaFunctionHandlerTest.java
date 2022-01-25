@@ -237,7 +237,7 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testNewToolHandler() {
     	NewToolHandler csh = new NewToolHandler();
-    	NewToolRequest r = new NewToolRequest("TOOL", "TOOLNAME", "TOOL NAME", "Speech", "txt");
+    	NewToolRequest r = new NewToolRequest("TOOL", "TOOLNAME", "TOOL NAME", "Speech", "txt", "ff9aeab7-b842-48ce-8e21-d7516292662c", "testAuthUser");
     	NewToolResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);

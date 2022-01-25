@@ -28,6 +28,16 @@ public class NewToolHandler implements RequestHandler<NewToolRequest, NewToolRes
 		
 		return document;
 	}
+	
+	private StudyDocument createStudyDocument(String studyId, String documentId){
+		StudyDocument studyDocument = new StudyDocument(studyId, documentId);
+		return studyDocument;
+	}
+	
+	private AuthUserDocument createAuthUserDocument(String authUserId, String documentId){
+		AuthUserDocument authUserDocument = new AuthUserDocument(authUserId, documentId);
+		return authUserDocument;
+	}
 
 	@Override
 	public NewToolResponse handleRequest(NewToolRequest req, Context context) {
