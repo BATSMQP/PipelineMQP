@@ -49,21 +49,24 @@
 
     <a class="btn btn-secondary backBtn" href="userHome.html" role="button">Back</a>
 
-    <div id="main">
+    <button type="submit" id="analyzeDataButton" onclick="window.location.href='selectData.html'" class="btn-outline-primary btn-lg float-right" >Analyze Data</button>
+
+    <div id="uploadStuffDiv">
+      <button type="submit" id="addNewData" onclick="window.location.href='uploadData.html'" class="btn-secondary mb-2 btn-sm ">Add New Data</button>
+      <button type="submit" id="addNewTool" onclick="window.location.href='uploadAnalysisTool.html'" class="btn-secondary mb-2 btn-sm">Add New Analysis Tool</button>
+    </div>
+    
+    <div>
+
+      <!-- <div id="rowForStudyName" class="row">
+
+        <h3 id="studyNameOnStudyPage">Study Name</h3>
+
+      </div> -->
+
+      <h3 id="studyNameOnStudyPage">Study Name</h3>
 
       <div class="row">
-
-        <div class="col-md-6">
-
-          <h3 id="studyNameOnStudyPage">Study Name</h3>
-
-        </div>
-
-        <div class="col-md-6">
-
-          <button type="submit" id="analyzeDataButton" onclick="window.location.href='selectData.html'" class="btn-outline-primary btn-lg float-right " >Analyze Data</button>
-
-        </div>
 
         <h2 class="sub-header col-md-6 mt-4">Data</h2>
         <h2 class="sub-header col-md-6 mt-4">Analysis Tools</h2>
@@ -120,7 +123,7 @@
           </table>
         </div>
 
-        <div class="col-md-6 text-center">
+        <!-- <div class="col-md-6 text-center">
           <button type="submit" id="addNewData" onclick="window.location.href='uploadData.html'" class="btn-secondary mb-2 btn-sm ">Add New Data</button>
 
         </div>
@@ -130,7 +133,7 @@
 
           <button type="submit" id="addNewTool" onclick="window.location.href='uploadAnalysisTool.html'" class="btn-secondary mb-2 btn-sm">Add New Analysis Tool</button>
 
-        </div>
+        </div> -->
 
       </div>
 
@@ -151,6 +154,7 @@
       <script>
         window.onload = function() {
           checkGetData();
+          loadStudyPage();
         }
       </script>
 

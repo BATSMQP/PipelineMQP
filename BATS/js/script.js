@@ -1,4 +1,5 @@
 var content;
+//beforeUpload
 
 ////////////////MAIN PAGE//////////////////////////
 
@@ -15,6 +16,18 @@ function handleRegisterClick() {
 function setWelcomeUser(){
     document.getElementById('welcomeUser').innerHTML = localStorage.getItem('currentUser');
     console.log("currentAuthUserId in checkNewStudy: " + localStorage.getItem('currentAuthUserId'));
+}
+
+function loadStudyPage(){
+    localStorage.setItem("beforeUpload", "studyPage");
+}
+
+function loadSelectData(){
+    localStorage.setItem("beforeUpload", "selectData");
+}
+
+function loadSelectAlgorithms(){
+    localStorage.setItem("beforeUpload", "selectAlgorithms");
 }
 
 function checkLogin() {
@@ -917,7 +930,8 @@ function processNewToolResponse(result) {
     var tool = js["tool"];
 
     if (status == 200) {
-        window.location.href = "studyPage.html";
+        // window.location.href = "studyPage.html";
+        window.location.href = localStorage.getItem("beforeUpload") + ".html";
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
@@ -1027,7 +1041,8 @@ function processNewDataResponse(result) {
     var data = js["data"];
 
     if (status == 200) {
-        window.location.href = "studyPage.html";
+        // window.location.href = "studyPage.html";
+        window.location.href = localStorage.getItem("beforeUpload") + ".html";
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
