@@ -129,7 +129,7 @@
     display: inline-block;
 }
 
-#uploadedToolViewer {
+#uploadedToolViewer, #uploadedDataViewer {
     width: 80%;
 }
 
