@@ -42,6 +42,6 @@ public class RunAlgo {
     public static void main(String[] args) {
         String name="test_d";
         File file = new File("./Data/",name+".csv" );
-        run(file, "ttest");
+        run(file, "graphwav");
     }
 }

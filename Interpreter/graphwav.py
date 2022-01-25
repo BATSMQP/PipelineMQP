@@ -1,11 +1,11 @@
 import sys
 #from lib.pyAudioAnalysisMaster import pyAudioAnalysis
 sys.path.insert(1,'lib/pyAudioAnalysisMaster/pyAudioAnalysis')
-import numpy as np 
 import ShortTermFeatures as aF
 import audioBasicIO as aIO 
-import plotly
 import plotly.graph_objs as go 
+import plotly
+import numpy as np 
 
 import IPython
 
