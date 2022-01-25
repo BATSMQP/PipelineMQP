@@ -15,7 +15,7 @@
     <script src="../js/script.js" defer></script>
     <script src="../js/api.js"></script>
   </head>
-  <body>
+  <body id="algoResultBody">
 
     <header>
         <!-- Navbar -->
@@ -52,14 +52,39 @@
 
     <a class="btn btn-secondary backBtn" href="selectAlgorithms.html" role="button">Back</a>
 
-    <div id="main">
+    <h3 id="title">View Analysis Result</h3>
 
-        <h3 id="title">View Analysis Result</h3>
+    <div id="selDataAndToolDiv">
+      <div id="selDataAR">
+        <h5 id="selectedDataHeader">Selected Data:</h5>
+          <table id="algoResultDataTable" class="table table-hover table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Data Name</th>
+                <th scope="col">Filename</th>
+              </tr>
+            </thead>
+            <tbody id="algoResultDataTableBody"></tbody>
+          </table>
+      </div>
 
-        <iframe id="uploadedResultFile"></iframe>
-        <iframe id="uploadedImage"></iframe>
-        
+      <div id="selToolAR">
+        <h5 id="selectedToolHeader">Selected Analysis Tool:</h5>
+          <table id="algoResultToolTable" class="table table-hover table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Analysis Tool Name</th>
+                <th scope="col">Filename</th>
+              </tr>
+            </thead>
+            <tbody id="algoResultToolTableBody"></tbody>
+          </table>
+      </div>
+    
     </div>
+
+    <iframe id="uploadedResultFile"></iframe>
+    <iframe id="uploadedImage"></iframe>
 
       <nav class="navbar fixed-bottom navbar-dark bg-dark">
         <a class="navbar-brand" href="#">BATS 2022</a>
@@ -67,6 +92,7 @@
 
       <script>
         window.onload = function() {
+          setSelectedDataAndTool();
           setUploadedResultFile();
           setUploadedImage();
           checkRunAlg();

@@ -98,6 +98,26 @@
     width: 100%;
 }
 
+#uploadedResultFile, #uploadedImage{
+    width: 45%;
+    height: 100%;
+}
+
+#uploadedResultFile{
+    margin-left: 3%;
+    margin-right: 2%;
+}
+
+#selDataAR, #selToolAR{
+    width: 45%;
+    display: inline-block;
+}
+
+#selDataAR{
+    margin-left: 3%;
+    margin-right: 2%;
+}
+
 #analyzeDataButton {
     margin-right: 10px;
     margin-top: 20px;

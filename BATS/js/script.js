@@ -639,8 +639,8 @@ function dataClicked(documentId, authUserId, filename, name) {
     console.log("name (in dataClicked): " + name);
     localStorage.setItem('currentDataDocumentId', documentId);
     // localStorage.setItem('currentAuthUserId', authUserId);
-    localStorage.setItem('filename', filename);
-    localStorage.setItem('name', name);
+    localStorage.setItem('currentDataFilename', filename);
+    localStorage.setItem('currentDataName', name);
     currentFileName = localStorage.getItem('filename');
     currentName = localStorage.getItem('name');
     currentDataDocumentId = localStorage.getItem('currentDataDocumentId');
@@ -651,13 +651,14 @@ function dataClicked(documentId, authUserId, filename, name) {
 }
 /////////////////Select Algorithm PAGE///////////////////////////////////////////////////////////
 
-function algoClicked(toolDocumentId, algName) {
+function algoClicked(toolDocumentId, algName, name) { //algName=filename
     console.log("in algoClicked");
     console.log("toolDocumentId: " + toolDocumentId);
     console.log("algName (in algoClicked): " + algName);
-    localStorage.setItem('currenttoolDocumentId', toolDocumentId);
+    localStorage.setItem('currenToolDocumentId', toolDocumentId);
     // localStorage.setItem('currentAuthUserId', authUserId);
     localStorage.setItem('algName', algName);
+    localStorage.setItem('currentToolName', name);
     currentAlgName = localStorage.getItem('algName');
     currentToolDocumentId = localStorage.getItem('currentToolDocumentId');
     console.log("currentAlgName (in algoClicked): " + currentAlgName);
@@ -1205,4 +1206,40 @@ function processGetStudyDataResponse3(result) {
         var msg = js["error"];
         console.log("error:" + msg);
     }
+}
+
+function setSelectedDataAndTool() {
+    var tableString = "";
+
+    tableString += "<tr>";
+
+    tableString += "<td>";
+    tableString += localStorage.getItem("currentDataName");
+    tableString += "</td>";
+
+    tableString += "<td>";
+    tableString += localStorage.getItem("currentDataFilename");
+    tableString += "</td>";
+
+    tableString += "</tr>";
+
+    DataTableBody = document.getElementById("algoResultDataTableBody");
+    DataTableBody.innerHTML = tableString;
+
+    tableString = "";
+
+    tableString += "<tr>";
+
+    tableString += "<td>";
+    tableString += localStorage.getItem("currentToolName");
+    tableString += "</td>";
+
+    tableString += "<td>";
+    tableString += localStorage.getItem("algName");
+    tableString += "</td>";
+
+    tableString += "</tr>";
+
+    toolTableBody = document.getElementById("algoResultToolTableBody");
+    toolTableBody.innerHTML = tableString;
 }
