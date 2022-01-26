@@ -2,6 +2,15 @@
     "python.analysis.extraPaths": [
         "./lib/pyAudioAnalysis-master/pyAudioAnalysis",
         "./lib/pyAudioAnalysis-master",
-        "./lib/pyAudioAnalysisMaster/pyAudioAnalysis"
+        "./lib/pyAudioAnalysisMaster/pyAudioAnalysis",
+        "./lib"
     ]
+,
+
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "lib/commons-lang3-3.12.0.jar",
+        "lib/commons-math3-3.6.1.jar"
+    ],
+    "maven.view": "flat"
 }

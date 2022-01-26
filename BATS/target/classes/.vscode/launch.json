@@ -6,6 +6,55 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch RunAlgo",
+            "request": "launch",
+            "mainClass": "UpperLevel.RunAlgo",
+            "projectName": "PipelineMQP_de9018c3"
+        },
+        {
+            "type": "java",
+            "name": "Launch Table2CSV",
+            "request": "launch",
+            "mainClass": "Gen_Algo.Table2CSV",
+            "projectName": "PipelineMQP_de9018c3"
+        },
+        {
+            "type": "java",
+            "name": "Launch PyInterpreter",
+            "request": "launch",
+            "mainClass": "Interpreter.PyInterpreter",
+            "projectName": "PipelineMQP_de9018c3"
+        },
+        {
+            "type": "java",
+            "name": "Launch Graphing_Simp",
+            "request": "launch",
+            "mainClass": "Graphing.Graphing_Simp",
+            "projectName": "PipelineMQP"
+        },
+        {
+            "type": "java",
+            "name": "Launch PyInterpreter",
+            "request": "launch",
+            "mainClass": "Interpreter.PyInterpreter",
+            "projectName": "PipelineMQP"
+        },
+        {
+            "type": "java",
+            "name": "Launch PyInterpreter",
+            "request": "launch",
+            "mainClass": "PyInterpreter",
+            "projectName": "PipelineMQP_de9018c3"
+        },
+        {
+            "type": "java",
+            "name": "Launch PyInterpreter",
+            "request": "launch",
+            "mainClass": "Interpreter.PyInterpreter",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
             "name": "Launch Interpreter",
             "request": "launch",
             "mainClass": "Interpreter.Interpreter",
