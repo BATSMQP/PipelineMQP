@@ -95,21 +95,147 @@
 
 
         <div class="table-responsive col-md-6">
-          <table id="studyPageToolTable" class="table table-hover table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Name of Tool</th>
-                <th scope="col">Filename</th>
-                <th scope="col">File Extension</th>
-                <th scope="col">For Data Type</th>
-              </tr>
-            </thead>
-            <tbody id="studyPageToolTableBody">
-              <tr>
-                <td id="loadingTableData">Loading...</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="accordion" id="accordionExample">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Graphing Toolkit
+                  </button>
+                </h2>
+              </div>
+          
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                  
+                  <table id="studyPageToolTable" class="table table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Filename</th>
+                        <th scope="col">File Ext.</th>
+                        <th scope="col">For Data Type</th>
+                      </tr>
+                    </thead>
+                    <tbody id="studyPageToolTableBody">
+                      <tr>
+                        <td>High Pass</td>
+                        <td>highpass</td>
+                        <td>.csv</td>
+                        <td>All</td>
+                      </tr>
+                      <tr>
+                        <td>Low Pass</td>
+                        <td>lowpass</td>
+                        <td>.csv</td>
+                        <td>All</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Statistical Toolkit
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                  
+                  <table id="studyPageToolTable" class="table table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Filename</th>
+                        <th scope="col">File Ext.</th>
+                        <th scope="col">For Data Type</th>
+                      </tr>
+                    </thead>
+                    <tbody id="studyPageToolTableBody">
+                      <tr>
+                        <td>tTest</td>
+                        <td>ttest</td>
+                        <td>.csv</td>
+                        <td>All</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Audio Toolkit
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                  
+                  <table id="studyPageToolTable" class="table table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Filename</th>
+                        <th scope="col">File Ext.</th>
+                        <th scope="col">For Data Type</th>
+                      </tr>
+                    </thead>
+                    <tbody id="studyPageToolTableBody">
+                      <tr>
+                        <td>Graph .wav</td>
+                        <td>graphwav</td>
+                        <td>.wav</td>
+                        <td>Speech</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingFour">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Neural Toolkit
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                <div class="card-body">
+                  
+                  <table id="studyPageToolTable" class="table table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Filename</th>
+                        <th scope="col">File Ext.</th>
+                        <th scope="col">For Data Type</th>
+                      </tr>
+                    </thead>
+                    <tbody id="studyPageToolTableBody">
+                      <tr>
+                        <td>Examlpe Name</td>
+                        <td>exampleName</td>
+                        <td>.csv</td>
+                        <td>Neural</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>          
         </div>
 
       </div>
@@ -129,7 +255,7 @@
           // checkGetData();
           loadStudyPage();
           getStudyDataForStudyPage();
-          getStudyToolsForStudyPage();
+          // getStudyToolsForStudyPage();
         }
       </script>
 
@@ -140,3 +266,106 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
+
+              <!-- <tr>
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                  <div class="accordion-item">
+                    <h5 class="accordion-header" id="panelsStayOpen-headingOne">
+                      <button class="accordion-button collapsed spToolkit" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        Graphing Toolkit
+                      </button>
+                    </h5>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                      <div class="accordion-body">
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h5 class="accordion-header" id="panelsStayOpen-headingTwo">
+                      <button class="accordion-button collapsed spToolkit" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        Statistical Toolkit
+                      </button>
+                    </h5>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                      <div class="accordion-body">
+                      
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h5 class="accordion-header" id="panelsStayOpen-headingThree">
+                      <button class="accordion-button collapsed spToolkit" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                        Audio Toolkit
+                      </button>
+                    </h5>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                      <div class="accordion-body">
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h5 class="accordion-header" id="panelsStayOpen-headingThree">
+                      <button class="accordion-button collapsed spToolkit" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                        Neural Toolkit
+                      </button>
+                    </h5>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                      <div class="accordion-body">
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </tr>
+ -->
+              <!-- <tr>
+                <td id="loadingTableData">Loading...</td>
+              </tr> -->
+
+              <!-- <tr class="table-primary" data-bs-toggle="collapse" data-bs-target=".graphingToolkit" aria-expanded="false" role="button">
+                <td colspan="4">Graphing Toolkit</td>
+              </tr>
+              <tr class="collapse graphingToolkit">
+                <td>High Pass</td>
+                <td>highpass</td>
+                <td>.csv</td>
+                <td>All</td>
+              </tr>
+              <tr class="collapse graphingToolkit">
+                <td>Low Pass</td>
+                <td>lowpass</td>
+                <td>.csv</td>
+                <td>All</td>
+              </tr>
+
+              <tr class="table-primary" data-bs-toggle="collapse" data-bs-target=".statToolkit" aria-expanded="false" role="button">
+                <td colspan="4">Statistical Toolkit</td>
+              </tr>
+              <tr class="collapse statToolkit">
+                <td>tTest</td>
+                <td>ttest</td>
+                <td>.csv</td>
+                <td>All</td>
+              </tr>
+
+              <tr class="table-primary" data-bs-toggle="collapse" data-bs-target=".audioToolkit" aria-expanded="false" role="button">
+                <td colspan="4">Audio Toolkit</td>
+              </tr>
+              <tr class="collapse audioToolkit">
+                <td>Graph .wav</td>
+                <td>graphwav</td>
+                <td>.wav</td>
+                <td>Speech</td>
+              </tr>
+
+              <tr class="table-primary" data-bs-toggle="collapse" data-bs-target=".neuralToolkit" aria-expanded="false" role="button">
+                <td colspan="4">Neural Toolkit</td>
+              </tr>
+              <tr class="collapse neuralToolkit">
+                <td>Examlpe Name</td>
+                <td>exampleName</td>
+                <td>.csv</td>
+                <td>Neural</td>
+              </tr> -->

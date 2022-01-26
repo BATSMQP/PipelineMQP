@@ -141,6 +141,12 @@
     width: 72%;
 }
 
+.spToolkit{
+    width: 100%;
+    padding-left: 2%;
+    text-align: left;
+}
+
 .form-control {
     width: 400px;
 }
