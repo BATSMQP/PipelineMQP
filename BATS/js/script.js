@@ -429,7 +429,7 @@ function processGetStudiesResponse(result) {
                 tableString += "</tr>";                    
         }
         // tableString += "</tbody>";
-        console.log(tableString);
+        // console.log(tableString);
 
         studyTableTbody = document.getElementById("studyTableTbody");
         studyTableTbody.innerHTML = tableString;
@@ -621,7 +621,7 @@ function processGetStudyDataResponse(result) {
                 tableString += "</tr>";                    
         }
         // tableString += "</tbody>";
-        console.log(tableString);
+        // console.log(tableString);
 
         DataTableBody = document.getElementById("DataTableBody");
         DataTableBody.innerHTML = tableString;
@@ -631,7 +631,7 @@ function processGetStudyDataResponse(result) {
     }
 }
 
-function dataClicked(documentId, authUserId, filename, name) {
+function dataClicked(documentId, authUserId, filename, name, i, n) {
     console.log("in dataClicked");
     console.log("documentId: " + documentId);
     console.log("authUserId: " + authUserId);
@@ -641,13 +641,25 @@ function dataClicked(documentId, authUserId, filename, name) {
     // localStorage.setItem('currentAuthUserId', authUserId);
     localStorage.setItem('currentDataFilename', filename);
     localStorage.setItem('currentDataName', name);
+    localStorage.setItem('currentDatai', i);
     currentFileName = localStorage.getItem('filename');
     currentName = localStorage.getItem('name');
     currentDataDocumentId = localStorage.getItem('currentDataDocumentId');
     console.log("currentFileName (in dataClicked): " + currentFileName);
     console.log("currentName (in dataClicked): " + currentName);
     console.log("currentDataDocumentId (in dataClicked): " + currentDataDocumentId);
-    window.location.href = "selectAlgorithms.html";
+    // window.location.href = "selectAlgorithms.html";
+
+    // var radio = "dataRadio" + localStorage.getItem("currentDatai");
+    // var radioBtn = document.getElementById(radio);
+    // radioBtn.checked = true;
+    // for(let i = 0; i < n; i++){
+    //     if(i != localStorage.getItem("currentDatai")){
+    //         radio = "dataRadio" + i;
+    //         radioBtn = document.getElementById(radio);
+    //         radioBtn.checked = false;
+    //     }
+    // }
 }
 /////////////////Select Algorithm PAGE///////////////////////////////////////////////////////////
 
@@ -663,7 +675,7 @@ function algoClicked(toolDocumentId, algName, name) { //algName=filename
     currentToolDocumentId = localStorage.getItem('currentToolDocumentId');
     console.log("currentAlgName (in algoClicked): " + currentAlgName);
     console.log("currentToolDocumentId (in algoClicked): " + currentToolDocumentId);
-    window.location.href = "algoResult.html";
+    // window.location.href = "algoResult.html";
 }
 
 function checkRunAlg() {
@@ -714,7 +726,7 @@ function processRunAlgResponse(result) {
         var tableString = "";
   
         // tableString += "</tbody>";
-        console.log(tableString);
+        // console.log(tableString);
 
         DataTableBody = document.getElementById("DataTableBody");
         DataTableBody.innerHTML = tableString;
