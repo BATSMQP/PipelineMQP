@@ -1,0 +1,160 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch RunAlgo",
+            "request": "launch",
+            "mainClass": "UpperLevel.RunAlgo",
+            "projectName": "PipelineMQP_de9018c3"
+        },
+        {
+            "type": "java",
+            "name": "Launch Table2CSV",
+            "request": "launch",
+            "mainClass": "Gen_Algo.Table2CSV",
+            "projectName": "PipelineMQP_de9018c3"
+        },
+        {
+            "type": "java",
+            "name": "Launch PyInterpreter",
+            "request": "launch",
+            "mainClass": "Interpreter.PyInterpreter",
+            "projectName": "PipelineMQP_de9018c3"
+        },
+        {
+            "type": "java",
+            "name": "Launch Graphing_Simp",
+            "request": "launch",
+            "mainClass": "Graphing.Graphing_Simp",
+            "projectName": "PipelineMQP"
+        },
+        {
+            "type": "java",
+            "name": "Launch PyInterpreter",
+            "request": "launch",
+            "mainClass": "Interpreter.PyInterpreter",
+            "projectName": "PipelineMQP"
+        },
+        {
+            "type": "java",
+            "name": "Launch PyInterpreter",
+            "request": "launch",
+            "mainClass": "PyInterpreter",
+            "projectName": "PipelineMQP_de9018c3"
+        },
+        {
+            "type": "java",
+            "name": "Launch PyInterpreter",
+            "request": "launch",
+            "mainClass": "Interpreter.PyInterpreter",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
+            "name": "Launch Interpreter",
+            "request": "launch",
+            "mainClass": "Interpreter.Interpreter",
+            "projectName": "PipelineMQP_d46bcdbb"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Butterworth",
+            "request": "launch",
+            "mainClass": "Gen_Algo.Butterworth",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
+            "name": "Launch CutOff",
+            "request": "launch",
+            "mainClass": "Gen_Algo.CutOff",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
+            "name": "Launch ReadFile",
+            "request": "launch",
+            "mainClass": "Gen_Algo.ReadFile",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
+            "name": "Launch Graphing_Simp",
+            "request": "launch",
+            "mainClass": "Graphing.Graphing_Simp",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
+            "name": "Launch Interpreter",
+            "request": "launch",
+            "mainClass": "Interpreter.Interpreter",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
+            "name": "Launch Demo",
+            "request": "launch",
+            "mainClass": "Stats_Func.Demo",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
+            "name": "Launch DemoOld",
+            "request": "launch",
+            "mainClass": "Stats_Func.DemoOld",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
+            "name": "Launch dev",
+            "request": "launch",
+            "mainClass": "Stats_Func.dev",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
+            "name": "Launch mean",
+            "request": "launch",
+            "mainClass": "Stats_Func.mean",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
+            "name": "Launch tTest",
+            "request": "launch",
+            "mainClass": "Stats_Func.tTest",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
+            "name": "Launch PitchAnalysis",
+            "request": "launch",
+            "mainClass": "Time_Data_Algo.Voice.PitchAnalysis",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
+            "name": "Launch FFMPEGDownloader",
+            "request": "launch",
+            "mainClass": "lib.TarsosDSP.util.FFMPEGDownloader",
+            "projectName": "PipelineMQP_1b4f2704"
+        },
+        {
+            "type": "java",
+            "name": "Launch AudioFormatDecoderExample",
+            "request": "launch",
+            "mainClass": "be.tarsos.dsp.example.AudioFormatDecoderExample"
+        }
+    ]
+}
