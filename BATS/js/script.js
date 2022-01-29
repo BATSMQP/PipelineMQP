@@ -583,6 +583,7 @@ function processGetStudyDataResponse(result) {
 
     var status = js["statusCode"];
     var data = js["data"];
+    localStorage.setItem("currentData", data);
 
     if (status == 200) {
         console.log("getStudyData status 200");
@@ -603,6 +604,8 @@ function processGetStudyDataResponse(result) {
                 tableString += doc["filename"];
                 tableString += '", "';
                 tableString += doc["name"];
+                tableString += '", "';
+                tableString += i;
                 tableString += '")';
                 tableString += "'>";
 
@@ -620,18 +623,17 @@ function processGetStudyDataResponse(result) {
 
                 tableString += "</tr>";                    
         }
-        // tableString += "</tbody>";
-        // console.log(tableString);
 
         DataTableBody = document.getElementById("DataTableBody");
         DataTableBody.innerHTML = tableString;
+        localStorage.setItem("dataTableString", tableString);
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
     }
 }
 
-function dataClicked(documentId, authUserId, filename, name, i, n) {
+function dataClicked(documentId, authUserId, filename, name, chosenI) {
     console.log("in dataClicked");
     console.log("documentId: " + documentId);
     console.log("authUserId: " + authUserId);
@@ -641,25 +643,35 @@ function dataClicked(documentId, authUserId, filename, name, i, n) {
     // localStorage.setItem('currentAuthUserId', authUserId);
     localStorage.setItem('currentDataFilename', filename);
     localStorage.setItem('currentDataName', name);
-    localStorage.setItem('currentDatai', i);
+    // localStorage.setItem('currentDatai', i);
     currentFileName = localStorage.getItem('filename');
     currentName = localStorage.getItem('name');
     currentDataDocumentId = localStorage.getItem('currentDataDocumentId');
     console.log("currentFileName (in dataClicked): " + currentFileName);
     console.log("currentName (in dataClicked): " + currentName);
     console.log("currentDataDocumentId (in dataClicked): " + currentDataDocumentId);
+    // console.log("data (in dataClicked): ")
+    // console.log(data[name]);
     // window.location.href = "selectAlgorithms.html";
 
-    // var radio = "dataRadio" + localStorage.getItem("currentDatai");
-    // var radioBtn = document.getElementById(radio);
-    // radioBtn.checked = true;
-    // for(let i = 0; i < n; i++){
-    //     if(i != localStorage.getItem("currentDatai")){
-    //         radio = "dataRadio" + i;
-    //         radioBtn = document.getElementById(radio);
-    //         radioBtn.checked = false;
-    //     }
-    // }
+    //make selected row active
+    var tableString = localStorage.getItem("dataTableString");
+    var splitter = "onclick='JavaScript:dataClicked(";
+    splitter += '"';
+    splitter += documentId;
+    splitter += '", "';
+    splitter += authUserId;
+    splitter += '", "';
+    splitter += filename;
+    splitter += '", "';
+    splitter += name;
+    splitter += '", "';
+    splitter += chosenI;
+    splitter += '")';
+    var tsSplit2 = tableString.split(splitter);
+    var newTableString = tsSplit2[0] + "class='table-active' " + tsSplit2[1];
+    DataTableBody = document.getElementById("DataTableBody");
+    DataTableBody.innerHTML = newTableString;
 }
 /////////////////Select Algorithm PAGE///////////////////////////////////////////////////////////
 
