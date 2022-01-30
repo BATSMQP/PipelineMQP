@@ -17,6 +17,8 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.amazonaws.lambda.demo.http.EditStudyInfoRequest;
+import com.amazonaws.lambda.demo.http.EditStudyInfoResponse;
 import com.amazonaws.lambda.demo.http.GetDataRequest;
 import com.amazonaws.lambda.demo.http.GetDataResponse;
 import com.amazonaws.lambda.demo.http.GetStudiesRequest;
@@ -137,11 +139,20 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testCreateStudyHandler() {
     	CreateStudyHandler csh = new CreateStudyHandler();
-    	NewStudyRequest r = new NewStudyRequest("testStudyInEclipse", "ts", "abstract", "institutionsInvolved", "studyContact", "studyNotes", "isIrbApproved", "visibility", "91c9465f-9a0d-4c6f-9f19-b5a813d2ce34");
+    	NewStudyRequest r = new NewStudyRequest("39cd1de6-6bb4-43ae-9348-c83e40f4d57d", "Eclipse", "Ecps", "Description", "institutionsInvolved", "studyContact", "studyNotes", "isIrbApproved", "visibility");
     	NewStudyResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
     	System.out.println("response.study: " + response.study);
+    }
+    
+    @Test
+    public void testEditStudyInfoHandler() {
+    	EditStudyInfoHandler csh = new EditStudyInfoHandler();
+    	EditStudyInfoRequest r = new EditStudyInfoRequest("testStudyInEclipse", "ts", "abstract", "institutionsInvolved", "studyContact", "studyNotes", "isIrbApproved", "visibility", "91c9465f-9a0d-4c6f-9f19-b5a813d2ce34");
+    	EditStudyInfoResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
     }
     
     @Test

@@ -65,6 +65,22 @@ public class Study{
 		this.authUserId = authUserId;
 	}
 	
+	public Study(String studyId, String institutionsInvolved, String studyDescription, String studyName, String studyShortName, String studyContact, String studyNotes, String visibility, String isIrbApproved, Timestamp lastMod) {
+		this.studyId = studyId;
+		this.institutionsInvolved = institutionsInvolved;
+		this.studyDescription = studyDescription;
+		this.studyName = studyName;
+		this.studyShortName = studyShortName;
+		this.studyContact = studyContact;
+		this.studyNotes = studyNotes;
+		this.visibility = visibility;
+		this.isIrbApproved = isIrbApproved;
+		this.studyStartDate = null;
+		this.lastMod = lastMod;
+		this.studyEndDate = null;
+		this.authUserId = null;
+	}
+	
 	public Study() {
 		this.studyId = null;
 		this.institutionsInvolved = null;

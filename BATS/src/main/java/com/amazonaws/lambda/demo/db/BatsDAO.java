@@ -176,6 +176,40 @@ public class BatsDAO {
 	  }
 	}
 	
+	public boolean EditStudy(Study study, LambdaLogger logger) throws Exception {
+	  try {
+	      PreparedStatement ps = conn.prepareStatement("UPDATE Study SET institutionsInvolved=?, studyDescription=?, studyName=?, studyShortName=?, studyContact=?, studyNotes=?, visibility=?, isIrbApproved=?, lastMod=? WHERE studyId=?;");
+	      ps.setString(1, study.institutionsInvolved);
+	      ps.setString(2, study.studyDescription);
+	      ps.setString(3, study.studyName);
+	      ps.setString(4, study.studyShortName);
+	      ps.setString(5, study.studyContact);
+	      ps.setString(6, study.studyNotes);
+	      ps.setString(7, study.visibility);
+	      ps.setString(8, study.isIrbApproved);
+	      ps.setTimestamp(9, study.lastMod);
+	      ps.setString(10, study.studyId);
+	      ResultSet resultSet = ps.executeQuery();
+//	      { logger.log("ps for select (in EditStudy): " + ps); }
+//	      // already present?
+//	      while (resultSet.next()) {
+//	    	  StudyDocument c = generateStudyDocument(resultSet, logger);
+//	          resultSet.close();
+//	          return false;
+//	      }
+//
+//	      ps = conn.prepareStatement("INSERT INTO StudyDocument (studyId, documentId) values(?,?);");
+//	      ps.setString(1, studyDocument.studyId);
+//	      ps.setString(2, studyDocument.documentId);
+//	      { logger.log("ps for insert (in addStuudyDocument): " + ps); }
+//	      ps.execute();
+	      return true;
+	
+	  } catch (Exception e) {
+	      throw new Exception("Failed to edit study: " + e.getMessage());
+	  }
+	}
+	
 	public boolean addAuthUserDocument(AuthUserDocument authUserDocument, LambdaLogger logger) throws Exception {
 	  try {
 	      PreparedStatement ps = conn.prepareStatement("SELECT * FROM AuthUserDocument WHERE documentId = ?;");

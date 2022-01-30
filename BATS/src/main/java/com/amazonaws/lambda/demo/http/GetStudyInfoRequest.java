@@ -5,7 +5,7 @@ public class GetStudyInfoRequest {
 	String studyId;
 
 	public String getStudyId() { return studyId; }
-	public void setStudyId(String studyId) { this.studyId = authUserIdstudyId; }
+	public void setStudyId(String studyId) { this.studyId = studyId; }
 	
 	public String toString() {
 		return "GetStudyInfoRequest(" + studyId + ")";
