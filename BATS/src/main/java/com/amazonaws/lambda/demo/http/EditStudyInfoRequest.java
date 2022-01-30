@@ -35,7 +35,7 @@ public class EditStudyInfoRequest {
 		return "EditStudyInfoRequest(" + studyId + ")";
 	}
 	
-	public EditStudyInfoRequest (String studyId, String institutionsInvolved, String studyDescription, String studyName, String studyShortName, String studyContact, String studyNotes, String visibility, String isIrbApproved) {
+	public EditStudyInfoRequest (String studyId, String studyName, String studyShortName, String studyDescription, String institutionsInvolved, String studyContact, String studyNotes, String isIrbApproved, String visibility) {
 		this.studyId = studyId;
 		this.studyName = studyName;
 		this.studyShortName = studyShortName;

@@ -149,7 +149,7 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testEditStudyInfoHandler() {
     	EditStudyInfoHandler csh = new EditStudyInfoHandler();
-    	EditStudyInfoRequest r = new EditStudyInfoRequest("testStudyInEclipse", "ts", "abstract", "institutionsInvolved", "studyContact", "studyNotes", "isIrbApproved", "visibility", "91c9465f-9a0d-4c6f-9f19-b5a813d2ce34");
+    	EditStudyInfoRequest r = new EditStudyInfoRequest("39cd1de6-6bb4-43ae-9348-c83e40f4d57d", "testStudyInEclipse", "ts", "abstract", "institutionsInvolved", "studyContact", "studyNotes", "yes", "no");
     	EditStudyInfoResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
