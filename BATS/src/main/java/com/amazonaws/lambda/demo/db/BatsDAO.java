@@ -65,6 +65,31 @@ public class BatsDAO {
       }
     }
     
+    public Study getStudy(String studyId, LambdaLogger logger) throws Exception {
+        
+    try {
+    	{ logger.log("in getStudy"); }
+    	Study study = null;
+        { logger.log("study = null"); }
+        { logger.log("con= " + conn); }
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM Study WHERE studyId=?;");
+        ps.setString(1, studyId);
+        ResultSet resultSet = ps.executeQuery();
+        
+        while (resultSet.next()) {
+            study = generateStudy(resultSet, logger);
+            { logger.log("study (in getStudy): " + study.toString()); }
+        }
+        resultSet.close();
+        ps.close();
+        return study;
+
+    } catch (Exception e) {
+    	e.printStackTrace();
+        throw new Exception("Failed in getting study: " + e.getMessage());
+    }
+  }
+    
 	 public boolean addAuthUser(AuthUser authUser, LambdaLogger logger) throws Exception {
 	  try {
 	      PreparedStatement ps = conn.prepareStatement("SELECT * FROM AuthUser WHERE authUserId = ?;");

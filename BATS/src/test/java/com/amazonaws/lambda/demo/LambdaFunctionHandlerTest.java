@@ -23,6 +23,8 @@ import com.amazonaws.lambda.demo.http.GetStudiesRequest;
 import com.amazonaws.lambda.demo.http.GetStudiesResponse;
 import com.amazonaws.lambda.demo.http.GetStudyDataRequest;
 import com.amazonaws.lambda.demo.http.GetStudyDataResponse;
+import com.amazonaws.lambda.demo.http.GetStudyInfoRequest;
+import com.amazonaws.lambda.demo.http.GetStudyInfoResponse;
 import com.amazonaws.lambda.demo.http.GetStudyToolsRequest;
 import com.amazonaws.lambda.demo.http.GetStudyToolsResponse;
 import com.amazonaws.lambda.demo.http.GetUsernameRequest;
@@ -160,6 +162,16 @@ public class LambdaFunctionHandlerTest {
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
     	System.out.println("response.data: " + response.data);
+    }
+    
+    @Test
+    public void testGetStudyInfoHandler() {
+    	GetStudyInfoHandler csh = new GetStudyInfoHandler();
+    	GetStudyInfoRequest r = new GetStudyInfoRequest("a9c30695-28ce-4481-81e5-b240af28e9fd");
+    	GetStudyInfoResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.study: " + response.study);
     }
     
     @Test
