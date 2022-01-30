@@ -455,11 +455,11 @@ function studyClicked(studyId, authUserId, studyName) {
 }
 
 function checkGetData() {
-    var studyNameOnStudyPage = document.getElementById("studyNameOnStudyPage");
-    currentStudyName = localStorage.getItem('studyName');
-    console.log("currrentStudyName (in checkGetData): " + currentStudyName);
-    console.log("innerhtml of studyNameOnStudyPage (in checkGetData): " + studyNameOnStudyPage.innerHTML);
-    studyNameOnStudyPage.innerHTML = currentStudyName;
+    // var studyNameOnStudyPage = document.getElementById("studyNameOnStudyPage");
+    // currentStudyName = localStorage.getItem('studyName');
+    // console.log("currrentStudyName (in checkGetData): " + currentStudyName);
+    // console.log("innerhtml of studyNameOnStudyPage (in checkGetData): " + studyNameOnStudyPage.innerHTML);
+    // studyNameOnStudyPage.innerHTML = currentStudyName;
 
     var json = {authUserId: localStorage.getItem('currentAuthUserId')};
 
@@ -496,9 +496,40 @@ function processGetDataResponse(result) {
 
     var status = js["statusCode"];
     var data = js["data"];
+    var studies = js["studies"];
 
     if (status == 200) {
         console.log("getData status 200");
+
+        var tableString = "";
+        var doc;
+  
+        for(let i = 0; i < data.length; i++){
+                doc = data[i];
+                //create row to be inserted
+                tableString += "<tr>";
+
+                tableString += "<td>";
+                tableString += doc["name"];
+                tableString += "</td>";
+
+                tableString += "<td>";
+                tableString += doc["filename"];
+                tableString += "</td>";
+
+                tableString += "<td>";
+                tableString += doc["dataType"];
+                tableString += "</td>";
+
+                tableString += "<td>";
+                tableString += studies[i]["studyName"];
+                tableString += "</td>";
+
+                tableString += "</tr>";                    
+        }
+
+        DataTableBody = document.getElementById("ViewDataTableBody");
+        DataTableBody.innerHTML = tableString;
 
         // var studyTable = document.getElementById("tableOfStudiesOnUserHome");
         // var study;
@@ -548,6 +579,12 @@ function processGetDataResponse(result) {
 ////////////////Select Data Page////////////////////////////////////////////////////////////////////
 
 function checkGetStudyData() {
+    var studyNameOnStudyPage = document.getElementById("studyNameOnStudyPage");
+    currentStudyName = localStorage.getItem('studyName');
+    console.log("currrentStudyName (in checkGetData): " + currentStudyName);
+    console.log("innerhtml of studyNameOnStudyPage (in checkGetData): " + studyNameOnStudyPage.innerHTML);
+    studyNameOnStudyPage.innerHTML = currentStudyName;
+
     var json = {studyId: localStorage.getItem('currentStudyId')};
 
     var js = JSON.stringify(json);

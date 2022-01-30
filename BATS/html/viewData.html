@@ -53,69 +53,30 @@
     <div id="main">
 
         <h3 id="title">View All Data</h3>
-        <div>
-          <h4 id="nameDataset">Name of Dataset</h6>
-          <h6 id="dataType">Data Type</h6>
-        </div>
 
-        <div class="table-responsive">
-          <table id="toolkitTable" class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Info</th>
-                <th scope="col">Time</th>
-                <th scope="col">Time Increment</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>12345</td>
-                <td>Something</td>
-                <td>1.00</td>
-                <td>second</td>
-              </tr>
-              <tr>
-                <td>23456</td>
-                <td>Something</td>
-                <td>2.00</td>
-                <td>second</td>
-              </tr>
-              <tr>
-                <td>34567</td>
-                <td>Something</td>
-                <td>3.00</td>
-                <td>second</td>
-              </tr>
-              <tr>
-                <td>45678</td>
-                <td>Something</td>
-                <td>4.00</td>
-                <td>second</td>
-              </tr>
-              <tr>
-                <td>56789</td>
-                <td>Something</td>
-                <td>5.00</td>
-                <td>second</td>
-              </tr>
-              <tr>
-                <td>67890</td>
-                <td>Something</td>
-                <td>6.00</td>
-                <td>second</td>
-              </tr>
+        <table id="ViewDataTable" class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Filename</th>
+              <th scope="col">Data Type</th>
+              <th scope="col">Study</th>
+            </tr>
+          </thead>
+          <tbody id="ViewDataTableBody">
+            <tr>
+              <td id="loadingTableData">Loading...</td>
+            </tr>
+          </tbody>
+        </table>
 
-            </tbody>
-          </table>
-        </div>
-        <div class="btn-group"  id="dataTypeButtons" role="group" aria-label="Basic outlined example">
+        <!-- <div class="btn-group"  id="dataTypeButtons" role="group" aria-label="Basic outlined example">
           <button type="button" class="btn btn-outline-primary">Data Type 1</button>
           <button type="button" class="btn btn-outline-primary">Data Type 2</button>
           <button type="button" class="btn btn-outline-primary">Data Type 3</button>
           <button type="button" class="btn btn-outline-primary">Data Type 4</button>
           <button type="button" class="btn btn-outline-primary">Data Type 5</button>
-        </div>
+        </div> -->
         </br>
         <!-- <button type="submit" id="nextButton" class="btn btn-primary">Next</button> -->
 
@@ -124,6 +85,12 @@
       <nav class="navbar fixed-bottom navbar-dark bg-dark">
         <a class="navbar-brand" href="#">BATS 2022</a>
       </nav>
+
+      <script>
+        window.onload = function() {
+          checkGetData();
+        }
+      </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

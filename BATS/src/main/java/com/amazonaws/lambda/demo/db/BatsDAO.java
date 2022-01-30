@@ -90,6 +90,44 @@ public class BatsDAO {
     }
   }
     
+    public ArrayList<Study> getStudiesForDocuments(ArrayList<Document> docs, LambdaLogger logger) throws Exception {
+        
+		try {
+			ArrayList<StudyDocument> studyDocs = new ArrayList<StudyDocument>();
+			for(int i = 0; i < docs.size(); i++) {
+				PreparedStatement ps = conn.prepareStatement("SELECT * FROM StudyDocument where documentId=?;");
+			     ps.setString(1, docs.get(i).documentId);
+			     ResultSet resultSet = ps.executeQuery();
+			     while (resultSet.next()) {
+			    	 studyDocs.add(generateStudyDocument(resultSet, logger));
+			     	{ logger.log("studies in while (in getStudies): " + studyDocs); }
+			     }
+			     resultSet.close();
+			     ps.close();
+			}
+			ArrayList<Study> studies = new ArrayList<Study>();
+			for(int i = 0; i < studyDocs.size(); i++){
+				PreparedStatement ps = conn.prepareStatement("SELECT * FROM Study where studyId=?;");
+			     ps.setString(1, studyDocs.get(i).studyId);
+			     ResultSet resultSet = ps.executeQuery();
+			     while (resultSet.next()) {
+			    	 studies.add(generateStudy(resultSet, logger));
+			     	{ logger.log("studies in while (in getStudies): " + studies); }
+			     }
+			     resultSet.close();
+			     ps.close();
+			}
+		     
+		     
+		     { logger.log("studies after (in getStudies): " + studies); }
+		     return studies;
+		
+		 } catch (Exception e) {
+		 	e.printStackTrace();
+		     throw new Exception("Failed in getting studies for the documents: " + e.getMessage());
+		 }
+      }
+    
 	 public boolean addAuthUser(AuthUser authUser, LambdaLogger logger) throws Exception {
 	  try {
 	      PreparedStatement ps = conn.prepareStatement("SELECT * FROM AuthUser WHERE authUserId = ?;");

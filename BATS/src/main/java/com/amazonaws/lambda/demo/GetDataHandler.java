@@ -39,6 +39,7 @@ public class GetDataHandler implements RequestHandler<GetDataRequest, GetDataRes
 		String failMessage = "";
 		
 		ArrayList<Document> data = new ArrayList<Document>();
+		ArrayList<Study> studies = new ArrayList<Study>();
 		
 
 		try {
@@ -49,11 +50,19 @@ public class GetDataHandler implements RequestHandler<GetDataRequest, GetDataRes
 			failMessage = "Failed to get the data for the authUserId";
 		}
 		
+		try {
+			studies = dao.getStudiesForDocuments(data, logger);
+		}
+		catch(Exception e) {
+			fail = true;
+			failMessage = "Failed to get the studies for the data documents";
+		}
+		
 		GetDataResponse response;
 		if (fail) {
-			response = new GetDataResponse(failMessage, 400, data);
+			response = new GetDataResponse(failMessage, 400, data, studies);
 		} else {
-			response = new GetDataResponse("none", 200, data);
+			response = new GetDataResponse("none", 200, data, studies);
 		}
 
 		return response;
