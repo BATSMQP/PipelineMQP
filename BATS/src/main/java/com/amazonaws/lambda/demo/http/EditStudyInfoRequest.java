@@ -24,7 +24,7 @@ public class EditStudyInfoRequest {
 	public void setStudyId(String studyId) { this.studyId = studyId; }
 	public void setStudyName(String studyName) { this.studyName = studyName; }
 	public void setStudyShortName(String studyShortName) { this.studyShortName = studyShortName; }
-	public void setStudDescription(String studyAbstract) { this.studyDescription = studyDescription; }
+	public void setStudyDescription(String studyDescription) { this.studyDescription = studyDescription; }
 	public void setInstitutionsInvolved(String institutionsInvolved) { this.institutionsInvolved = institutionsInvolved; }
 	public void setStudyContact(String studyContact) { this.studyContact = studyContact; }
 	public void setStudyNotes(String studyNotes) { this.studyNotes = studyNotes; }

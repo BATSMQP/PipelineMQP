@@ -1386,3 +1386,179 @@ function processGetStudyInfoResponse(result) {
         console.log("error:" + msg);
     }
 }
+
+//Edit Study Page
+function loadEditStudyPage() {
+    var json = {studyId: localStorage.getItem('currentStudyId')};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", GetStudyInfo_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processGetStudyInfoResponse2(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processGetStudyInfoResponse2("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processGetStudyInfoResponse2(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var study = js["study"];
+
+    if (status == 200) {
+        console.log("getData status 200");
+
+        editInputStudyName = document.getElementById("editInputStudyName");
+        editInputStudyName.value = study["studyName"];
+
+        editInputShortStudyName = document.getElementById("editInputShortStudyName");
+        editInputShortStudyName.value = study["studyShortName"];
+
+        editInputStudyAbstract = document.getElementById("editInputStudyAbstract");
+        editInputStudyAbstract.value = study["studyDescription"];
+
+        editInputStudyInstitutionsInvolved = document.getElementById("editInputStudyInstitutionsInvolved");
+        editInputStudyInstitutionsInvolved.value = study["institutionsInvolved"];
+
+        editInputStudyStudyContact = document.getElementById("editInputStudyStudyContact");
+        editInputStudyStudyContact.value = study["studyContact"];
+
+        editInputStudyStudyNotes = document.getElementById("editInputStudyStudyNotes");
+        editInputStudyStudyNotes.value = study["studyNotes"];
+
+        if(study["isIrbApproved"] == "yes"){
+            editInputStudyIsIrbApprovedYes = document.getElementById("editInputStudyIsIrbApprovedYes");
+            editInputStudyIsIrbApprovedYes.checked = true;
+
+            editInputStudyIsIrbApprovedNo = document.getElementById("editInputStudyIsIrbApprovedNo");
+            editInputStudyIsIrbApprovedNo.checked = false;
+        } else{
+            editInputStudyIsIrbApprovedYes = document.getElementById("editInputStudyIsIrbApprovedYes");
+            editInputStudyIsIrbApprovedYes.checked = false;
+
+            editInputStudyIsIrbApprovedNo = document.getElementById("editInputStudyIsIrbApprovedNo");
+            editInputStudyIsIrbApprovedNo.checked = true;
+        }
+
+        if(study["visibility"] == "yes"){
+            editInputStudyVisibilityYes = document.getElementById("editInputStudyVisibilityYes");
+            editInputStudyVisibilityYes.checked = true;
+
+            editInputStudyVisibilityNo = document.getElementById("editInputStudyVisibilityNo");
+            editInputStudyVisibilityNo.checked = false;
+        } else{
+            editInputStudyVisibilityYes = document.getElementById("editInputStudyVisibilityYes");
+            editInputStudyVisibilityYes.checked = false;
+
+            editInputStudyVisibilityNo = document.getElementById("editInputStudyVisibilityNo");
+            editInputStudyVisibilityNo.checked = true;
+        }
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
+    }
+}
+
+function checkEditStudyInfo() {
+    var editInputStudyName = document.getElementById("editInputStudyName").value;
+    var editInputShortStudyName = document.getElementById("editInputShortStudyName").value;
+    var editInputStudyAbstract = document.getElementById("editInputStudyAbstract").value;
+    var editInputStudyInstitutionsInvolved = document.getElementById("editInputStudyInstitutionsInvolved").value;
+    var editInputStudyStudyContact = document.getElementById("editInputStudyStudyContact").value;
+    var editInputStudyStudyNotes = document.getElementById("editInputStudyStudyNotes").value;
+    var editInputStudyIsIrbApprovedYes = document.getElementById("editInputStudyIsIrbApprovedYes").checked;
+    var editInputStudyIsIrbApprovedNo = document.getElementById("editInputStudyIsIrbApprovedNo").checked;
+    var editInputStudyVisibilityYes = document.getElementById("editInputStudyVisibilityYes").checked;
+    var editInputStudyVisibilityNo = document.getElementById("editInputStudyVisibilityNo").checked;
+
+    if (editInputStudyName == "") {
+        alert("Please enter a study name before continuing");
+        return false;
+    }
+
+    var editInputStudyIsIrbApproved = "";
+    if(editInputStudyIsIrbApprovedYes){
+        editInputStudyIsIrbApproved = "yes";
+    } else if(editInputStudyIsIrbApprovedNo){
+        editInputStudyIsIrbApproved = "no";
+    }
+
+    var editInputStudyVisibility = "";
+    if(editInputStudyVisibilityYes){
+        editInputStudyVisibility = "yes";
+    } else if(editInputStudyVisibilityNo){
+        editInputStudyVisibility = "no";
+    }
+
+    // console.log("currentAuthUserId in checkNewStudy: " + localStorage.getItem('currentAuthUserId'));
+    console.log("editInputStudyIsIrbApprovedYes:" + editInputStudyIsIrbApprovedYes);
+    console.log("editInputStudyIsIrbApprovedNo:" + editInputStudyIsIrbApprovedNo);
+    console.log("editInputStudyVisibilityYes:" + editInputStudyVisibilityYes);
+    console.log("editInputStudyVisibilityNo:" + editInputStudyVisibilityNo);
+
+    var json = {studyId: localStorage.getItem("currentStudyId"), studyName: editInputStudyName, studyShortName: editInputShortStudyName, studyDescription: editInputStudyAbstract, institutionsInvolved: editInputStudyInstitutionsInvolved, studyContact: editInputStudyStudyContact, studyNotes: editInputStudyStudyNotes, isIrbApproved: editInputStudyIsIrbApproved, visibility: editInputStudyVisibility};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", EditStudyInfo_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processEditStudyInfoResponse(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processEditStudyInfoResponse("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processEditStudyInfoResponse(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+
+    if (status == 200) {
+        window.location.href = "studyInfo.html";
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
+
+        var textString = "<p> error: " + msg + "</p>";
+        newStudyText = document.getElementById("newStudyText");
+        renewStudyTextgText.innerHTML = textString;
+    }
+}

@@ -50,32 +50,32 @@
         <!-- Navbar -->
     </header>
 
-    <a class="btn btn-secondary backBtn" href="userHome.html" role="button">Back</a>
+    <a class="btn btn-secondary backBtn" href="studyInfo.html" role="button">Back</a>
 
     <div id="main">
 
         <h3 id="title">Edit Study:</h3>
 
-        <form id="newStudy" onsubmit="return checkNewStudy()" action="">
+        <form id="newStudy" onsubmit="return checkEditStudyInfo()" action="">
             <!-- <div class="mb-3">
                 <label for="inputStudyName" class="form-label">Name:</label>
                 <input type="name" class="form-control" id="inputStudyName">
             </div> -->
             <div class="row mb-3 align-items-center">
                 <div class="col-auto">
-                    <label for="inputStudyName" class="form-label">Name:</label>
+                    <label for="editInputStudyName" class="form-label">Name:</label>
                 </div>
                 <div class="col-auto input">
-                    <input type="name" class="form-control" id="inputStudyName">
+                    <input type="name" class="form-control" id="editInputStudyName" value="Loading...">
                 </div>
             </div>
 
             <div class="row mb-3 align-items-center">
                 <div class="col-auto">
-                <label for="inputShortStudyName" class="col-form-label">Short Name:</label>
+                <label for="editInputShortStudyName" class="col-form-label">Short Name:</label>
                 </div>
                 <div class="col-auto">
-                <input type="shortName" id="inputShortStudyName" class="form-control" aria-describedby="shortNameHelp">
+                <input type="shortName" id="editInputShortStudyName" class="form-control" aria-describedby="shortNameHelp" value="Loading...">
                 </div>
                 <div class="col-auto">
                 <span id="shortNameHelp" class="form-text">
@@ -96,37 +96,37 @@
 
             <div class="row mb-3 align-items-center">
                 <div class="col-auto">
-                  <label for="inputStudyAbstract" class="form-label">Abstract:</label>
+                  <label for="editInputStudyAbstract" class="form-label">Abstract:</label>
                 </div>
                 <div class="col-auto input">
-                  <textarea class="form-control" id="inputStudyAbstract" rows="3"></textarea>
+                  <textarea class="form-control" id="editInputStudyAbstract" rows="3" value="Loading..."></textarea>
                 </div>
             </div>
 
             <div class="row mb-3 align-items-center">
               <div class="col-auto">
-                  <label for="inputStudyInstitutionsInvolved" class="form-label">Institutions Involved:</label>
+                  <label for="editInputStudyInstitutionsInvolved" class="form-label">Institutions Involved:</label>
               </div>
               <div class="col-auto input">
-                  <input type="name" class="form-control" id="inputStudyInstitutionsInvolved">
+                  <input type="name" class="form-control" id="editInputStudyInstitutionsInvolved" value="Loading...">
               </div>
             </div>
 
             <div class="row mb-3 align-items-center">
               <div class="col-auto">
-                  <label for="inputStudyStudyContact" class="form-label">Study Contact:</label>
+                  <label for="editInputStudyStudyContact" class="form-label">Study Contact:</label>
               </div>
               <div class="col-auto input">
-                  <input type="name" class="form-control" id="inputStudyStudyContact">
+                  <input type="name" class="form-control" id="editInputStudyStudyContact" value="Loading...">
               </div>
             </div>
 
             <div class="row mb-3 align-items-center">
               <div class="col-auto">
-                  <label for="inputStudyStudyNotes" class="form-label">Study Notes:</label>
+                  <label for="editInputStudyStudyNotes" class="form-label">Study Notes:</label>
               </div>
               <div class="col-auto input">
-                <textarea class="form-control" id="inputStudyStudyNotes" rows="3"></textarea>
+                <textarea class="form-control" id="editInputStudyStudyNotes" rows="3" value="Loading..."></textarea>
               </div>
             </div>
 
@@ -136,14 +136,14 @@
               </div>
               <div class="col-auto input">
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="inputStudyIsIrbApproved" id="inputStudyIsIrbApprovedYes">
-                  <label class="form-check-label" for="inputStudyIsIrbApprovedYes">
+                  <input class="form-check-input" type="radio" name="editInputStudyIsIrbApproved" id="editInputStudyIsIrbApprovedYes">
+                  <label class="form-check-label" for="editInputStudyIsIrbApprovedYes">
                     Yes
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="inputStudyIsIrbApproved" id="inputStudyIsIrbApprovedNo">
-                  <label class="form-check-label" for="inputStudyIsIrbApprovedNo">
+                  <input class="form-check-input" type="radio" name="editInputStudyIsIrbApproved" id="editInputStudyIsIrbApprovedNo">
+                  <label class="form-check-label" for="editInputStudyIsIrbApprovedNo">
                     No
                   </label>
                 </div>
@@ -156,21 +156,21 @@
             </div>
             <div class="col-auto input">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="inputStudyVisibility" id="inputStudyVisibilityYes">
-                <label class="form-check-label" for="inputStudyVisibilityYes">
+                <input class="form-check-input" type="radio" name="inputStudyVisibility" id="editInputStudyVisibilityYes">
+                <label class="form-check-label" for="editInputStudyVisibilityYes">
                   Visible
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="inputStudyVisibility" id="inputStudyVisibilityNo">
-                <label class="form-check-label" for="inputStudyVisibilityNo">
+                <input class="form-check-input" type="radio" name="inputStudyVisibility" id="editInputStudyVisibilityNo">
+                <label class="form-check-label" for="editInputStudyVisibilityNo">
                   Hidden
                 </label>
               </div>
             </div>
         </div>
 
-            <button type="submit" id="createStudyButton" class="btn btn-primary">Create Study</button>
+            <button type="submit" id="createStudyButton" class="btn btn-primary">Edit Study</button>
         </form>
 
         <p id="newStudyText"></p>
@@ -181,6 +181,12 @@
         <a class="navbar-brand" href="#">BATS 2022</a>
         <img class="navbar-text" src="WPI_logo.png" alt="WPILogo" width="80" height=auto>
       </nav>
+
+    <script>
+      window.onload = function() {
+        loadEditStudyPage();
+      }
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
