@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/newStudy.css">
 
-    <title>BATS: View Data</title>
+    <title>BATS: Study Info</title>
 
     <!-- import the webpage's javascript file -->
     <script src="../js/script.js" defer></script>
@@ -50,37 +50,75 @@
         <!-- Navbar -->
     </header>
 
-    <a class="btn btn-secondary backBtn" href="userHome.html" role="button">Back</a>
+    <a class="btn btn-secondary backBtn" href="studyPage.html" role="button">Back</a>
+
+    <a class="btn btn-secondary backBtn" href="editStudy.html" role="button">Edit Study Information</a>
 
     <div id="main">
 
-        <h3 id="title">View All Data</h3>
+        <h3 id="title">Study Info:</h3>
 
-        <table id="ViewDataTable" class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Filename</th>
-              <th scope="col">Data Type</th>
-              <th scope="col">Study</th>
-            </tr>
-          </thead>
-          <tbody id="ViewDataTableBody">
-            <tr>
-              <td id="loadingTableData">Loading...</td>
-            </tr>
-          </tbody>
-        </table>
+        <div>
+          <h5 class="ib">Study Name:</h5>
+          <div id="studyInfoStudyName" class="ib">Loading...</div>
+        </div>
+      
+        <div>
+          <h5 class="ib">Short Study Name:</h5>
+          <div id="studyInfoShortStudyName" class="ib">Loading...</div>
+        </div>
 
-        <!-- <div class="btn-group"  id="dataTypeButtons" role="group" aria-label="Basic outlined example">
-          <button type="button" class="btn btn-outline-primary">Data Type 1</button>
-          <button type="button" class="btn btn-outline-primary">Data Type 2</button>
-          <button type="button" class="btn btn-outline-primary">Data Type 3</button>
-          <button type="button" class="btn btn-outline-primary">Data Type 4</button>
-          <button type="button" class="btn btn-outline-primary">Data Type 5</button>
-        </div> -->
-        </br>
-        <!-- <button type="submit" id="nextButton" class="btn btn-primary">Next</button> -->
+        <div>
+          <h5 class="ib">Study Abstract:</h5>
+          <div id="studyInfoStudyAbstract" class="ib">Loading...</div>
+        </div>
+
+        <div>
+          <h5 class="ib">Institutions Involved:</h5>
+          <div id="studyInfoInstitutionsInvolved" class="ib">Loading...</div>
+        </div> 
+
+        <div>
+          <h5 class="ib">Study Contact:</h5>
+          <div id="studyInfoStudyContact" class="ib">Loading...</div>
+        </div>
+
+        <div>
+          <h5 class="ib">Study Notes:</h5>
+          <div id="studyInfoStudyNotes" class="ib">Loading...</div>
+        </div>
+
+        <div>
+          <h5 class="ib">Is Irb Approved:</h5>
+          <div id="studyInfoIsIrbApproved" class="ib">Loading...</div>
+        </div>
+
+        <div>
+          <h5 class="ib">Visibility:</h5>
+          <div id="studyInfoVisibility" class="ib">Loading...</div>
+        </div>
+
+        <div>
+          <h5 class="ib">Start Date:</h5>
+          <div id="studyInfoStartDate" class="ib">Loading...</div>
+        </div>
+
+        <div>
+          <h5 class="ib">End Date:</h5>
+          <div id="studyInfoEndDate" class="ib">Loading...</div>
+        </div>
+
+        <div>
+          <h5 class="ib">Last Modified:</h5>
+          <div id="studyInfoLastMod" class="ib">Loading...</div>
+        </div>
+
+        <div>
+          <h5 class="ib">Username of Creator:</h5>
+          <div id="studyInfoUsername" class="ib">Loading...</div>
+        </div>
+
+        <p id="newStudyText"></p>
 
     </div>
 
@@ -89,11 +127,11 @@
         <img class="navbar-text" src="WPI_logo.png" alt="WPILogo" width="80" height=auto>
       </nav>
 
-      <script>
-        window.onload = function() {
-          checkGetData();
-        }
-      </script>
+    <script>
+      window.onload = function() {
+        checkGetStudyInfo();
+      }
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

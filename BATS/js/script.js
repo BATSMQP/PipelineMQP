@@ -1304,3 +1304,85 @@ function setSelectedDataAndTool() {
     toolTableBody = document.getElementById("algoResultToolTableBody");
     toolTableBody.innerHTML = tableString;
 }
+
+//Study Info Page
+function checkGetStudyInfo() {
+    var json = {studyId: localStorage.getItem('currentStudyId')};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", GetStudyInfo_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processGetStudyInfoResponse(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processGetStudyInfoResponse("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processGetStudyInfoResponse(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var study = js["study"];
+
+    if (status == 200) {
+        console.log("getData status 200");
+
+        studyInfoStudyName = document.getElementById("studyInfoStudyName");
+        studyInfoStudyName.innerHTML = study["studyName"];
+
+        studyInfoShortStudyName = document.getElementById("studyInfoShortStudyName");
+        studyInfoShortStudyName.innerHTML = study["studyShortName"];
+
+        studyInfoStudyAbstract = document.getElementById("studyInfoStudyAbstract");
+        studyInfoStudyAbstract.innerHTML = study["studyDescription"];
+
+        studyInfoInstitutionsInvolved = document.getElementById("studyInfoInstitutionsInvolved");
+        studyInfoInstitutionsInvolved.innerHTML = study["institutionsInvolved"];
+
+        studyInfoStudyContact = document.getElementById("studyInfoStudyContact");
+        studyInfoStudyContact.innerHTML = study["studyContact"];
+
+        studyInfoStudyNotes = document.getElementById("studyInfoStudyNotes");
+        studyInfoStudyNotes.innerHTML = study["studyNotes"];
+
+        studyInfoIsIrbApproved = document.getElementById("studyInfoIsIrbApproved");
+        studyInfoIsIrbApproved.innerHTML = study["isIrbApproved"];
+
+        studyInfoVisibility = document.getElementById("studyInfoVisibility");
+        studyInfoVisibility.innerHTML = study["visibility"];
+
+        studyInfoStartDate = document.getElementById("studyInfoStartDate");
+        studyInfoStartDate.innerHTML = study["studyStartDate"];
+
+        studyInfoEndDate = document.getElementById("studyInfoEndDate");
+        studyInfoEndDate.innerHTML = study["studyEndDate"];
+
+        studyInfoLastMod = document.getElementById("studyInfoLastMod");
+        studyInfoLastMod.innerHTML = study["lastMod"];
+
+        studyInfoUsername = document.getElementById("studyInfoUsername");
+        studyInfoUsername.innerHTML = study["authUserId"];
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
+    }
+}

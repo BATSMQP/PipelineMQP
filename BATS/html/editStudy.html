@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/newStudy.css">
+
+    <title>BATS: Edit Study</title>
+
+    <!-- import the webpage's javascript file -->
+    <script src="../js/script.js" defer></script>
+    <script src="../js/api.js"></script>
+  </head>
+  <body>
+
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-mdb-toggle="collapse"
+              data-mdb-target="#navbarExample01"
+              aria-controls="navbarExample01"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarExample01">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item active">
+                  <a class="nav-link" aria-current="page" href="userHome.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="helpPage.html">Help</a>
+                </li>
+                <li id="logoutButton" class="nav-item">
+                  <a class="nav-link" href="mainPage.html">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- Navbar -->
+    </header>
+
+    <a class="btn btn-secondary backBtn" href="userHome.html" role="button">Back</a>
+
+    <div id="main">
+
+        <h3 id="title">Edit Study:</h3>
+
+        <form id="newStudy" onsubmit="return checkNewStudy()" action="">
+            <!-- <div class="mb-3">
+                <label for="inputStudyName" class="form-label">Name:</label>
+                <input type="name" class="form-control" id="inputStudyName">
+            </div> -->
+            <div class="row mb-3 align-items-center">
+                <div class="col-auto">
+                    <label for="inputStudyName" class="form-label">Name:</label>
+                </div>
+                <div class="col-auto input">
+                    <input type="name" class="form-control" id="inputStudyName">
+                </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+                <div class="col-auto">
+                <label for="inputShortStudyName" class="col-form-label">Short Name:</label>
+                </div>
+                <div class="col-auto">
+                <input type="shortName" id="inputShortStudyName" class="form-control" aria-describedby="shortNameHelp">
+                </div>
+                <div class="col-auto">
+                <span id="shortNameHelp" class="form-text">
+                    Max 100 characters.
+                </span>
+                </div>
+            </div>
+
+            <!-- <div class="mb-3">
+                <label for="inputStudyAbstract" class="form-label">Abstract:</label>
+                <input type="abstract" class="form-control" id="inputStudyAbstract">
+            </div> -->
+
+            <!-- <div class="mb-3">
+              <label for="inputStudyAbstract" class="form-label">Abstract:</label>
+              <textarea class="form-control" id="inputStudyAbstract" rows="3"></textarea>
+            </div> -->
+
+            <div class="row mb-3 align-items-center">
+                <div class="col-auto">
+                  <label for="inputStudyAbstract" class="form-label">Abstract:</label>
+                </div>
+                <div class="col-auto input">
+                  <textarea class="form-control" id="inputStudyAbstract" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <div class="col-auto">
+                  <label for="inputStudyInstitutionsInvolved" class="form-label">Institutions Involved:</label>
+              </div>
+              <div class="col-auto input">
+                  <input type="name" class="form-control" id="inputStudyInstitutionsInvolved">
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <div class="col-auto">
+                  <label for="inputStudyStudyContact" class="form-label">Study Contact:</label>
+              </div>
+              <div class="col-auto input">
+                  <input type="name" class="form-control" id="inputStudyStudyContact">
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <div class="col-auto">
+                  <label for="inputStudyStudyNotes" class="form-label">Study Notes:</label>
+              </div>
+              <div class="col-auto input">
+                <textarea class="form-control" id="inputStudyStudyNotes" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <div class="col-auto">
+                <p>Is Irb Approved:</p>
+              </div>
+              <div class="col-auto input">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="inputStudyIsIrbApproved" id="inputStudyIsIrbApprovedYes">
+                  <label class="form-check-label" for="inputStudyIsIrbApprovedYes">
+                    Yes
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="inputStudyIsIrbApproved" id="inputStudyIsIrbApprovedNo">
+                  <label class="form-check-label" for="inputStudyIsIrbApprovedNo">
+                    No
+                  </label>
+                </div>
+              </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <div class="col-auto">
+              <p>Visibility:</p>
+            </div>
+            <div class="col-auto input">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="inputStudyVisibility" id="inputStudyVisibilityYes">
+                <label class="form-check-label" for="inputStudyVisibilityYes">
+                  Visible
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="inputStudyVisibility" id="inputStudyVisibilityNo">
+                <label class="form-check-label" for="inputStudyVisibilityNo">
+                  Hidden
+                </label>
+              </div>
+            </div>
+        </div>
+
+            <button type="submit" id="createStudyButton" class="btn btn-primary">Create Study</button>
+        </form>
+
+        <p id="newStudyText"></p>
+
+    </div>
+
+      <nav class="navbar fixed-bottom navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">BATS 2022</a>
+        <img class="navbar-text" src="WPI_logo.png" alt="WPILogo" width="80" height=auto>
+      </nav>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
