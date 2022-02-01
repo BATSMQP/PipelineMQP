@@ -12,7 +12,8 @@ public class Table2CSV {
         a[1][1]="1.3";
         a[2][2]="2.3";
         Stri("test", a,3); */
-
+        String name="test_d";
+        File file = new File("./Data/",name+".csv" );
         double[][] b=new double[3][2];
         b[0][0]=0.3;
         b[1][0]=1.3;
@@ -20,13 +21,15 @@ public class Table2CSV {
         b[0][1]=0.3;
         b[1][1]=1.3;
         b[2][1]=2.5;
-        Doub("test_d", b,2);
+        Doub("test_d", b,2,file);
     }
 
-    public static void Stri(String name, String[][] a, int colNum) {
+    public static void Stri(String name, String[][] a, int colNum, File f) {
         //TODO: naming conventions improve
         try{
-            File file = new File("./Data/",name+".csv" ); //KEY IS DIR ex."./local-storage/" and fileName='comp.html'
+            String path = f.getParent();
+            System.out.println(path);
+            File file = new File(path,name+".csv" ); //KEY IS DIR ex."./local-storage/" and fileName='comp.html'
 
             // if file doesnt exists, then create it 
             if ( ! file.exists( ) )
@@ -54,7 +57,7 @@ public class Table2CSV {
         return;
     }
 
-    public static void Doub(String name, double[][] a,int colNum) {
+    public static void Doub(String name, double[][] a,int colNum, File f) {
         String[][] s=new String[a.length][colNum];
         for(int i=0; i<a.length; i++) {
 
@@ -63,6 +66,6 @@ public class Table2CSV {
             }
          
         }
-        Stri(name, s, colNum);
+        Stri(name, s, colNum,f);
     }
 }
