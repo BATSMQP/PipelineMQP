@@ -21,14 +21,15 @@ public class Table2CSV {
         b[0][1]=0.3;
         b[1][1]=1.3;
         b[2][1]=2.5;
-        Doub("test_d", b,2,file);
+        File fileout=Doub("test_d", b,2,file);
+        System.out.println(fileout.getName());
     }
 
-    public static void Stri(String name, String[][] a, int colNum, File f) {
+    public static File Stri(String name, String[][] a, int colNum, File f) {
         //TODO: naming conventions improve
         try{
             String path = f.getParent();
-            System.out.println(path);
+            //System.out.println(path);
             File file = new File(path,name+".csv" ); //KEY IS DIR ex."./local-storage/" and fileName='comp.html'
 
             // if file doesnt exists, then create it 
@@ -50,14 +51,15 @@ public class Table2CSV {
                 
             }
             fileWriter.close();
+            return file;
         } catch (IOException e){
             System.out.println("File IO error:");
             e.printStackTrace();
         }
-        return;
+        return f;
     }
 
-    public static void Doub(String name, double[][] a,int colNum, File f) {
+    public static File Doub(String name, double[][] a,int colNum, File f) {
         String[][] s=new String[a.length][colNum];
         for(int i=0; i<a.length; i++) {
 
@@ -66,6 +68,6 @@ public class Table2CSV {
             }
          
         }
-        Stri(name, s, colNum,f);
+        return Stri(name, s, colNum,f);
     }
 }
