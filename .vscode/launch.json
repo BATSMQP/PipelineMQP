@@ -18,13 +18,7 @@
             "mainClass": "Gen_Algo.Table2CSV",
             "projectName": "PipelineMQP_de9018c3"
         },
-        {
-            "type": "java",
-            "name": "Launch PyInterpreter",
-            "request": "launch",
-            "mainClass": "Interpreter.PyInterpreter",
-            "projectName": "PipelineMQP_de9018c3"
-        },
+       
         {
             "type": "java",
             "name": "Launch Graphing_Simp",
@@ -32,34 +26,7 @@
             "mainClass": "Graphing.Graphing_Simp",
             "projectName": "PipelineMQP"
         },
-        {
-            "type": "java",
-            "name": "Launch PyInterpreter",
-            "request": "launch",
-            "mainClass": "Interpreter.PyInterpreter",
-            "projectName": "PipelineMQP"
-        },
-        {
-            "type": "java",
-            "name": "Launch PyInterpreter",
-            "request": "launch",
-            "mainClass": "PyInterpreter",
-            "projectName": "PipelineMQP_de9018c3"
-        },
-        {
-            "type": "java",
-            "name": "Launch PyInterpreter",
-            "request": "launch",
-            "mainClass": "Interpreter.PyInterpreter",
-            "projectName": "PipelineMQP_1b4f2704"
-        },
-        {
-            "type": "java",
-            "name": "Launch Interpreter",
-            "request": "launch",
-            "mainClass": "Interpreter.Interpreter",
-            "projectName": "PipelineMQP_d46bcdbb"
-        },
+        
         {
             "type": "java",
             "name": "Launch Current File",
@@ -94,13 +61,7 @@
             "mainClass": "Graphing.Graphing_Simp",
             "projectName": "PipelineMQP_1b4f2704"
         },
-        {
-            "type": "java",
-            "name": "Launch Interpreter",
-            "request": "launch",
-            "mainClass": "Interpreter.Interpreter",
-            "projectName": "PipelineMQP_1b4f2704"
-        },
+        
         {
             "type": "java",
             "name": "Launch Demo",
@@ -142,19 +103,6 @@
             "request": "launch",
             "mainClass": "Time_Data_Algo.Voice.PitchAnalysis",
             "projectName": "PipelineMQP_1b4f2704"
-        },
-        {
-            "type": "java",
-            "name": "Launch FFMPEGDownloader",
-            "request": "launch",
-            "mainClass": "lib.TarsosDSP.util.FFMPEGDownloader",
-            "projectName": "PipelineMQP_1b4f2704"
-        },
-        {
-            "type": "java",
-            "name": "Launch AudioFormatDecoderExample",
-            "request": "launch",
-            "mainClass": "be.tarsos.dsp.example.AudioFormatDecoderExample"
         }
     ]
 }
