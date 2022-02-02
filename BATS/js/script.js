@@ -786,26 +786,23 @@ function processRunAlgResponse(result) {
 
     if (status == 200) {
         console.log("RunAlg status 200");
-        var frameResultFile = document.getElementById("uploadedResultFile").value;
-        var frameImage = document.getElementById("uploadedImage").value;
-
-        var dataTable = document.getElementById("DataTable");
-        var tableString = "";
-  
-        // tableString += "</tbody>";
-        // console.log(tableString);
-
-        DataTableBody = document.getElementById("DataTableBody");
-        DataTableBody.innerHTML = tableString;
+        setUploadedResultFile(resultFile);
+        setUploadedImage(image);
+        // var frameResultFile = document.getElementById("uploadedResultFile").value;
+        // var frameImage = document.getElementById("uploadedImage").value;
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
     }
 }
 
-function setUploadedResultFile() {
+function setUploadedResultFile(resultFile) {
     //var file = document.getElementById('uploadedResultFile').files[0];
-    var file = "Bats result file"
+    // const blob = new Blob([resultFile], {type : 'text/plain'});
+    var file = new File([resultFile], "foo.txt", {
+        type: "text/plain",
+      });
+    // var file = "Bats result file"
     //set iframe
     const obj_url = URL.createObjectURL(file);
     const iframe = document.getElementById('uploadedResultFile');
@@ -825,9 +822,13 @@ function setUploadedResultFile() {
     };
 }
 
-function setUploadedImage() {
+function setUploadedImage(image) {
     //var file = document.getElementById('uploadedImage').files[0];
-    var file = "Bats image"
+    // const blob = new Blob([image], {type : 'text/plain'});
+    var file = new File([image], "foo.txt", {
+        type: "text/plain",
+      });
+    // var file = "Bats image"
     //set iframe
     const obj_url = URL.createObjectURL(file);
     const iframe = document.getElementById('uploadedImage');
