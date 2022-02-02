@@ -61,7 +61,149 @@
         <h3 id="title">Algorithms</h3>
         <h6 class="mb-5" id="otherText">Select Algorithms for Analyzing your Data:</h6>
 
-        <table id="AlgoTable" class="table table-hover">
+          <div class="accordion" id="accordionExample">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Graphing Toolkit
+                  </button>
+                </h2>
+              </div>
+          
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                  
+                  <table id="studyPageToolTable" class="table table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Filename</th>
+                        <th scope="col">File Ext.</th>
+                        <th scope="col">For Data Type</th>
+                      </tr>
+                    </thead>
+                    <tbody id="studyPageToolTableBody">
+                      <tr onclick='JavaScript:algoClicked("", "highpass", "High Pass")'>
+                        <td>High Pass</td>
+                        <td>highpass</td>
+                        <td>.csv</td>
+                        <td>All</td>
+                      </tr>
+                      <tr onclick='JavaScript:algoClicked("", "lowpass", "Low Pass")'>
+                        <td>Low Pass</td>
+                        <td>lowpass</td>
+                        <td>.csv</td>
+                        <td>All</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Statistical Toolkit
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                  
+                  <table id="studyPageToolTable" class="table table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Filename</th>
+                        <th scope="col">File Ext.</th>
+                        <th scope="col">For Data Type</th>
+                      </tr>
+                    </thead>
+                    <tbody id="studyPageToolTableBody">
+                      <tr onclick='JavaScript:algoClicked("", "ttest", "tTest")'>
+                        <td>tTest</td>
+                        <td>ttest</td>
+                        <td>.csv</td>
+                        <td>All</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Audio Toolkit
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                  
+                  <table id="studyPageToolTable" class="table table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Filename</th>
+                        <th scope="col">File Ext.</th>
+                        <th scope="col">For Data Type</th>
+                      </tr>
+                    </thead>
+                    <tbody id="studyPageToolTableBody">
+                      <tr onclick='JavaScript:algoClicked("", "graphwav", "Graph .wav")'>
+                        <td>Graph .wav</td>
+                        <td>graphwav</td>
+                        <td>.wav</td>
+                        <td>Speech</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingFour">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Neural Toolkit
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                <div class="card-body">
+                  
+                  <table id="studyPageToolTable" class="table table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Filename</th>
+                        <th scope="col">File Ext.</th>
+                        <th scope="col">For Data Type</th>
+                      </tr>
+                    </thead>
+                    <tbody id="studyPageToolTableBody">
+                      <tr onclick='JavaScript:algoClicked("", "exampleName", "Example Name")'>
+                        <td>Examlpe Name</td>
+                        <td>exampleName</td>
+                        <td>.csv</td>
+                        <td>Neural</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>          
+
+        <!-- <table id="AlgoTable" class="table table-hover">
           <thead>
             <tr>
               <th scope="col">Name</th>
@@ -82,7 +224,7 @@
             </tr>
 
           </tbody>
-        </table>
+        </table> -->
 
         <!-- <a class="btn btn-secondary backBtn" href="algoResult.html" role="button">Next</a> -->
         

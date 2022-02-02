@@ -28,6 +28,7 @@ function loadSelectData(){
 
 function loadSelectAlgorithms(){
     localStorage.setItem("beforeUpload", "selectAlgorithms");
+    localStorage.setItem("selectAlgsTableString", document.getElementById("selectAlgsToolkits"));
 }
 
 function checkLogin() {
@@ -582,8 +583,8 @@ function checkGetStudyData() {
     var studyNameOnStudyPage = document.getElementById("studyNameOnStudyPage");
     currentStudyName = localStorage.getItem('studyName');
     console.log("currrentStudyName (in checkGetData): " + currentStudyName);
-    console.log("innerhtml of studyNameOnStudyPage (in checkGetData): " + studyNameOnStudyPage.innerHTML);
-    studyNameOnStudyPage.innerHTML = currentStudyName;
+    // console.log("innerhtml of studyNameOnStudyPage (in checkGetData): " + studyNameOnStudyPage.innerHTML);
+    // studyNameOnStudyPage.innerHTML = currentStudyName;
 
     var json = {studyId: localStorage.getItem('currentStudyId')};
 
@@ -725,6 +726,23 @@ function algoClicked(toolDocumentId, algName, name) { //algName=filename
     console.log("currentAlgName (in algoClicked): " + currentAlgName);
     console.log("currentToolDocumentId (in algoClicked): " + currentToolDocumentId);
     // window.location.href = "algoResult.html";
+
+    //make selected row active
+    // var tableString = localStorage.getItem("selectAlgsTableString");
+    // var splitter = "onclick='JavaScript:algoClicked(";
+    // splitter += '"';
+    // splitter += toolDocumentId;
+    // splitter += '", "';
+    // splitter += algName;
+    // splitter += '", "';
+    // splitter += name;
+    // splitter += '")';
+    // splitter += "'";
+    // var tsSplit2 = tableString.split(splitter);
+    // var newTableString = tsSplit2[0] + "class='table-active' " + tsSplit2[1];
+    // selectAlgsToolkits = document.getElementById("selectAlgsToolkits");
+    // selectAlgsToolkits.innerHTML = newTableString;
+    // console.log("selectAlgsToolkits: " + selectAlgsToolkits);
 }
 
 function checkRunAlg() {
