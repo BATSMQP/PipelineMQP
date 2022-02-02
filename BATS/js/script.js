@@ -20,6 +20,7 @@ function setWelcomeUser(){
 
 function loadStudyPage(){
     localStorage.setItem("beforeUpload", "studyPage");
+    document.getElementById("studyNameOnStudyPage").innerHTML = localStorage.getItem("studyName");
 }
 
 function loadSelectData(){
@@ -746,7 +747,7 @@ function algoClicked(toolDocumentId, algName, name) { //algName=filename
 }
 
 function checkRunAlg() {
-    var json = {dataDocumentId: localStorage.getItem('currentDataDocumentId'), toolDocumentId: "", algName: localStorage.getItem('currentAlgName')};
+    var json = {dataDocumentId: localStorage.getItem('currentDataDocumentId'), toolDocumentId: "", algName: localStorage.getItem('currentAlgName'), studyId: localStorage.getItem("currentStudyId")};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);

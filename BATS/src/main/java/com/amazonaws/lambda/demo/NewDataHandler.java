@@ -76,6 +76,15 @@ public class NewDataHandler implements RequestHandler<NewDataRequest, NewDataRes
 			failMessage = "Error adding AuthUserDocument to the database";
 		}
 		
+		//modify lastMod for the study
+//		try {
+//			dao.updateLastMod(req.getStudyId(), logger);
+//		}
+//		catch(Exception e) {
+//			fail = true;
+//			failMessage = "Error updating lastMod for the given studyId";
+//		}
+		
 		NewDataResponse response;
 		if (fail) {
 			response = new NewDataResponse(failMessage, 400, document);

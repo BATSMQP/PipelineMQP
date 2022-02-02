@@ -46,7 +46,14 @@ public class RunAlgHandler implements RequestHandler<RunAlgRequest, RunAlgRespon
 			failMessage = "Failed to get the Document for the documentId";
 		}
 		
-		
+		//modify lastMod for the study
+//		try {
+//			dao.updateLastMod(req.getStudyId(), logger);
+//		}
+//		catch(Exception e) {
+//			fail = true;
+//			failMessage = "Error updating lastMod for the given studyId";
+//		}
 		
 		RunAlgResponse response;
 		if (fail) {

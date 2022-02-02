@@ -277,6 +277,24 @@ public class BatsDAO {
 	  }
 	}
 	
+	public boolean updateLastMod(String studyId, LambdaLogger logger) throws Exception {
+		  try {
+			  //call getStudy
+			  Study study = getStudy(studyId, logger);
+			  
+			  //update lastMod
+			  long millis=System.currentTimeMillis();  
+			  Timestamp currentDate =new Timestamp(millis); 
+			  study.lastMod = currentDate;
+			  
+			  //call editStudy
+			  return EditStudy(study, logger);
+		
+		  } catch (Exception e) {
+		      throw new Exception("Failed to update lastMod: " + e.getMessage());
+		  }
+		}
+	
 	public boolean addAuthUserDocument(AuthUserDocument authUserDocument, LambdaLogger logger) throws Exception {
 	  try {
 	      PreparedStatement ps = conn.prepareStatement("SELECT * FROM AuthUserDocument WHERE documentId = ?;");
