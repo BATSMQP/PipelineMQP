@@ -136,156 +136,156 @@ public class LambdaFunctionHandlerTest {
         return ctx;
     }
     
-    @Test
-    public void testCreateStudyHandler() {
-    	CreateStudyHandler csh = new CreateStudyHandler();
-    	NewStudyRequest r = new NewStudyRequest("39cd1de6-6bb4-43ae-9348-c83e40f4d57d", "Eclipse", "Ecps", "Description", "institutionsInvolved", "studyContact", "studyNotes", "isIrbApproved", "visibility");
-    	NewStudyResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.study: " + response.study);
-    }
-    
-    @Test
-    public void testEditStudyInfoHandler() {
-    	EditStudyInfoHandler csh = new EditStudyInfoHandler();
-    	EditStudyInfoRequest r = new EditStudyInfoRequest("39cd1de6-6bb4-43ae-9348-c83e40f4d57d", "testStudyInEclipse", "ts", "abstract", "institutionsInvolved", "studyContact", "studyNotes", "yes", "no");
-    	EditStudyInfoResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    }
-    
-    @Test
-    public void testGetStudiesHandler() {
-    	GetStudiesHandler csh = new GetStudiesHandler();
-    	GetStudiesRequest r = new GetStudiesRequest("91c9465f-9a0d-4c6f-9f19-b5a813d2ce34", "test");
-    	GetStudiesResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.studies: " + response.studies);
-    }
-    
-    @Test
-    public void testGetDataHandler() {
-    	GetDataHandler csh = new GetDataHandler();
-    	GetDataRequest r = new GetDataRequest("testAuthUser");
-    	GetDataResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.data: " + response.data);
-    }
-    
-    @Test
-    public void testGetStudyInfoHandler() {
-    	GetStudyInfoHandler csh = new GetStudyInfoHandler();
-    	GetStudyInfoRequest r = new GetStudyInfoRequest("a9c30695-28ce-4481-81e5-b240af28e9fd");
-    	GetStudyInfoResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.study: " + response.study);
-    }
-    
-    @Test
-    public void testGetStudyDataHandler() {
-    	GetStudyDataHandler csh = new GetStudyDataHandler();
-    	GetStudyDataRequest r = new GetStudyDataRequest("ff9aeab7-b842-48ce-8e21-d7516292662c");
-    	GetStudyDataResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.data: " + response.data);
-    }
-    
-    @Test
-    public void testGetStudyToolsHandler() {
-    	GetStudyToolsHandler csh = new GetStudyToolsHandler();
-    	GetStudyToolsRequest r = new GetStudyToolsRequest("ff9aeab7-b842-48ce-8e21-d7516292662c");
-    	GetStudyToolsResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.tools: " + response.tools);
-    }
-    
-    @Test
-    public void testLoginHandler1() {
-    	LoginHandler csh = new LoginHandler();
-    	LoginRequest r = new LoginRequest("exampleUser", "password");
-    	LoginResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.username: " + response.username);
-    	System.out.println("response.authUserId: " + response.authUserId);
-    }
-    
-    @Test
-    public void testLoginHandler2() {
-    	LoginHandler csh = new LoginHandler();
-    	LoginRequest r = new LoginRequest("exampleUser", "wrong");
-    	LoginResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.username: " + response.username);
-    	System.out.println("response.authUserId: " + response.authUserId);
-    }
-    
-    @Test
-    public void testLoginHandler3() {
-    	LoginHandler csh = new LoginHandler();
-    	LoginRequest r = new LoginRequest("wrong", "password");
-    	LoginResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.username: " + response.username);
-    }
-    
-    @Test
-    public void testRegisterHandler1() {
-    	RegisterHandler csh = new RegisterHandler();
-    	RegisterRequest r = new RegisterRequest("test2", "pass", "email@gmail.com");
-    	RegisterResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.username: " + response.username);
-    }
-    
-    @Test
-    public void testRegisterHandler2() {
-    	RegisterHandler csh = new RegisterHandler();
-    	RegisterRequest r = new RegisterRequest("exampleUser", "pass", "email@gmail.com");
-    	RegisterResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.username: " + response.username);
-    }
-    
-    @Test
-    public void testNewToolHandler() {
-    	NewToolHandler csh = new NewToolHandler();
-    	NewToolRequest r = new NewToolRequest("TOOL", "TOOLNAME", "TOOL NAME", "Speech", "txt", "ff9aeab7-b842-48ce-8e21-d7516292662c", "testAuthUser");
-    	NewToolResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.tool: " + response.tool);
-    }
-  
-    @Test
-    public void testNewDataHandler() {
-    	NewDataHandler csh = new NewDataHandler();
-    	NewDataRequest r = new NewDataRequest("data", "dataname", "Data Name", "Facial", "csv", "ff9aeab7-b842-48ce-8e21-d7516292662c", "testAuthUser");
-    	NewDataResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.data: " + response.data);
-    }
-    
-    @Test
-    public void testGetUsernameHandler() {
-    	GetUsernameHandler csh = new GetUsernameHandler();
-    	GetUsernameRequest r = new GetUsernameRequest("testAuthUser");
-    	GetUsernameResponse response= csh.handleRequest(r, createContext());
-    	System.out.println("response.statusCode: " + response.statusCode);
-    	System.out.println("response.error: " + response.error);
-    	System.out.println("response.username: " + response.username);
-    }
+//    @Test
+//    public void testCreateStudyHandler() {
+//    	CreateStudyHandler csh = new CreateStudyHandler();
+//    	NewStudyRequest r = new NewStudyRequest("39cd1de6-6bb4-43ae-9348-c83e40f4d57d", "Eclipse", "Ecps", "Description", "institutionsInvolved", "studyContact", "studyNotes", "isIrbApproved", "visibility");
+//    	NewStudyResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.study: " + response.study);
+//    }
+//    
+//    @Test
+//    public void testEditStudyInfoHandler() {
+//    	EditStudyInfoHandler csh = new EditStudyInfoHandler();
+//    	EditStudyInfoRequest r = new EditStudyInfoRequest("39cd1de6-6bb4-43ae-9348-c83e40f4d57d", "testStudyInEclipse", "ts", "abstract", "institutionsInvolved", "studyContact", "studyNotes", "yes", "no");
+//    	EditStudyInfoResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    }
+//    
+//    @Test
+//    public void testGetStudiesHandler() {
+//    	GetStudiesHandler csh = new GetStudiesHandler();
+//    	GetStudiesRequest r = new GetStudiesRequest("91c9465f-9a0d-4c6f-9f19-b5a813d2ce34", "test");
+//    	GetStudiesResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.studies: " + response.studies);
+//    }
+//    
+//    @Test
+//    public void testGetDataHandler() {
+//    	GetDataHandler csh = new GetDataHandler();
+//    	GetDataRequest r = new GetDataRequest("testAuthUser");
+//    	GetDataResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.data: " + response.data);
+//    }
+//    
+//    @Test
+//    public void testGetStudyInfoHandler() {
+//    	GetStudyInfoHandler csh = new GetStudyInfoHandler();
+//    	GetStudyInfoRequest r = new GetStudyInfoRequest("a9c30695-28ce-4481-81e5-b240af28e9fd");
+//    	GetStudyInfoResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.study: " + response.study);
+//    }
+//    
+//    @Test
+//    public void testGetStudyDataHandler() {
+//    	GetStudyDataHandler csh = new GetStudyDataHandler();
+//    	GetStudyDataRequest r = new GetStudyDataRequest("ff9aeab7-b842-48ce-8e21-d7516292662c");
+//    	GetStudyDataResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.data: " + response.data);
+//    }
+//    
+//    @Test
+//    public void testGetStudyToolsHandler() {
+//    	GetStudyToolsHandler csh = new GetStudyToolsHandler();
+//    	GetStudyToolsRequest r = new GetStudyToolsRequest("ff9aeab7-b842-48ce-8e21-d7516292662c");
+//    	GetStudyToolsResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.tools: " + response.tools);
+//    }
+//    
+//    @Test
+//    public void testLoginHandler1() {
+//    	LoginHandler csh = new LoginHandler();
+//    	LoginRequest r = new LoginRequest("exampleUser", "password");
+//    	LoginResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.username: " + response.username);
+//    	System.out.println("response.authUserId: " + response.authUserId);
+//    }
+//    
+//    @Test
+//    public void testLoginHandler2() {
+//    	LoginHandler csh = new LoginHandler();
+//    	LoginRequest r = new LoginRequest("exampleUser", "wrong");
+//    	LoginResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.username: " + response.username);
+//    	System.out.println("response.authUserId: " + response.authUserId);
+//    }
+//    
+//    @Test
+//    public void testLoginHandler3() {
+//    	LoginHandler csh = new LoginHandler();
+//    	LoginRequest r = new LoginRequest("wrong", "password");
+//    	LoginResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.username: " + response.username);
+//    }
+//    
+//    @Test
+//    public void testRegisterHandler1() {
+//    	RegisterHandler csh = new RegisterHandler();
+//    	RegisterRequest r = new RegisterRequest("test2", "pass", "email@gmail.com");
+//    	RegisterResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.username: " + response.username);
+//    }
+//    
+//    @Test
+//    public void testRegisterHandler2() {
+//    	RegisterHandler csh = new RegisterHandler();
+//    	RegisterRequest r = new RegisterRequest("exampleUser", "pass", "email@gmail.com");
+//    	RegisterResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.username: " + response.username);
+//    }
+//    
+//    @Test
+//    public void testNewToolHandler() {
+//    	NewToolHandler csh = new NewToolHandler();
+//    	NewToolRequest r = new NewToolRequest("TOOL", "TOOLNAME", "TOOL NAME", "Speech", "txt", "ff9aeab7-b842-48ce-8e21-d7516292662c", "testAuthUser");
+//    	NewToolResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.tool: " + response.tool);
+//    }
+//  
+//    @Test
+//    public void testNewDataHandler() {
+//    	NewDataHandler csh = new NewDataHandler();
+//    	NewDataRequest r = new NewDataRequest("data", "dataname", "Data Name", "Facial", "csv", "ff9aeab7-b842-48ce-8e21-d7516292662c", "testAuthUser");
+//    	NewDataResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.data: " + response.data);
+//    }
+//    
+//    @Test
+//    public void testGetUsernameHandler() {
+//    	GetUsernameHandler csh = new GetUsernameHandler();
+//    	GetUsernameRequest r = new GetUsernameRequest("testAuthUser");
+//    	GetUsernameResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.username: " + response.username);
+//    }
     
     @Test
     public void testRunAlgHandler() {
