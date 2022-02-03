@@ -89,5 +89,13 @@
       <artifactId>aws-lambda-java-core</artifactId>
       <version>1.1.0</version>
     </dependency>
+    
+    <dependency>
+    	<groupId>BATS</groupId>
+	    <artifactId>Algo_limited</artifactId>
+	    <version>3</version>
+	    <scope>system</scope>
+	    <systemPath>C:\Users\bookl\Downloads/Algo_limited_3.jar</systemPath>
+	</dependency>
   </dependencies>
 </project>
