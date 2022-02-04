@@ -92,10 +92,10 @@
     
     <dependency>
     	<groupId>BATS</groupId>
-	    <artifactId>Algo_limited</artifactId>
+	    <artifactId>Algo</artifactId>
 	    <version>3</version>
 	    <scope>system</scope>
-	    <systemPath>C:\Users\bookl\Downloads/Algo_limited_3.jar</systemPath>
+	    <systemPath>C:\Users\bookl\Downloads/Algo5.jar</systemPath>
 	</dependency>
 	
 	<dependency>

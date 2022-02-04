@@ -7,7 +7,7 @@ import UpperLevel.RunAlgo;
 public class test {
     public static void main(String[] args) {
         String name="test_d";
-        File file = new File("./Data/",name+".csv" );
+        File file = new File("./src/main/java/",name+".csv" );
         
         RunAlgo.run(file,"lowpass");
 

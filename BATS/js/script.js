@@ -824,17 +824,35 @@ function setUploadedResultFile(resultFile) {
 }
 
 function setUploadedImage(image) {
+    console.log("image in setUploadedImage: " + image);
     //var file = document.getElementById('uploadedImage').files[0];
     // const blob = new Blob([image], {type : 'text/plain'});
     var file = new File([image], "foo.txt", {
-        type: "text/plain",
+        type: "image/png",
       });
     // var file = "Bats image"
     //set iframe
     const obj_url = URL.createObjectURL(file);
-    const iframe = document.getElementById('uploadedImage');
-    iframe.setAttribute('src', obj_url);
+    const img = document.getElementById('uploadedImage');
+    var src = "data:image/png;base64," + image;
+    img.setAttribute('src', src);
+
+    // var canvas = document.createElement("canvas");
+    // canvas.width = 200;
+    // canvas.height = 200;
+    // canvas.setAttribute('src', obj_url);
+
     URL.revokeObjectURL(obj_url);
+
+    // var canvas = document.createElement("canvas");
+    // canvas.width = 200;
+    // canvas.height = 200;
+    // var url = canvas.toDataURL();
+    // var a = document.createElement('a');
+    // a.download = 'my.png';
+    // a.href = url;
+    // a.textContent = 'Download PNG';
+    // document.body.appendChild(a);
 
     const reader = new FileReader();
     reader.readAsText(file);

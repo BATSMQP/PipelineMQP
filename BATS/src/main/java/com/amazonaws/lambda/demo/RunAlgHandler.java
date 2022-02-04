@@ -60,25 +60,25 @@ public class RunAlgHandler implements RequestHandler<RunAlgRequest, RunAlgRespon
 //			failMessage = "Error updating lastMod for the given studyId";
 //		}
 		
-		byte[] fileContent = null;
-		String encodedString = null;
-		try {
-			fileContent = FileUtils.readFileToByteArray(new File("C:\\Users\\bookl\\OneDrive\\Documents\\WPI Stuff\\CS3733 Soft Eng\\eclipse_workspace\\PipelineMQP\\BATS\\img\\example_graph.png"));
-			logger.log("fileContent in RunAlgHandler:");
-			logger.log(fileContent.toString());
-			encodedString = Base64.getEncoder().encodeToString(fileContent);
-			logger.log("encodedString in RunAlgHandler:");
-			logger.log(encodedString);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		byte[] fileContent = null;
+//		String encodedString = null;
+//		try {
+//			fileContent = FileUtils.readFileToByteArray(new File("./img/example_graph.png"));
+//			logger.log("fileContent in RunAlgHandler:");
+//			logger.log(fileContent.toString());
+//			encodedString = Base64.getEncoder().encodeToString(fileContent);
+//			logger.log("encodedString in RunAlgHandler:");
+//			logger.log(encodedString);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		RunAlgResponse response;
 		if (fail) {
-			response = new RunAlgResponse(failMessage, 400, "filex", encodedString);
+			response = new RunAlgResponse(failMessage, 400, "filex", "image");
 		} else {
-			response = new RunAlgResponse("none", 200, "filex", encodedString);
+			response = new RunAlgResponse("none", 200, "filex", "image");
 		}
 
 		return response;
