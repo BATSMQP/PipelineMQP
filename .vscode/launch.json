@@ -9,6 +9,13 @@
             "name": "Launch RunAlgo",
             "request": "launch",
             "mainClass": "UpperLevel.RunAlgo",
+            "projectName": "PipelineMQP"
+        },
+        {
+            "type": "java",
+            "name": "Launch RunAlgo",
+            "request": "launch",
+            "mainClass": "UpperLevel.RunAlgo",
             "projectName": "PipelineMQP_de9018c3"
         },
         {
