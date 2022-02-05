@@ -1044,6 +1044,19 @@ function processNewToolResponse(result) {
 
 //NEWDATA PAGE
 
+function getBase64(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      console.log(reader.result);
+      return reader.result;
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+      return error;
+    };
+ }
+
 function checkNewData() {
     var fn = document.getElementById("dataInputToolFile").value;
     var n = document.getElementById("dataInputToolName").value;
@@ -1104,7 +1117,10 @@ function checkNewData() {
 
     console.log("In checkNewData selDataType: " + selDataType);
 
-    var json = {file: content, filename: fn3[0], name: n, dataType: selDataType, ext: fn3[1], studyId: localStorage.getItem("currentStudyId"), authUserId: localStorage.getItem("currentAuthUserId")};
+    var file = document.getElementById('dataInputToolFile').files[0];
+    var fileBase64 = getBase64(file);
+
+    var json = {file: fileBase64, filename: fn3[0], name: n, dataType: selDataType, ext: fn3[1], studyId: localStorage.getItem("currentStudyId"), authUserId: localStorage.getItem("currentAuthUserId")};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
@@ -1147,9 +1163,9 @@ function processNewDataResponse(result) {
         var msg = js["error"];
         console.log("error:" + msg);
 
-        var textString = "<p> error: " + msg + "</p>";
-        loginText = document.getElementById("loginText");
-        loginText.innerHTML = textString;
+        // var textString = "<p> error: " + msg + "</p>";
+        // loginText = document.getElementById("loginText");
+        // loginText.innerHTML = textString;
     }
 }
 
