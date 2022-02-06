@@ -290,7 +290,7 @@ public class LambdaFunctionHandlerTest {
     @Test
     public void testRunAlgHandler() {
     	RunAlgHandler csh = new RunAlgHandler();
-    	RunAlgRequest r = new RunAlgRequest("8d430131-8a99-4c1c-a2ff-3bf4783643ea", "", "lowpass", "ff9aeab7-b842-48ce-8e21-d7516292662c");
+    	RunAlgRequest r = new RunAlgRequest("8d430131-8a99-4c1c-a2ff-3bf4783643ea", "", "ttest", "ff9aeab7-b842-48ce-8e21-d7516292662c");
     	RunAlgResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);

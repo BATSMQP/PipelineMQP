@@ -49,6 +49,36 @@ import com.amazonaws.regions.Regions;
 public class RunAlgHandler implements RequestHandler<RunAlgRequest, RunAlgResponse> {
 
 	LambdaLogger logger;
+	
+	private AmazonS3 s3 = null;
+
+	void getJarFromBucket() throws Exception {
+		if (logger != null) { logger.log("in getJarFromBucket"); }
+		if (s3 == null) {
+			// overly precise.... shouldn't have to live life this way...
+			s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
+		}
+		
+		try {
+			S3Object o = s3.getObject("batsmqp", "Algo5.jar");
+		    S3ObjectInputStream s3is = o.getObjectContent();
+		    FileOutputStream fos = new FileOutputStream(new File("./Algo5.jar"));
+		    byte[] read_buf = new byte[1024];
+		    int read_len = 0;
+		    while ((read_len = s3is.read(read_buf)) > 0) {
+		        fos.write(read_buf, 0, read_len);
+		    }
+		    s3is.close();
+		    fos.close();
+		    logger.log("fos closed");
+		    
+		    byte[] fileContent = null;
+		    fileContent = FileUtils.readFileToByteArray(new File("./Algo5.jar"));
+		    logger.log("'Algo5.jar': " + fileContent.toString());
+		} catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+	}
 
 	@Override
 	public RunAlgResponse handleRequest(RunAlgRequest req, Context context) {
@@ -69,6 +99,16 @@ public class RunAlgHandler implements RequestHandler<RunAlgRequest, RunAlgRespon
 			fail = true;
 			failMessage = "Failed to get the Document for the documentId";
 		}
+		
+//		try {
+//			getJarFromBucket();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+//		ExtensionLoader<Algo5> loader = new ExtensionLoader<Algo5>();
+//		algoPlugin = loader.LoadClass("./Algo5.jar", "com.amazonaws.lambda.demo", Algo5.class);
 		
 		String name="test_d";
         File file = new File("./src/main/java/",name+".csv" );
