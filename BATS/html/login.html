@@ -34,12 +34,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarExample01">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item active">
-                  <a class="nav-link" aria-current="page" href="mainPage.html">Home</a>
-                </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="aboutPage.html">About</a>
+                  <a class="nav-link" href="mainPage.html">Home</a>
                 </li>
+                <li class="nav-item ">
+                  <a class="nav-link" aria-current="page" href="aboutPage.html">About</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="helpPage.html">Help & Support</a>
+                </li>              
               </ul>
             </div>
           </div>
@@ -47,31 +52,32 @@
         <!-- Navbar -->
     </header>
       
-      <a class="btn btn-secondary backBtn" href="mainPage.html" role="button">Back</a>
         <!-- Jumbotron -->
-        <div class="container mt-4">
-            <div class="jumbotron">
-                <div class="display-4" style="text-align:center;">Login User</div>
+
+        <div class="jumbotron text-center mx-auto " style="width: 75vh; height: 55vh; margin-top: 40px;">
+            <div class="container text-center" >
+                <div class="display-4" style="font-weight: bold;">User Login</div>
                 <div class="card-body">
                     <form id="login" onsubmit="return checkLogin()" action="">
   
                       <div class="mb-3">
-                        <label for="loginUsername" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="loginUsername" name="username">
+                        <input type="text" class="form-control" placeholder="Username" id="loginUsername" name="username">
                       </div>
   
                       <div class="mb-3">
-                          <label for="loginPassword" class="form-label">Password</label>
-                          <input type="password" class="form-control" id="loginPassword" name="password">
+                          <input type="password" class="form-control" placeholder="Password" id="loginPassword" name="password">
                       </div>
   
   
                       <button type="submit" class="btn btn-primary" id='login-button'>Login</button>
+
                     </form>
+                    <a style="margin-top: 10px;" class="btn btn-secondary" href="mainPage.html" id='backBtn'>Back</a>
                     
                     <p id="loginText"></p>
     
                 </div>
+                
               </div>
         </div>
         <!-- Jumbotron -->
