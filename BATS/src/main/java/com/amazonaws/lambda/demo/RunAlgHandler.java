@@ -12,6 +12,8 @@ import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 
+import java.io.BufferedWriter;
+
 //import edu.wpi.cs.heineman.demo.BucketManager;
 
 import java.io.ByteArrayInputStream;
@@ -23,6 +25,7 @@ import UpperLevel.RunAlgo;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -79,6 +82,13 @@ public class RunAlgHandler implements RequestHandler<RunAlgRequest, RunAlgRespon
 	    	e.printStackTrace();
 	    }
 	}
+	
+	ArrayList<File> getTestResults() {
+		ArrayList<File> results = new ArrayList<File>();
+		results.add(new File("./test_d.csv"));
+		results.add(new File("./example_graph.png"));
+		return results;
+	}
 
 	@Override
 	public RunAlgResponse handleRequest(RunAlgRequest req, Context context) {
@@ -100,38 +110,73 @@ public class RunAlgHandler implements RequestHandler<RunAlgRequest, RunAlgRespon
 			failMessage = "Failed to get the Document for the documentId";
 		}
 		
+		//create new java file from data.file text string with same data.filename + ".csv"
+		
+		//The following is commented out for AWS
+//		File file = new File("./",data.filename+".csv");
+		
+//		byte[] fileContent = null;
 //		try {
-//			getJarFromBucket();
-//		} catch (Exception e) {
+//			fileContent = FileUtils.readFileToByteArray(new File("./src/main/java/",data.filename+".csv"));
+//		} catch (IOException e1) {
 //			// TODO Auto-generated catch block
-//			e.printStackTrace();
+//			e1.printStackTrace();
 //		}
+//		logger.log("fileContent of data file before in RunAlgHandler:");
+//		logger.log(fileContent.toString());
 		
-//		ExtensionLoader<Algo5> loader = new ExtensionLoader<Algo5>();
-//		algoPlugin = loader.LoadClass("./Algo5.jar", "com.amazonaws.lambda.demo", Algo5.class);
+		//The following is commented out for AWS
+//		try {
+//			new FileOutputStream("./"+data.filename+".csv").close();
+//			FileOutputStream fos = new FileOutputStream(("./"+data.filename+".csv"), true);
+//		    fos.write(data.file.getBytes());
+//		    fos.close();
+//		} catch (IOException e) {
+//	    	e.printStackTrace();
+//	    }
 		
-		String name="test_d";
-        File file = new File("./src/main/java/",name+".csv" );
-        
-//        byte[] decodedBytes = Base64.getDecoder().decode(data.file);
-//        String decodedString = new String(decodedBytes);
-        
-        File resultFile = RunAlgo.run(file, req.getAlgName());
+//		fileContent = null;
+//		try {
+//			fileContent = FileUtils.readFileToByteArray(new File("./src/main/java/",data.filename+".csv"));
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		logger.log("fileContent of data file after in RunAlgHandler:");
+//		logger.log(fileContent.toString());
+	    
+        File resultFile = RunAlgo.run(getTestResults().get(0), req.getAlgName());
 	    byte[] resultFileContent = null;
 	    String resultFileEncodedString = null;
+	    String resultFileString = null;
         try {
         	resultFileContent = FileUtils.readFileToByteArray(resultFile);
         	resultFileEncodedString = Base64.getEncoder().encodeToString(resultFileContent);
         	logger.log("resultFileEncodedString: " + resultFileEncodedString);
+        	resultFileString = new String(resultFileContent, StandardCharsets.UTF_8);
 	    } catch (IOException e) {
 	    	e.printStackTrace();
 	    }
+        
+      byte[] imageFileContent = null;
+      String imageEncodedString = null;
+      try {
+    	  imageFileContent = FileUtils.readFileToByteArray(getTestResults().get(1));
+      	logger.log("fileContent in RunAlgHandler:");
+      	logger.log(imageFileContent.toString());
+      	imageEncodedString = Base64.getEncoder().encodeToString(imageFileContent);
+      	logger.log("encodedString in RunAlgHandler:");
+      	logger.log(imageEncodedString);
+      } catch (IOException e) {
+      	// TODO Auto-generated catch block
+      	e.printStackTrace();
+      }
 		
 		RunAlgResponse response;
 		if (fail) {
-			response = new RunAlgResponse(failMessage, 400, resultFileEncodedString, "image");
+			response = new RunAlgResponse(failMessage, 400, resultFileString, imageEncodedString);
 		} else {
-			response = new RunAlgResponse("none", 200, resultFileEncodedString, "image");
+			response = new RunAlgResponse("none", 200, resultFileString, imageEncodedString);
 		}
 
 		return response;
@@ -228,3 +273,19 @@ public class RunAlgHandler implements RequestHandler<RunAlgRequest, RunAlgRespon
 //	// if we ever get here, then whole thing was stored
 //	return true;
 //}
+
+//try {
+//getJarFromBucket();
+//} catch (Exception e) {
+//// TODO Auto-generated catch block
+//e.printStackTrace();
+//}
+
+//ExtensionLoader<Algo5> loader = new ExtensionLoader<Algo5>();
+//algoPlugin = loader.LoadClass("./Algo5.jar", "com.amazonaws.lambda.demo", Algo5.class);
+
+//String name="test_d";
+//File file = new File("./src/main/java/",name+".csv" );
+
+//byte[] decodedBytes = Base64.getDecoder().decode(data.file);
+//String decodedString = new String(decodedBytes);
