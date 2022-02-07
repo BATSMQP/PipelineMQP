@@ -908,6 +908,7 @@ function setDataContent() {
         console.log("reader.result: ");
         console.log(reader.result);
         content = reader.result.toString();
+        localStorage.setItem("newDataContent", content);
         console.log("in setContent content: "+ reader.result);
         console.log("in setContent content.toString(): " + content);
     };
@@ -1118,9 +1119,14 @@ function checkNewData() {
     console.log("In checkNewData selDataType: " + selDataType);
 
     var file = document.getElementById('dataInputToolFile').files[0];
+    const reader = new FileReader();
+    var fileAsText = reader.readAsText(file);
+    console.log("in checkNewData fileAsText: " + fileAsText);
+    // console.log("In checkNewData file: " + file.content);
     var fileBase64 = getBase64(file);
+    console.log("In checkNewData fileBase64: " + fileBase64);
 
-    var json = {file: fileBase64, filename: fn3[0], name: n, dataType: selDataType, ext: fn3[1], studyId: localStorage.getItem("currentStudyId"), authUserId: localStorage.getItem("currentAuthUserId")};
+    var json = {file: localStorage.getItem("newDataContent"), filename: fn3[0], name: n, dataType: selDataType, ext: fn3[1], studyId: localStorage.getItem("currentStudyId"), authUserId: localStorage.getItem("currentAuthUserId")};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
