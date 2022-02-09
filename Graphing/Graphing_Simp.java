@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.geom.*;
 import java.awt.Container;
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;

@@ -2,11 +2,11 @@
  import java.util.Scanner; // Claire Nicolas Edit
 import javax.swing.JFrame;
 
-import java.util.*;  //Claire Nicolas Edit
+//import java.util.*;  //Claire Nicolas Edit
  import lib.jdsp.filter.ButterworthJDSP;
- import Graphing.Graphing_Simp;
- import Gen_Algo.TimeSeriesData;
- import Gen_Algo.ReadFile;
+ //import Graphing.Graphing_Simp;
+ //import Gen_Algo.TimeSeriesData;
+ //import Gen_Algo.ReadFile;
 
 public class Butterworth{
     static JFrame j1 = new JFrame();
@@ -15,7 +15,7 @@ public class Butterworth{
     public static double[][] LowPass(TimeSeriesData Data, int startT, int endT,int Fs, int order, double cutOff){
         Data.AnalyseRange(startT, endT,Fs);
         double[] Time= Data.GetTime(); 
-        double[] signal= Data.GetSignal(); 
+        //double[] signal= Data.GetSignal(); 
         ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
         double[] result = flt.lowPassFilter(order, cutOff);
         double[][] LowPassed = TimeSeriesData.Refill2dArray(Time, result);
@@ -25,7 +25,7 @@ public class Butterworth{
     public static double[][] HighPass(TimeSeriesData Data, int startT, int endT,int Fs, int order, double cutOff){
         Data.AnalyseRange(startT, endT,Fs);
         double[] Time= Data.GetTime(); 
-        double[] signal= Data.GetSignal(); 
+        //double[] signal= Data.GetSignal(); 
         ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
         double[] result = flt.highPassFilter(order, cutOff);
         double[][] HighPassed = TimeSeriesData.Refill2dArray(Time, result);
@@ -35,7 +35,7 @@ public class Butterworth{
     public static double[][] BandPass(TimeSeriesData Data, int startT, int endT,int Fs, int order, double lowCutOff, double highCutOff){
         Data.AnalyseRange(startT, endT, Fs);
         double[] Time= Data.GetTime(); 
-        double[] signal= Data.GetSignal(); 
+        //double[] signal= Data.GetSignal(); 
         ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
         double[] result = flt.bandPassFilter(order, lowCutOff, highCutOff);
         double[][] BandPassed = TimeSeriesData.Refill2dArray(Time, result);
@@ -45,7 +45,7 @@ public class Butterworth{
     public static double[][] BandStop(TimeSeriesData Data, int startT, int endT,int Fs, int order, double lowCutOff, double highCutOff){
         Data.AnalyseRange(startT, endT, Fs);
         double[] Time= Data.GetTime(); 
-        double[] signal= Data.GetSignal(); 
+        //double[] signal= Data.GetSignal(); 
         ButterworthJDSP flt = Data.ConvertBWJDSP(Fs);
         double[] result = flt.bandPassFilter(order, lowCutOff, highCutOff);
         double[][] BandStopped = TimeSeriesData.Refill2dArray(Time, result);
@@ -105,6 +105,7 @@ public class Butterworth{
             double[][] BandStopped= BandStop(Data,startT, endT, Fs, order,  lowcutOff, highcutOff);
             Graphing.Graphing_Simp.printThisD2(BandStopped,"Data\\Low_test_Img.png");
         } 
+        keyboard.close();
     }
    
 
