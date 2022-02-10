@@ -18,44 +18,42 @@
   <body>
 
     <header>
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="container-fluid">
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-mdb-toggle="collapse"
-              data-mdb-target="#navbarExample01"
-              aria-controls="navbarExample01"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <i class="fas fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarExample01">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item active">
-                  <a class="nav-link" aria-current="page" href="userHome.html">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="helpPage.html">Help</a>
-                </li>
-                <li id="logoutButton" class="nav-item">
-                  <a class="nav-link" href="mainPage.html">Logout</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <!-- Navbar -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+          aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="mainPage.html">Home</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" aria-current="page" href="aboutPage.html">About</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="helpPage.html">Help & Support</a>
+            </li>
+            <li id="logoutButton" class="nav-item">
+              <a class="nav-link" href="mainPage.html">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
     </header>
 
     <div id="main">
 
-        <h3 id="title">Toolkits</h3>
-        <h6 class="mb-5" id="otherText">Select Toolkits for Analyzing your Data:</h6>
+        <h2 id="title" style="font-weight: bold;">Toolkits</h2>
+        <h6 class="mb-5" id="otherText">Select Toolkits for Analyzing your Data</h6>
 
-        <table id="toolkitTable" class="table table-hover" data-filter-control="true" data-show-search-clear-button="true">>
+        <table id="toolkitTable" class="table table-hover" data-filter-control="true" data-show-search-clear-button="true">
           <thead>
             <tr>
               <th scope="col"></th>
@@ -98,7 +96,7 @@
         
 
         </br>
-        <button type="submit" id="nextButton" class="btn btn-primary">Next</button>
+        <button type="submit" id="nextButton" class="btn btn-primary btn-lg">Next</button>
 
     </div>
 

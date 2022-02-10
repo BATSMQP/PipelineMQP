@@ -35,11 +35,16 @@
             <div class="collapse navbar-collapse" id="navbarExample01">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link" href="userHome.html">Home</a>
+                  <a class="nav-link" href="mainPage.html">Home</a>
                 </li>
+                <li class="nav-item ">
+                  <a class="nav-link" aria-current="page" href="aboutPage.html">About</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" aria-current="page" href="helpPage.html">Help</a>
-                </li>
+                  <a class="nav-link" aria-current="page" href="helpPage.html">Help & Support</a>
+                </li>              
               </ul>
             </div>
           </div>
@@ -50,7 +55,7 @@
             <!-- Jumbotron -->
             <div class="jumbotron vertical-center" style="height: 30vh;">
                 <div class="container text-center">
-                  <h1 class="display-4">Help and Support</h1>
+                  <h1 class="display-4" style="font-weight: bold;">Help and Support</h1>
                 </div>
               </div>
             <!-- Jumbotron -->
@@ -58,15 +63,20 @@
             <div class="row">
                 <div class="col-4">
                   <div class="list-group" id="list-tab" role="tablist" style="margin-left: 25px; margin-bottom: 40px;">
-                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
-                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Creating an Account</a>
+                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">User Home Page</a>
+                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Creating a Study</a>
                     <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
                   </div>
                 </div>
                 <div class="col-8">
                   <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">...</div>
+                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                      <h4>Creating and Accesing your Account</h4>
+                      <h6>Register User</h6>
+                      <h6>Log-in to User Account</h6>
+
+                    </div>
                     <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
                     <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
                     <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
@@ -77,7 +87,6 @@
 
       <nav class="navbar fixed-bottom navbar-dark bg-dark">
         <a class="navbar-brand" href="#">BATS 2022</a>
-        <img class="navbar-text" src="WPI_logo.png" alt="WPILogo" width="80" height=auto>
         <img class="navbar-text" src="WPI_logo.png" alt="WPILogo" width="80" height=auto>
       </nav>
 

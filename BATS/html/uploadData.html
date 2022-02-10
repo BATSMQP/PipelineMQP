@@ -19,48 +19,46 @@
   <body>
 
     <header>
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="container-fluid">
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-mdb-toggle="collapse"
-              data-mdb-target="#navbarExample01"
-              aria-controls="navbarExample01"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <i class="fas fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarExample01">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item active">
-                  <a class="nav-link" aria-current="page" href="userHome.html">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="helpPage.html">Help</a>
-                </li>
-                <li id="logoutButton" class="nav-item">
-                  <a class="nav-link" href="mainPage.html">Logout</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <!-- Navbar -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+          aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="mainPage.html">Home</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" aria-current="page" href="aboutPage.html">About</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="helpPage.html">Help & Support</a>
+            </li>
+            <li id="logoutButton" class="nav-item">
+              <a class="nav-link" href="mainPage.html">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
     </header>
 
     <a class="btn btn-secondary backBtn" href="studyPage.html" role="button">Back</a>
 
     <div id="main">
 
-        <h3 id="title">Upload Data:</h3>
+        <h2 id="title" style="font-weight: bold; margin-bottom: 20px;">Upload Data</h2>
 
         <form id="newData" onsubmit="return checkNewData()" action="">
           <div class="row mb-3 align-items-center">
             <div class="col-auto">
-                <label for="dataInputToolFile" class="form-label">File:</label>
+                <label for="dataInputToolFile" class="form-label" style="font-weight: bold;">File:</label>
             </div>
             <div class="col-auto">
               <div class="input-group mb-3">
@@ -69,11 +67,11 @@
           </div>
           </div>
 
-          <iframe id="uploadedDataViewer"></iframe>
+          <iframe id="uploadedDataViewer" style="margin-bottom: 20px;"></iframe>
 
           <div class="row mb-3 align-items-center">
             <div class="col-auto">
-                <label for="dataInputToolName" class="form-label">Name:</label>
+                <label for="dataInputToolName" class="form-label" style="font-weight: bold;">Name:</label>
             </div>
             <div class="col-auto input">
                 <input type="name" class="form-control" id="dataInputToolName">
@@ -82,7 +80,8 @@
 
         <!-- List Group Data Type -->
 
-          <p>Data Type:</p>
+          <label style="font-weight: bold;">Data Type:</label>
+          <p></p>
 
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="newFacialData">
@@ -150,7 +149,7 @@
         -->
 
           </br>
-          <button type="submit" id="confirmUploadNewDataButton" class="btn btn-primary mb-5">Upload</button>
+          <button type="submit" id="confirmUploadNewDataButton" class="btn btn-primary btn-lg mb-5">Upload</button>
         </form>
 
     </div>
