@@ -35,6 +35,10 @@ public class RunAlgo {
         //}else if(algo=="graphwav"){
         //    PyInterpreter.graphWav();
         //    return;
+        }else if(algo=="graphcsv"){
+
+            arF[0]=f;
+            arF[1] = Graphing_Simp.printThisD2(Gen_Algo.ReadFile.fromCSVtoD2(f.getAbsolutePath(),0,1), f.getPath()+"_Graph.png");
         }else{
             System.out.println("This algorithm is not curently available");
             return arF;
@@ -48,7 +52,7 @@ public class RunAlgo {
     public static void main(String[] args) {
         String name="test_d";
         File file = new File("./Data2/",name+".csv" );
-        File[] fileout=run(file, "lowpass");
+        File[] fileout=run(file, "graphcsv");
         System.out.println(fileout[0].getName());
     }
 }
