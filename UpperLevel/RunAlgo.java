@@ -50,7 +50,7 @@ public class RunAlgo {
     }
 
     public static void main(String[] args) {
-        String name="test_d";
+        String name="Test_Wave";
         File file = new File("./Data2/",name+".csv" );
         File[] fileout=run(file, "graphcsv");
         System.out.println(fileout[0].getName());
