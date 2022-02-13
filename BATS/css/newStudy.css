@@ -167,3 +167,9 @@
 .ib{
     display: inline-block;
 }
+
+#loadingGif {
+    position: fixed;
+    bottom: 42.5%;
+    right: 42.5%;
+}

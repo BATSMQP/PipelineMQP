@@ -33,6 +33,9 @@ function loadSelectAlgorithms(){
 }
 
 function checkLogin() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     var user = document.getElementById("loginUsername").value;
     var pass = document.getElementById("loginPassword").value;
 
@@ -57,6 +60,7 @@ function checkLogin() {
     // send the collected data as JSON
     xhr.send(js);
     console.log("after send");
+
     // This will process results and update HTML as appropriate.
     xhr.onloadend = function() {
         console.log("in function");
@@ -89,6 +93,8 @@ function processLoginResponse(result) {
     console.log("currentUser in processLoginResponse: " + localStorage.getItem("currentUser"));
 
     if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         window.location.href = "userHome.html";
         // window.onload = checkUsername(username);
     } else {
@@ -104,6 +110,9 @@ function processLoginResponse(result) {
 ////////////////REGISTER PAGE/////////////////////////////////////////
 
 function checkRegister() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     var user = document.getElementById("regUsername").value;
     var eMail = document.getElementById("regEmail").value;
     var pass = document.getElementById("regPassword").value;
@@ -174,6 +183,8 @@ function processRegisterResponse(result) {
     localStorage.setItem('currentAuthUserId', authUserId);
 
     if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         window.location.href = "userHome.html";
 
         // var id = choice[0];
@@ -205,6 +216,9 @@ function processRegisterResponse(result) {
 ////////////////NEW STUDY PAGE/////////////////////////////////////////
 
 function checkNewStudy() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     var inputStudyName = document.getElementById("inputStudyName").value;
     var inputShortStudyName = document.getElementById("inputShortStudyName").value;
     var inputStudyAbstract = document.getElementById("inputStudyAbstract").value;
@@ -274,6 +288,8 @@ function processNewStudyResponse(result) {
     var study = js["study"];
 
     if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         window.location.href = "userHome.html";
     } else {
         var msg = js["error"];
@@ -288,6 +304,9 @@ function processNewStudyResponse(result) {
 ////////////////USER HOME PAGE/////////////////////////////////////////
 
 function checkGetUsername(aid) {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     var result = "";
     var json = {authUserId: aid};
 
@@ -328,6 +347,9 @@ function processGetUsernameResponse(result) {
     console.log("in processGetUsernameResponse username: " + username);
 
     if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+
         r = username;
         localStorage.setItem("usernameOfAU", username);
         console.log("in processGetUsernameResponse r: " + r);
@@ -339,6 +361,9 @@ function processGetUsernameResponse(result) {
 }
 
 function checkGetStudies() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     console.log("currentAuthUserId in checkGetStudies: " + localStorage.getItem('currentAuthUserId'));
     console.log("currentUser in checkGetStudies: " + localStorage.getItem('currentUser'));
 
@@ -379,6 +404,9 @@ function processGetStudiesResponse(result) {
     var studies = js["studies"];
 
     if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+
         console.log("getStudies status 200");
 
         var studyTable = document.getElementById("tableOfStudiesOnUserHome");
@@ -457,6 +485,9 @@ function studyClicked(studyId, authUserId, studyName) {
 }
 
 function checkGetData() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     // var studyNameOnStudyPage = document.getElementById("studyNameOnStudyPage");
     // currentStudyName = localStorage.getItem('studyName');
     // console.log("currrentStudyName (in checkGetData): " + currentStudyName);
@@ -501,6 +532,9 @@ function processGetDataResponse(result) {
     var studies = js["studies"];
 
     if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+
         console.log("getData status 200");
 
         var tableString = "";
@@ -581,6 +615,9 @@ function processGetDataResponse(result) {
 ////////////////Select Data Page////////////////////////////////////////////////////////////////////
 
 function checkGetStudyData() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     var studyNameOnStudyPage = document.getElementById("studyNameOnStudyPage");
     currentStudyName = localStorage.getItem('studyName');
     console.log("currrentStudyName (in checkGetData): " + currentStudyName);
@@ -625,6 +662,9 @@ function processGetStudyDataResponse(result) {
     localStorage.setItem("currentData", data);
 
     if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        
         console.log("getStudyData status 200");
 
         var dataTable = document.getElementById("DataTable");
@@ -747,6 +787,9 @@ function algoClicked(toolDocumentId, algName, name) { //algName=filename
 }
 
 function checkRunAlg() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     var json = {dataDocumentId: localStorage.getItem('currentDataDocumentId'), toolDocumentId: "", algName: localStorage.getItem('currentAlgName'), studyId: localStorage.getItem("currentStudyId")};
 
     var js = JSON.stringify(json);
@@ -789,6 +832,10 @@ function processRunAlgResponse(result) {
         console.log("RunAlg status 200");
         setUploadedResultFile(resultFile);
         setUploadedImage(image);
+
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+
         // var frameResultFile = document.getElementById("uploadedResultFile").value;
         // var frameImage = document.getElementById("uploadedImage").value;
     } else {
@@ -915,6 +962,9 @@ function setDataContent() {
 }
 
 function checkNewTool() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     var fn = document.getElementById("inputToolFile").value;
     var n = document.getElementById("inputToolName").value;
     var isFacialData = document.getElementById("facialData").checked;
@@ -1031,6 +1081,8 @@ function processNewToolResponse(result) {
     var tool = js["tool"];
 
     if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         // window.location.href = "studyPage.html";
         window.location.href = localStorage.getItem("beforeUpload") + ".html";
     } else {
@@ -1059,6 +1111,9 @@ function getBase64(file) {
  }
 
 function checkNewData() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     var fn = document.getElementById("dataInputToolFile").value;
     var n = document.getElementById("dataInputToolName").value;
     var isFacialData = document.getElementById("newFacialData").checked;
@@ -1163,6 +1218,8 @@ function processNewDataResponse(result) {
     var data = js["data"];
 
     if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         // window.location.href = "studyPage.html";
         window.location.href = localStorage.getItem("beforeUpload") + ".html";
     } else {
@@ -1176,6 +1233,9 @@ function processNewDataResponse(result) {
 }
 
 function getStudyDataForStudyPage() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     var json = {studyId: localStorage.getItem('currentStudyId')};
 
     var js = JSON.stringify(json);
@@ -1213,6 +1273,9 @@ function processGetStudyDataResponse2(result) {
     var data = js["data"];
 
     if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+
         console.log("getStudyData status 200");
 
         var tableString = "";
@@ -1253,6 +1316,9 @@ function processGetStudyDataResponse2(result) {
 }
 
 function getStudyToolsForStudyPage() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     var json = {studyId: localStorage.getItem('currentStudyId')};
 
     var js = JSON.stringify(json);
@@ -1290,6 +1356,9 @@ function processGetStudyDataResponse3(result) {
     var tools = js["tools"];
 
     if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        
         console.log("getStudyData status 200");
 
         var tableString = "";
@@ -1367,6 +1436,9 @@ function setSelectedDataAndTool() {
 
 //Study Info Page
 function checkGetStudyInfo() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     var json = {studyId: localStorage.getItem('currentStudyId')};
 
     var js = JSON.stringify(json);
@@ -1441,6 +1513,9 @@ function processGetStudyInfoResponse(result) {
 
         studyInfoUsername = document.getElementById("studyInfoUsername");
         studyInfoUsername.innerHTML = study["authUserId"];
+
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
@@ -1449,6 +1524,9 @@ function processGetStudyInfoResponse(result) {
 
 //Edit Study Page
 function loadEditStudyPage() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     var json = {studyId: localStorage.getItem('currentStudyId')};
 
     var js = JSON.stringify(json);
@@ -1533,6 +1611,9 @@ function processGetStudyInfoResponse2(result) {
             editInputStudyVisibilityNo = document.getElementById("editInputStudyVisibilityNo");
             editInputStudyVisibilityNo.checked = true;
         }
+
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
@@ -1540,6 +1621,9 @@ function processGetStudyInfoResponse2(result) {
 }
 
 function checkEditStudyInfo() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
     var editInputStudyName = document.getElementById("editInputStudyName").value;
     var editInputShortStudyName = document.getElementById("editInputShortStudyName").value;
     var editInputStudyAbstract = document.getElementById("editInputStudyAbstract").value;
@@ -1612,6 +1696,8 @@ function processEditStudyInfoResponse(result) {
     var status = js["statusCode"];
 
     if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         window.location.href = "studyInfo.html";
     } else {
         var msg = js["error"];
