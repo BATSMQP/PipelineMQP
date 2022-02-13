@@ -942,23 +942,40 @@ function setToolContent() {
 function setDataContent() {
     var file = document.getElementById('dataInputToolFile').files[0];
     //set iframe
-    const obj_url = URL.createObjectURL(document.getElementById('dataInputToolFile').files[0]);
-    const iframe = document.getElementById('uploadedDataViewer');
-    iframe.setAttribute('src', obj_url);
-    URL.revokeObjectURL(obj_url);
+    // const obj_url = URL.createObjectURL(file);
+    // var iframe = document.getElementById('uploadedDataViewer');
+    // iframe.setAttribute('src', obj_url);
+    // URL.revokeObjectURL(obj_url);
 
-    const reader = new FileReader();
-    reader.readAsText(file);
-    reader.onload = function(evt) {
-        console.log("in reader.onload");
-        console.log(evt.target.result);
-        console.log("reader.result: ");
-        console.log(reader.result);
+    var reader = new FileReader();
+    var file2;
+    reader.onload = function(e) {
+        // The file's text will be printed here
+        console.log(e.target.result);
         content = reader.result.toString();
         localStorage.setItem("newDataContent", content);
-        console.log("in setContent content: "+ reader.result);
-        console.log("in setContent content.toString(): " + content);
+        console.log("localStorage.getItem('newDataContent'): " + localStorage.getItem('newDataContent'));
     };
+
+    var fileContent = reader.readAsText(file);
+
+    // const obj_url = URL.createObjectURL(file2);
+    // const iframe = document.getElementById('uploadedDataViewer');
+    // iframe.setAttribute('src', obj_url);
+    // URL.revokeObjectURL(obj_url);
+
+    // const reader = new FileReader();
+    // reader.readAsText(file);
+    // reader.onload = function(evt) {
+    //     console.log("in reader.onload");
+    //     console.log(evt.target.result);
+    //     console.log("reader.result: ");
+    //     console.log(reader.result);
+    //     // content = reader.result.toString();
+    //     // localStorage.setItem("newDataContent", content);
+    //     console.log("in setContent content: "+ reader.result);
+    //     console.log("in setContent content.toString(): " + content);
+    // };
 }
 
 function checkNewTool() {
@@ -1122,14 +1139,14 @@ function checkNewData() {
     var isSiData = document.getElementById("newSiData").checked;
     var isLogData = document.getElementById("newLogData").checked;
 
-    var fn2 = fn.split("\\");
-    var fn3 = fn2[fn2.length-1].split(".");
+    var fn2 = fn.split(".");
+    var fn3 = fn2[0].split("\\");
 
     console.log("filename: " + fn);
     console.log("fn2: " + fn2);
     console.log("fn3: " + fn3);
-    console.log("fn3[0]: " + fn3[0]);
-    console.log("fn3[1]: " + fn3[1]);
+    console.log("fn2[1]: " + fn2[1]);
+    console.log("fn3[2]: " + fn3[2]);
     console.log("name: " + n);    
 
     if (fn == "") {
@@ -1181,7 +1198,7 @@ function checkNewData() {
     var fileBase64 = getBase64(file);
     console.log("In checkNewData fileBase64: " + fileBase64);
 
-    var json = {file: localStorage.getItem("newDataContent"), filename: fn3[0], name: n, dataType: selDataType, ext: fn3[1], studyId: localStorage.getItem("currentStudyId"), authUserId: localStorage.getItem("currentAuthUserId")};
+    var json = {file: localStorage.getItem("newDataContent"), filename: fn3[2], name: n, dataType: selDataType, ext: fn2[1], studyId: localStorage.getItem("currentStudyId"), authUserId: localStorage.getItem("currentAuthUserId")};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
