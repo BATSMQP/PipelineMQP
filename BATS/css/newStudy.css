@@ -173,3 +173,7 @@
     bottom: 42.5%;
     right: 42.5%;
 }
+
+#clickRowToGraph {
+    text-align: left;
+}

@@ -882,7 +882,8 @@ function setUploadedImage(image) {
     const obj_url = URL.createObjectURL(file);
     const img = document.getElementById('uploadedImage');
     var src = "data:image/png;base64," + image;
-    img.setAttribute('src', src);
+    // img.setAttribute('src', src);
+    img.setAttribute('src', '../img/Test_Wave.csv_Graph.png');
 
     // var canvas = document.createElement("canvas");
     // canvas.width = 200;
@@ -1301,7 +1302,20 @@ function processGetStudyDataResponse2(result) {
         for(let i = 0; i < data.length; i++){
                 doc = data[i];
                 //create row to be inserted
-                tableString += "<tr>";
+                // tableString += "<tr>";
+                tableString += "<tr onclick='JavaScript:dataForGraphingClicked(";
+                tableString += '"';
+                tableString += doc["documentId"];
+                tableString += '", "';
+                tableString += doc["authUserId"];
+                tableString += '", "';
+                tableString += doc["filename"];
+                tableString += '", "';
+                tableString += doc["name"];
+                tableString += '", "';
+                tableString += i;
+                tableString += '")';
+                tableString += "'>";
 
                 tableString += "<td>";
                 tableString += doc["name"];
@@ -1724,4 +1738,22 @@ function processEditStudyInfoResponse(result) {
         newStudyText = document.getElementById("newStudyText");
         renewStudyTextgText.innerHTML = textString;
     }
+}
+
+function dataForGraphingClicked(documentId, authUserId, filename, name, chosenI) {
+    console.log("in dataClicked");
+    console.log("documentId: " + documentId);
+    console.log("authUserId: " + authUserId);
+    console.log("filename (in dataClicked): " + filename);
+    console.log("name (in dataClicked): " + name);
+    localStorage.setItem('currentDataDocumentId', documentId);
+    localStorage.setItem('currentDataFilename', filename);
+    localStorage.setItem('currentDataName', name);
+    localStorage.setItem('algName', "graphcsv");
+    window.location.href = "algoResult.html";
+    checkRunAlg();
+}
+
+function goToBeforeUpload(){
+    window.location.href = localStorage.getItem("beforeUpload") + ".html";
 }
