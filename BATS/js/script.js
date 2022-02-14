@@ -890,7 +890,11 @@ function setUploadedImage(image) {
     const img = document.getElementById('uploadedImage');
     var src = "data:image/png;base64," + image;
     // img.setAttribute('src', src);
-    img.setAttribute('src', '../img/Test_Wave.csv_Graph.png');
+    if(localStorage.getItem("algName") === "lowpass"){
+        img.setAttribute('src', '../img/Test_Wave.csv_lowpassGraph.png');
+    } else {
+        img.setAttribute('src', '../img/Test_Wave.csv_Graph.png');
+    }
 
     //set download href
     document.getElementById("downloadGraph").setAttribute("href", '../img/Test_Wave.csv_Graph.png');
