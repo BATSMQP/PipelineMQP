@@ -125,15 +125,21 @@
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
-                      <tr onclick='JavaScript:runSelectedTool("highpass")'>
+                      <tr onclick='JavaScript:runSelectedTool("highpass", "High Pass")'>
                         <td>High Pass</td>
                         <td>highpass</td>
                         <td>.csv</td>
                         <td>All</td>
                       </tr>
-                      <tr onclick='JavaScript:runSelectedTool("lowpass")'>
+                      <tr onclick='JavaScript:runSelectedTool("lowpass", "Low Pass")'>
                         <td>Low Pass</td>
                         <td>lowpass</td>
+                        <td>.csv</td>
+                        <td>All</td>
+                      </tr>
+                      <tr onclick='JavaScript:runSelectedTool("graphcsv", "Graph CSV")'>
+                        <td>Graph CSV</td>
+                        <td>graphcsv</td>
                         <td>.csv</td>
                         <td>All</td>
                       </tr>
@@ -164,7 +170,7 @@
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
-                      <tr onclick='JavaScript:runSelectedTool("ttest")'> 
+                      <tr onclick='JavaScript:runSelectedTool("ttest", "tTest")'> 
                         <td>tTest</td>
                         <td>ttest</td>
                         <td>.csv</td>
@@ -197,7 +203,7 @@
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
-                      <tr onclick='JavaScript:runSelectedTool("graphwav")'>
+                      <tr onclick='JavaScript:runSelectedTool("graphwav", "Graph . wav")'>
                         <td>Graph .wav</td>
                         <td>graphwav</td>
                         <td>.wav</td>

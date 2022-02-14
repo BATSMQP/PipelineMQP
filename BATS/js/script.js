@@ -1350,6 +1350,7 @@ function processGetStudyDataResponse2(result) {
 
         DataTableBody = document.getElementById("studyPageDataTableBody");
         DataTableBody.innerHTML = tableString;
+        algoClicked("", "graphcsv", "Graph CSV");
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
@@ -1768,14 +1769,16 @@ function goToBeforeUpload(){
     window.location.href = localStorage.getItem("beforeUpload") + ".html";
 }
 
-function runSelectedTool(algName) {
+function runSelectedTool(algName, name) {
     localStorage.setItem("ranFromTool", "true");
     window.location.href = "selectData.html";
+    algoClicked("", algName, name);
 }
 
 function analyzeDataButtonClicked() {
     localStorage.setItem("ranFromTool", "false");
     window.location.href='selectData.html';
+    algoClicked("", "", "");
 }
 
 function nextFromSelectData() {
