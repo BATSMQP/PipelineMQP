@@ -24,6 +24,8 @@ public class Graphing_Simp extends JPanel{
     static int mar=50;
     boolean notplaced=true;
     public static String title;
+    public static String Xtitle;
+    public static String Ytitle;
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g1=(Graphics2D)g;
@@ -57,6 +59,7 @@ public class Graphing_Simp extends JPanel{
 
         g1.setFont(new Font("Verdana",1,10));
         g1.setPaint(Color.BLACK);
+        
         //System.out.print(s);
         
         g1.drawString(sX, width-mar, height-mar+10); 
@@ -68,6 +71,14 @@ public class Graphing_Simp extends JPanel{
         g1.drawString(sY, mar-10, mar-10);
         
         g1.drawString(title,width/2-70,mar-10);
+
+        g1.drawString(Xtitle,width/2-70,height-mar+10);
+
+
+        AffineTransform at2 = AffineTransform.getQuadrantRotateInstance(1);
+        g1.setTransform(at2);
+
+        g1.drawString(Ytitle,height/2-40,-mar+10);
     }
 
     public String cutDec(String s){
@@ -90,16 +101,18 @@ public class Graphing_Simp extends JPanel{
         }return max;
     }       
 
-    public static File printThisD2(double[][] d, String path){
+    public static File printThisD2(double[][] d, String path,String x, String y){
         JFrame j =new JFrame();
         j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Graphing_Simp.coordinates=d;
-        Graphing_Simp.title= path.replace("_lowpassGraph.png", " Lowpassed");
+        Graphing_Simp.title= path.replace("_lowpassGraph.png", " Lowpassed").replace("_Graph.png", " Graphed");
+        Graphing_Simp.Xtitle=x;
+        Graphing_Simp.Ytitle=y;
         j.add(new Graphing_Simp());
         j.setSize(400,400);
         j.setLocation(200,200);
         j.setVisible(true);
-        j.setTitle(path.replace("_lowpassGraph.png", " Lowpassed"));
+        j.setTitle(path.replace("_lowpassGraph.png", " Lowpassed").replace("_Graph.png", " Graphed"));
         File file=savePic(j,path);
         j.dispose();
         return file;

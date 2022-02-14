@@ -21,7 +21,7 @@ public class RunAlgo {
             double[][] LowPassed= Butterworth.LowPass(Data,0, Data.GetTime().length, 1, 1,  cutOff); //fs and order are bs just for this version
             //Graphing.Graphing_Simp.printThisD2(LowPassed,j2);
             arF[0]=Gen_Algo.Table2CSV.Doub(f.getName()+"_lowpassed", LowPassed,2,f);
-            arF[1] = Graphing_Simp.printThisD2(LowPassed, f.getPath()+"_lowpassGraph.png");
+            arF[1] = Graphing_Simp.printThisD2(LowPassed, f.getPath()+"_lowpassGraph.png","Time (s)","Wavelength\n (m)");
             
         }else if(algo=="ttest"){
             double[][] ar=Gen_Algo.ReadFile.fromCSVtoD2(f.getAbsolutePath(),0, 1);
@@ -38,7 +38,7 @@ public class RunAlgo {
         }else if(algo=="graphcsv"){
 
             arF[0]=f;
-            arF[1] = Graphing_Simp.printThisD2(Gen_Algo.ReadFile.fromCSVtoD2(f.getAbsolutePath(),0,1), f.getPath()+"_Graph.png");
+            arF[1] = Graphing_Simp.printThisD2(Gen_Algo.ReadFile.fromCSVtoD2(f.getAbsolutePath(),0,1), f.getPath()+"_Graph.png","Time (s)","Wavelength\n (m)");
         }else{
             System.out.println("This algorithm is not curently available");
             return arF;
@@ -52,7 +52,7 @@ public class RunAlgo {
     public static void main(String[] args) {
         String name="Test_Wave";
         File file = new File("./Data2/",name+".csv" );
-        File[] fileout=run(file, "graphcsv");
+        File[] fileout=run(file, "lowpass");
         System.out.println(fileout[0].getName());
     }
 }

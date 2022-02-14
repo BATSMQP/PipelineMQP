@@ -66,7 +66,7 @@ public class Butterworth{
         int Signal= keyboard.nextInt();
 
         TimeSeriesData Data= new TimeSeriesData(ReadFile.fromCSVtoD2(path,Time, Signal));
-        Graphing.Graphing_Simp.printThisD2(ReadFile.fromCSVtoD2(path,Time, Signal),"Data\\Low_test_Img.png");
+        Graphing.Graphing_Simp.printThisD2(ReadFile.fromCSVtoD2(path,Time, Signal),"Data\\Low_test_Img.png","Time (s)","Wavelength\n (m)");
 
         System.out.print("What time would you like the analysis to start: ");  
         int startT= keyboard.nextInt();
@@ -84,26 +84,26 @@ public class Butterworth{
             System.out.print("What is the cutoff signal you wish to use for the filter (<.50): ");  
             double cutOff= keyboard.nextDouble();
             double[][] LowPassed= LowPass(Data,startT, endT, Fs, order,  cutOff);
-            Graphing.Graphing_Simp.printThisD2(LowPassed,"Data\\Low_test_Img.png");
+            Graphing.Graphing_Simp.printThisD2(LowPassed,"Data\\Low_test_Img.png","Time (s)","Wavelength\n (m)");
         } else if(ChooseFilter == 2){
             System.out.print("What is the cutoff signal you wish to use for the filter (<.50): ");  
             double cutOff= keyboard.nextDouble();
             double[][] HighPassed= HighPass(Data,startT, endT, Fs, order,  cutOff);
-            Graphing.Graphing_Simp.printThisD2(HighPassed,"Data\\Low_test_Img.png");
+            Graphing.Graphing_Simp.printThisD2(HighPassed,"Data\\Low_test_Img.png","Time (s)","Wavelength\n (m)");
         } else if(ChooseFilter == 3 ){
             System.out.print("What is the lower cutoff signal you wish to use for the filter: ");  
             double lowcutOff= keyboard.nextDouble();
             System.out.print("What is the higher cutoff signal you wish to use for the filter: ");  
             double highcutOff= keyboard.nextDouble();
             double[][] BandPassed= BandPass(Data,startT, endT, Fs, order,  lowcutOff, highcutOff);
-            Graphing.Graphing_Simp.printThisD2(BandPassed,"Data\\Low_test_Img.png");
+            Graphing.Graphing_Simp.printThisD2(BandPassed,"Data\\Low_test_Img.png","Time (s)","Wavelength\n (m)");
         } else if(ChooseFilter == 4 ){
             System.out.print("What is the lower cutoff signal you wish to use for the filter: ");  
             double lowcutOff= keyboard.nextDouble();
             System.out.print("What is the higher cutoff signal you wish to use for the filter: ");  
             double highcutOff= keyboard.nextDouble();
             double[][] BandStopped= BandStop(Data,startT, endT, Fs, order,  lowcutOff, highcutOff);
-            Graphing.Graphing_Simp.printThisD2(BandStopped,"Data\\Low_test_Img.png");
+            Graphing.Graphing_Simp.printThisD2(BandStopped,"Data\\Low_test_Img.png","Time (s)","Wavelength\n (m)");
         } 
         keyboard.close();
     }

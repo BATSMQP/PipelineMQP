@@ -17,7 +17,7 @@ public class Demo {
         double[][] t1=ReadFile.fromCSVtoD2("Data\\Test.csv", 0, 1);
         //double[][] t2=ReadFile.fromCSVtoD2("Data\\Test.csv", 0, 2);
         
-        Graphing_Simp.printThisD2(t1,"Data\\TestImg.png");
+        Graphing_Simp.printThisD2(t1,"Data\\TestImg.png","Time (s)","Wavelength\n (m)");
         /* TimeUnit.MILLISECONDS.sleep(1000); // without this there is an error where the graphs are the same. im guessing it has to do with overlaping prossesses but its pretty weird.
         JFrame j2 = new JFrame();
         Graphing_Simp.printThisD2(t2,j2); */
