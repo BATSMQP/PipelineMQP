@@ -177,3 +177,7 @@
 #clickRowToGraph, #clickRowToUseTool {
     text-align: left;
 }
+
+#downloadResultFile {
+    margin-left: 57%;
+}

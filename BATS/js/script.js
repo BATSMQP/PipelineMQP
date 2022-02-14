@@ -847,15 +847,22 @@ function processRunAlgResponse(result) {
 function setUploadedResultFile(resultFile) {
     //var file = document.getElementById('uploadedResultFile').files[0];
     // const blob = new Blob([resultFile], {type : 'text/plain'});
-    var file = new File([resultFile], "foo.txt", {
+    var file = new File([resultFile], "resultFile.csv", {
         type: "text/plain",
+      });
+      var fileCSV = new File([resultFile], "resultFile.csv", {
+        type: "text/csv",
       });
     // var file = "Bats result file"
     //set iframe
     const obj_url = URL.createObjectURL(file);
+    const obj_url2 = URL.createObjectURL(fileCSV);
     const iframe = document.getElementById('uploadedResultFile');
     iframe.setAttribute('src', obj_url);
-    URL.revokeObjectURL(obj_url);
+    //set download href
+    document.getElementById("downloadResultFile").setAttribute("href", obj_url2);
+    
+    // URL.revokeObjectURL(obj_url);
 
     const reader = new FileReader();
     reader.readAsText(file);
@@ -884,6 +891,9 @@ function setUploadedImage(image) {
     var src = "data:image/png;base64," + image;
     // img.setAttribute('src', src);
     img.setAttribute('src', '../img/Test_Wave.csv_Graph.png');
+
+    //set download href
+    document.getElementById("downloadGraph").setAttribute("href", '../img/Test_Wave.csv_Graph.png');
 
     // var canvas = document.createElement("canvas");
     // canvas.width = 200;
