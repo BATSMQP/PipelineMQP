@@ -56,7 +56,7 @@
 
     <!-- <button type="submit" id="addNewData" onclick="window.location.href='uploadData.html'" class="btn-secondary mb-2 btn-sm ">Add New Data</button> -->
 
-    <button type="submit" id="analyzeDataButton" onclick="window.location.href='selectData.html'" class="btn-outline-primary btn-lg float-right" >Analyze Data</button>
+    <button type="submit" id="analyzeDataButton" onclick='JavaScript:analyzeDataButtonClicked()' class="btn-outline-primary btn-lg float-right" >Analyze Data</button>
 
 
     <div id="uploadStuffDiv">
@@ -101,6 +101,7 @@
 
 
         <div class="table-responsive col-md-6">
+          <h6 id="clickRowToUseTool">To use an analysis tool, click on one from the below toolkits</h6>
           <div class="accordion" id="accordionExample">
             <div class="card">
               <div class="card-header" id="headingOne">
@@ -114,7 +115,7 @@
               <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
                   
-                  <table id="studyPageToolTable" class="table table-bordered">
+                  <table id="studyPageToolTable" class="table table-bordered table-hover">
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
@@ -124,13 +125,13 @@
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
-                      <tr>
+                      <tr onclick='JavaScript:runSelectedTool("highpass")'>
                         <td>High Pass</td>
                         <td>highpass</td>
                         <td>.csv</td>
                         <td>All</td>
                       </tr>
-                      <tr>
+                      <tr onclick='JavaScript:runSelectedTool("lowpass")'>
                         <td>Low Pass</td>
                         <td>lowpass</td>
                         <td>.csv</td>
@@ -153,7 +154,7 @@
               <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                 <div class="card-body">
                   
-                  <table id="studyPageToolTable" class="table table-bordered">
+                  <table id="studyPageToolTable" class="table table-bordered table-hover">
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
@@ -163,7 +164,7 @@
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
-                      <tr>
+                      <tr onclick='JavaScript:runSelectedTool("ttest")'> 
                         <td>tTest</td>
                         <td>ttest</td>
                         <td>.csv</td>
@@ -186,7 +187,7 @@
               <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                 <div class="card-body">
                   
-                  <table id="studyPageToolTable" class="table table-bordered">
+                  <table id="studyPageToolTable" class="table table-bordered table-hover">
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
@@ -196,7 +197,7 @@
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
-                      <tr>
+                      <tr onclick='JavaScript:runSelectedTool("graphwav")'>
                         <td>Graph .wav</td>
                         <td>graphwav</td>
                         <td>.wav</td>
@@ -219,7 +220,7 @@
               <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                 <div class="card-body">
                   
-                  <table id="studyPageToolTable" class="table table-bordered">
+                  <table id="studyPageToolTable" class="table table-bordered table-hover">
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
@@ -229,7 +230,7 @@
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
-                      <tr>
+                      <tr onclick='JavaScript:runSelectedTool("lowpass")'>
                         <td>Examlpe Name</td>
                         <td>exampleName</td>
                         <td>.csv</td>

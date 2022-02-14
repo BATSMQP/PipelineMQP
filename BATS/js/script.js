@@ -1757,3 +1757,22 @@ function dataForGraphingClicked(documentId, authUserId, filename, name, chosenI)
 function goToBeforeUpload(){
     window.location.href = localStorage.getItem("beforeUpload") + ".html";
 }
+
+function runSelectedTool(algName) {
+    localStorage.setItem("ranFromTool", "true");
+    window.location.href = "selectData.html";
+}
+
+function analyzeDataButtonClicked() {
+    localStorage.setItem("ranFromTool", "false");
+    window.location.href='selectData.html';
+}
+
+function nextFromSelectData() {
+    var ranFromTool = localStorage.getItem("ranFromTool");
+    if(ranFromTool === "true"){
+        window.location.href='algoResult.html';
+    } else if (ranFromTool === "false"){
+        window.location.href='selectAlgorithms.html';
+    }
+}
