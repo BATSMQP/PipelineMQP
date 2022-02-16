@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse" id="navbarExample01">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="mainPage.html">Home</a>
+              <a class="nav-link" href="userHome.html">Home</a>
             </li>
             <li class="nav-item ">
               <a class="nav-link" aria-current="page" href="aboutPage.html">About</a>
@@ -56,7 +56,7 @@
 
     <!-- <button type="submit" id="addNewData" onclick="window.location.href='uploadData.html'" class="btn-secondary mb-2 btn-sm ">Add New Data</button> -->
 
-    <button type="submit" id="analyzeDataButton" onclick="window.location.href='selectData.html'" class="btn-outline-primary btn-lg float-right" >Analyze Data</button>
+    <button type="submit" id="analyzeDataButton" onclick='JavaScript:analyzeDataButtonClicked()' class="btn-outline-primary btn-lg float-right" >Analyze Data</button>
 
 
     <div id="uploadStuffDiv">
@@ -80,7 +80,8 @@
         <h2 class="sub-header col-md-6 mt-4">Analysis Tools</h2>
 
         <div class="table-responsive col-md-6">
-          <table id="studyPageDataTable" class="table table-hover table-bordered">
+          <h6 id="clickRowToGraph">Click on a row to graph its data</h6>
+          <table id="studyPageDataTable" class="table table-bordered table-hover">
             <thead>
               <tr>
                 <th scope="col">Name of Data</th>
@@ -100,6 +101,7 @@
 
 
         <div class="table-responsive col-md-6">
+          <h6 id="clickRowToUseTool">To use an analysis tool, click on one from the below toolkits</h6>
           <div class="accordion" id="accordionExample">
             <div class="card">
               <div class="card-header" id="headingOne">
@@ -113,7 +115,7 @@
               <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
                   
-                  <table id="studyPageToolTable" class="table table-hover table-bordered">
+                  <table id="studyPageToolTable" class="table table-bordered table-hover">
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
@@ -123,15 +125,21 @@
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
-                      <tr>
+                      <tr onclick='JavaScript:runSelectedTool("highpass", "High Pass")'>
                         <td>High Pass</td>
                         <td>highpass</td>
                         <td>.csv</td>
                         <td>All</td>
                       </tr>
-                      <tr>
+                      <tr onclick='JavaScript:runSelectedTool("lowpass", "Low Pass")'>
                         <td>Low Pass</td>
                         <td>lowpass</td>
+                        <td>.csv</td>
+                        <td>All</td>
+                      </tr>
+                      <tr onclick='JavaScript:runSelectedTool("graphcsv", "Graph CSV")'>
+                        <td>Graph CSV</td>
+                        <td>graphcsv</td>
                         <td>.csv</td>
                         <td>All</td>
                       </tr>
@@ -152,7 +160,7 @@
               <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                 <div class="card-body">
                   
-                  <table id="studyPageToolTable" class="table table-hover table-bordered">
+                  <table id="studyPageToolTable" class="table table-bordered table-hover">
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
@@ -162,7 +170,7 @@
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
-                      <tr>
+                      <tr onclick='JavaScript:runSelectedTool("ttest", "tTest")'> 
                         <td>tTest</td>
                         <td>ttest</td>
                         <td>.csv</td>
@@ -185,7 +193,7 @@
               <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                 <div class="card-body">
                   
-                  <table id="studyPageToolTable" class="table table-hover table-bordered">
+                  <table id="studyPageToolTable" class="table table-bordered table-hover">
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
@@ -195,7 +203,7 @@
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
-                      <tr>
+                      <tr onclick='JavaScript:runSelectedTool("graphwav", "Graph . wav")'>
                         <td>Graph .wav</td>
                         <td>graphwav</td>
                         <td>.wav</td>
@@ -218,7 +226,7 @@
               <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                 <div class="card-body">
                   
-                  <table id="studyPageToolTable" class="table table-hover table-bordered">
+                  <table id="studyPageToolTable" class="table table-bordered table-hover">
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
@@ -228,7 +236,7 @@
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
-                      <tr>
+                      <tr onclick='JavaScript:runSelectedTool("lowpass")'>
                         <td>Examlpe Name</td>
                         <td>exampleName</td>
                         <td>.csv</td>
@@ -244,6 +252,8 @@
         </div>
 
       </div>
+
+      <img id="loadingGif" src="../img/loading.gif" hidden />
 
       </br>
 <!--         <h6 class="inline">People With Access:</h6>

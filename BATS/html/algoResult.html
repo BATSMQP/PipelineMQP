@@ -31,7 +31,7 @@
         <div class="collapse navbar-collapse" id="navbarExample01">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="mainPage.html">Home</a>
+              <a class="nav-link" href="userHome.html">Home</a>
             </li>
             <li class="nav-item ">
               <a class="nav-link" aria-current="page" href="aboutPage.html">About</a>
@@ -56,14 +56,18 @@
 
   </header>
 
-  <a class="btn btn-secondary backBtn" href="selectAlgorithms.html" role="button">Back</a>
+  <a class="btn btn-secondary backBtn" onclick='JavaScript:goToBeforeUpload()' role="button">Back</a>
+  <a class="btn btn-secondary backBtn" href="studyPage.html" role="button">Done</a>
+  <a id="downloadResultFile" class="btn btn-outline-secondary backBtn" href="algoResult.html" role="button" download>Download Result File</a>
+  <a id="downloadGraph" class="btn btn-outline-secondary backBtn" href="algoResult.html" role="button" download>Download Graph</a>
+
 
   <h3 id="title">View Analysis Result</h3>
 
   <div id="selDataAndToolDiv">
     <div id="selDataAR">
       <h5 id="selectedDataHeader">Selected Data:</h5>
-      <table id="algoResultDataTable" class="table table-hover table-sm">
+      <table id="algoResultDataTable" class="table table-sm">
         <thead>
           <tr>
             <th scope="col">Data Name</th>
@@ -76,7 +80,7 @@
 
     <div id="selToolAR">
       <h5 id="selectedToolHeader">Selected Analysis Tool:</h5>
-      <table id="algoResultToolTable" class="table table-hover table-sm">
+      <table id="algoResultToolTable" class="table table-sm">
         <thead>
           <tr>
             <th scope="col">Analysis Tool Name</th>
@@ -91,6 +95,8 @@
 
   <iframe id="uploadedResultFile"></iframe>
   <img id="uploadedImage" alt="Result Image"></img>
+
+  <img id="loadingGif" src="../img/loading.gif" hidden />
 
   <nav class="navbar fixed-bottom navbar-dark bg-dark">
     <a class="navbar-brand" href="#">BATS 2022</a>

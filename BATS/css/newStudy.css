@@ -168,3 +168,17 @@
 .ib{
     display: inline-block;
 }
+
+#loadingGif {
+    position: fixed;
+    bottom: 42.5%;
+    right: 42.5%;
+}
+
+#clickRowToGraph, #clickRowToUseTool {
+    text-align: left;
+}
+
+#downloadResultFile {
+    margin-left: 45%;
+}

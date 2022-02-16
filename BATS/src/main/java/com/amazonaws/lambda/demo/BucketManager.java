@@ -6,6 +6,7 @@ public class BucketManager {
 	public static final String bucket = "batsmqp";
 	
 	public static final String folder = "img";
+	public static final String dataFolder = "data";
 	public static final String test_folder = "test_img";
 	
 	static String cachedResult = null;   // compute once and then retain
@@ -22,6 +23,20 @@ public class BucketManager {
 			System.out.println("USING TEST");
 		} else {
 			cachedResult = folder;
+		}
+		
+		return cachedResult;
+	}
+	
+	static String getDataFolder() {
+		if (cachedResult != null) { return cachedResult; }    // won't change
+		
+		String test = System.getenv("lambdaTesting");
+		if (test != null) {
+			cachedResult = test_folder;
+			System.out.println("USING TEST");
+		} else {
+			cachedResult = dataFolder;
 		}
 		
 		return cachedResult;
