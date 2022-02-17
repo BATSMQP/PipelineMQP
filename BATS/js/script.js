@@ -25,6 +25,7 @@ function loadStudyPage(){
 
 function loadSelectData(){
     localStorage.setItem("beforeUpload", "selectData");
+    localStorage.setItem("currentDataDocumentId", "");
 }
 
 function loadSelectAlgorithms(){
@@ -1850,10 +1851,17 @@ function analyzeDataButtonClicked() {
 }
 
 function nextFromSelectData() {
+    if (localStorage.getItem("currentDataDocumentId") === "") {
+        alert("Please select data before continuing");
+        return false;
+    }
+
     var ranFromTool = localStorage.getItem("ranFromTool");
     if(ranFromTool === "true"){
+        localStorage.setItem("currentDataDocumentId", "");
         window.location.href='algoResult.html';
     } else if (ranFromTool === "false"){
+        localStorage.setItem("currentDataDocumentId", "");
         window.location.href='selectAlgorithms.html';
     }
 }
