@@ -122,27 +122,27 @@
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Filename</th>
-                        <th scope="col">File Ext.</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">For File Type</th>
                         <th scope="col">For Data Type</th>
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
+                      <tr onclick='JavaScript:runSelectedTool("graphcsv", "Graph CSV")'>
+                        <td>Graph CSV Data</td>
+                        <td>Produces a graph from .csv data.</td>
+                        <td>.csv</td>
+                        <td>All</td>
+                      </tr>
                       <tr onclick='JavaScript:runSelectedTool("highpass", "High Pass")'>
-                        <td>High Pass</td>
-                        <td>highpass</td>
+                        <td>High Pass Filter</td>
+                        <td>Filters out unwanted low frequencies.</td>
                         <td>.csv</td>
                         <td>All</td>
                       </tr>
                       <tr onclick='JavaScript:runSelectedTool("lowpass", "Low Pass")'>
-                        <td>Low Pass</td>
-                        <td>lowpass</td>
-                        <td>.csv</td>
-                        <td>All</td>
-                      </tr>
-                      <tr onclick='JavaScript:runSelectedTool("graphcsv", "Graph CSV")'>
-                        <td>Graph CSV</td>
-                        <td>graphcsv</td>
+                        <td>Low Pass Filter</td>
+                        <td>Filters out unwanted high frequencies.</td>
                         <td>.csv</td>
                         <td>All</td>
                       </tr>
@@ -167,15 +167,16 @@
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Filename</th>
-                        <th scope="col">File Ext.</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">For File Type</th>
                         <th scope="col">For Data Type</th>
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
                       <tr onclick='JavaScript:runSelectedTool("ttest", "tTest")'> 
                         <td>tTest</td>
-                        <td>ttest</td>
+                        <td>Determines if there is a statistical different between the mean of two groups.</td>
+                        <!-- <td>ttest</td> -->
                         <td>.csv</td>
                         <td>All</td>
                       </tr>
@@ -200,15 +201,15 @@
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Filename</th>
-                        <th scope="col">File Ext.</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">For File Type</th>
                         <th scope="col">For Data Type</th>
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
                       <tr onclick='JavaScript:runSelectedTool("graphwav", "Graph . wav")'>
                         <td>Graph .wav</td>
-                        <td>graphwav</td>
+                        <td>Produces a graph from .wav data.</td>
                         <td>.wav</td>
                         <td>Speech</td>
                       </tr>
@@ -233,15 +234,15 @@
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Filename</th>
-                        <th scope="col">File Ext.</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">For File Type</th>
                         <th scope="col">For Data Type</th>
                       </tr>
                     </thead>
                     <tbody id="studyPageToolTableBody">
                       <tr onclick='JavaScript:runSelectedTool("lowpass")'>
                         <td>Examlpe Name</td>
-                        <td>exampleName</td>
+                        <td>Example Description</td>
                         <td>.csv</td>
                         <td>Neural</td>
                       </tr>

@@ -33,6 +33,9 @@
             <li class="nav-item ">
               <a class="nav-link" aria-current="page" href="aboutPage.html">About</a>
             </li>
+            <li class="nav-item ">
+              <a class="nav-link" aria-current="page" href="viewData.html">View Data</a>
+            </li>
           </ul>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto">
             <li class="nav-item">
@@ -57,8 +60,8 @@
           <!-- <button type="submit" id="goToNewStudyButton" onclick="window.location.href='newStudy.html'" class="btn btn-primary inline">New Study</button> -->
         </div>
         <button type="submit" id="goToNewStudyButton" onclick="window.location.href='newStudy.html'" class="btn btn-primary inline">New Study</button>
-        <button type="submit" id="goToViewDataButton" onclick="window.location.href='viewData.html'" class="btn btn-primary inline">View All Data</button>
-    </div>
+        <button type="submit" id="goToViewDataButton" onclick='JavaScript:addNewDataFromUserHome()' class="btn btn-primary inline">Add New Data</button>
+      </div>
 
       <h3 id="dataTableName" style="margin-top: 30px; margin-bottom: 20px; font-weight: bold;">Studies</h3>
 
@@ -71,7 +74,7 @@
                 <th scope="col">Creator</th>
                 <th scope="col">Study Contact</th>
                 <th scope="col">Institutions Involved</th>
-                <th scope="col">Study Notes</th>
+                <!-- <th scope="col">Study Notes</th> -->
                 <th scope="col">Is IRB Approved</th>
                 <th scope="col">Visibility</th>
                 <th scope="col">Last Modified</th>
@@ -84,6 +87,24 @@
             </tbody>
           </table>
         </div>
+
+      <!-- <div class="accordion" id="abstractACD">
+        <div class="card">
+          <div class="card-header" id="heading1">
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                Show Abstract
+              </button>
+            </h2>
+          </div>
+      
+          <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#abstractACD">
+            <div class="card-body">
+              Abstract Stuff
+            </div>
+          </div>
+        </div>
+      </div> -->
 
     </div>
     <img id="loadingGif" src="../img/loading.gif" hidden />

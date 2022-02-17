@@ -183,6 +183,16 @@
     margin-left: 45%;
 }
 
+.newStudyInput {
+    width: 100%;
+}
+
+/* .abstractTd {
+    max-height: 30px;
+    min-width: 50px;
+    overflow-y: auto;
+} */
+
 /* .registerInput {
     position: relative;
     vertical-align: middle;

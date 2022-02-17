@@ -429,31 +429,92 @@ function processGetStudiesResponse(result) {
                 tableString += study["studyName"];
                 tableString += '")';
                 tableString += "'>";
-                tableString += "<td>";
+                tableString += "<td onclick='JavaScript:studyClicked(";
+                tableString += '"';
+                tableString += study["studyId"];
+                tableString += '", "';
+                tableString += study["authUserId"];
+                tableString += '", "';
+                tableString += study["studyName"];
+                tableString += '")';
+                tableString += "'>";
                 tableString += study["studyName"];
                 tableString += "</td>";
-                tableString += "<td>";
-                tableString += study["studyDescription"];
+                tableString += "<td class='abstractTd'>";
+
+                tableString += study["studyDescription"];               
+                // tableString += '<div class="accordion" id="abstractACD"><div class="card"><div class="card-header" id="headingOne"><h2 class="mb-0"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Show Abstract</button></h2></div><div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#abstractACD"><div class="card-body">';
+                // tableString += study["studyDescription"];
+                // tableString += '</div></div></div></div>';
+                
                 tableString += "</td>";
-                tableString += "<td>";
+                tableString += "<td onclick='JavaScript:studyClicked(";
+                tableString += '"';
+                tableString += study["studyId"];
+                tableString += '", "';
+                tableString += study["authUserId"];
+                tableString += '", "';
+                tableString += study["studyName"];
+                tableString += '")';
+                tableString += "'>";
                 tableString += localStorage.getItem("usernameOfAU");
                 tableString += "</td>";
-                tableString += "<td>";
+                tableString += "<td onclick='JavaScript:studyClicked(";
+                tableString += '"';
+                tableString += study["studyId"];
+                tableString += '", "';
+                tableString += study["authUserId"];
+                tableString += '", "';
+                tableString += study["studyName"];
+                tableString += '")';
+                tableString += "'>";
                 tableString += study["studyContact"];
                 tableString += "</td>";
-                tableString += "<td>";
+                tableString += "<td onclick='JavaScript:studyClicked(";
+                tableString += '"';
+                tableString += study["studyId"];
+                tableString += '", "';
+                tableString += study["authUserId"];
+                tableString += '", "';
+                tableString += study["studyName"];
+                tableString += '")';
+                tableString += "'>";
                 tableString += study["institutionsInvolved"];
                 tableString += "</td>";
-                tableString += "<td>";
-                tableString += study["studyNotes"];
-                tableString += "</td>";
-                tableString += "<td>";
+                // tableString += "<td>";
+                // tableString += study["studyNotes"];
+                // tableString += "</td>";
+                tableString += "<td onclick='JavaScript:studyClicked(";
+                tableString += '"';
+                tableString += study["studyId"];
+                tableString += '", "';
+                tableString += study["authUserId"];
+                tableString += '", "';
+                tableString += study["studyName"];
+                tableString += '")';
+                tableString += "'>";
                 tableString += study["isIrbApproved"];
                 tableString += "</td>";
-                tableString += "<td>";
+                tableString += "<td onclick='JavaScript:studyClicked(";
+                tableString += '"';
+                tableString += study["studyId"];
+                tableString += '", "';
+                tableString += study["authUserId"];
+                tableString += '", "';
+                tableString += study["studyName"];
+                tableString += '")';
+                tableString += "'>";
                 tableString += study["visibility"];
                 tableString += "</td>";
-                tableString += "<td>";
+                tableString += "<td onclick='JavaScript:studyClicked(";
+                tableString += '"';
+                tableString += study["studyId"];
+                tableString += '", "';
+                tableString += study["authUserId"];
+                tableString += '", "';
+                tableString += study["studyName"];
+                tableString += '")';
+                tableString += "'>";
                 tableString += "date";
                 tableString += "</td>";
                 tableString += "</tr>";                    
@@ -531,6 +592,8 @@ function processGetDataResponse(result) {
     var data = js["data"];
     var studies = js["studies"];
 
+    // console.log("studies: " + JSON.stringify(studies));
+
     if (status == 200) {
         //hide loading gif
         document.getElementById("loadingGif").setAttribute("hidden", "hidden");
@@ -558,7 +621,8 @@ function processGetDataResponse(result) {
                 tableString += "</td>";
 
                 tableString += "<td>";
-                tableString += studies[i]["studyName"];
+                // tableString += studies[i]["studyName"];
+                tableString += "Study Name"
                 tableString += "</td>";
 
                 tableString += "</tr>";                    
@@ -1791,5 +1855,231 @@ function nextFromSelectData() {
         window.location.href='algoResult.html';
     } else if (ranFromTool === "false"){
         window.location.href='selectAlgorithms.html';
+    }
+}
+
+function addNewDataFromUserHome() {
+    localStorage.setItem("beforeUpload", "userHome");
+    window.location.href = "uploadDataToStudy.html";
+}
+
+function checkGetStudies2() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
+    console.log("currentAuthUserId in checkGetStudies: " + localStorage.getItem('currentAuthUserId'));
+    console.log("currentUser in checkGetStudies: " + localStorage.getItem('currentUser'));
+
+    var json = {authUserId: localStorage.getItem('currentAuthUserId'), username: localStorage.getItem('currentUser')};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", getStudies_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processGetStudiesResponse2(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processGetStudiesResponse2("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processGetStudiesResponse2(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var studies = js["studies"];
+
+    if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+
+        console.log("getStudies status 200");
+
+        var studyList = document.getElementById("studiesInUploadData");
+        var study;
+        var tableString = "";
+        var id;
+  
+        for(let i = 0; i < studies.length; i++){
+            study = studies[i];
+            // checkGetUsername(study["authUserId"]);
+            console.log("in processGetStudiesResponse usernameOfAU: " + localStorage.getItem("usernameOfAU"));
+
+            id = "study" + i;
+            tableString += '<div class="form-check"';
+            tableString += " onclick='JavaScript:dataStudyClicked(";
+            tableString += '"';
+            tableString += study["studyId"];
+            tableString += '", "';
+            tableString += study["studyName"];
+            tableString += '")';
+            tableString+= "'>";
+            tableString += '<input class="form-check-input" type="radio" name="';
+            tableString += id;
+            tableString += 'id="';
+            tableString += id;
+            tableString += '">';
+            tableString += '<label class="form-check-label" for="';
+            tableString += id;
+            tableString += '">';
+            tableString += study["studyName"];
+            tableString += '</label></div>';
+        }
+        // tableString += "</tbody>";
+        // console.log(tableString);
+
+        // studyTableTbody = document.getElementById("studyTableTbody");
+        studyList.innerHTML = tableString;
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
+    }
+}
+
+function dataStudyClicked(studyId, studyName) {
+    localStorage.setItem("newDataForStudyId", studyId);
+    localStorage.setItem("newDataForStudyName", studyName);
+    console.log("newDataForStudyId: " + localStorage.getItem("newDataForStudyId"));
+    console.log("newDataForStudyName: " + localStorage.getItem("newDataForStudyName"));
+}
+
+function checkNewData2() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
+    var fn = document.getElementById("dataInputToolFile").value;
+    var n = document.getElementById("dataInputToolName").value;
+    var isFacialData = document.getElementById("newFacialData").checked;
+    var isNeuralData = document.getElementById("newNeuralData").checked;
+    var isSpeechData = document.getElementById("newSpeechData").checked;
+    var isSiData = document.getElementById("newSiData").checked;
+    var isLogData = document.getElementById("newLogData").checked;
+
+    var fn2 = fn.split(".");
+    var fn3 = fn2[0].split("\\");
+
+    console.log("filename: " + fn);
+    console.log("fn2: " + fn2);
+    console.log("fn3: " + fn3);
+    console.log("fn2[1]: " + fn2[1]);
+    console.log("fn3[2]: " + fn3[2]);
+    console.log("name: " + n);    
+
+    if (fn == "") {
+        alert("Please upload a file before continuing");
+        return false;
+    }
+
+    if (n == "") {
+        alert("Please enter a name for the new data before continuing");
+        return false;
+    }
+
+    if (localStorage.getItem("newDataForStudyId") === "") {
+        alert("Please select a study for the new data to be a part of before continuing");
+        return false;
+    }
+
+    var selDataType = "";
+    if(isFacialData){
+        selDataType += "Facial";
+    }
+    if(isNeuralData){
+        if(selDataType != ""){
+            selDataType += ",";
+        }
+        selDataType += "Neural";
+    }
+    if(isSpeechData){
+        if(selDataType != ""){
+            selDataType += ",";
+        }
+        selDataType += "Speech";
+    }
+    if(isSiData){
+        if(selDataType != ""){
+            selDataType += ",";
+        }
+        selDataType += "Stress Indicators";
+    }
+    if(isLogData){
+        if(selDataType != ""){
+            selDataType += ",";
+        }
+        selDataType += "Log Data";
+    }
+
+    console.log("In checkNewData selDataType: " + selDataType);
+
+    var file = document.getElementById('dataInputToolFile').files[0];
+    const reader = new FileReader();
+    var fileAsText = reader.readAsText(file);
+    console.log("in checkNewData fileAsText: " + fileAsText);
+    // console.log("In checkNewData file: " + file.content);
+    var fileBase64 = getBase64(file);
+    console.log("In checkNewData fileBase64: " + fileBase64);
+
+    var json = {file: localStorage.getItem("newDataContent"), filename: fn3[2], name: n, dataType: selDataType, ext: fn2[1], studyId: localStorage.getItem("newDataForStudyId"), authUserId: localStorage.getItem("currentAuthUserId")};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", NewData_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processNewDataResponse2(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processNewDataResponse2("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processNewDataResponse2(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var data = js["data"];
+
+    if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        localStorage.setItem("newDataForStudyId", "");
+        // window.location.href = "studyPage.html";
+        window.location.href = localStorage.getItem("beforeUpload") + ".html";
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
     }
 }

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/newStudy.css">
+
+    <title>BATS: Upload Data To Study</title>
+
+    <!-- import the webpage's javascript file -->
+    <script src="../js/script.js" defer></script>
+    <!-- <script src="../js/userHome.js" defer></script> -->
+    <script src="../js/api.js"></script>
+  </head>
+  <body>
+
+    <header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+          aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="userHome.html">Home</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" aria-current="page" href="aboutPage.html">About</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="helpPage.html">Help & Support</a>
+            </li>
+            <li id="logoutButton" class="nav-item">
+              <a class="nav-link" href="mainPage.html">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+    </header>
+
+    <a class="btn btn-secondary backBtn" onclick='JavaScript:goToBeforeUpload()' role="button">Back</a>
+
+    <div id="main">
+
+        <h2 id="title" style="font-weight: bold; margin-bottom: 20px;">Upload Data</h2>
+
+        <form id="newData" onsubmit="return checkNewData2()" action="">
+          <div class="row mb-3 align-items-center">
+            <div class="col-auto">
+                <label for="dataInputToolFile" class="form-label" style="font-weight: bold;">File:</label>
+            </div>
+            <div class="col-auto">
+              <div class="input-group mb-3">
+                <input type="file" class="form-control" id="dataInputToolFile" accept=".csv,.nirs,.wav" onchange="return setDataContent()">
+              </div>
+          </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <div class="col-auto">
+                <label for="dataInputToolName" class="form-label" style="font-weight: bold;">Name for Data:</label>
+            </div>
+            <div class="col-auto input">
+                <input type="name" class="form-control" id="dataInputToolName">
+            </div>
+          </div>
+
+        <!-- List Group Data Type -->
+
+          <label style="font-weight: bold;">Data Type:</label>
+          <p></p>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="newFacialData">
+            <label class="form-check-label" for="newFacialData">Facial Data</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="newNeuralData">
+            <label class="form-check-label" for="newNeuralData">Neural Data</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="newSpeechData">
+            <label class="form-check-label" for="newSpeechData">Speech Data</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="newSiData">
+            <label class="form-check-label" for="newSiData">Stress Indicators Data</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="newLogData">
+            <label class="form-check-label" for="newLogData">Log Data</label>
+          </div>
+          </br>
+
+          <label style="font-weight: bold;">Select a study to add the new data to:</label>
+          <div class="col-auto input" id="studiesInUploadData">
+            Loading...
+          </div>
+
+          <!-- <div class="list-group d-flex mb-4" style="width: 350px;">
+            <button type="button" id="logData"style="text-align: left" class="list-group-item">Log</button>
+            <button type="button" id="neuralData" style="text-align: left" class="list-group-item">Neural</button>
+            <button type="button" id="FacialData" style="text-align: left" class="list-group-item">Facial</button>
+            <button type="button" id="speechData" style="text-align: left" class="list-group-item">Speech</button>
+            <button type="button" id="stressIndicatorsData" style="text-align: left" class="list-group-item">Stress Indicators</button>
+            <button type="button" id="timeSeriesData" style="text-align: left" class="list-group-item mb-3" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Time Series</button>
+            <div class="collapse" id="collapseExample">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">Collection rate (every second):</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Value" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+          </div> -->
+
+        <!-- List Group Data Type -->
+
+        <!-- The following section is commented out for now -->
+        <!-- <p>Study:</p>
+
+        <div class="form-check mb-3" id="StudyList">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> This is checkbox <br />
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> This is checkbox <br />           
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> This is checkbox <br />
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> This is checkbox <br />
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> This is checkbox <br />
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> This is checkbox <br />         
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> This is checkbox <br />
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> This is checkbox <br />
+        </div> -->
+
+        <!--
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="timeSeriesData" value="option1">
+            <label class="form-check-label" for="timeSeriesData">Time Series Data</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="logData" value="option2">
+            <label class="form-check-label" for="logData">Log Data</label>
+          </div>
+        -->
+
+          </br>
+          <button type="submit" id="confirmUploadNewDataStudyButton" class="btn btn-primary btn-lg mb-5">Upload</button>
+        </form>
+
+    </div>
+
+    <img id="loadingGif" src="../img/loading.gif" hidden />
+
+      <nav class="navbar fixed-bottom navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">BATS 2022</a>
+        <img class="navbar-text" src="WPI_logo.png" alt="WPILogo" width="80" height=auto>
+      </nav>
+
+      <script>
+        window.onload = function() {
+          checkGetStudies2();
+        }
+      </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
