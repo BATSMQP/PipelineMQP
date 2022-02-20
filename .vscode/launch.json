@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch RunAlgoTable",
+            "request": "launch",
+            "mainClass": "UpperLevel.RunAlgoTable",
+            "projectName": "PipelineMQP_de9018c3"
+        },
+        {
+            "type": "java",
             "name": "Launch RunAlgo",
             "request": "launch",
             "mainClass": "UpperLevel.RunAlgo",

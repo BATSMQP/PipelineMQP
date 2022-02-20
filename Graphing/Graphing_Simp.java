@@ -72,13 +72,13 @@ public class Graphing_Simp extends JPanel{
         
         g1.drawString(title,width/2-70,mar-10);
 
-        g1.drawString(Xtitle,width/2-70,height-mar+10);
+        g1.drawString(Xtitle,width/2-10,height-mar+10);
+        //g1.drawString(Ytitle,0,height/2);
 
-
-        AffineTransform at2 = AffineTransform.getQuadrantRotateInstance(1);
+        AffineTransform at2 = AffineTransform.getQuadrantRotateInstance(3);
         g1.setTransform(at2);
 
-        g1.drawString(Ytitle,height/2-40,-mar+10);
+        g1.drawString(Ytitle,-height/2-40,+mar-10);
     }
 
     public String cutDec(String s){
