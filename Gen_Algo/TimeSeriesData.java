@@ -36,6 +36,7 @@ public class TimeSeriesData {
     public TimeSeriesData AnalyseRange (int startT, int endT,int Fs) {
             this.output= new double[endT-startT*Fs][2];
             int j= 0; 
+            //TODO: Why is there a for loop that does nothing here?
            for ( int i = 0; i < this.signal.length; i++) {
                    if ( this.signal[i][0]> startT | this.signal[i][0]<endT ) { //this is assuming that col 1 = time 2= data
                         this.output[j][0] =this.signal[i][0];
