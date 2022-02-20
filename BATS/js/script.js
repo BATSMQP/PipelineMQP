@@ -236,6 +236,11 @@ function checkNewStudy() {
         return false;
     }
 
+    if (inputStudyAbstract.length > 500) {
+        alert("The entered abstract exceeds the 500 character limit.");
+        return false;
+    }
+
     var inputStudyIsIrbApproved = "";
     if(inputStudyIsIrbApprovedYes){
         inputStudyIsIrbApproved = "yes";
@@ -304,7 +309,7 @@ function processNewStudyResponse(result) {
 
 ////////////////USER HOME PAGE/////////////////////////////////////////
 
-function checkGetUsername(aid) {
+async function checkGetUsername(aid) {
     //display loading gif
     document.getElementById("loadingGif").removeAttribute("hidden");
 
@@ -397,7 +402,8 @@ function checkGetStudies() {
     return false;
 }
 
-function processGetStudiesResponse(result) {
+// const processGetStudiesResponse = async () => {
+async function processGetStudiesResponse(result) {
     console.log("result:" + result);
     var js = JSON.parse(result);
 
@@ -412,11 +418,13 @@ function processGetStudiesResponse(result) {
 
         var studyTable = document.getElementById("tableOfStudiesOnUserHome");
         var study;
+        var username;
+
         var tableString = "";
   
         for(let i = 0; i < studies.length; i++){
             study = studies[i];
-            checkGetUsername(study["authUserId"]);
+            username = await checkGetUsername(study["authUserId"]);
             console.log("in processGetStudiesResponse usernameOfAU: " + localStorage.getItem("usernameOfAU"));
 
 
@@ -430,15 +438,7 @@ function processGetStudiesResponse(result) {
                 tableString += study["studyName"];
                 tableString += '")';
                 tableString += "'>";
-                tableString += "<td onclick='JavaScript:studyClicked(";
-                tableString += '"';
-                tableString += study["studyId"];
-                tableString += '", "';
-                tableString += study["authUserId"];
-                tableString += '", "';
-                tableString += study["studyName"];
-                tableString += '")';
-                tableString += "'>";
+                tableString += "<td>";
                 tableString += study["studyName"];
                 tableString += "</td>";
                 tableString += "<td class='abstractTd'>";
@@ -449,73 +449,25 @@ function processGetStudiesResponse(result) {
                 // tableString += '</div></div></div></div>';
                 
                 tableString += "</td>";
-                tableString += "<td onclick='JavaScript:studyClicked(";
-                tableString += '"';
-                tableString += study["studyId"];
-                tableString += '", "';
-                tableString += study["authUserId"];
-                tableString += '", "';
-                tableString += study["studyName"];
-                tableString += '")';
-                tableString += "'>";
-                tableString += localStorage.getItem("usernameOfAU");
+                tableString += "<td>";
+                tableString += localStorage.getItem("currentUser");
                 tableString += "</td>";
-                tableString += "<td onclick='JavaScript:studyClicked(";
-                tableString += '"';
-                tableString += study["studyId"];
-                tableString += '", "';
-                tableString += study["authUserId"];
-                tableString += '", "';
-                tableString += study["studyName"];
-                tableString += '")';
-                tableString += "'>";
+                tableString += "<td>";
                 tableString += study["studyContact"];
                 tableString += "</td>";
-                tableString += "<td onclick='JavaScript:studyClicked(";
-                tableString += '"';
-                tableString += study["studyId"];
-                tableString += '", "';
-                tableString += study["authUserId"];
-                tableString += '", "';
-                tableString += study["studyName"];
-                tableString += '")';
-                tableString += "'>";
+                tableString += "<td>";
                 tableString += study["institutionsInvolved"];
                 tableString += "</td>";
                 // tableString += "<td>";
                 // tableString += study["studyNotes"];
                 // tableString += "</td>";
-                tableString += "<td onclick='JavaScript:studyClicked(";
-                tableString += '"';
-                tableString += study["studyId"];
-                tableString += '", "';
-                tableString += study["authUserId"];
-                tableString += '", "';
-                tableString += study["studyName"];
-                tableString += '")';
-                tableString += "'>";
+                tableString += "<td>";
                 tableString += study["isIrbApproved"];
                 tableString += "</td>";
-                tableString += "<td onclick='JavaScript:studyClicked(";
-                tableString += '"';
-                tableString += study["studyId"];
-                tableString += '", "';
-                tableString += study["authUserId"];
-                tableString += '", "';
-                tableString += study["studyName"];
-                tableString += '")';
-                tableString += "'>";
+                tableString += "<td>";
                 tableString += study["visibility"];
                 tableString += "</td>";
-                tableString += "<td onclick='JavaScript:studyClicked(";
-                tableString += '"';
-                tableString += study["studyId"];
-                tableString += '", "';
-                tableString += study["authUserId"];
-                tableString += '", "';
-                tableString += study["studyName"];
-                tableString += '")';
-                tableString += "'>";
+                tableString += "<td>";
                 tableString += "date";
                 tableString += "</td>";
                 tableString += "</tr>";                    
@@ -1867,8 +1819,15 @@ function nextFromSelectData() {
 }
 
 function addNewDataFromUserHome() {
-    localStorage.setItem("beforeUpload", "userHome");
-    window.location.href = "uploadDataToStudy.html";
+    console.log("localStorage.getItem('studiesExist'): " + localStorage.getItem("studiesExist"));
+    //alert if no studies for the current user
+    if (localStorage.getItem("studiesExist") === "false") {
+        alert("Please add a study before continuing");
+        return false;
+    } else{
+        localStorage.setItem("beforeUpload", "userHome");
+        window.location.href = "uploadDataToStudy.html";
+    }
 }
 
 function checkGetStudies2() {
@@ -2086,6 +2045,67 @@ function processNewDataResponse2(result) {
         localStorage.setItem("newDataForStudyId", "");
         // window.location.href = "studyPage.html";
         window.location.href = localStorage.getItem("beforeUpload") + ".html";
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
+    }
+}
+
+function checkGetStudies3() {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
+    console.log("currentAuthUserId in checkGetStudies: " + localStorage.getItem('currentAuthUserId'));
+    console.log("currentUser in checkGetStudies: " + localStorage.getItem('currentUser'));
+
+    var json = {authUserId: localStorage.getItem('currentAuthUserId'), username: localStorage.getItem('currentUser')};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", getStudies_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processGetStudiesResponse3(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processGetStudiesResponse3("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processGetStudiesResponse3(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var studies = js["studies"];
+
+    if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+
+        console.log("getStudies3 status 200");
+        console.log("studies.length: " + studies.length);
+
+        if(studies.length === 0){
+            localStorage.setItem("studiesExist", "false");
+        } else {
+            localStorage.setItem("studiesExist", "true");
+        }
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
