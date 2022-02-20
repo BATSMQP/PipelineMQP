@@ -7,6 +7,8 @@ import Gen_Algo.Butterworth;
 //import Interpreter.PyInterpreter;
 import Graphing.Graphing_Simp;
 
+//a version of RunAlgo but with the imput being tables.
+
 public class RunAlgoTable {
     public static File[] run(double[][] d,String algo, String path){
         //TODO: Make accedental overwriting less of an issue
