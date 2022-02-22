@@ -60,9 +60,73 @@ public class RunAlgHandler implements RequestHandler<RunAlgRequest, RunAlgRespon
 	LambdaLogger logger;
 //	private AmazonS3 s3 = null;
 	
-	double[][] getDataTable(Document data) {
-		double[][] table = { { .3, .3 }, { 1.3, 1.3 }, {2.3, 2.5} };
-		return table;
+	double[][] getDataTable(Document data, int col0, int col1) {
+//		double[][] table = { { .3, .3 }, { 1.3, 1.3 }, {2.3, 2.5} };
+		
+		ArrayList<String> dat = new ArrayList<String>();
+		int lsize=0;
+		
+		String[] lines = data.file.split("\n");
+		String l = null;
+		
+		//for each line, 
+		for(int ln = 0; ln < lines.length; ln++) {
+			l = lines[ln];
+			while (l != null) { 
+	            // use string.split to load a string array with the values from 
+	            // each line of 
+	            // the file, using a comma as the delimiter 
+	            String[] line = l.split(",");
+	            lsize=line.length;
+	            for(int i=0;i<lsize;i++){
+	                dat.add(line[i]);
+	            }
+	        }
+		}
+		
+		String[][] datarray= new String[dat.size()/lsize][lsize]; //this will be determined by the size obvs
+
+        for (int i = 0;i<dat.size();i++){
+            datarray[i/lsize][i%lsize]=dat.get(i);
+        }
+        
+        String[][] s = datarray;
+        
+        ArrayList<Double> dat2 = new ArrayList<Double>();
+        
+        for(int i=0;i<s.length;i++){
+            int j=0;
+            for(String source : s[i]){
+                Scanner scanner = new Scanner(source);
+
+                if(j==col0 || j==col1){
+                    //TODO: Possible error here if there are doubles in the colomns that are not inteded to be data, such as if the colomn header was just a number this would cause an error. Will solve at a latter time
+                    if(scanner.hasNextDouble()){
+                        dat2.add(Double.parseDouble(source));
+                    }
+
+                }
+                scanner.close();
+                j++;
+            }
+        }
+
+        double[][] d = new double[dat2.size()/2][2];
+        boolean first = col0 < col1;
+        for(int i = 0;i<d.length;i++){
+            if(first){
+            
+                d[i][0] =dat2.get(i*2);
+                d[i][1]=dat2.get(i*2+1);
+
+            }else{
+                d[i][1] =dat2.get(i*2);
+                d[i][0]=dat2.get(i*2+1);
+            }
+
+        }
+
+        return d;
 	}
 	
 	String getImageEncodedString(JFrame jf) throws IOException {
@@ -95,7 +159,7 @@ public class RunAlgHandler implements RequestHandler<RunAlgRequest, RunAlgRespon
 		}
 	    
 //        File[] results = RunAlgo.run(getDataFile(data), req.getAlgName());
-        File[] results = RunAlgoTable.run(getDataTable(data), req.getAlgName(), "data/data.csv");
+        File[] results = RunAlgoTable.run(getDataTable(data, 0, 1), req.getAlgName(), "data/data.csv");
         
         String resultFileString = null; //results[0]
         
