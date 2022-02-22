@@ -118,6 +118,22 @@ public class Graphing_Simp extends JPanel{
         return file;
         
     }
+
+    public static JFrame printThisD2Frame(double[][] d, String Title,String x, String y){
+        JFrame j =new JFrame();
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Graphing_Simp.coordinates=d;
+        Graphing_Simp.title= Title;
+        Graphing_Simp.Xtitle=x;
+        Graphing_Simp.Ytitle=y;
+        j.add(new Graphing_Simp());
+        j.setSize(400,400);
+        j.setLocation(200,200);
+        j.setVisible(false);
+        j.setTitle(Title);
+        return j;
+        
+    }
         
     public static void main(String args[]){
         JFrame j =new JFrame();

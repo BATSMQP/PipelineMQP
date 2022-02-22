@@ -59,6 +59,25 @@ public class Table2CSV {
         return f;
     }
 
+    public static String RawStri(String name, String[][] a, int colNum) {
+        //TODO: naming conventions improve
+        
+        String out = "";
+        
+        for(int i=0; a.length>i;i++){
+            String line =a[i][0];
+            for(int j=1;j<colNum;j++){
+                line = line+","+a[i][j];
+            }
+            
+            out=out+line+"\n";
+        }
+        
+        
+        return out;
+    }
+
+
     public static File Doub(String name, double[][] a,int colNum, File f) {
         String[][] s=new String[a.length][colNum];
         for(int i=0; i<a.length; i++) {
@@ -69,5 +88,18 @@ public class Table2CSV {
          
         }
         return Stri(name, s, colNum,f);
+    }
+
+    public static String RawDoub(String name, double[][] a, int colNum){
+        String[][] s=new String[a.length][colNum];
+        for(int i=0; i<a.length; i++) {
+
+            for(int j=0; j<colNum;j++){
+                s[i][j] = ""+a[i][j];
+            }
+         
+        }
+        return RawStri(name, s, colNum);
+
     }
 }
