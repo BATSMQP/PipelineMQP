@@ -16,7 +16,7 @@ public class RunAlgoTable {
         //TODO: Make accedental overwriting less of an issue
        
         Object[] arF=new Object[2];
-        if (algo=="lowpass"){
+        if (algo.equals("lowpass")){
             //Scanner keyboard = new Scanner(System.in); 
             Gen_Algo.TimeSeriesData Data= new Gen_Algo.TimeSeriesData(d);
             //System.out.print("What is the cutoff signal you wish to use for the filter (<.50): ");  
@@ -27,7 +27,7 @@ public class RunAlgoTable {
             arF[0]=Gen_Algo.Table2CSV.RawDoub(Title+"_lowpassed", LowPassed,2);
             arF[1] = Graphing_Simp.printThisD2Frame(LowPassed, Title+"_lowpassGraph.png","Time (s)","Wavelength\n (m)");
             
-        }else if(algo=="highpass"){
+        }else if(algo.equals("highpass")){
 
             //Scanner keyboard = new Scanner(System.in); 
             Gen_Algo.TimeSeriesData Data= new Gen_Algo.TimeSeriesData(d);
@@ -39,7 +39,7 @@ public class RunAlgoTable {
             arF[0]=Gen_Algo.Table2CSV.RawDoub(Title+"_highpassed", LowPassed,2);
             arF[1] = Graphing_Simp.printThisD2Frame(LowPassed, Title+"_highpassGraph.png","Time (s)","Wavelength\n (m)");
             
-        }else if(algo=="ttest"){
+        }else if(algo.equals("ttest")){
             //double[][] ar=Gen_Algo.ReadFile.fromCSVtoD2(f.getAbsolutePath(),0, 1);
             double[] m= new double[3];
             String[][] m2= new String[3][2];
@@ -54,7 +54,7 @@ public class RunAlgoTable {
         //}else if(algo=="graphwav"){
         //    PyInterpreter.graphWav();
         //    return;
-        }else if(algo=="graphcsv"){
+        }else if(algo.equals("graphcsv")){
 
             //arF[0]=f;
             arF[1] = Graphing_Simp.printThisD2Frame(d, Title+"_Graph.png","Time (s)","Wavelength\n (m)");
