@@ -6,8 +6,8 @@ import java.io.File;
 import Gen_Algo.Butterworth;
 //import Interpreter.PyInterpreter;
 import Graphing.Graphing_Simp;
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
+//import javax.imageio.ImageIO;
+//import javax.swing.JFrame;
 
 //a version of RunAlgo but with the imput being tables.
 
@@ -25,7 +25,7 @@ public class RunAlgoTable {
             double[][] LowPassed= Butterworth.LowPass(Data,0, Data.GetTime().length, 1, 1,  cutOff); //fs and order are bs just for this version
             //Graphing.Graphing_Simp.printThisD2(LowPassed,j2);
             arF[0]=Gen_Algo.Table2CSV.RawDoub(Title+"_lowpassed", LowPassed,2);
-            arF[1] = Graphing_Simp.printThisD2Frame(LowPassed, Title+"_lowpassGraph.png","Time (s)","Wavelength\n (m)");
+            //arF[1] = Graphing_Simp.printThisD2Frame(LowPassed, Title+"_lowpassGraph.png","Time (s)","Wavelength\n (m)");
             
         }else if(algo.equals("highpass")){
 
@@ -37,7 +37,7 @@ public class RunAlgoTable {
             double[][] LowPassed= Butterworth.HighPass(Data,0, Data.GetTime().length, 1, 1,  cutOff); //fs and order are bs just for this version
             //Graphing.Graphing_Simp.printThisD2(LowPassed,j2);
             arF[0]=Gen_Algo.Table2CSV.RawDoub(Title+"_highpassed", LowPassed,2);
-            arF[1] = Graphing_Simp.printThisD2Frame(LowPassed, Title+"_highpassGraph.png","Time (s)","Wavelength\n (m)");
+            //arF[1] = Graphing_Simp.printThisD2Frame(LowPassed, Title+"_highpassGraph.png","Time (s)","Wavelength\n (m)");
             
         }else if(algo.equals("ttest")){
             //double[][] ar=Gen_Algo.ReadFile.fromCSVtoD2(f.getAbsolutePath(),0, 1);
@@ -54,10 +54,10 @@ public class RunAlgoTable {
         //}else if(algo=="graphwav"){
         //    PyInterpreter.graphWav();
         //    return;
-        }else if(algo.equals("graphcsv")){
+       /*  }else if(algo.equals("graphcsv")){
 
             //arF[0]=f;
-            arF[1] = Graphing_Simp.printThisD2Frame(d, Title+"_Graph.png","Time (s)","Wavelength\n (m)");
+            arF[1] = Graphing_Simp.printThisD2Frame(d, Title+"_Graph.png","Time (s)","Wavelength\n (m)"); */
         }else{
             System.out.println("This algorithm is not curently available");
             return arF;
@@ -69,12 +69,12 @@ public class RunAlgoTable {
     }
 
     public static void main(String[] args) {
-        String name="Test_Wave";
+        String name="test_d";
         File file = new File("./Data2/",name+".csv" );
         double[][] d=Gen_Algo.ReadFile.fromCSVtoD2(file.getAbsolutePath(),0, 1);
-        Object[] fileout=run(d, "lowpass",name);
+        Object[] fileout=run(d, "ttest",name);
         System.out.println(fileout[0]);
-        JFrame f=(JFrame) fileout[1];
-        f.setVisible(true);
+        //JFrame f=(JFrame) fileout[1];
+        //f.setVisible(true);
     }
 }
