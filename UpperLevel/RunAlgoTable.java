@@ -22,7 +22,7 @@ public class RunAlgoTable {
             //System.out.print("What is the cutoff signal you wish to use for the filter (<.50): ");  
             //double cutOff= keyboard.nextDouble();
             double cutOff= .3;
-            double[][] LowPassed= Butterworth.LowPass(Data,0, Data.GetTime().length, 1, 1,  cutOff); //fs and order are bs just for this version
+            double[][] LowPassed= Butterworth.LowPass(Data,0, Data.GetTime().length, 1, 1,  cutOff); //cutoff and order are bs just for this version
             //Graphing.Graphing_Simp.printThisD2(LowPassed,j2);
             arF[0]=Gen_Algo.Table2CSV.RawDoub(Title+"_lowpassed", LowPassed,2);
             //arF[1] = Graphing_Simp.printThisD2Frame(LowPassed, Title+"_lowpassGraph.png","Time (s)","Wavelength\n (m)");
