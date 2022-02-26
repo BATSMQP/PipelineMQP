@@ -467,9 +467,9 @@ async function processGetStudiesResponse(result) {
                 tableString += "<td>";
                 tableString += study["visibility"];
                 tableString += "</td>";
-                tableString += "<td>";
-                tableString += "date";
-                tableString += "</td>";
+                // tableString += "<td>";
+                // tableString += "date";
+                // tableString += "</td>";
                 tableString += "</tr>";                    
         }
         // tableString += "</tbody>";
@@ -777,6 +777,7 @@ function algoClicked(toolDocumentId, algName, name) { //algName=filename
     console.log("algName (in algoClicked): " + algName);
     localStorage.setItem('currenToolDocumentId', toolDocumentId);
     // localStorage.setItem('currentAuthUserId', authUserId);
+    localStorage.setItem('currentAlgName', algName);
     localStorage.setItem('algName', algName);
     localStorage.setItem('currentToolName', name);
     currentAlgName = localStorage.getItem('algName');
@@ -806,6 +807,8 @@ function algoClicked(toolDocumentId, algName, name) { //algName=filename
 function checkRunAlg() {
     //display loading gif
     document.getElementById("loadingGif").removeAttribute("hidden");
+
+    console.log("localStorage.getItem('currentAlgName'): " + localStorage.getItem('currentAlgName'));
 
     var json = {dataDocumentId: localStorage.getItem('currentDataDocumentId'), toolDocumentId: "", algName: localStorage.getItem('currentAlgName'), studyId: localStorage.getItem("currentStudyId")};
 
@@ -848,7 +851,7 @@ function processRunAlgResponse(result) {
     if (status == 200) {
         console.log("RunAlg status 200");
         setUploadedResultFile(resultFile);
-        setUploadedImage(image);
+        // setUploadedImage(image);
 
         //hide loading gif
         document.getElementById("loadingGif").setAttribute("hidden", "hidden");
@@ -1165,10 +1168,10 @@ function checkNewData() {
 
     var fn = document.getElementById("dataInputToolFile").value;
     var n = document.getElementById("dataInputToolName").value;
-    var isFacialData = document.getElementById("newFacialData").checked;
+    // var isFacialData = document.getElementById("newFacialData").checked;
     var isNeuralData = document.getElementById("newNeuralData").checked;
     var isSpeechData = document.getElementById("newSpeechData").checked;
-    var isSiData = document.getElementById("newSiData").checked;
+    // var isSiData = document.getElementById("newSiData").checked;
     var isLogData = document.getElementById("newLogData").checked;
 
     var fn2 = fn.split(".");
@@ -1192,13 +1195,13 @@ function checkNewData() {
     }
 
     var selDataType = "";
-    if(isFacialData){
-        selDataType += "Facial";
-    }
+    // if(isFacialData){
+    //     selDataType += "Facial";
+    // }
     if(isNeuralData){
-        if(selDataType != ""){
-            selDataType += ",";
-        }
+        // if(selDataType != ""){
+        //     selDataType += ",";
+        // }
         selDataType += "Neural";
     }
     if(isSpeechData){
@@ -1207,12 +1210,12 @@ function checkNewData() {
         }
         selDataType += "Speech";
     }
-    if(isSiData){
-        if(selDataType != ""){
-            selDataType += ",";
-        }
-        selDataType += "Stress Indicators";
-    }
+    // if(isSiData){
+    //     if(selDataType != ""){
+    //         selDataType += ",";
+    //     }
+    //     selDataType += "Stress Indicators";
+    // }
     if(isLogData){
         if(selDataType != ""){
             selDataType += ",";
@@ -1773,7 +1776,7 @@ function processEditStudyInfoResponse(result) {
 }
 
 function dataForGraphingClicked(documentId, authUserId, filename, name, chosenI) {
-    console.log("in dataClicked");
+    console.log("in dataForGraphingClicked");
     console.log("documentId: " + documentId);
     console.log("authUserId: " + authUserId);
     console.log("filename (in dataClicked): " + filename);
@@ -1782,6 +1785,7 @@ function dataForGraphingClicked(documentId, authUserId, filename, name, chosenI)
     localStorage.setItem('currentDataFilename', filename);
     localStorage.setItem('currentDataName', name);
     localStorage.setItem('algName', "graphcsv");
+    localStorage.setItem('currentAlgName', "graphcsv");
     window.location.href = "algoResult.html";
     checkRunAlg();
 }
@@ -1810,10 +1814,10 @@ function nextFromSelectData() {
 
     var ranFromTool = localStorage.getItem("ranFromTool");
     if(ranFromTool === "true"){
-        localStorage.setItem("currentDataDocumentId", "");
+        // localStorage.setItem("currentDataDocumentId", "");
         window.location.href='algoResult.html';
     } else if (ranFromTool === "false"){
-        localStorage.setItem("currentDataDocumentId", "");
+        // localStorage.setItem("currentDataDocumentId", "");
         window.location.href='selectAlgorithms.html';
     }
 }

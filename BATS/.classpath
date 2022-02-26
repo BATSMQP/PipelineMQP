@@ -35,6 +35,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/bookl/Downloads/Table_Algo.jar"/>
+	<classpathentry kind="lib" path="C:/Users/bookl/Downloads/Graphless_Algo4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
