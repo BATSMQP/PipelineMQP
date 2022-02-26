@@ -5,24 +5,28 @@ import java.io.File;
 
 import Gen_Algo.Butterworth;
 //import Interpreter.PyInterpreter;
-import Graphing.Graphing_Simp;
+//import Graphing.Graphing_Simp;
 //import javax.imageio.ImageIO;
 //import javax.swing.JFrame;
 
 //a version of RunAlgo but with the imput being tables.
+//cutoff and then order for the
 
 public class RunAlgoTable {
-    public static Object[] run(double[][] d,String algo, String Title){
+    public static Object[] run(double[][] d,String algo, String Title,double... p){
         //TODO: Make accedental overwriting less of an issue
        
+        double cutOff= p.length > 0 ? p[0] : 0.3;
+        Integer order = (int)(p.length > 1 ? p[1] : 1);
+
         Object[] arF=new Object[2];
         if (algo.equals("lowpass")){
             //Scanner keyboard = new Scanner(System.in); 
             Gen_Algo.TimeSeriesData Data= new Gen_Algo.TimeSeriesData(d);
             //System.out.print("What is the cutoff signal you wish to use for the filter (<.50): ");  
             //double cutOff= keyboard.nextDouble();
-            double cutOff= .3;
-            double[][] LowPassed= Butterworth.LowPass(Data,0, Data.GetTime().length, 1, 1,  cutOff); //cutoff and order are bs just for this version
+            
+            double[][] LowPassed= Butterworth.LowPass(Data,0, Data.GetTime().length, 1, order ,  cutOff); //cutoff and order are bs just for this version
             //Graphing.Graphing_Simp.printThisD2(LowPassed,j2);
             arF[0]=Gen_Algo.Table2CSV.RawDoub(Title+"_lowpassed", LowPassed,2);
             //arF[1] = Graphing_Simp.printThisD2Frame(LowPassed, Title+"_lowpassGraph.png","Time (s)","Wavelength\n (m)");
@@ -33,8 +37,8 @@ public class RunAlgoTable {
             Gen_Algo.TimeSeriesData Data= new Gen_Algo.TimeSeriesData(d);
             //System.out.print("What is the cutoff signal you wish to use for the filter (<.50): ");  
             //double cutOff= keyboard.nextDouble();
-            double cutOff= .3;
-            double[][] LowPassed= Butterworth.HighPass(Data,0, Data.GetTime().length, 1, 1,  cutOff); //fs and order are bs just for this version
+            //double cutOff= .3;
+            double[][] LowPassed= Butterworth.HighPass(Data,0, Data.GetTime().length, 1, order ,  cutOff); //fs and order are bs just for this version
             //Graphing.Graphing_Simp.printThisD2(LowPassed,j2);
             arF[0]=Gen_Algo.Table2CSV.RawDoub(Title+"_highpassed", LowPassed,2);
             //arF[1] = Graphing_Simp.printThisD2Frame(LowPassed, Title+"_highpassGraph.png","Time (s)","Wavelength\n (m)");
@@ -72,7 +76,7 @@ public class RunAlgoTable {
         String name="Test_Wave";
         File file = new File("./Data2/",name+".csv" );
         double[][] d=Gen_Algo.ReadFile.fromCSVtoD2(file.getAbsolutePath(),0, 1);
-        Object[] fileout=run(d, "lowpass",name);
+        Object[] fileout=run(d, "lowpass",name,0.3,1);
         System.out.println(fileout[0]);
         //JFrame f=(JFrame) fileout[1];
         //f.setVisible(true);
