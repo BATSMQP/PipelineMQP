@@ -58,10 +58,11 @@ public class RunAlgoTable {
         //}else if(algo=="graphwav"){
         //    PyInterpreter.graphWav();
         //    return;
-       /*  }else if(algo.equals("graphcsv")){
+         }else if(algo.equals("graphcsv")){
 
             //arF[0]=f;
-            arF[1] = Graphing_Simp.printThisD2Frame(d, Title+"_Graph.png","Time (s)","Wavelength\n (m)"); */
+            //arF[1] = Graphing_Simp.printThisD2Frame(d, Title+"_Graph.png","Time (s)","Wavelength\n (m)"); 
+            arF[0]=Gen_Algo.Table2CSV.RawDoub(Title,d,2);
         }else{
             System.out.println("This algorithm is not curently available");
             return arF;
