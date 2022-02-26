@@ -69,10 +69,10 @@ public class RunAlgoTable {
     }
 
     public static void main(String[] args) {
-        String name="test_d";
+        String name="Test_Wave";
         File file = new File("./Data2/",name+".csv" );
         double[][] d=Gen_Algo.ReadFile.fromCSVtoD2(file.getAbsolutePath(),0, 1);
-        Object[] fileout=run(d, "ttest",name);
+        Object[] fileout=run(d, "lowpass",name);
         System.out.println(fileout[0]);
         //JFrame f=(JFrame) fileout[1];
         //f.setVisible(true);

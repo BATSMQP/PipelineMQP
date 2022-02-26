@@ -1,6 +1,6 @@
  package Gen_Algo;
  import java.util.Scanner; // Claire Nicolas Edit
-import javax.swing.JFrame;
+//import javax.swing.JFrame;
 
 //import java.util.*;  //Claire Nicolas Edit
  import lib.jdsp.filter.ButterworthJDSP;
@@ -9,8 +9,8 @@ import javax.swing.JFrame;
  //import Gen_Algo.ReadFile;
 
 public class Butterworth{
-    static JFrame j1 = new JFrame();
-    static JFrame j2 = new JFrame();
+    //static JFrame j1 = new JFrame();
+    //static JFrame j2 = new JFrame();
 
     public static double[][] LowPass(TimeSeriesData Data, int startT, int endT,int Fs, int order, double cutOff){
         Data.AnalyseRange(startT, endT,Fs);
