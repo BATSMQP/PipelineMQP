@@ -13,11 +13,14 @@ import Gen_Algo.Butterworth;
 //cutoff and then order for the
 
 public class RunAlgoTable {
-    public static Object[] run(double[][] d,String algo, String Title,double... p){
+    public static Object[] run(double[][] d,String algo, String Title,double[] da){
         //TODO: Make accedental overwriting less of an issue
        
-        double cutOff= p.length > 0 ? p[0] : 0.3;
-        Integer order = (int)(p.length > 1 ? p[1] : 1);
+        //double cutOff= p.length > 0 ? p[0] : 0.3;
+        //Integer order = (int)(p.length > 1 ? p[1] : 1);
+
+        double cutOff= da[0];
+        Integer order = (int)da[1];
 
         Object[] arF=new Object[2];
         if (algo.equals("lowpass")){
@@ -77,7 +80,7 @@ public class RunAlgoTable {
         String name="Test_Wave";
         File file = new File("./Data2/",name+".csv" );
         double[][] d=Gen_Algo.ReadFile.fromCSVtoD2(file.getAbsolutePath(),0, 1);
-        Object[] fileout=run(d, "lowpass",name,0.3,1);
+        Object[] fileout=run(d, "lowpass",name, new double[2]);
         System.out.println(fileout[0]);
         //JFrame f=(JFrame) fileout[1];
         //f.setVisible(true);
