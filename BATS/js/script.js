@@ -99,10 +99,11 @@ function processLoginResponse(result) {
         window.location.href = "userHome.html";
         // window.onload = checkUsername(username);
     } else {
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         var msg = js["error"];
         console.log("error:" + msg);
 
-        var textString = "<p> error: " + msg + "</p>";
+        var textString = "<p>" + msg + "</p>";
         loginText = document.getElementById("loginText");
         loginText.innerHTML = textString;
     }
@@ -205,10 +206,11 @@ function processRegisterResponse(result) {
         // // Insert text
         // document.body.appendChild(choiceText);
     } else {
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         var msg = js["error"];
         console.log("error:" + msg);
 
-        var textString = "<p> error: " + msg + "</p>";
+        var textString = "<p>" + msg + "</p>";
         regText = document.getElementById("regText");
         regText.innerHTML = textString;
     }
@@ -298,12 +300,14 @@ function processNewStudyResponse(result) {
         document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         window.location.href = "userHome.html";
     } else {
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         var msg = js["error"];
         console.log("error:" + msg);
 
         var textString = "<p> error: " + msg + "</p>";
         newStudyText = document.getElementById("newStudyText");
         renewStudyTextgText.innerHTML = textString;
+        alert(msg);
     }
 }
 
@@ -865,9 +869,11 @@ function processRunAlgResponse(result) {
 }
 
 function setUploadedResultFile(resultFile) {
+    resultFileForIframe = "Time (seconds), Wavelength(meters)\n" + resultFile;
+    resultFile = "sec,met\n" + resultFile;
     //var file = document.getElementById('uploadedResultFile').files[0];
     // const blob = new Blob([resultFile], {type : 'text/plain'});
-    var file = new File([resultFile], "resultFile.csv", {
+    var file = new File([resultFileForIframe], "resultFile.csv", {
         type: "text/plain",
       });
       var fileCSV = new File([resultFile], "resultFile.csv", {
@@ -895,6 +901,238 @@ function setUploadedResultFile(resultFile) {
         console.log("in setContent content: "+ reader.result);
         console.log("in setContent content.toString(): " + content);
     };
+
+    // createGraph(fileCSV, obj_url2);
+    createGraph2(obj_url2);
+}
+
+function csv2json(csv){
+      
+    var nested = d3.nest()
+        .key(function(d){ return d.sec; })
+      .entries(csv)
+        
+    var json = nested.map(function(d){
+      var timerecord = {};
+      
+      // this is the variable that we grouped by
+      timerecord.sec = d.key; 
+
+      timerecord.met = d.values[0].met;
+      
+      return timerecord;
+    });
+    
+    return json;
+  }
+
+function createGraph2(obj_url2) {
+                 
+    d3.csv(obj_url2, function(csv){
+    
+        csv.forEach(function(d){
+            d.met = +d.met;
+        });
+                    
+        console.table(csv);
+        
+        var json = csv2json(csv);
+
+        // data = json;
+
+        console.log("In d3.csv: ");
+        // console.log("data: ");
+        // console.log(data);
+        
+        console.log("json: ");
+
+        console.log(json);
+        
+        var data = json;
+
+        console.log("In createGraph2 after got json -> data");
+        
+        console.log("After d3.csv: ");
+        console.log("data: ");
+        console.log(data);
+        // console.log("json: ");
+        // console.log(json);
+
+        var margin = {
+            top: 40,
+            right: 20,
+            bottom: 60,
+            left: 60
+        }
+        width = 700 - margin.left - margin.right;
+        height = 500 - margin.top - margin.bottom;
+
+        var x = d3.scaleLinear().range([0, width]);
+        // var y = d3.scaleLinear().range([height, 0]);
+        // Scale the range of the data
+        x.domain(d3.extent(data, function (d) {
+            return d.sec;
+        }));
+        // y.domain([0, d3.max(data, function (d) {
+        //     return d.met;
+        // })]);
+
+        y = d3.scaleLinear()
+        .domain(d3.extent(data, d => d.met)).nice()
+        .range([height, 0])
+        // .range([height - margin.bottom, margin.top])
+
+        var valueline = d3.line()
+        .x(function (d) {
+            return x(d.sec);
+        })
+        .y(function (d) {
+            return y(d.met);
+        });
+
+        var svg = d3.select("#scatter").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var path = svg.selectAll("dot")
+        .data(data)
+        .enter().append("circle")
+        .attr("r", 5)
+        .attr("cx", function (d) {
+            return x(d.sec);
+        })
+        .attr("cy", function (d) {
+            return y(d.met);
+        })
+        .attr("stroke", "#32CD32")
+        .attr("stroke-width", 1.5)
+        .attr("fill", "#FFFFFF");
+
+        svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+        svg.append("g")
+        .call(d3.axisLeft(y));
+
+        // text label for the x axis
+        svg.append("text")             
+        .attr("transform",
+                "translate(" + (width/2) + " ," + 
+                            (height + margin.top + 20) + ")")
+        .style("text-anchor", "middle")
+        .text("Time (seconds)");
+
+        // text label for the y axis
+        svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Wavelength (meters)");
+
+        svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "bold")  
+        .text(localStorage.getItem("currentDataFilename") + " " + localStorage.getItem("currentToolName"));
+    
+        // gridlines in x axis function
+        function make_x_gridlines() {		
+            return d3.axisBottom(x)
+        }
+
+        // gridlines in y axis function
+        function make_y_gridlines() {		
+            return d3.axisLeft(y)
+        }
+
+        // add the X gridlines
+        svg.append("g")			
+        .attr("class", "grid")
+        .attr("transform", "translate(0," + height + ")")
+        .call(make_x_gridlines()
+            .tickSize(-height)
+            .tickFormat("")
+        )
+
+        // add the Y gridlines
+        svg.append("g")			
+        .attr("class", "grid")
+        .call(make_y_gridlines()
+            .tickSize(-width)
+            .tickFormat("")
+        )
+    })
+
+
+
+
+
+//     console.log("After d3.csv: ");
+//     console.log("data: ");
+//     console.log(data);
+//     // console.log("json: ");
+//     // console.log(json);
+
+//     var margin = {
+//         top: 20,
+//         right: 20,
+//         bottom: 30,
+//         left: 40
+//    }
+//    width = 700 - margin.left - margin.right;
+//    height = 500 - margin.top - margin.bottom;
+
+//    var x = d3.scaleLinear().range([0, width]);
+//     var y = d3.scaleLinear().range([height, 0]);
+//     // Scale the range of the data
+//     x.domain(d3.extent(data, function (d) {
+//         return d.sec;
+//     }));
+//     y.domain([0, d3.max(data, function (d) {
+//         return d.met;
+//     })]);
+
+//     var valueline = d3.line()
+//      .x(function (d) {
+//           return x(d.sec);
+//      })
+//      .y(function (d) {
+//           return y(d.met);
+//      });
+
+//      var svg = d3.select("#scatter").append("svg")
+//      .attr("width", width + margin.left + margin.right)
+//      .attr("height", height + margin.top + margin.bottom)
+//      .append("g")
+//      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+//      var path = svg.selectAll("dot")
+//      .data(data)
+//      .enter().append("circle")
+//      .attr("r", 5)
+//      .attr("cx", function (d) {
+//            return x(d.sec);
+//      })
+//      .attr("cy", function (d) {
+//           return y(d.met);
+//      })
+//      .attr("stroke", "#32CD32")
+//      .attr("stroke-width", 1.5)
+//      .attr("fill", "#FFFFFF");
+
+//      svg.append("g")
+//      .attr("transform", "translate(0," + height + ")")
+//      .call(d3.axisBottom(x));
+
+//      svg.append("g")
+//      .call(d3.axisLeft(y).ticks(0,5,50));
 }
 
 function setUploadedImage(image) {

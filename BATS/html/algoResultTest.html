@@ -113,9 +113,10 @@
 
   </div>
 
-  <iframe style="margin-top: 5%; align-items: center;" id="uploadedResultFile"></iframe>
+  <iframe style="margin-top: 5%;" id="uploadedResultFile"></iframe>
   <!-- <img id="uploadedImage" style="margin-bottom: 10%;" alt="Result Image"></img> -->
-  <div id="scatter" style="margin-bottom: 100px; align-items: center;"></div>
+  <!-- <div id=”my_dataviz”>for graph</div> -->
+  <div id="scatter" style="margin-bottom: 100px;"></div>
 
   <img id="loadingGif" src="../img/loading.gif" hidden />
 
@@ -127,10 +128,7 @@
 
   <script>
     window.onload = function () {
-      setSelectedDataAndTool();
-      checkRunAlg();
-      // setUploadedResultFile();
-      // setUploadedImage();
+      createGraph2();
     }
   </script>
 
