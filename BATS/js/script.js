@@ -577,10 +577,10 @@ function processGetDataResponse(result) {
                 tableString += doc["dataType"];
                 tableString += "</td>";
 
-                tableString += "<td>";
-                // tableString += studies[i]["studyName"];
-                tableString += "Study Name"
-                tableString += "</td>";
+                // tableString += "<td>";
+                // // tableString += studies[i]["studyName"];
+                // tableString += "Study Name"
+                // tableString += "</td>";
 
                 tableString += "</tr>";                    
         }
@@ -888,7 +888,12 @@ function processRunAlgResponse(result) {
 }
 
 function setUploadedResultFile(resultFile) {
-    resultFileForIframe = "Time (seconds), Wavelength(meters)\n" + resultFile;
+    var resultFileForIframe;
+    if((localStorage.getItem("currentAlgName") === "graphcsv") || (localStorage.getItem("currentAlgName") === "highpass") || (localStorage.getItem("currentAlgName") === "lowpass")){
+        resultFileForIframe = "Time (seconds), Wavelength(meters)\n" + resultFile;
+    } else{
+        resultFileForIframe = resultFile;
+    }
     resultFile = "sec,met\n" + resultFile;
     //var file = document.getElementById('uploadedResultFile').files[0];
     // const blob = new Blob([resultFile], {type : 'text/plain'});
@@ -1835,11 +1840,11 @@ function processGetStudyInfoResponse(result) {
         studyInfoEndDate = document.getElementById("studyInfoEndDate");
         studyInfoEndDate.innerHTML = study["studyEndDate"];
 
-        studyInfoLastMod = document.getElementById("studyInfoLastMod");
-        studyInfoLastMod.innerHTML = study["lastMod"];
+        // studyInfoLastMod = document.getElementById("studyInfoLastMod");
+        // studyInfoLastMod.innerHTML = study["lastMod"];
 
-        studyInfoUsername = document.getElementById("studyInfoUsername");
-        studyInfoUsername.innerHTML = study["authUserId"];
+        // studyInfoUsername = document.getElementById("studyInfoUsername");
+        // studyInfoUsername.innerHTML = checkGetUsername(study["authUserId"]);
 
         //hide loading gif
         document.getElementById("loadingGif").setAttribute("hidden", "hidden");
