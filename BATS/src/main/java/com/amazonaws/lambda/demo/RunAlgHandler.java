@@ -175,7 +175,6 @@ public class RunAlgHandler implements RequestHandler<RunAlgRequest, RunAlgRespon
 		
 		Document data = null;
 		String algorithm = req.getAlgName();
-		
 
 		try {
 			data = dao.getDocument(req.getDataDocumentId(), logger);
@@ -188,8 +187,11 @@ public class RunAlgHandler implements RequestHandler<RunAlgRequest, RunAlgRespon
 		
 		logger.log("dataFromDAO2: " + data);
 		logger.log("\nreq.getAlgName(): " + req.getAlgName() + "\n");
+		
+		double[] options = {req.getCutoff(), req.getOrder()};
+		logger.log("options: " + options);
 	    
-        Object[] results = RunAlgoTable.run(getDataTable(data, 0, 1), req.getAlgName(), data.name);
+        Object[] results = RunAlgoTable.run(getDataTable(data, 0, 1), req.getAlgName(), data.name, options);
         
         String resultFileString = null;
         resultFileString = (String) results[0]; //results[0]

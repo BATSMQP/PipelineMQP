@@ -288,9 +288,9 @@ public class LambdaFunctionHandlerTest {
 //    }
     
     @Test
-    public void testRunAlgHandler() {
+    public void testRunAlgHandler4() {
     	RunAlgHandler csh = new RunAlgHandler();
-    	RunAlgRequest r = new RunAlgRequest("59fb5051-8e5f-4710-b884-372b553911b1", "", "graphcsv", "ff9aeab7-b842-48ce-8e21-d7516292662c");
+    	RunAlgRequest r = new RunAlgRequest("59fb5051-8e5f-4710-b884-372b553911b1", "", "lowpass", "ff9aeab7-b842-48ce-8e21-d7516292662c", 0.4, 1.0);
     	RunAlgResponse response= csh.handleRequest(r, createContext());
     	System.out.println("response.statusCode: " + response.statusCode);
     	System.out.println("response.error: " + response.error);
@@ -298,5 +298,101 @@ public class LambdaFunctionHandlerTest {
     	System.out.println("response.image: " + response.image);
 
     }
+    
+    @Test
+    public void testRunAlgHandler3() {
+    	RunAlgHandler csh = new RunAlgHandler();
+    	RunAlgRequest r = new RunAlgRequest("59fb5051-8e5f-4710-b884-372b553911b1", "", "lowpass", "ff9aeab7-b842-48ce-8e21-d7516292662c", 0.3, 1.0);
+    	RunAlgResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.resultFile: " + response.resultFile);
+    	System.out.println("response.image: " + response.image);
+
+    }
+    
+    @Test
+    public void testRunAlgHandler2() {
+    	RunAlgHandler csh = new RunAlgHandler();
+    	RunAlgRequest r = new RunAlgRequest("59fb5051-8e5f-4710-b884-372b553911b1", "", "lowpass", "ff9aeab7-b842-48ce-8e21-d7516292662c", 0.2, 1.0);
+    	RunAlgResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.resultFile: " + response.resultFile);
+    	System.out.println("response.image: " + response.image);
+
+    }
+    
+    @Test
+    public void testRunAlgHandler1() {
+    	RunAlgHandler csh = new RunAlgHandler();
+    	RunAlgRequest r = new RunAlgRequest("59fb5051-8e5f-4710-b884-372b553911b1", "", "lowpass", "ff9aeab7-b842-48ce-8e21-d7516292662c", 0.1, 1.0);
+    	RunAlgResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.resultFile: " + response.resultFile);
+    	System.out.println("response.image: " + response.image);
+
+    }
+    
+    @Test
+    public void testRunAlgHandler0() {
+    	RunAlgHandler csh = new RunAlgHandler();
+    	RunAlgRequest r = new RunAlgRequest("59fb5051-8e5f-4710-b884-372b553911b1", "", "lowpass", "ff9aeab7-b842-48ce-8e21-d7516292662c", 0, 1.0);
+    	RunAlgResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.resultFile: " + response.resultFile);
+    	System.out.println("response.image: " + response.image);
+
+    }
+    
+    @Test
+    public void testRunAlgHandler49() {
+    	RunAlgHandler csh = new RunAlgHandler();
+    	RunAlgRequest r = new RunAlgRequest("59fb5051-8e5f-4710-b884-372b553911b1", "", "lowpass", "ff9aeab7-b842-48ce-8e21-d7516292662c", 0.49, 1.0);
+    	RunAlgResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.resultFile: " + response.resultFile);
+    	System.out.println("response.image: " + response.image);
+
+    }
+    
+//    @Test
+//    public void testRunAlgHandler5() {
+//    	RunAlgHandler csh = new RunAlgHandler();
+//    	RunAlgRequest r = new RunAlgRequest("59fb5051-8e5f-4710-b884-372b553911b1", "", "lowpass", "ff9aeab7-b842-48ce-8e21-d7516292662c", 0.5, 1.0);
+//    	RunAlgResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.resultFile: " + response.resultFile);
+//    	System.out.println("response.image: " + response.image);
+//
+//    }
+//    
+//    @Test
+//    public void testRunAlgHandlern4() {
+//    	RunAlgHandler csh = new RunAlgHandler();
+//    	RunAlgRequest r = new RunAlgRequest("59fb5051-8e5f-4710-b884-372b553911b1", "", "lowpass", "ff9aeab7-b842-48ce-8e21-d7516292662c", -0.4, 1.0);
+//    	RunAlgResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.resultFile: " + response.resultFile);
+//    	System.out.println("response.image: " + response.image);
+//
+//    }
+//    
+//    @Test
+//    public void testRunAlgHandlern5() {
+//    	RunAlgHandler csh = new RunAlgHandler();
+//    	RunAlgRequest r = new RunAlgRequest("59fb5051-8e5f-4710-b884-372b553911b1", "", "lowpass", "ff9aeab7-b842-48ce-8e21-d7516292662c", -0.5, 1.0);
+//    	RunAlgResponse response= csh.handleRequest(r, createContext());
+//    	System.out.println("response.statusCode: " + response.statusCode);
+//    	System.out.println("response.error: " + response.error);
+//    	System.out.println("response.resultFile: " + response.resultFile);
+//    	System.out.println("response.image: " + response.image);
+//
+//    }
 
 }
