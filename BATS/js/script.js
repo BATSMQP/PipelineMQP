@@ -20,12 +20,23 @@ function setWelcomeUser(){
 
 function loadStudyPage(){
     localStorage.setItem("beforeUpload", "studyPage");
+    localStorage.setItem("currentDataDocumentId", "");
     document.getElementById("studyNameOnStudyPage").innerHTML = localStorage.getItem("studyName");
+    localStorage.setItem("currentCutoff", "0.3");
+    localStorage.setItem("currentOrder", "1");
 }
 
 function loadSelectData(){
     localStorage.setItem("beforeUpload", "selectData");
     localStorage.setItem("currentDataDocumentId", "");
+}
+
+function loadOptions(){
+    localStorage.setItem("beforeUpload", "options");
+    var title = "Enter " + localStorage.getItem("currentToolName") + " Options";
+    document.getElementById("optionsTitle").innerHTML = title;
+    localStorage.setItem("currentCutoff", "0.3");
+    localStorage.setItem("currentOrder", "1");
 }
 
 function loadSelectAlgorithms(){
@@ -833,7 +844,7 @@ function checkRunAlg() {
 
     console.log("localStorage.getItem('currentAlgName'): " + localStorage.getItem('currentAlgName'));
 
-    var json = {dataDocumentId: localStorage.getItem('currentDataDocumentId'), toolDocumentId: "", algName: localStorage.getItem('currentAlgName'), studyId: localStorage.getItem("currentStudyId")};
+    var json = {dataDocumentId: localStorage.getItem('currentDataDocumentId'), toolDocumentId: "", algName: localStorage.getItem('currentAlgName'), studyId: localStorage.getItem("currentStudyId"), cutoff: parseFloat(localStorage.getItem("currentCutoff")), order: parseFloat(localStorage.getItem("currentOrder"))};
 
     var js = JSON.stringify(json);
     console.log("JS:" + js);
@@ -2083,7 +2094,32 @@ function nextFromSelectData() {
         return false;
     }
 
+    if((localStorage.getItem("currentAlgName") === "highpass") || (localStorage.getItem("currentAlgName") === "lowpass")){
+        window.location.href='options.html';
+    } else {
+        var ranFromTool = localStorage.getItem("ranFromTool");
+        if(ranFromTool === "true"){
+            // localStorage.setItem("currentDataDocumentId", "");
+            window.location.href='algoResult.html';
+        } else if (ranFromTool === "false"){
+            // localStorage.setItem("currentDataDocumentId", "");
+            window.location.href='selectAlgorithms.html';
+        }
+    }
+}
+
+function nextFromOptions() {
     var ranFromTool = localStorage.getItem("ranFromTool");
+    var cutoff = document.getElementById("inputCutoff").value;
+    var order = document.getElementById("inputCutoff").value;
+
+    if((cutoff < 0) || (cutoff >= 0.5)){
+        alert("The cutoff frequency must be between 0 (inclusive) and 0.5 (exclusive). Please enter a new value.");
+        return false;
+    }
+
+    localStorage.setItem("currentCutoff", cutoff);
+    localStorage.setItem("currentOrder", order);
     if(ranFromTool === "true"){
         // localStorage.setItem("currentDataDocumentId", "");
         window.location.href='algoResult.html';
