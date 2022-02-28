@@ -705,6 +705,8 @@ function processGetStudyDataResponse(result) {
                 tableString += '", "';
                 tableString += doc["name"];
                 tableString += '", "';
+                tableString += doc["ext"];
+                tableString += '", "';
                 tableString += i;
                 tableString += '")';
                 tableString += "'>";
@@ -733,7 +735,19 @@ function processGetStudyDataResponse(result) {
     }
 }
 
-function dataClicked(documentId, authUserId, filename, name, chosenI) {
+function dataClicked(documentId, authUserId, filename, name, ext, chosenI) {
+    if (((localStorage.getItem("currentAlgName") === "graphcsv") || (localStorage.getItem("currentAlgName") === "highpass") || (localStorage.getItem("currentAlgName") === "lowpass") || (localStorage.getItem("currentAlgName") === "ttest")) &&
+        ext != "csv") {
+        alert("Only .csv data can be " + localStorage.getItem("currentToolName") + " graphed. Please select .csv data before continuing.");
+        return false;
+    }
+
+    if ((localStorage.getItem("currentAlgName") === "graphwav") &&
+        ext != "wav") {
+        alert("Only .wav data can be " + localStorage.getItem("currentToolName") + " graphed. Please select .wav data before continuing.");
+        return false;
+    }
+
     console.log("in dataClicked");
     console.log("documentId: " + documentId);
     console.log("authUserId: " + authUserId);
@@ -743,13 +757,16 @@ function dataClicked(documentId, authUserId, filename, name, chosenI) {
     // localStorage.setItem('currentAuthUserId', authUserId);
     localStorage.setItem('currentDataFilename', filename);
     localStorage.setItem('currentDataName', name);
+    localStorage.setItem("currentDataExt", ext);
     // localStorage.setItem('currentDatai', i);
     currentFileName = localStorage.getItem('filename');
     currentName = localStorage.getItem('name');
     currentDataDocumentId = localStorage.getItem('currentDataDocumentId');
+    currentDataExt = localStorage.getItem("currentDataExt");
     console.log("currentFileName (in dataClicked): " + currentFileName);
     console.log("currentName (in dataClicked): " + currentName);
     console.log("currentDataDocumentId (in dataClicked): " + currentDataDocumentId);
+    console.log("currentDataExt (in dataClicked): " + currentDataExt);
     // console.log("data (in dataClicked): ")
     // console.log(data[name]);
     // window.location.href = "selectAlgorithms.html";
@@ -765,6 +782,8 @@ function dataClicked(documentId, authUserId, filename, name, chosenI) {
     splitter += filename;
     splitter += '", "';
     splitter += name;
+    splitter += '", "';
+    splitter += ext;
     splitter += '", "';
     splitter += chosenI;
     splitter += '")';
@@ -902,8 +921,10 @@ function setUploadedResultFile(resultFile) {
         console.log("in setContent content.toString(): " + content);
     };
 
-    // createGraph(fileCSV, obj_url2);
-    createGraph2(obj_url2);
+    if(localStorage.getItem("currentAlgName") != "ttest"){
+        createGraph2(obj_url2);
+    }
+    
 }
 
 function csv2json(csv){
@@ -1585,6 +1606,8 @@ function processGetStudyDataResponse2(result) {
                 tableString += '", "';
                 tableString += doc["name"];
                 tableString += '", "';
+                tableString += doc["ext"];
+                tableString += '", "';
                 tableString += i;
                 tableString += '")';
                 tableString += "'>";
@@ -2013,7 +2036,12 @@ function processEditStudyInfoResponse(result) {
     }
 }
 
-function dataForGraphingClicked(documentId, authUserId, filename, name, chosenI) {
+function dataForGraphingClicked(documentId, authUserId, filename, name, ext, chosenI) {
+    if (ext != "csv") {
+        alert("Only .csv data can be graphed. Please select .csv data before continuing.");
+        return false;
+    }
+
     console.log("in dataForGraphingClicked");
     console.log("documentId: " + documentId);
     console.log("authUserId: " + authUserId);
