@@ -53,11 +53,13 @@ function checkLogin() {
 
     if (user == "") {
         alert("Please enter a username before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
     if (pass == "") {
         alert("Please enter a password before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
@@ -133,26 +135,31 @@ function checkRegister() {
 
     if (user == "") {
         alert("Please enter a username before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
     if (eMail == "") {
         alert("Please enter an email before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
     if (pass == "") {
         alert("Please enter a password before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
     if (pass2 == "") {
         alert("Please confirm your password before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
     if (pass != pass2) {
         alert("The passwords entered are not the same");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
@@ -246,11 +253,13 @@ function checkNewStudy() {
 
     if (inputStudyName == "") {
         alert("Please enter a study name before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
     if (inputStudyAbstract.length > 500) {
         alert("The entered abstract exceeds the 500 character limit.");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
@@ -315,9 +324,9 @@ function processNewStudyResponse(result) {
         var msg = js["error"];
         console.log("error:" + msg);
 
-        var textString = "<p> error: " + msg + "</p>";
-        newStudyText = document.getElementById("newStudyText");
-        renewStudyTextgText.innerHTML = textString;
+        // var textString = "<p> error: " + msg + "</p>";
+        // newStudyText = document.getElementById("newStudyText");
+        // renewStudyTextgText.innerHTML = textString;
         alert(msg);
     }
 }
@@ -758,12 +767,14 @@ function dataClicked(documentId, authUserId, filename, name, ext, chosenI) {
     if (((localStorage.getItem("currentAlgName") === "graphcsv") || (localStorage.getItem("currentAlgName") === "highpass") || (localStorage.getItem("currentAlgName") === "lowpass") || (localStorage.getItem("currentAlgName") === "ttest")) &&
         ext != "csv") {
         alert("Only .csv data can be " + localStorage.getItem("currentToolName") + " graphed. Please select .csv data before continuing.");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
     if ((localStorage.getItem("currentAlgName") === "graphwav") &&
         ext != "wav") {
         alert("Only .wav data can be " + localStorage.getItem("currentToolName") + " graphed. Please select .wav data before continuing.");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
@@ -1342,11 +1353,13 @@ function checkNewTool() {
 
     if (fn == "") {
         alert("Please upload a file before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
     if (n == "") {
         alert("Please enter a name for the analysis tool before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
@@ -1455,60 +1468,77 @@ function checkNewData() {
 
     var fn = document.getElementById("dataInputToolFile").value;
     var n = document.getElementById("dataInputToolName").value;
-    // var isFacialData = document.getElementById("newFacialData").checked;
     var isNeuralData = document.getElementById("newNeuralData").checked;
     var isSpeechData = document.getElementById("newSpeechData").checked;
     // var isSiData = document.getElementById("newSiData").checked;
     var isLogData = document.getElementById("newLogData").checked;
+    var isOtherData = document.getElementById("newOtherData").checked;
 
     var fn2 = fn.split(".");
     var fn3 = fn2[0].split("\\");
 
-    console.log("filename: " + fn);
-    console.log("fn2: " + fn2);
-    console.log("fn3: " + fn3);
-    console.log("fn2[1]: " + fn2[1]);
-    console.log("fn3[2]: " + fn3[2]);
-    console.log("name: " + n);    
+    console.log("isNeuralData: " + isNeuralData);
+    console.log("isSpeechData: " + isSpeechData);
+    console.log("isLogData: " + isLogData);
+    console.log("isOtherData: " + isOtherData); 
 
     if (fn == "") {
         alert("Please upload a file before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
     if (n == "") {
         alert("Please enter a name for the analysis tool before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
     var selDataType = "";
+
+    if(isNeuralData){
+        selDataType = "Neural";
+    } else if(isSpeechData){
+        selDataType = "Speech";
+    } else if(isLogData){
+        selDataType = "Log Data";
+    } else if(isOtherData){
+        selDataType = "Other";
+    }
+
+    if (selDataType == "") {
+        alert("Please select a data type before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        return false;
+    }
+
     // if(isFacialData){
     //     selDataType += "Facial";
     // }
-    if(isNeuralData){
-        // if(selDataType != ""){
-        //     selDataType += ",";
-        // }
-        selDataType += "Neural";
-    }
-    if(isSpeechData){
-        if(selDataType != ""){
-            selDataType += ",";
-        }
-        selDataType += "Speech";
-    }
-    // if(isSiData){
-    //     if(selDataType != ""){
-    //         selDataType += ",";
-    //     }
-    //     selDataType += "Stress Indicators";
+    // if(isNeuralData){
+    //     // if(selDataType != ""){
+    //     //     selDataType += ",";
+    //     // }
+    //     selDataType = "Neural";
     // }
-    if(isLogData){
-        if(selDataType != ""){
-            selDataType += ",";
-        }
-        selDataType += "Log Data";
-    }
+    // if(isSpeechData){
+    //     // if(selDataType != ""){
+    //     //     selDataType += ",";
+    //     // }
+    //     selDataType = "Speech";
+    // }
+    // // if(isSiData){
+    // //     if(selDataType != ""){
+    // //         selDataType += ",";
+    // //     }
+    // //     selDataType += "Stress Indicators";
+    // // }
+    // if(isLogData){
+    //     // if(selDataType != ""){
+    //     //     selDataType += ",";
+    //     // }
+    //     selDataType = "Log Data";
+    // }
 
     console.log("In checkNewData selDataType: " + selDataType);
 
@@ -1679,7 +1709,7 @@ function processGetStudyDataResponse2(result) {
 
                 tableString += "<td>";
                 // tableString += functionString;
-                tableString += doc["docType"];
+                tableString += doc["dataType"];
                 tableString += "</td>";
 
                 // tableString += "<td>";
@@ -2038,6 +2068,7 @@ function checkEditStudyInfo() {
 
     if (editInputStudyName == "") {
         alert("Please enter a study name before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
@@ -2115,6 +2146,7 @@ function processEditStudyInfoResponse(result) {
 function dataForGraphingClicked(documentId, authUserId, filename, name, ext, chosenI) {
     if (ext != "csv") {
         alert("Only .csv data can be graphed. Please select .csv data before continuing.");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
@@ -2151,6 +2183,7 @@ function analyzeDataButtonClicked() {
 function nextFromSelectData() {
     if (localStorage.getItem("currentDataDocumentId") === "") {
         alert("Please select data before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
@@ -2175,6 +2208,13 @@ function nextFromOptions() {
 
     if((cutoff < 0) || (cutoff >= 0.5)){
         alert("The cutoff frequency must be between 0 (inclusive) and 0.5 (exclusive). Please enter a new value.");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        return false;
+    }
+
+    if((order < 1) || (order > 5)){
+        alert("The order must be between 1 (inclusive) and 5 (inclusive). Please enter a new value.");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
@@ -2194,6 +2234,7 @@ function addNewDataFromUserHome() {
     //alert if no studies for the current user
     if (localStorage.getItem("studiesExist") === "false") {
         alert("Please add a study before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     } else{
         localStorage.setItem("beforeUpload", "userHome");
@@ -2311,60 +2352,79 @@ function checkNewData2() {
     var isSpeechData = document.getElementById("newSpeechData").checked;
     // var isSiData = document.getElementById("newSiData").checked;
     var isLogData = document.getElementById("newLogData").checked;
+    var isOtherData = document.getElementById("newOtherData").checked;
 
     var fn2 = fn.split(".");
     var fn3 = fn2[0].split("\\");
 
-    console.log("filename: " + fn);
-    console.log("fn2: " + fn2);
-    console.log("fn3: " + fn3);
-    console.log("fn2[1]: " + fn2[1]);
-    console.log("fn3[2]: " + fn3[2]);
-    console.log("name: " + n);    
+    console.log("isNeuralData: " + isNeuralData);
+    console.log("isSpeechData: " + isSpeechData);
+    console.log("isLogData: " + isLogData);
+    console.log("isOtherData: " + isOtherData);
 
     if (fn == "") {
         alert("Please upload a file before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
     if (n == "") {
         alert("Please enter a name for the new data before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
     if (localStorage.getItem("newDataForStudyId") === "") {
         alert("Please select a study for the new data to be a part of before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
         return false;
     }
 
     var selDataType = "";
+
+    if(isNeuralData){
+        selDataType = "Neural";
+    } else if(isSpeechData){
+        selDataType = "Speech";
+    } else if(isLogData){
+        selDataType = "Log Data";
+    } else if(isOtherData){
+        selDataType = "Other";
+    }
+
+    if (selDataType == "") {
+        alert("Please select a data type before continuing");
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        return false;
+    }
+
     // if(isFacialData){
     //     selDataType += "Facial";
     // }
-    if(isNeuralData){
-        // if(selDataType != ""){
-        //     selDataType += ",";
-        // }
-        selDataType += "Neural";
-    }
-    if(isSpeechData){
-        if(selDataType != ""){
-            selDataType += ",";
-        }
-        selDataType += "Speech";
-    }
-    // if(isSiData){
-    //     if(selDataType != ""){
-    //         selDataType += ",";
-    //     }
-    //     selDataType += "Stress Indicators";
+    // if(isNeuralData){
+    //     // if(selDataType != ""){
+    //     //     selDataType += ",";
+    //     // }
+    //     selDataType = "Neural";
     // }
-    if(isLogData){
-        if(selDataType != ""){
-            selDataType += ",";
-        }
-        selDataType += "Log Data";
-    }
+    // if(isSpeechData){
+    //     // if(selDataType != ""){
+    //     //     selDataType += ",";
+    //     // }
+    //     selDataType = "Speech";
+    // }
+    // // if(isSiData){
+    // //     if(selDataType != ""){
+    // //         selDataType += ",";
+    // //     }
+    // //     selDataType += "Stress Indicators";
+    // // }
+    // if(isLogData){
+    //     // if(selDataType != ""){
+    //     //     selDataType += ",";
+    //     // }
+    //     selDataType = "Log Data";
+    // }
 
     console.log("In checkNewData selDataType: " + selDataType);
 
