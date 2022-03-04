@@ -377,6 +377,8 @@ function processGetUsernameResponse(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
     }
     return r;
 }
@@ -495,6 +497,8 @@ async function processGetStudiesResponse(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
     }
 }
 
@@ -642,6 +646,8 @@ function processGetDataResponse(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
     }
 }
 ////////////////Select Data Page////////////////////////////////////////////////////////////////////
@@ -743,6 +749,8 @@ function processGetStudyDataResponse(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
     }
 }
 
@@ -895,6 +903,8 @@ function processRunAlgResponse(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
     }
 }
 
@@ -1415,8 +1425,10 @@ function processNewToolResponse(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
 
-        var textString = "<p> error: " + msg + "</p>";
+        // var textString = "<p> error: " + msg + "</p>";
         // loginText = document.getElementById("loginText");
         // loginText.innerHTML = textString;
     }
@@ -1552,6 +1564,8 @@ function processNewDataResponse(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
 
         // var textString = "<p> error: " + msg + "</p>";
         // loginText = document.getElementById("loginText");
@@ -1607,45 +1621,81 @@ function processGetStudyDataResponse2(result) {
 
         var tableString = "";
         var doc;
+        var functionString = "";
   
         for(let i = 0; i < data.length; i++){
                 doc = data[i];
+
+                functionString += "<td onclick='JavaScript:dataForGraphingClicked(";
+                functionString += '"';
+                functionString += doc["documentId"];
+                functionString += '", "';
+                functionString += doc["authUserId"];
+                functionString += '", "';
+                functionString += doc["filename"];
+                functionString += '", "';
+                functionString += doc["name"];
+                functionString += '", "';
+                functionString += doc["ext"];
+                functionString += '", "';
+                functionString += i;
+                functionString += '")';
+                functionString += "'>";
+
                 //create row to be inserted
-                // tableString += "<tr>";
-                tableString += "<tr onclick='JavaScript:dataForGraphingClicked(";
-                tableString += '"';
-                tableString += doc["documentId"];
-                tableString += '", "';
-                tableString += doc["authUserId"];
-                tableString += '", "';
-                tableString += doc["filename"];
-                tableString += '", "';
+                // // tableString += "<tr>";
+                // tableString += "<tr onclick='JavaScript:dataForGraphingClicked(";
+                // tableString += '"';
+                // tableString += doc["documentId"];
+                // tableString += '", "';
+                // tableString += doc["authUserId"];
+                // tableString += '", "';
+                // tableString += doc["filename"];
+                // tableString += '", "';
+                // tableString += doc["name"];
+                // tableString += '", "';
+                // tableString += doc["ext"];
+                // tableString += '", "';
+                // tableString += i;
+                // tableString += '")';
+                // tableString += "'>";
+
+                tableString += "<tr>"
+
+                // tableString += "<td>";
+                tableString += functionString;
                 tableString += doc["name"];
-                tableString += '", "';
-                tableString += doc["ext"];
-                tableString += '", "';
-                tableString += i;
-                tableString += '")';
-                tableString += "'>";
-
-                tableString += "<td>";
-                tableString += doc["name"];
                 tableString += "</td>";
 
-                tableString += "<td>";
+                // tableString += "<td>";
+                tableString += functionString;
                 tableString += doc["filename"];
                 tableString += "</td>";
 
-                tableString += "<td>";
+                // tableString += "<td>";
+                tableString += functionString;
                 tableString += doc["ext"];
                 tableString += "</td>";
 
-                tableString += "<td>";
+                // tableString += "<td>";
+                tableString += functionString;
                 tableString += doc["docType"];
                 tableString += "</td>";
 
-                tableString += "</tr>";                    
+                tableString += "<td>";
+                tableString += "<a id='download";
+                tableString += doc["documentId"];
+                tableString += "role='button' download><img src='download.png'/></a>";
+                tableString += "</td>";
+
+                tableString += "</tr>";
+                functionString = "";                    
         }
+        for(let i = 0; i < data.length; i++){
+            doc = data[i];
+            checkGetDataDoc(doc.documentId);
+        }
+
         // tableString += "</tbody>";
         // console.log(tableString);
 
@@ -1655,6 +1705,8 @@ function processGetStudyDataResponse2(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
     }
 }
 
@@ -1738,6 +1790,8 @@ function processGetStudyDataResponse3(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
     }
 }
 
@@ -1862,6 +1916,8 @@ function processGetStudyInfoResponse(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
     }
 }
 
@@ -1960,6 +2016,8 @@ function processGetStudyInfoResponse2(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
     }
 }
 
@@ -2045,10 +2103,12 @@ function processEditStudyInfoResponse(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
 
-        var textString = "<p> error: " + msg + "</p>";
-        newStudyText = document.getElementById("newStudyText");
-        renewStudyTextgText.innerHTML = textString;
+        // var textString = "<p> error: " + msg + "</p>";
+        // newStudyText = document.getElementById("newStudyText");
+        // renewStudyTextgText.innerHTML = textString;
     }
 }
 
@@ -2228,6 +2288,8 @@ function processGetStudiesResponse2(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
     }
 }
 
@@ -2244,10 +2306,10 @@ function checkNewData2() {
 
     var fn = document.getElementById("dataInputToolFile").value;
     var n = document.getElementById("dataInputToolName").value;
-    var isFacialData = document.getElementById("newFacialData").checked;
+    // var isFacialData = document.getElementById("newFacialData").checked;
     var isNeuralData = document.getElementById("newNeuralData").checked;
     var isSpeechData = document.getElementById("newSpeechData").checked;
-    var isSiData = document.getElementById("newSiData").checked;
+    // var isSiData = document.getElementById("newSiData").checked;
     var isLogData = document.getElementById("newLogData").checked;
 
     var fn2 = fn.split(".");
@@ -2276,13 +2338,13 @@ function checkNewData2() {
     }
 
     var selDataType = "";
-    if(isFacialData){
-        selDataType += "Facial";
-    }
+    // if(isFacialData){
+    //     selDataType += "Facial";
+    // }
     if(isNeuralData){
-        if(selDataType != ""){
-            selDataType += ",";
-        }
+        // if(selDataType != ""){
+        //     selDataType += ",";
+        // }
         selDataType += "Neural";
     }
     if(isSpeechData){
@@ -2291,12 +2353,12 @@ function checkNewData2() {
         }
         selDataType += "Speech";
     }
-    if(isSiData){
-        if(selDataType != ""){
-            selDataType += ",";
-        }
-        selDataType += "Stress Indicators";
-    }
+    // if(isSiData){
+    //     if(selDataType != ""){
+    //         selDataType += ",";
+    //     }
+    //     selDataType += "Stress Indicators";
+    // }
     if(isLogData){
         if(selDataType != ""){
             selDataType += ",";
@@ -2359,6 +2421,8 @@ function processNewDataResponse2(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
     }
 }
 
@@ -2420,5 +2484,79 @@ function processGetStudiesResponse3(result) {
     } else {
         var msg = js["error"];
         console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
+    }
+}
+
+function checkGetDataDoc(docId) {
+    //display loading gif
+    document.getElementById("loadingGif").removeAttribute("hidden");
+
+    var json = {documentId: docId};
+
+    var js = JSON.stringify(json);
+    console.log("JS:" + js);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", GetDataDoc_url, true);
+
+    console.log("after post");
+    // send the collected data as JSON
+    xhr.send(js);
+    console.log("after send");
+    // This will process results and update HTML as appropriate.
+    xhr.onloadend = function() {
+        console.log("in function");
+        console.log("XHR:" + xhr);
+        console.log(xhr.request);
+
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("XHR:" + xhr.responseText);
+            processGetDataDocResponse(xhr.responseText);
+        } else {
+            console.log("got an error");
+            processGetDataDocResponse("N/A");
+        }
+    };
+
+    return false;
+}
+
+function processGetDataDocResponse(result) {
+    console.log("result:" + result);
+    var js = JSON.parse(result);
+
+    var status = js["statusCode"];
+    var doc = js["doc"];
+
+    if (status == 200) {
+        //hide loading gif
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        console.log("getDataDoc status 200");
+
+        var fileCSV = new File([doc.file], "userFile.csv", {
+            type: "text/csv",
+          });
+        const obj_url = URL.createObjectURL(fileCSV);
+        //set download href
+        var docId = "download" + doc.documentId;
+        document.getElementById(docId).setAttribute("href", obj_url);
+    
+        // const reader = new FileReader();
+        // reader.readAsText(file);
+        // reader.onload = function(evt) {
+        //     console.log("in reader.onload");
+        //     console.log(evt.target.result);
+        //     console.log("reader.result: ");
+        //     console.log(reader.result);
+        //     content = reader.result.toString();
+        //     console.log("in setContent content: "+ reader.result);
+        //     console.log("in setContent content.toString(): " + content);
+        // };
+    } else {
+        var msg = js["error"];
+        console.log("error:" + msg);
+        document.getElementById("loadingGif").setAttribute("hidden", "hidden");
+        alert(msg);
     }
 }

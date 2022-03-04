@@ -19,6 +19,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.amazonaws.lambda.demo.http.EditStudyInfoRequest;
 import com.amazonaws.lambda.demo.http.EditStudyInfoResponse;
+import com.amazonaws.lambda.demo.http.GetDataDocRequest;
+import com.amazonaws.lambda.demo.http.GetDataDocResponse;
 import com.amazonaws.lambda.demo.http.GetDataRequest;
 import com.amazonaws.lambda.demo.http.GetDataResponse;
 import com.amazonaws.lambda.demo.http.GetStudiesRequest;
@@ -356,6 +358,17 @@ public class LambdaFunctionHandlerTest {
     	System.out.println("response.error: " + response.error);
     	System.out.println("response.resultFile: " + response.resultFile);
     	System.out.println("response.image: " + response.image);
+
+    }
+    
+    @Test
+    public void testGetDataDocHandler() {
+    	GetDataDocHandler csh = new GetDataDocHandler();
+    	GetDataDocRequest r = new GetDataDocRequest("38c9e5b8-33eb-4465-ad3b-aa910541ebcd");
+    	GetDataDocResponse response= csh.handleRequest(r, createContext());
+    	System.out.println("response.statusCode: " + response.statusCode);
+    	System.out.println("response.error: " + response.error);
+    	System.out.println("response.doc: " + response.doc);
 
     }
     

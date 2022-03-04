@@ -4,6 +4,7 @@ var base_url = 'https://es7rigcmle.execute-api.us-east-2.amazonaws.com/beta/';
 
 var CreateStudy_url = base_url + 'CreateStudy'; //POST
 var GetData_url = base_url + 'GetData'; //POST
+var GetDataDoc_url = base_url + 'GetDataDoc'; //POST
 var GetStudyInfo_url = base_url + 'GetStudyInfo'; //POST
 var EditStudyInfo_url = base_url + 'EditStudyInfo'; //POST
 var GetStudyData_url = base_url + 'GetStudyData'; //POST
