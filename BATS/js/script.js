@@ -1621,80 +1621,80 @@ function processGetStudyDataResponse2(result) {
 
         var tableString = "";
         var doc;
-        var functionString = "";
+        // var functionString = "";
   
         for(let i = 0; i < data.length; i++){
                 doc = data[i];
 
-                functionString += "<td onclick='JavaScript:dataForGraphingClicked(";
-                functionString += '"';
-                functionString += doc["documentId"];
-                functionString += '", "';
-                functionString += doc["authUserId"];
-                functionString += '", "';
-                functionString += doc["filename"];
-                functionString += '", "';
-                functionString += doc["name"];
-                functionString += '", "';
-                functionString += doc["ext"];
-                functionString += '", "';
-                functionString += i;
-                functionString += '")';
-                functionString += "'>";
+                // functionString += "<td onclick='JavaScript:dataForGraphingClicked(";
+                // functionString += '"';
+                // functionString += doc["documentId"];
+                // functionString += '", "';
+                // functionString += doc["authUserId"];
+                // functionString += '", "';
+                // functionString += doc["filename"];
+                // functionString += '", "';
+                // functionString += doc["name"];
+                // functionString += '", "';
+                // functionString += doc["ext"];
+                // functionString += '", "';
+                // functionString += i;
+                // functionString += '")';
+                // functionString += "'>";
 
-                //create row to be inserted
-                // // tableString += "<tr>";
-                // tableString += "<tr onclick='JavaScript:dataForGraphingClicked(";
-                // tableString += '"';
-                // tableString += doc["documentId"];
-                // tableString += '", "';
-                // tableString += doc["authUserId"];
-                // tableString += '", "';
-                // tableString += doc["filename"];
-                // tableString += '", "';
-                // tableString += doc["name"];
-                // tableString += '", "';
-                // tableString += doc["ext"];
-                // tableString += '", "';
-                // tableString += i;
-                // tableString += '")';
-                // tableString += "'>";
+                // create row to be inserted
+                // tableString += "<tr>";
+                tableString += "<tr onclick='JavaScript:dataForGraphingClicked(";
+                tableString += '"';
+                tableString += doc["documentId"];
+                tableString += '", "';
+                tableString += doc["authUserId"];
+                tableString += '", "';
+                tableString += doc["filename"];
+                tableString += '", "';
+                tableString += doc["name"];
+                tableString += '", "';
+                tableString += doc["ext"];
+                tableString += '", "';
+                tableString += i;
+                tableString += '")';
+                tableString += "'>";
 
-                tableString += "<tr>"
+                // tableString += "<tr>"
 
-                // tableString += "<td>";
-                tableString += functionString;
+                tableString += "<td>";
+                // tableString += functionString;
                 tableString += doc["name"];
                 tableString += "</td>";
 
-                // tableString += "<td>";
-                tableString += functionString;
+                tableString += "<td>";
+                // tableString += functionString;
                 tableString += doc["filename"];
                 tableString += "</td>";
 
-                // tableString += "<td>";
-                tableString += functionString;
+                tableString += "<td>";
+                // tableString += functionString;
                 tableString += doc["ext"];
                 tableString += "</td>";
 
-                // tableString += "<td>";
-                tableString += functionString;
+                tableString += "<td>";
+                // tableString += functionString;
                 tableString += doc["docType"];
                 tableString += "</td>";
 
-                tableString += "<td>";
-                tableString += "<a id='download";
-                tableString += doc["documentId"];
-                tableString += "role='button' download><img src='download.png'/></a>";
-                tableString += "</td>";
+                // tableString += "<td>";
+                // tableString += "<a id='download";
+                // tableString += doc["documentId"];
+                // tableString += "role='button' download><img src='download.png'/></a>";
+                // tableString += "</td>";
 
                 tableString += "</tr>";
                 functionString = "";                    
         }
-        for(let i = 0; i < data.length; i++){
-            doc = data[i];
-            checkGetDataDoc(doc.documentId);
-        }
+        // for(let i = 0; i < data.length; i++){
+        //     doc = data[i];
+        //     checkGetDataDoc(doc.documentId);
+        // }
 
         // tableString += "</tbody>";
         // console.log(tableString);
