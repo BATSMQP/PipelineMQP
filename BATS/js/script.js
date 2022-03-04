@@ -1126,6 +1126,14 @@ function createGraph2(obj_url2) {
             .tickSize(-width)
             .tickFormat("")
         )
+
+
+        d3.select("#downloadGraph")
+        .on('click', function(){
+            // Get the d3js SVG element and save using saveSvgAsPng.js
+            saveSvgAsPng(document.getElementsByTagName("svg")[0], (localStorage.getItem("currentDataFilename") + " " + localStorage.getItem("currentToolName")+ ".png"));
+        })
+
     })
 
 
