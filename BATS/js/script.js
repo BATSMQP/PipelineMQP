@@ -246,10 +246,10 @@ function checkNewStudy() {
     var inputStudyInstitutionsInvolved = document.getElementById("inputStudyInstitutionsInvolved").value;
     var inputStudyStudyContact = document.getElementById("inputStudyStudyContact").value;
     var inputStudyStudyNotes = document.getElementById("inputStudyStudyNotes").value;
-    var inputStudyIsIrbApprovedYes = document.getElementById("inputStudyIsIrbApprovedYes").value;
-    var inputStudyIsIrbApprovedNo = document.getElementById("inputStudyIsIrbApprovedNo").value;
-    var inputStudyVisibilityYes = document.getElementById("inputStudyVisibilityYes").value;
-    var inputStudyVisibilityNo = document.getElementById("inputStudyVisibilityNo").value;
+    var inputStudyIsIrbApprovedYes = document.getElementById("inputStudyIsIrbApprovedYes").checked;
+    var inputStudyIsIrbApprovedNo = document.getElementById("inputStudyIsIrbApprovedNo").checked;
+    var inputStudyVisibilityYes = document.getElementById("inputStudyVisibilityYes").checked;
+    var inputStudyVisibilityNo = document.getElementById("inputStudyVisibilityNo").checked;
 
     if (inputStudyName == "") {
         alert("Please enter a study name before continuing");
